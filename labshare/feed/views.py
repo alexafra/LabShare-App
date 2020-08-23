@@ -23,4 +23,4 @@ def home(request):
     return render(request, 'feed/home.html', context)
 
 def about(request):
-    return render(request, 'feed/about.html')
+    return render(request, 'feed/about.html', {'title': 'About'})
