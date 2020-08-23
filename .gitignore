@@ -116,3 +116,10 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# Custom
+venv*
+env*
+.vscode*
+.DS_Store*
+__pycache__/
