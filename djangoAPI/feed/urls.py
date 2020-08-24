@@ -7,5 +7,5 @@ router.register('users', views.UsersView)
 router.register('posts', views.PostsView)
 
 urlpatterns = [
-    path('', include(router.urls)) #imports all the standard urls for REST
+    path('', include(router.urls)), #imports all the standard urls for REST
 ]
