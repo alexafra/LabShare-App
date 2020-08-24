@@ -79,5 +79,16 @@ def post_detail(request, pk):
         post.delete()
         return HttpResponse(status=204)
 
+@csrf_exempt
+def user_post_list(request, pk):
+    try:
+        posts = Post.objects.filter(author=pk)
+    except Post.DoesNotExist:
+        return HttpResponse(status=404)
+    
+    if request.method == 'GET':
+        serializer = PostSerializer(posts, many=True) #converts Python to JSON for post with ID
+        return JsonResponse(serializer.data, safe = False) #returns
+
 
 # Create your views here.
