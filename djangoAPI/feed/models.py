@@ -17,4 +17,4 @@ class Posts(models.Model):
         ordering = ['-date_posted']
 
     def __str__(self):
-        return self.name
+        return self.title
