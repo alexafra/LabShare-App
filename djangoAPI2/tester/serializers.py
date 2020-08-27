@@ -4,7 +4,7 @@ from tester.models import User, Post, LANGUAGE_CHOICES, STYLE_CHOICES
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'name']
+        fields = ['id', 'username']
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:

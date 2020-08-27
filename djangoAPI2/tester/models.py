@@ -9,13 +9,10 @@ STYLE_CHOICES = sorted([(item, item) for item in get_all_styles()])
 
 class User(models.Model):
     date_created = models.DateTimeField(auto_now_add= True)
-    name = models.CharField(max_length = 56)
+    name = models.CharField(max_length = 80)
 
-    class Meta:
-        ordering = ['-date_created']
-    
     def __str__(self):
-        return self.name
+        return self.title
 
 class Post(models.Model):
     date_created = models.DateTimeField(auto_now_add= True)
