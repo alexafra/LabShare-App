@@ -19,10 +19,18 @@ struct ContentView: View {
         }.onAppear(perform: loadData)
     }
     func loadData() {
+        /*
+        1. Create URL we want to read
+        2. Wrap URLRequest which allows us to configuew how the url should be accessed
+        3. Create and start a networking task from that url request
+        4. Handle the result of that networking tak
+        */
+
         guard let url = URL(string: "http://127.0.0.1:8000/users/4/posts/") else {
             print("Invalid URL")
             return
         }
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 if let decodedResponse = try? JSONDecoder().decode([Post].self, from: data) {
@@ -30,7 +38,6 @@ struct ContentView: View {
                     DispatchQueue.main.async {
                         //Update our UI
                         self.posts = decodedResponse
-
                         //Everything is good, so we can exit
                         return
                     }
@@ -54,9 +61,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-/*
- 1. Create URL we want to read
- 2. Wrap URLRequest which allows us to configuew how the url should be accessed
- 3. Create and start a networking task from that url request
- 4. Handle the result of that networking tak
- */
