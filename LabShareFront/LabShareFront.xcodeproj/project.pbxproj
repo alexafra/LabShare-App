@@ -17,7 +17,6 @@
 		F04A32FA24F7EB0D004A86D9 /* LabShareFrontUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A32F924F7EB0D004A86D9 /* LabShareFrontUITests.swift */; };
 		F04A330A24F7EB8B004A86D9 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A330924F7EB8B004A86D9 /* Post.swift */; };
 		F04A330D24F7EBFE004A86D9 /* PostRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A330C24F7EBFE004A86D9 /* PostRow.swift */; };
-		F04A331024F7EED3004A86D9 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F04A330E24F7EED3004A86D9 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +53,6 @@
 		F04A32FB24F7EB0D004A86D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F04A330924F7EB8B004A86D9 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F04A330C24F7EBFE004A86D9 /* PostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRow.swift; sourceTree = "<group>"; };
-		F04A330F24F7EED3004A86D9 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +108,6 @@
 				F04A32D424F7EB0C004A86D9 /* AppDelegate.swift */,
 				F04A32D624F7EB0C004A86D9 /* SceneDelegate.swift */,
 				F04A32DB24F7EB0C004A86D9 /* ContentView.swift */,
-				F04A330E24F7EED3004A86D9 /* Model.xcdatamodeld */,
 				F04A32DD24F7EB0D004A86D9 /* Assets.xcassets */,
 				F04A32E224F7EB0D004A86D9 /* LaunchScreen.storyboard */,
 				F04A32E524F7EB0D004A86D9 /* Info.plist */,
@@ -295,7 +292,6 @@
 				F04A32D524F7EB0C004A86D9 /* AppDelegate.swift in Sources */,
 				F04A32D724F7EB0C004A86D9 /* SceneDelegate.swift in Sources */,
 				F04A330A24F7EB8B004A86D9 /* Post.swift in Sources */,
-				F04A331024F7EED3004A86D9 /* Model.xcdatamodeld in Sources */,
 				F04A32DC24F7EB0C004A86D9 /* ContentView.swift in Sources */,
 				F04A330D24F7EBFE004A86D9 /* PostRow.swift in Sources */,
 			);
@@ -622,19 +618,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		F04A330E24F7EED3004A86D9 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				F04A330F24F7EED3004A86D9 /* Model.xcdatamodel */,
-			);
-			currentVersion = F04A330F24F7EED3004A86D9 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = F04A32C924F7EB0C004A86D9 /* Project object */;
 }

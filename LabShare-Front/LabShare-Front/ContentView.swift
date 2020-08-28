@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  LabShareFront
+//  LabShare-Front
 //
-//  Created by Alexander Frazis on 27/8/20.
+//  Created by Alexander Frazis on 28/8/20.
 //  Copyright © 2020 CITS3200. All rights reserved.
 //
 
@@ -14,7 +14,7 @@ struct ContentView: View {
         List {
             ForEach(posts) {
                 post in
-                PostRow(userName: post.name, postTitle: post.title, postText: post.content, timeOfPost: post.date_created)
+                PostRow(userName: post.author, postTitle: post.title, postText: post.content, timeOfPost: post.date_created)
             }
         }.onAppear(perform: loadData)
     }
@@ -23,22 +23,25 @@ struct ContentView: View {
             print("Invalid URL")
             return
         }
-        let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
-                if let decodedResonse = try? JSONDecoder().decode(Posts.self, from: data) {
-                    //We have good data - go back to the main thread
+                if let decodedResponse = try? JSONDecoder().decode([Post].self, from: data) {
+//                    We have good data - go back to the main thread
                     DispatchQueue.main.async {
                         //Update our UI
-                        self.posts = decodedResonse.posts
-                    
+                        self.posts = decodedResponse
+
                         //Everything is good, so we can exit
                         return
                     }
+                } else {
+                    print("Failed to decode")
                 }
+                
+            } else {
+                print("Failed to fetch data \(error.debugDescription)")
+                return
             }
-            //If were still here it means there was a problem
-            print("Fetch failed: \(error?.localizedDescription ?? "Unknownerror")")
             
         }.resume()
     }
