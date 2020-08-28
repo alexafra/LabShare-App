@@ -13,7 +13,7 @@ struct ContentView: View {
         List {
             ForEach(0..<20) {
                 index in
-                PostRow(userName: "Alexander Frazis", postText: "I would like to give away 10 iphones", timeOfPost: "2020-07-22 16:48:31")
+                PostRow(userName: "Alexander Frazis", postTitle: "Free Iphones", postText: "I would like to give away 10 iphones", timeOfPost: "2020-07-22 16:48:31")
             }
         }
     }

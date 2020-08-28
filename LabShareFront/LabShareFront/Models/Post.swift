@@ -11,5 +11,6 @@ import Foundation
 struct Post: Hashable, Codable, Identifiable {
     var id: Int
     var name: String
+    var postTitle: String
     var postText: String
 }
