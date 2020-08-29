@@ -149,6 +149,8 @@ struct ContentView: View {
                 let dataString = String(data: data, encoding: .utf8) {
                 print("got data: \(dataString)")
             }
+            self.newPostContent = ""
+            self.newPostTitle = ""
             self.loadData()
         }.resume()
     }
