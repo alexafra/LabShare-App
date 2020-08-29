@@ -17,6 +17,7 @@
 		F04A334024F91C45004A86D9 /* LabShare_FrontUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A333F24F91C45004A86D9 /* LabShare_FrontUITests.swift */; };
 		F04A335024F91C90004A86D9 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A334F24F91C90004A86D9 /* Posts.swift */; };
 		F04A335224F91CAA004A86D9 /* PostRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A335124F91CAA004A86D9 /* PostRow.swift */; };
+		F04A335924FA234F004A86D9 /* PostDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A335824FA234F004A86D9 /* PostDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		F04A334124F91C45004A86D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F04A334F24F91C90004A86D9 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		F04A335124F91CAA004A86D9 /* PostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRow.swift; sourceTree = "<group>"; };
+		F04A335824FA234F004A86D9 /* PostDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				F04A335124F91CAA004A86D9 /* PostRow.swift */,
+				F04A335824FA234F004A86D9 /* PostDetail.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */,
 				F04A335224F91CAA004A86D9 /* PostRow.swift in Sources */,
 				F04A332224F91C43004A86D9 /* ContentView.swift in Sources */,
+				F04A335924FA234F004A86D9 /* PostDetail.swift in Sources */,
 				F04A335024F91C90004A86D9 /* Posts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

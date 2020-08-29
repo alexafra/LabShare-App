@@ -10,13 +10,15 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var posts = [Post]()
-    @State private var newUserPost = ""
+    @State private var newPostTitle = ""
+    @State private var newPostContent = ""
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("Create new post")) {
                     HStack {
-                        TextField("New Item", text: self.$newUserPost )
+                        TextField("Title", text: self.$newPostTitle)
+                        TextField("Content", text: self.$newPostContent)
                         Button(action: {
                             self.addPost()
                         }){
@@ -28,14 +30,46 @@ struct ContentView: View {
                     
                 }
                 Section(header: Text("Posts:")) {
-                    ForEach(posts) {
+                    ForEach(posts, id: \.id) {
                         post in
                         PostRow(userName: post.author, postTitle: post.title, postText: post.content, timeOfPost: post.date_created)
-                    }
+                    }.onDelete(perform: delete)
                 }
             }.onAppear(perform: loadData)
             .navigationBarTitle(Text("My Posts"))
         }
+    }
+    func delete(indexSet: IndexSet) {
+        let deleteItem = self.posts[indexSet.first!]
+        let deleteId = deleteItem.id
+//        self.$posts.remove(indexSet.first!)
+        
+        guard let url = URL(string: "http://127.0.0.1:8000/posts/\(deleteId)/") else {
+            print("Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            //Check for error
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print ("Server Error: ")
+                return
+            }
+            if let mimeType = response.mimeType,
+                mimeType == "application/json",
+                let data = data,
+                let dataString = String(data: data, encoding: .utf8) {
+                print("got data: \(dataString)")
+            }
+            self.loadData()
+        }.resume()
     }
     func loadData() {
         /*
@@ -72,30 +106,41 @@ struct ContentView: View {
         }.resume()
     }
     func addPost() {
-        guard let url = URL(string: "http://127.0.0.1:8000/users/4/posts/") else {
+        self.$newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.$newPostTitle = self.$newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if self.newPostContent.count() != 0 && self.newPostTitle.count() != 0
+        guard let url = URL(string: "http://127.0.0.1:8000/posts/") else {
             print("Invalid URL")
             return
         }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let post = PostEncodable(title: "RandomTitle", content: "Free Iphone", author: 4)
+        let post = PostEncodable(title: self.newPostTitle, content: self.newPostContent, author: 4)
         
-        if let postData = try? JSONDecoder().decode(Post.self, from: post) {
-            request.httpBody = postData
+        guard let postData = try? JSONEncoder().encode(post) else {
+            print("Error Encoding")
+            return
         }
-        request.httpBody = postString.data(using: String.Encoding.utf8)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
+        URLSession.shared.uploadTask(with: request, from: postData) { (data, response, error) in
             //Check for error
             if let error = error {
-                print("Error took place \(error.localizedDescription)")
+                print("Error took place \(error)")
                 return
             }
-            //Convert HTTP Response Data to a String
-            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                print("Response data string:\n \(dataString)")
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print ("Server Error: ")
+                return
             }
-//            self.loadData()
+            if let mimeType = response.mimeType,
+                mimeType == "application/json",
+                let data = data,
+                let dataString = String(data: data, encoding: .utf8) {
+                print("got data: \(dataString)")
+            }
+            self.loadData()
         }.resume()
     }
 
