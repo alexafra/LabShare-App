@@ -156,7 +156,6 @@ env*
 .vscode*
 .DS_Store*
 __pycache__/
-<<<<<<< HEAD
 
 #Xcode
 */build/*
@@ -204,5 +203,3 @@ build/
 xcuserdata
 LabShare-App.xcodeproj/xcuserdata/*
 LabShare-App.xcodeproj/project.xcworkspace/xcuserdata/*
-=======
->>>>>>> AddPostPost
