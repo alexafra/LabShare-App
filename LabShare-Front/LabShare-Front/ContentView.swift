@@ -17,8 +17,10 @@ struct ContentView: View {
             List {
                 Section(header: Text("Create new post")) {
                     HStack {
-                        TextField("Title", text: self.$newPostTitle)
-                        TextField("Content", text: self.$newPostContent)
+                        VStack {
+                            TextField("Title", text: self.$newPostTitle)
+                            TextField("Content", text: self.$newPostContent)
+                        }
                         Button(action: {
                             self.addPost()
                         }){
@@ -32,7 +34,7 @@ struct ContentView: View {
                 Section(header: Text("Posts:")) {
                     ForEach(posts, id: \.id) {
                         post in
-                        PostRow(userName: post.author, postTitle: post.title, postText: post.content, timeOfPost: post.date_created)
+                        PostRow(userName: post.author, postTitle: post.title, postContent: post.content, timeOfPost: post.date_created)
                     }.onDelete(perform: delete)
                 }
             }.onAppear(perform: loadData)
@@ -91,6 +93,10 @@ struct ContentView: View {
                     DispatchQueue.main.async {
                         //Update our UI
                         self.posts = decodedResponse
+                        for index in 0..<self.posts.count {
+                            self.posts[index].content = self.posts[index].content.trimmingCharacters(in: .whitespacesAndNewlines)
+                            self.posts[index].title = self.posts[index].title.trimmingCharacters(in: .whitespacesAndNewlines)
+                        }
                         //Everything is good, so we can exit
                         return
                     }
@@ -106,10 +112,13 @@ struct ContentView: View {
         }.resume()
     }
     func addPost() {
-        self.$newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
-        self.$newPostTitle = self.$newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.newPostTitle = self.newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if self.newPostContent.count() != 0 && self.newPostTitle.count() != 0
+        if self.newPostContent.isEmpty || self.newPostTitle.isEmpty {
+            return
+        }
+        
         guard let url = URL(string: "http://127.0.0.1:8000/posts/") else {
             print("Invalid URL")
             return
