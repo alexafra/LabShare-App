@@ -10,13 +10,32 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var posts = [Post]()
+    @State private var newUserPost = ""
     var body: some View {
-        List {
-            ForEach(posts) {
-                post in
-                PostRow(userName: post.author, postTitle: post.title, postText: post.content, timeOfPost: post.date_created)
-            }
-        }.onAppear(perform: loadData)
+        NavigationView {
+            List {
+                Section(header: Text("Create new post")) {
+                    HStack {
+                        TextField("New Item", text: self.$newUserPost )
+                        Button(action: {
+                            self.addPost()
+                        }){
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(.green)
+                                .imageScale(.large)
+                        }
+                    }
+                    
+                }
+                Section(header: Text("Posts:")) {
+                    ForEach(posts) {
+                        post in
+                        PostRow(userName: post.author, postTitle: post.title, postText: post.content, timeOfPost: post.date_created)
+                    }
+                }
+            }.onAppear(perform: loadData)
+            .navigationBarTitle(Text("My Posts"))
+        }
     }
     func loadData() {
         /*
@@ -50,6 +69,33 @@ struct ContentView: View {
                 return
             }
             
+        }.resume()
+    }
+    func addPost() {
+        guard let url = URL(string: "http://127.0.0.1:8000/users/4/posts/") else {
+            print("Invalid URL")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let post = PostEncodable(title: "RandomTitle", content: "Free Iphone", author: 4)
+        
+        if let postData = try? JSONDecoder().decode(Post.self, from: post) {
+            request.httpBody = postData
+        }
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            //Check for error
+            if let error = error {
+                print("Error took place \(error.localizedDescription)")
+                return
+            }
+            //Convert HTTP Response Data to a String
+            if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                print("Response data string:\n \(dataString)")
+            }
+//            self.loadData()
         }.resume()
     }
 
