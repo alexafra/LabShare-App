@@ -9,36 +9,33 @@
 import SwiftUI
 
 struct PostDetail: View {
-    var userName: Int
-    var postTitle: String
-    var postContent: String
-    var timeOfPost: String
+    var post: Post
     
     @ViewBuilder
     var body: some View {
-        VStack (alignment: .leading) {
-            Text(postTitle)
+//        VStack (alignment: .center) {
+        VStack {
+            Spacer()
+            Text(self.post.title)
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(Color.black)
+            
             HStack {
-                Text(String(userName)).font(Font.footnote).fontWeight(.thin)
+                Text(String(self.post.author)).font(Font.footnote).fontWeight(.thin)
                 Spacer()
-                Text(timeOfPost.description).font(Font.footnote).fontWeight(.thin)
+                Text(self.post.date_created.description).font(Font.footnote).fontWeight(.thin)
             }
-            if postContent.count > 50 {
-                Text("\(String(postContent.prefix(50)))...")
-            } else {
-                Text(postContent)
-            }
-            
-            
+            Spacer()
+            Text(self.post.content)
+            Spacer()
         }.padding()
+//            .navigationBarTitle(Text(post.postTitle), displayMode: .inline)
     }
 }
 
 struct PostDetail_Previews: PreviewProvider {
     static var previews: some View {
-        PostDetail(userName: 4, postTitle: "Free Iphones", postContent: "I would like to give away 10 iphones", timeOfPost: "2020-07-22 16:48:31")
+        PostDetail(post: Post(id: 10, title: "Free Iphones", content: "I would like to give away 10 iphones", date_created: "2020-07-22 16:48:31", author: 4))
     }
 }

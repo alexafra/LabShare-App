@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  PostListView.swift
 //  LabShare-Front
 //
 //  Created by Alexander Frazis on 28/8/20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct PostList: View {
     @State private var posts = [Post]()
     @State private var newPostTitle = ""
     @State private var newPostContent = ""
@@ -18,13 +18,13 @@ struct ContentView: View {
                 Section(header: Text("Create new post")) {
                     HStack {
                         VStack {
-                            TextField("Title", text: self.$newPostTitle)
-                            TextField("Content", text: self.$newPostContent)
+                            TextField("Title: Enter up to 20 characters", text: self.$newPostTitle)
+                            TextField("Content: enter up to 1000 characters", text: self.$newPostContent)
                         }
                         Button(action: {
                             self.addPost()
                         }){
-                            Image(systemName: "plus.circle.fill")
+                            Image(systemName: "plus.     circle.fill")
                                 .foregroundColor(.green)
                                 .imageScale(.large)
                         }
@@ -34,7 +34,9 @@ struct ContentView: View {
                 Section(header: Text("Posts:")) {
                     ForEach(posts, id: \.id) {
                         post in
-                        PostRow(userName: post.author, postTitle: post.title, postContent: post.content, timeOfPost: post.date_created)
+                        NavigationLink(destination: PostDetail(post: post)) {
+                            PostRow(post: post)
+                        }
                     }.onDelete(perform: delete)
                 }
             }.onAppear(perform: loadData)
@@ -157,9 +159,9 @@ struct ContentView: View {
 
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct PostList_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        PostList()
     }
 }
 
