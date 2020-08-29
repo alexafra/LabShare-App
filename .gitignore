@@ -122,6 +122,34 @@ GitHub.sublime-settings
 project.xcworkspace/
 xcuserdata/
 
+# Mac OS X
+*.DS_Store
+
+# Xcode
+LabShare-App.xcodeproj/xcuserdata/*
+LabShare-App.xcodeproj/project.xcworkspace/xcuserdata/*
+
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+
+# Generated files
+*.o
+*.pyc
+
+
+#Python modules
+MANIFEST
+dist/
+build/
+
+# Backup files
+*~.nib
+
 # Custom
 venv*
 env*
