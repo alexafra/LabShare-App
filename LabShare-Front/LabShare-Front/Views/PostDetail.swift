@@ -14,19 +14,26 @@ struct PostDetail: View {
     @ViewBuilder
     var body: some View {
 //        VStack (alignment: .center) {
-        VStack {
-            Spacer()
+        VStack (alignment:.leading) {
+            HStack {
+                VStack (alignment: .leading) {
+                    Text(String(self.post.author)).font(Font.footnote).fontWeight(.thin)
+                    Text(self.post.date_created.description).font(Font.footnote).fontWeight(.thin)
+                }
+                Spacer()
+                Button(action: {
+                }){
+                    Image(systemName: "pencil")
+                        .imageScale(.large)
+                    Text("Edit Post")
+                }.foregroundColor(.black)
+            }
+            
             Text(self.post.title)
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(Color.black)
             
-            HStack {
-                Text(String(self.post.author)).font(Font.footnote).fontWeight(.thin)
-                Spacer()
-                Text(self.post.date_created.description).font(Font.footnote).fontWeight(.thin)
-            }
-            Spacer()
             Text(self.post.content)
             Spacer()
         }.padding()

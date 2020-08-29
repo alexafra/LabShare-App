@@ -28,6 +28,7 @@ struct PostRow: View {
                 Text(self.post.content)
             }
         }.padding()
+            .navigationBarTitle(Text(post.title), displayMode: .inline)
     }
 }
 
