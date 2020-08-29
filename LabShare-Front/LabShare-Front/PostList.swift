@@ -24,7 +24,7 @@ struct PostList: View {
                         Button(action: {
                             self.addPost()
                         }){
-                            Image(systemName: "plus.     circle.fill")
+                            Image(systemName: "plus.circle.fill")
                                 .foregroundColor(.green)
                                 .imageScale(.large)
                         }
