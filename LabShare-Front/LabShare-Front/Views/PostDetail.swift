@@ -13,13 +13,14 @@ struct PostDetail: View {
     
     @ViewBuilder
     var body: some View {
-//        VStack (alignment: .center) {
+        //        VStack (alignment: .center) {
         VStack (alignment:.leading) {
+            
             HStack {
-                VStack (alignment: .leading) {
-                    Text(String(self.post.author)).font(Font.footnote).fontWeight(.thin)
-                    Text(self.post.date_created.description).font(Font.footnote).fontWeight(.thin)
-                }
+                Text(self.post.title)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.black)
                 Spacer()
                 Button(action: {
                 }){
@@ -29,20 +30,17 @@ struct PostDetail: View {
                 }.foregroundColor(.black)
             }
             
-            Text(self.post.title)
-                .font(.headline)
-                .fontWeight(.bold)
-                .foregroundColor(Color.black)
+            Text("Date Posted: " + self.post.date_created.description).font(Font.footnote).fontWeight(.thin)
+            Text("\n" + self.post.content)
             
-            Text(self.post.content)
-            Spacer()
+            ContactDetails(user: User(id: 1, name: "Liam"))
+            
         }.padding()
-//            .navigationBarTitle(Text(post.postTitle), displayMode: .inline)
     }
 }
 
 struct PostDetail_Previews: PreviewProvider {
     static var previews: some View {
-        PostDetail(post: Post(id: 10, title: "Free Iphones", content: "I would like to give away 10 iphones", date_created: "2020-07-22 16:48:31", author: 4))
+        PostDetail(post: Post(id: 10, title: "Free Iphones", content: "Dave found joy in the daily routine of life. He awoke at the same time, ate the same breakfast and drove the same commute. He worked at a job that never seemed to change and he got home at 6 pm sharp every night. It was who he had been for the last ten years and he had no idea that was all about to change.", date_created: "2020-07-22 16:48:31", author: 4))
     }
 }

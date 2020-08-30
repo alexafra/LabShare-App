@@ -40,13 +40,14 @@ struct PostList: View {
                     }.onDelete(perform: delete)
                 }
             }.onAppear(perform: loadData)
-            .navigationBarTitle(Text("My Posts"))
+                .navigationBarTitle("My Posts")
         }
     }
+    
     func delete(indexSet: IndexSet) {
         let deleteItem = self.posts[indexSet.first!]
         let deleteId = deleteItem.id
-//        self.$posts.remove(indexSet.first!)
+        //        self.$posts.remove(indexSet.first!)
         
         guard let url = URL(string: "http://127.0.0.1:8000/posts/\(deleteId)/") else {
             print("Invalid URL")
@@ -77,13 +78,13 @@ struct PostList: View {
     }
     func loadData() {
         /*
-        1. Create URL we want to read
-        2. Wrap URLRequest which allows us to configuew how the url should be accessed
-        3. Create and start a networking task from that url request
-        4. Handle the result of that networking tak
-        */
-
-        guard let url = URL(string: "http://127.0.0.1:8000/users/4/posts/") else {
+         1. Create URL we want to read
+         2. Wrap URLRequest which allows us to configuew how the url should be accessed
+         3. Create and start a networking task from that url request
+         4. Handle the result of that networking tak
+         */
+        
+        guard let url = URL(string: "http://127.0.0.1:8000/users/1/posts/") else {
             print("Invalid URL")
             return
         }
@@ -91,7 +92,7 @@ struct PostList: View {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 if let decodedResponse = try? JSONDecoder().decode([Post].self, from: data) {
-//                    We have good data - go back to the main thread
+                    //                    We have good data - go back to the main thread
                     DispatchQueue.main.async {
                         //Update our UI
                         self.posts = decodedResponse
@@ -113,6 +114,7 @@ struct PostList: View {
             
         }.resume()
     }
+    
     func addPost() {
         self.newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
         self.newPostTitle = self.newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -127,7 +129,7 @@ struct PostList: View {
         }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let post = PostEncodable(title: self.newPostTitle, content: self.newPostContent, author: 4)
+        let post = PostEncodable(title: self.newPostTitle, content: self.newPostContent, author: 1)
         
         guard let postData = try? JSONEncoder().encode(post) else {
             print("Error Encoding")
@@ -156,7 +158,7 @@ struct PostList: View {
             self.loadData()
         }.resume()
     }
-
+    
 }
 
 struct PostList_Previews: PreviewProvider {
