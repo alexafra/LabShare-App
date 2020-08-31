@@ -13,14 +13,14 @@ struct PostRow: View {
     
     var body: some View {
         
-            VStack (alignment: .leading) {
+            VStack (alignment: .leading, spacing: 5) {
                 Text(self.post.title)
                     .font(.headline)
                     .fontWeight(.bold)
                     .foregroundColor(Color.black)
                 
-                if self.post.content.count > 150 {
-                    Text("\(String(self.post.content.prefix(150)))...")
+                if self.post.content.count > 120 {
+                    Text("\(String(self.post.content.prefix(120)))...")
                 } else {
                     Text(self.post.content)
                 }

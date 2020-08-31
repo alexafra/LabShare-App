@@ -8,13 +8,16 @@
 
 import SwiftUI
 
-struct PostList: View {
+struct FeedView: View {
     @State private var posts = [Post]()
     @State private var newPostTitle = ""
     @State private var newPostContent = ""
+    @State private var isProfileViewPresent = false
     var body: some View {
         NavigationView {
             List {
+                Text("LabShare Feed")
+                    .font(.largeTitle)
                 Section(header: Text("Create new post")) {
                     HStack {
                         VStack {
@@ -28,7 +31,7 @@ struct PostList: View {
                                 .foregroundColor(.green)
                                 .imageScale(.large)
                         }
-                    }
+                    }.navigationBarTitle("Home", displayMode: .inline)
                     
                 }
                 Section(header: Text("Posts:")) {
@@ -36,11 +39,21 @@ struct PostList: View {
                         post in
                         NavigationLink(destination: PostDetail(post: post)) {
                             PostRow(post: post)
-                        }
+                        }.navigationBarTitle("Home", displayMode: .inline)
                     }.onDelete(perform: delete)
                 }
-            }.onAppear(perform: loadData)
-                .navigationBarTitle("My Posts")
+                
+            }
+            .onAppear(perform: loadData)
+            .navigationBarTitle("Home", displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: {
+                print("button pressed")
+                self.isProfileViewPresent = true
+            }) {
+                Image(systemName: "person")
+            }.sheet(isPresented: $isProfileViewPresent, content: { (UserProfile(user: User(id: 1, name: "Liam"))) } )
+            )
+            
         }
     }
     
@@ -84,7 +97,7 @@ struct PostList: View {
          4. Handle the result of that networking tak
          */
         
-        guard let url = URL(string: "http://127.0.0.1:8000/users/1/posts/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/posts/") else {
             print("Invalid URL")
             return
         }
@@ -161,9 +174,9 @@ struct PostList: View {
     
 }
 
-struct PostList_Previews: PreviewProvider {
+struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
-        PostList()
+        FeedView()
     }
 }
 

@@ -10,32 +10,46 @@ import SwiftUI
 
 struct PostDetail: View {
     var post: Post
+    //var user: User
     
     @ViewBuilder
     var body: some View {
-        //        VStack (alignment: .center) {
-        VStack (alignment:.leading) {
-            
-            HStack {
-                Text(self.post.title)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.black)
+        NavigationView {
+            VStack (alignment:.leading) {
+                
+                HStack {
+                    Text(self.post.title)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.black)
+                    Spacer()
+                    Button(action: {
+                    }){
+                        Image(systemName: "pencil")
+                            .imageScale(.large)
+                        Text("Edit Post")
+                    }.foregroundColor(.black)
+                }
+                
+                Text("Date Posted: " + self.post.date_created.description).font(Font.footnote).fontWeight(.thin)
+                Text("\n" + self.post.content)
+                
+                
+                VStack(alignment: .leading) {
+                    Text("User Details:").font(.subheadline).fontWeight(.medium).foregroundColor(Color.black)
+                    Text("Liam Niedzielski\nEmail: 22499153@student.uwa.edu.au").font(.caption).foregroundColor(Color.black)
+                    NavigationLink(destination: UserProfile(user: User(id: 1, name: "Liam Niedzielski"))) {Text("See more")
+                        .font(.footnote)
+                    }.navigationBarTitle("Post", displayMode: .inline)
+                    .navigationBarHidden(true)
+                }.padding(.all, 7)
+                    .padding(.top)
+                
                 Spacer()
-                Button(action: {
-                }){
-                    Image(systemName: "pencil")
-                        .imageScale(.large)
-                    Text("Edit Post")
-                }.foregroundColor(.black)
-            }
+            }.padding([.top, .leading, .trailing])
+
             
-            Text("Date Posted: " + self.post.date_created.description).font(Font.footnote).fontWeight(.thin)
-            Text("\n" + self.post.content)
-            
-            ContactDetails(user: User(id: 1, name: "Liam"))
-            
-        }.padding()
+        }
     }
 }
 
