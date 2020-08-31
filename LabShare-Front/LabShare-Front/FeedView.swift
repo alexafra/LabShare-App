@@ -51,7 +51,7 @@ struct FeedView: View {
                 self.isProfileViewPresent = true
             }) {
                 Image(systemName: "person")
-            }.sheet(isPresented: $isProfileViewPresent, content: { (UserProfile(user: User(id: 1, name: "Liam"))) } )
+            }.sheet(isPresented: $isProfileViewPresent, content: { (UserProfile(userid: 1)) } )
             )
             
         }

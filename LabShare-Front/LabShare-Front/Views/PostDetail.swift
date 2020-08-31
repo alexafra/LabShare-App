@@ -10,11 +10,10 @@ import SwiftUI
 
 struct PostDetail: View {
     var post: Post
-    //var user: User
+    @State private var user: User = User(id: 1, name: "Liam")
     
     @ViewBuilder
     var body: some View {
-        NavigationView {
             VStack (alignment:.leading) {
                 
                 HStack {
@@ -37,19 +36,45 @@ struct PostDetail: View {
                 
                 VStack(alignment: .leading) {
                     Text("User Details:").font(.subheadline).fontWeight(.medium).foregroundColor(Color.black)
-                    Text("Liam Niedzielski\nEmail: 22499153@student.uwa.edu.au").font(.caption).foregroundColor(Color.black)
-                    NavigationLink(destination: UserProfile(user: User(id: 1, name: "Liam Niedzielski"))) {Text("See more")
+                    Text(user.name+"\nEmail: 22499153@student.uwa.edu.au").font(.caption).foregroundColor(Color.black)
+                    NavigationLink(destination: UserProfile(userid: post.author)) {Text("See more")
                         .font(.footnote)
                     }.navigationBarTitle("Post", displayMode: .inline)
-                    .navigationBarHidden(true)
-                }.padding(.all, 7)
+                    }.onAppear(perform: getUser)
+                .padding(.all, 7)
                     .padding(.top)
                 
                 Spacer()
             }.padding([.top, .leading, .trailing])
 
             
+    }
+    
+    func getUser() {
+        guard let url = URL(string: "http://127.0.0.1:8000/users/"+String(post.author)+"/profile/") else {
+            print("Invalid URL")
+            return
         }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                if let decodedResponse = try? JSONDecoder().decode(User.self, from: data) {
+                    //                    We have good data - go back to the main thread
+                    DispatchQueue.main.async {
+                        //Update our UI
+                        self.user = decodedResponse
+                        return
+                    }
+                } else {
+                    print("Failed to decode")
+                }
+                
+            } else {
+                print("Failed to fetch data \(error.debugDescription)")
+                return
+            }
+            
+        }.resume()
     }
 }
 

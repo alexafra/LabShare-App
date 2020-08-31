@@ -10,12 +10,13 @@ import SwiftUI
 
 struct UserProfile: View {
     
-    var user: User
+    var userid: User.ID
+    
+    @State private var user: User = User(id: 1, name: "LIAM")
     @State private var posts = [Post]()
     
     var body: some View {
         
-        NavigationView {
             VStack {
                 List {
                     HStack {
@@ -53,15 +54,42 @@ struct UserProfile: View {
                             }.navigationBarTitle("User Profile", displayMode: .inline)
                         }
                 }.onAppear(perform: loadData)
-                
-                
-                
-            }
+                    .onAppear(perform: getUser)
         }
     }
     
     
-    
+    func getUser() {
+        guard let url = URL(string: "http://127.0.0.1:8000/users/"+String(userid)+"/profile/") else {
+            print("Invalid URL")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                if let decodedResponse = try? JSONDecoder().decode(User.self, from: data) {
+                    //                    We have good data - go back to the main thread
+                    DispatchQueue.main.async {
+                        //Update our UI
+                        self.user = decodedResponse
+                        for index in 0..<self.posts.count {
+                            self.posts[index].content = self.posts[index].content.trimmingCharacters(in: .whitespacesAndNewlines)
+                            self.posts[index].title = self.posts[index].title.trimmingCharacters(in: .whitespacesAndNewlines)
+                        }
+                        //Everything is good, so we can exit
+                        return
+                    }
+                } else {
+                    print("Failed to decode")
+                }
+                
+            } else {
+                print("Failed to fetch data \(error.debugDescription)")
+                return
+            }
+            
+        }.resume()
+    }
     
     func loadData() {
         /*
@@ -71,7 +99,7 @@ struct UserProfile: View {
          4. Handle the result of that networking tak
          */
         
-        guard let url = URL(string: "http://127.0.0.1:8000/users/1/posts/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/users/"+String(userid)+"/posts/") else {
             print("Invalid URL")
             return
         }
@@ -110,7 +138,7 @@ struct UserProfile: View {
 
 struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfile(user: User(id: 1, name: "Liam Niedzielski"))
+        UserProfile(userid: 1)
     }
 }
 
