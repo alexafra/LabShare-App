@@ -19,8 +19,8 @@ struct PostRow: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color.black)
                 
-                if self.post.content.count > 120 {
-                    Text("\(String(self.post.content.prefix(120)))...")
+                if self.post.content.count > 50 {
+                    Text("\(String(self.post.content.prefix(50)))...")
                 } else {
                     Text(self.post.content)
                 }

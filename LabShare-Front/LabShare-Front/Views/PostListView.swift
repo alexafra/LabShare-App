@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct myPostView: View {
+struct PostListView: View {
     @State private var posts = [Post]()
     @State private var newPostTitle = ""
     @State private var newPostContent = ""
@@ -164,7 +164,7 @@ struct myPostView: View {
 
 struct myPostViwq_Previews: PreviewProvider {
     static var previews: some View {
-        myPostView()
+        PostListView()
     }
 }
 
