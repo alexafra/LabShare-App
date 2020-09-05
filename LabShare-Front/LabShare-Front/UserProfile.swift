@@ -17,44 +17,44 @@ struct UserProfile: View {
     
     var body: some View {
         
-            VStack {
-                List {
-                    HStack {
-                        Spacer()
-                        Text(self.user.name)
-                        .font(.largeTitle)
-                        .fontWeight(.semibold)
-                        .padding(.bottom)
-                        Spacer()
-                    }.padding(.bottom, -15)
-                    
-                    
-                    HStack {
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text("About")
-                                .font(.title)
-                                .fontWeight(.medium)
-                            
-                            Text("Email: 22499153@student.uwa.edu.au\nMobile: 0450215119\nLocation: QEII\nJoined in: 2020").font(.footnote).padding(.horizontal,5)
-                            
-                        }
-                        Spacer()
-                    }
-                    
-                    HStack{
-                        Text(user.name + "'s Posts")
+        VStack {
+            List {
+                HStack {
+                    Spacer()
+                    Text(self.user.name)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .padding(.bottom)
+                    Spacer()
+                }.padding(.bottom, -15)
+                
+                
+                HStack {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("About")
                             .font(.title)
                             .fontWeight(.medium)
-                        Spacer()
+                        
+                        Text("Email: 22499153@student.uwa.edu.au\nMobile: 0450215119\nLocation: QEII\nJoined in: 2020").font(.footnote).padding(.horizontal,5)
+                        
                     }
-                        ForEach(posts, id: \.id) {
-                            post in
-                            NavigationLink(destination: PostDetail(post: post)) {
-                                PostRow(post: post)
-                            }.navigationBarTitle("User Profile", displayMode: .inline)
-                        }
-                }.onAppear(perform: loadData)
-                    .onAppear(perform: getUser)
+                    Spacer()
+                }
+                
+                HStack{
+                    Text(user.name + "'s Posts")
+                        .font(.title)
+                        .fontWeight(.medium)
+                    Spacer()
+                }
+                    ForEach(posts, id: \.id) {
+                        post in
+                        NavigationLink(destination: PostDetail(post: post)) {
+                            PostRow(post: post)
+                        }.navigationBarTitle("User Profile", displayMode: .inline)
+                    }
+            }.onAppear(perform: loadData)
+                .onAppear(perform: getUser)
         }
     }
     
