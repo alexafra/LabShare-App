@@ -46,6 +46,7 @@ struct PostListView: View {
 }
 
 struct myPostViwq_Previews: PreviewProvider {
+    
     static var previews: some View {
         PostListView()
     }

@@ -14,6 +14,7 @@ struct PostRow: View {
     var body: some View {
         
             VStack (alignment: .leading, spacing: 5) {
+                PostHeaderView(post: post)
                 Text(self.post.title)
                     .font(.headline)
                     .fontWeight(.bold)
@@ -24,7 +25,6 @@ struct PostRow: View {
                 } else {
                     Text(self.post.content)
                 }
-                Text(self.post.date_created).font(Font.footnote).fontWeight(.thin)
             }.padding()
                 .navigationBarTitle(Text(post.title), displayMode: .inline)
             

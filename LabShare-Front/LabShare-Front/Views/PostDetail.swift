@@ -16,6 +16,8 @@ struct PostDetail: View {
     var body: some View {
             VStack (alignment:.leading) {
                 
+                PostHeaderView(post: post)
+                
                 HStack {
                     Text(self.post.title)
                         .font(.largeTitle)
