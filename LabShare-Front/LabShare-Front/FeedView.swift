@@ -37,8 +37,8 @@ struct FeedView: View {
                 Section(header: Text("Posts:")) {
                     ForEach(posts, id: \.id) {
                         post in
-                        NavigationLink(destination: PostDetail(post: post)) {
-                            PostRow(post: post)
+                        NavigationLink(destination: PostDetailView(post: post)) {
+                            PostRowView(post: post)
                         }.navigationBarTitle("Home", displayMode: .inline)
                     }.onDelete(perform: delete)
                 }
@@ -51,7 +51,7 @@ struct FeedView: View {
                 self.isProfileViewPresent = true
             }) {
                 Image(systemName: "person")
-            }.sheet(isPresented: $isProfileViewPresent, content: { (UserProfileView(userId: 1)) } )
+            }.sheet(isPresented: $isProfileViewPresent, content: { (ProfileView(userId: 1)) } )
             )
             
         }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UserProfileModel: Hashable, Codable, Identifiable {
+struct ProfileModel: Hashable, Codable, Identifiable {
     var id: Int
     var name: String
 }

@@ -10,9 +10,9 @@ import Foundation
 import SwiftUI
 import Combine
 
-class UserProfileViewModel: ObservableObject {
-    @Published var userProfile : UserProfileModel
-    init(userProfile: UserProfileModel) {
+class ProfileViewModel: ObservableObject {
+    @Published var userProfile : ProfileModel
+    init(userProfile: ProfileModel) {
        self.userProfile = userProfile
     }
     func getUser() {

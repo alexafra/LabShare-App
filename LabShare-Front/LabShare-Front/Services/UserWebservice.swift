@@ -8,7 +8,7 @@
 
 import Foundation
 class UserWebservice {
-    func getUser(userId: Int, completion: @escaping (UserProfileModel?) -> ()) {
+    func getUser(userId: Int, completion: @escaping (ProfileModel?) -> ()) {
         guard let url = URL(string: "http://127.0.0.1:8000/users/\(String(userId))/profile/") else {
             print("Invalid URL")
             return
@@ -16,7 +16,7 @@ class UserWebservice {
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
-                if let user = try? JSONDecoder().decode(UserProfileModel.self, from: data) {
+                if let user = try? JSONDecoder().decode(ProfileModel.self, from: data) {
                     //                    We have good data - go back to the main thread
                     DispatchQueue.main.async {
                         //Update our UI

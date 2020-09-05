@@ -34,7 +34,7 @@ struct PostListView: View {
                     ForEach(self.postListVM.posts, id: \.id) {
                         postVM in
                        // NavigationLink(destination: PostDetail(post: post)) {
-                        PostRow(post: postVM.post)
+                        PostRowView(post: postVM.post)
                        // }
                     }.onDelete(perform: self.postListVM.deletePost)
                 }

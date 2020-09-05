@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-struct UserProfileView: View {
+struct ProfileView: View {
     
-    var userId: UserProfileModel.ID
+    var userId: ProfileModel.ID
     
-    @State private var user: UserProfileModel = UserProfileModel(id: -1, name: "")
+    @State private var user: ProfileModel = ProfileModel(id: -1, name: "")
     @State private var posts = [PostModel]()
     
     var body: some View {
@@ -67,7 +67,7 @@ struct UserProfileView: View {
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
-                if let decodedResponse = try? JSONDecoder().decode(UserProfileModel.self, from: data) {
+                if let decodedResponse = try? JSONDecoder().decode(ProfileModel.self, from: data) {
                     //                    We have good data - go back to the main thread
                     DispatchQueue.main.async {
                         //Update our UI
@@ -99,7 +99,7 @@ struct UserProfileView: View {
 
 struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileView(userId: 1)
+        ProfileView(userId: 1)
     }
 }
 
