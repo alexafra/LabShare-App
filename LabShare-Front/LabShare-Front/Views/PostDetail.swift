@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct PostDetail: View {
-    var post: Post
-    @State private var user: User = User(id: 1, name: "Liam")
+    var post: PostModel
+    @State private var user: UserProfileModel = UserProfileModel(id: 1, name: "Liam")
     
     @ViewBuilder
     var body: some View {
@@ -39,7 +39,7 @@ struct PostDetail: View {
                 VStack(alignment: .leading) {
                     Text("User Details:").font(.subheadline).fontWeight(.medium).foregroundColor(Color.black)
                     Text(user.name+"\nEmail: 22499153@student.uwa.edu.au").font(.caption).foregroundColor(Color.black)
-                    NavigationLink(destination: UserProfile(userid: post.author)) {Text("See more")
+                    NavigationLink(destination: UserProfileView(userId: post.author)) {Text("See more")
                         .font(.footnote)
                     }.navigationBarTitle("Post", displayMode: .inline)
                     }.onAppear(perform: getUser)
@@ -60,7 +60,7 @@ struct PostDetail: View {
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
-                if let decodedResponse = try? JSONDecoder().decode(User.self, from: data) {
+                if let decodedResponse = try? JSONDecoder().decode(UserProfileModel.self, from: data) {
                     //                    We have good data - go back to the main thread
                     DispatchQueue.main.async {
                         //Update our UI
@@ -82,6 +82,6 @@ struct PostDetail: View {
 
 struct PostDetail_Previews: PreviewProvider {
     static var previews: some View {
-        PostDetail(post: Post(id: 10, title: "Free Iphones", content: "Dave found joy in the daily routine of life. He awoke at the same time, ate the same breakfast and drove the same commute. He worked at a job that never seemed to change and he got home at 6 pm sharp every night. It was who he had been for the last ten years and he had no idea that was all about to change.", date_created: "2020-07-22 16:48:31", author: 4))
+        PostDetail(post: PostModel(id: 10, title: "Free Iphones", content: "Dave found joy in the daily routine of life. He awoke at the same time, ate the same breakfast and drove the same commute. He worked at a job that never seemed to change and he got home at 6 pm sharp every night. It was who he had been for the last ten years and he had no idea that was all about to change.", date_created: "2020-07-22 16:48:31", author: 4))
     }
 }

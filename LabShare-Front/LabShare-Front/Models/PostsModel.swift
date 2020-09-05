@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct Posts: Codable {
-    var posts: [Post]
+struct PostsModel: Codable {
+    var posts: [PostModel]
 }
 
 //Changge to let
-struct Post: Hashable, Codable, Identifiable {
+struct PostModel: Hashable, Codable, Identifiable {
     var id: Int
     var title: String
     var content: String

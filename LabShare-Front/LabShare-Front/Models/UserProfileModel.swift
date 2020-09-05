@@ -8,16 +8,12 @@
 
 import Foundation
 
-struct Users: Codable {
-    var posts: [User]
-}
-
-struct User: Hashable, Codable, Identifiable {
+struct UserProfileModel: Hashable, Codable, Identifiable {
     var id: Int
     var name: String
 }
 
-struct UserEncodable: Codable {
+struct UserProfileModelEncodable: Codable {
     var title: String
     var name: String
 }

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct PostRow: View {
-    var post: Post
+    var post: PostModel
     
     var body: some View {
         
@@ -33,6 +33,6 @@ struct PostRow: View {
 
 struct PostRow_Previews: PreviewProvider {
     static var previews: some View {
-        PostRow(post: Post(id: 10, title: "Free Iphones", content: "I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones", date_created: "2020-07-22 16:48:31", author: 4))
+        PostRow(post: PostModel(id: 10, title: "Free Iphones", content: "I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones", date_created: "2020-07-22 16:48:31", author: 4))
     }
 }

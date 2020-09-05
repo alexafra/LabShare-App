@@ -12,7 +12,7 @@ import Foundation
 
 class PostWebservice {
     
-    func getAllPosts(completion: @escaping ([Post]?) -> ()) {
+    func getAllPosts(completion: @escaping ([PostModel]?) -> ()) {
         /*
          1. Create URL we want to read
          2. Wrap URLRequest which allows us to configuew how the url should be accessed
@@ -32,11 +32,10 @@ class PostWebservice {
                 completion(nil)
                 return
             }
-            let decodedResponse = try? JSONDecoder().decode([Post].self, from: data)
+            let posts = try? JSONDecoder().decode([PostModel].self, from: data)
                 //                    We have good data - go back to the main thread
             DispatchQueue.main.async {
                 //Update our UI
-                let posts = decodedResponse
                 completion(posts)
                 return
             }
@@ -44,7 +43,7 @@ class PostWebservice {
         
     }
     
-    func createPost (post: PostEncodable, completion: @escaping ([Post]?) -> ()) {
+    func createPost (post: PostEncodable, completion: @escaping ([PostModel]?) -> ()) {
         guard let url = URL(string: "http://127.0.0.1:8000/posts/") else {
             print("Invalid URL")
             return
@@ -78,7 +77,7 @@ class PostWebservice {
         }.resume()
     }
     
-    func deletePost(itemId: Int, completion: @escaping ([Post]?) -> ()) {
+    func deletePost(itemId: Int, completion: @escaping ([PostModel]?) -> ()) {
         guard let url = URL(string: "http://127.0.0.1:8000/posts/\(itemId)/") else {
             print("Invalid URL")
             return
@@ -107,7 +106,7 @@ class PostWebservice {
         }.resume()
     }
     
-    func updatePost(postId: Int, post: PostEncodable, completion: @escaping ([Post]?) -> ()) {
+    func updatePost(postId: Int, post: PostEncodable, completion: @escaping ([PostModel]?) -> ()) {
         
         guard let url = URL(string: "http://127.0.0.1:8000/posts/\(postId)") else {
             print("Invalid URL")

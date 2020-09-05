@@ -77,9 +77,9 @@ class PostListViewModel: ObservableObject {
 }
 
 struct PostViewModel {
-    var post: Post
+    var post: PostModel
     
-    init(post: Post) {
+    init(post: PostModel) {
         self.post = post
     }
     

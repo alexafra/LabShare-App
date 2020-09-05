@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		10FC88C596DF2B561DB6A527 /* Pods_LabShare_FrontTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F57E97853FC45E6A4C572E5 /* Pods_LabShare_FrontTests.framework */; };
 		1B92704D24FBDAF500D8CF34 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92704C24FBDAF500D8CF34 /* PostListView.swift */; };
-		1B92704F24FBDE6400D8CF34 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92704E24FBDE6400D8CF34 /* Users.swift */; };
-		1B92705324FBE07D00D8CF34 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92705224FBE07D00D8CF34 /* UserProfile.swift */; };
+		1B92704F24FBDE6400D8CF34 /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92704E24FBDE6400D8CF34 /* UserProfileModel.swift */; };
+		1B92705324FBE07D00D8CF34 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92705224FBE07D00D8CF34 /* UserProfileView.swift */; };
 		1E40D5CFC070094A1C8C84AD /* Pods_LabShare_Front.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B900551F389BECD52DCD2DD7 /* Pods_LabShare_Front.framework */; };
 		E470409723EB23F8766A4344 /* Pods_LabShare_Front_LabShare_FrontUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD28AB0AAB97049B83229062 /* Pods_LabShare_Front_LabShare_FrontUITests.framework */; };
 		F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A331D24F91C43004A86D9 /* AppDelegate.swift */; };
@@ -21,12 +21,14 @@
 		F04A332A24F91C44004A86D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F04A332824F91C44004A86D9 /* LaunchScreen.storyboard */; };
 		F04A333524F91C45004A86D9 /* LabShare_FrontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A333424F91C45004A86D9 /* LabShare_FrontTests.swift */; };
 		F04A334024F91C45004A86D9 /* LabShare_FrontUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A333F24F91C45004A86D9 /* LabShare_FrontUITests.swift */; };
-		F04A335024F91C90004A86D9 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A334F24F91C90004A86D9 /* Posts.swift */; };
+		F04A335024F91C90004A86D9 /* PostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A334F24F91C90004A86D9 /* PostsModel.swift */; };
 		F04A335224F91CAA004A86D9 /* PostRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A335124F91CAA004A86D9 /* PostRow.swift */; };
 		F04A335924FA234F004A86D9 /* PostDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A335824FA234F004A86D9 /* PostDetail.swift */; };
 		F0519BB825034A68006E580E /* PostWebservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0519BB725034A68006E580E /* PostWebservice.swift */; };
 		F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0519BBA25034CD9006E580E /* PostListViewModel.swift */; };
 		F0519BBD250363CA006E580E /* UrlApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0519BBC250363CA006E580E /* UrlApi.swift */; };
+		F05E5E8D25039AC8004BC996 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8C25039AC8004BC996 /* UserProfileViewModel.swift */; };
+		F05E5E8F25039D9B004BC996 /* UserWebservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8E25039D9B004BC996 /* UserWebservice.swift */; };
 		F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D331DB250390CB008A280A /* PostHeaderView.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,8 +53,8 @@
 		0AED4C041A59F839562BED82 /* Pods-LabShare-FrontTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-FrontTests.release.xcconfig"; path = "Target Support Files/Pods-LabShare-FrontTests/Pods-LabShare-FrontTests.release.xcconfig"; sourceTree = "<group>"; };
 		156CAE522A85B462637BAF62 /* Pods-LabShare-Front.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front.debug.xcconfig"; path = "Target Support Files/Pods-LabShare-Front/Pods-LabShare-Front.debug.xcconfig"; sourceTree = "<group>"; };
 		1B92704C24FBDAF500D8CF34 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
-		1B92704E24FBDE6400D8CF34 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
-		1B92705224FBE07D00D8CF34 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		1B92704E24FBDE6400D8CF34 /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
+		1B92705224FBE07D00D8CF34 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		1F57E97853FC45E6A4C572E5 /* Pods_LabShare_FrontTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_FrontTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		305CF325481435D3912A9B8A /* Pods-LabShare-FrontTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-FrontTests.debug.xcconfig"; path = "Target Support Files/Pods-LabShare-FrontTests/Pods-LabShare-FrontTests.debug.xcconfig"; sourceTree = "<group>"; };
 		417B8354CF9748BD5D3D7790 /* Pods-LabShare-Front-LabShare-FrontUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front-LabShare-FrontUITests.debug.xcconfig"; path = "Target Support Files/Pods-LabShare-Front-LabShare-FrontUITests/Pods-LabShare-Front-LabShare-FrontUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,12 +75,14 @@
 		F04A333B24F91C45004A86D9 /* LabShare-FrontUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LabShare-FrontUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04A333F24F91C45004A86D9 /* LabShare_FrontUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabShare_FrontUITests.swift; sourceTree = "<group>"; };
 		F04A334124F91C45004A86D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F04A334F24F91C90004A86D9 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
+		F04A334F24F91C90004A86D9 /* PostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsModel.swift; sourceTree = "<group>"; };
 		F04A335124F91CAA004A86D9 /* PostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRow.swift; sourceTree = "<group>"; };
 		F04A335824FA234F004A86D9 /* PostDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetail.swift; sourceTree = "<group>"; };
 		F0519BB725034A68006E580E /* PostWebservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWebservice.swift; sourceTree = "<group>"; };
 		F0519BBA25034CD9006E580E /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
 		F0519BBC250363CA006E580E /* UrlApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlApi.swift; sourceTree = "<group>"; };
+		F05E5E8C25039AC8004BC996 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
+		F05E5E8E25039D9B004BC996 /* UserWebservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebservice.swift; sourceTree = "<group>"; };
 		F0D331DB250390CB008A280A /* PostHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderView.swift; sourceTree = "<group>"; };
 		F383668E12D6B29CB9CA91DE /* Pods-LabShare-Front.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front.release.xcconfig"; path = "Target Support Files/Pods-LabShare-Front/Pods-LabShare-Front.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,7 +135,6 @@
 				305CF325481435D3912A9B8A /* Pods-LabShare-FrontTests.debug.xcconfig */,
 				0AED4C041A59F839562BED82 /* Pods-LabShare-FrontTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -160,12 +163,12 @@
 		F04A331C24F91C43004A86D9 /* LabShare-Front */ = {
 			isa = PBXGroup;
 			children = (
+				F04A334E24F91C6A004A86D9 /* Views */,
 				F0519BB925034CC5006E580E /* ViewModels */,
 				F0519BB625034A49006E580E /* Services */,
-				F04A334E24F91C6A004A86D9 /* Views */,
 				F04A334D24F91C62004A86D9 /* Models */,
 				F04A331D24F91C43004A86D9 /* AppDelegate.swift */,
-				1B92705224FBE07D00D8CF34 /* UserProfile.swift */,
+				1B92705224FBE07D00D8CF34 /* UserProfileView.swift */,
 				F04A331F24F91C43004A86D9 /* SceneDelegate.swift */,
 				F04A332124F91C43004A86D9 /* FeedView.swift */,
 				F04A332324F91C44004A86D9 /* Assets.xcassets */,
@@ -205,8 +208,8 @@
 		F04A334D24F91C62004A86D9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F04A334F24F91C90004A86D9 /* Posts.swift */,
-				1B92704E24FBDE6400D8CF34 /* Users.swift */,
+				F04A334F24F91C90004A86D9 /* PostsModel.swift */,
+				1B92704E24FBDE6400D8CF34 /* UserProfileModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			children = (
 				F0519BB725034A68006E580E /* PostWebservice.swift */,
 				F0519BBC250363CA006E580E /* UrlApi.swift */,
+				F05E5E8E25039D9B004BC996 /* UserWebservice.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -235,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				F0519BBA25034CD9006E580E /* PostListViewModel.swift */,
+				F05E5E8C25039AC8004BC996 /* UserProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -443,17 +448,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0519BBD250363CA006E580E /* UrlApi.swift in Sources */,
-				1B92704F24FBDE6400D8CF34 /* Users.swift in Sources */,
+				1B92704F24FBDE6400D8CF34 /* UserProfileModel.swift in Sources */,
 				F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */,
+				F05E5E8D25039AC8004BC996 /* UserProfileViewModel.swift in Sources */,
 				F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */,
-				1B92705324FBE07D00D8CF34 /* UserProfile.swift in Sources */,
+				1B92705324FBE07D00D8CF34 /* UserProfileView.swift in Sources */,
 				F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */,
 				F04A335224F91CAA004A86D9 /* PostRow.swift in Sources */,
 				1B92704D24FBDAF500D8CF34 /* PostListView.swift in Sources */,
+				F05E5E8F25039D9B004BC996 /* UserWebservice.swift in Sources */,
 				F04A332224F91C43004A86D9 /* FeedView.swift in Sources */,
 				F04A335924FA234F004A86D9 /* PostDetail.swift in Sources */,
 				F0519BB825034A68006E580E /* PostWebservice.swift in Sources */,
-				F04A335024F91C90004A86D9 /* Posts.swift in Sources */,
+				F04A335024F91C90004A86D9 /* PostsModel.swift in Sources */,
 				F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

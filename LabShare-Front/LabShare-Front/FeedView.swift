@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct FeedView: View {
-    @State private var posts = [Post]()
+    @State private var posts = [PostModel]()
     @State private var newPostTitle = ""
     @State private var newPostContent = ""
     @State private var isProfileViewPresent = false
@@ -51,7 +51,7 @@ struct FeedView: View {
                 self.isProfileViewPresent = true
             }) {
                 Image(systemName: "person")
-            }.sheet(isPresented: $isProfileViewPresent, content: { (UserProfile(userid: 1)) } )
+            }.sheet(isPresented: $isProfileViewPresent, content: { (UserProfileView(userId: 1)) } )
             )
             
         }
@@ -104,7 +104,7 @@ struct FeedView: View {
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
-                if let decodedResponse = try? JSONDecoder().decode([Post].self, from: data) {
+                if let decodedResponse = try? JSONDecoder().decode([PostModel].self, from: data) {
                     //                    We have good data - go back to the main thread
                     DispatchQueue.main.async {
                         //Update our UI

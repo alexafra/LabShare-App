@@ -8,17 +8,17 @@
 
 import SwiftUI
 
-struct UserProfile: View {
+struct UserProfileView: View {
     
-    var userid: User.ID
+    var userId: UserProfileModel.ID
     
-    @State private var user: User = User(id: 1, name: "LIAM")
-    @State private var posts = [Post]()
+    @State private var user: UserProfileModel = UserProfileModel(id: -1, name: "")
+    @State private var posts = [PostModel]()
     
     var body: some View {
         
         VStack {
-            List {
+//            ScrollView {
                 HStack {
                     Spacer()
                     Text(self.user.name)
@@ -47,70 +47,31 @@ struct UserProfile: View {
                         .fontWeight(.medium)
                     Spacer()
                 }
-                    ForEach(posts, id: \.id) {
-                        post in
-                        NavigationLink(destination: PostDetail(post: post)) {
-                            PostRow(post: post)
-                        }.navigationBarTitle("User Profile", displayMode: .inline)
-                    }
-            }.onAppear(perform: loadData)
-                .onAppear(perform: getUser)
+                PostListView()
+//                    ForEach(posts, id: \.id) {
+//                        post in
+//                        NavigationLink(destination: PostDetail(post: post)) {
+//                            PostRow(post: post)
+//                        }.navigationBarTitle("User Profile", displayMode: .inline)
+//                    }
+//            }//.onAppear(perform: loadData)
+               // .onAppear(perform: getUser)
         }
     }
     
-    
     func getUser() {
-        guard let url = URL(string: "http://127.0.0.1:8000/users/"+String(userid)+"/profile/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/users/"+String(userId)+"/profile/") else {
             print("Invalid URL")
             return
         }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
-                if let decodedResponse = try? JSONDecoder().decode(User.self, from: data) {
+                if let decodedResponse = try? JSONDecoder().decode(UserProfileModel.self, from: data) {
                     //                    We have good data - go back to the main thread
                     DispatchQueue.main.async {
                         //Update our UI
                         self.user = decodedResponse
-                        for index in 0..<self.posts.count {
-                            self.posts[index].content = self.posts[index].content.trimmingCharacters(in: .whitespacesAndNewlines)
-                            self.posts[index].title = self.posts[index].title.trimmingCharacters(in: .whitespacesAndNewlines)
-                        }
-                        //Everything is good, so we can exit
-                        return
-                    }
-                } else {
-                    print("Failed to decode")
-                }
-                
-            } else {
-                print("Failed to fetch data \(error.debugDescription)")
-                return
-            }
-            
-        }.resume()
-    }
-    
-    func loadData() {
-        /*
-         1. Create URL we want to read
-         2. Wrap URLRequest which allows us to configuew how the url should be accessed
-         3. Create and start a networking task from that url request
-         4. Handle the result of that networking tak
-         */
-        
-        guard let url = URL(string: "http://127.0.0.1:8000/users/"+String(userid)+"/posts/") else {
-            print("Invalid URL")
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                if let decodedResponse = try? JSONDecoder().decode([Post].self, from: data) {
-                    //                    We have good data - go back to the main thread
-                    DispatchQueue.main.async {
-                        //Update our UI
-                        self.posts = decodedResponse
                         for index in 0..<self.posts.count {
                             self.posts[index].content = self.posts[index].content.trimmingCharacters(in: .whitespacesAndNewlines)
                             self.posts[index].title = self.posts[index].title.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -138,7 +99,7 @@ struct UserProfile: View {
 
 struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfile(userid: 1)
+        UserProfileView(userId: 1)
     }
 }
 
