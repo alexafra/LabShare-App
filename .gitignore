@@ -201,6 +201,13 @@ build/
 # Backup files
 *~.nib
 xcuserdata
+LabShare-Front.xcodeproj/xcuserdata/*
+LabShare-Front.xcodeproj/project.xcworkspace/xcuserdata/*
+LabShare-Front/LabShare-Front.xcodeproj/project.xcworkspace/xcuserdata/alexanderfrazis.xcuserdatad/UserInterfaceState.xcuserstate
 LabShare-App.xcodeproj/xcuserdata/*
 LabShare-App.xcodeproj/project.xcworkspace/xcuserdata/*
+<<<<<<< HEAD
 LabShare-Front/LabShare-Front.xcodeproj/project.xcworkspace/xcuserdata/alexanderfrazis.xcuserdatad/UserInterfaceState.xcuserstate
+=======
+LabShare-App/LabShare-Front.xcodeproj/project.xcworkspace/xcuserdata/alexanderfrazis.xcuserdatad/UserInterfaceState.xcuserstate
+>>>>>>> master
