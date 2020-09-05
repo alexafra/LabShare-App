@@ -12,6 +12,7 @@ struct Posts: Codable {
     var posts: [Post]
 }
 
+//Changge to let
 struct Post: Hashable, Codable, Identifiable {
     var id: Int
     var title: String
@@ -20,6 +21,8 @@ struct Post: Hashable, Codable, Identifiable {
     var author: Int
 }
 
+
+//I dont think this is right....
 struct PostEncodable: Codable {
     var title: String
     var content: String
