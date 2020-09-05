@@ -29,7 +29,11 @@ class PostListViewModel: ObservableObject {
     func createPost() {
         let newPostTitle = self.newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         let newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
-        PostWebservice().createPost(newPostTitle: newPostTitle, newPostContent: newPostContent, author: 1) { posts in
+        if newPostContent.isEmpty || newPostTitle.isEmpty {
+            return
+        }
+        let newPost = PostEncodable(title: newPostTitle, content:newPostContent, author: 1)
+        PostWebservice().createPost(post: newPost) { posts in
         
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init )
@@ -44,12 +48,13 @@ class PostListViewModel: ObservableObject {
         let postToUpdate = self.posts[indexSet.first!]
         let newPostTitle = self.newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         let newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
-        let newPost = Post(id: postToUpdate.id, title: newPostTitle, content: newPostContent, author: postToUpdate.author)
+        if newPostContent.isEmpty || newPostTitle.isEmpty {
+            return
+        }
         
-        updateItem.title = newPostTitle
-        updateItem.content = newPostContent
+        let newPost = PostEncodable(title: newPostTitle, content: newPostContent, author: postToUpdate.author)
         
-        PostWebservice().updatePost(post: self.posts[], newPostTitle: newPostTitle, newPostContent: newPostContent, author: 1) { posts in
+        PostWebservice().updatePost(postId: postToUpdate.id, post: newPost) { posts in
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init )
             }
