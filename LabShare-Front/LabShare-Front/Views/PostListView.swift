@@ -12,7 +12,7 @@ struct PostListView: View {
     @ObservedObject private var postListVM = PostListViewModel()
 
     var body: some View {
-        NavigationView {
+
             List {
                 Section(header: Text("Create new post")) {
                     HStack {
@@ -40,8 +40,6 @@ struct PostListView: View {
                 }
             }//.onAppear(perform: loadData)
                 .navigationBarTitle("My Posts")
-            
-        }
     }
 }
 

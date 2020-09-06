@@ -24,6 +24,7 @@ struct FeedView: View {
                             TextField("Title: Enter up to 20 characters", text: self.$newPostTitle)
                             TextField("Content: enter up to 1000 characters", text: self.$newPostContent)
                         }
+                        
                         Button(action: {
                             self.addPost()
                         }){
@@ -46,13 +47,10 @@ struct FeedView: View {
             }
             .onAppear(perform: loadData)
             .navigationBarTitle("Home", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
-                print("button pressed")
-                self.isProfileViewPresent = true
-            }) {
-                Image(systemName: "person")
-            }.sheet(isPresented: $isProfileViewPresent, content: { (ProfileView(userId: 1)) } )
-            )
+            .navigationBarItems(trailing:
+                NavigationLink(destination: ProfileView(userId: 1), label: {
+                    Image(systemName: "person")
+                }))
             
         }
     }

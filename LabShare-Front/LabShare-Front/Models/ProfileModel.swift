@@ -13,7 +13,7 @@ struct ProfileModel: Hashable, Codable, Identifiable {
     var name: String
 }
 
-struct UserProfileModelEncodable: Codable {
+struct ProfileModelEncodable: Codable {
     var title: String
     var name: String
 }

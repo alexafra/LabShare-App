@@ -10,23 +10,24 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    var userId: ProfileModel.ID
+    var userId: Int
     
     @State private var user: ProfileModel = ProfileModel(id: -1, name: "")
     @State private var posts = [PostModel]()
     
     var body: some View {
         
-        VStack {
-//            ScrollView {
+            List {
+                //            ScrollView {
                 HStack {
                     Spacer()
                     Text(self.user.name)
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-                    .padding(.bottom)
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
+                        .padding(.bottom)
                     Spacer()
-                }.padding(.bottom, -15)
+                }
+                .padding(.bottom, -15)
                 
                 
                 HStack {
@@ -48,15 +49,16 @@ struct ProfileView: View {
                     Spacer()
                 }
                 PostListView()
-//                    ForEach(posts, id: \.id) {
-//                        post in
-//                        NavigationLink(destination: PostDetail(post: post)) {
-//                            PostRow(post: post)
-//                        }.navigationBarTitle("User Profile", displayMode: .inline)
-//                    }
-//            }//.onAppear(perform: loadData)
-               // .onAppear(perform: getUser)
-        }
+                //                    ForEach(posts, id: \.id) {
+                //                        post in
+                //                        NavigationLink(destination: PostDetail(post: post)) {
+                //                            PostRow(post: post)
+                //                        }.navigationBarTitle("User Profile", displayMode: .inline)
+                //                    }
+                //            }//.onAppear(perform: loadData)
+                .onAppear(perform: getUser)
+                }
+            .navigationBarItems(leading: SearchBarView())
     }
     
     func getUser() {
