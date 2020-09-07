@@ -32,7 +32,7 @@ struct FeedView: View {
                                 .foregroundColor(.green)
                                 .imageScale(.large)
                         }
-                    }.navigationBarTitle("Home", displayMode: .inline)
+                    }
                     
                 }
                 Section(header: Text("Posts:")) {
@@ -40,13 +40,13 @@ struct FeedView: View {
                         post in
                         NavigationLink(destination: PostDetailView(post: post)) {
                             PostRowView(post: post)
-                        }.navigationBarTitle("Home", displayMode: .inline)
+                        }
                     }.onDelete(perform: delete)
                 }
                 
             }
             .onAppear(perform: loadData)
-            .navigationBarTitle("Home", displayMode: .inline)
+
             .navigationBarItems(trailing:
                 NavigationLink(destination: ProfileView(userId: 1), label: {
                     Image(systemName: "person")

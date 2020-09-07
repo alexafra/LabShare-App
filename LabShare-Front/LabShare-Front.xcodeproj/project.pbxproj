@@ -174,11 +174,11 @@
 				F04A331D24F91C43004A86D9 /* AppDelegate.swift */,
 				F04A331F24F91C43004A86D9 /* SceneDelegate.swift */,
 				F04A332124F91C43004A86D9 /* FeedView.swift */,
+				1BD01AFF250488B4006C6F90 /* myProfileView.swift */,
 				F04A332324F91C44004A86D9 /* Assets.xcassets */,
 				F04A332824F91C44004A86D9 /* LaunchScreen.storyboard */,
 				F04A332B24F91C44004A86D9 /* Info.plist */,
 				F04A332524F91C44004A86D9 /* Preview Content */,
-				1BD01AFF250488B4006C6F90 /* myProfileView.swift */,
 			);
 			path = "LabShare-Front";
 			sourceTree = "<group>";

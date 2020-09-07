@@ -41,7 +41,7 @@ struct PostDetailView: View {
                     Text(user.name+"\nEmail: 22499153@student.uwa.edu.au").font(.caption).foregroundColor(Color.black)
                     NavigationLink(destination: ProfileView(userId: post.author)) {Text("See more")
                         .font(.footnote)
-                    }.navigationBarTitle("Post", displayMode: .inline)
+                    }
                     }.onAppear(perform: getUser)
                 .padding(.all, 7)
                     .padding(.top)

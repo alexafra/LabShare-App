@@ -17,19 +17,20 @@ struct ProfileView: View {
     
     var body: some View {
         
-            List {
-                //            ScrollView {
-                HStack {
-                    Spacer()
-                    Text(self.user.name)
-                        .font(.largeTitle)
-                        .fontWeight(.semibold)
-                        .padding(.bottom)
-                    Spacer()
-                }
-                .padding(.bottom, -15)
-                
-                
+        VStack {
+            //            ScrollView {
+            
+            HStack {
+                Spacer()
+                Text(self.user.name)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .padding(.bottom)
+                Spacer()
+            }.padding(.top, 15)
+                .padding(.bottom, -10)
+            
+            VStack {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
                         Text("About")
@@ -48,7 +49,8 @@ struct ProfileView: View {
                         .fontWeight(.medium)
                     Spacer()
                 }
-                PostListView()
+            }.padding(.leading, 5)
+            PostListView()
                 //                    ForEach(posts, id: \.id) {
                 //                        post in
                 //                        NavigationLink(destination: PostDetail(post: post)) {
@@ -57,8 +59,7 @@ struct ProfileView: View {
                 //                    }
                 //            }//.onAppear(perform: loadData)
                 .onAppear(perform: getUser)
-                }
-            .navigationBarItems(leading: SearchBarView())
+        }
     }
     
     func getUser() {

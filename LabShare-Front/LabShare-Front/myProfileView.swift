@@ -12,6 +12,8 @@ struct myProfileView: View {
     var body: some View {
         NavigationView {
             ProfileView(userId: 1)
+            .navigationBarTitle(Text("Profile"), displayMode: .inline)
+            .navigationBarItems(leading: SearchBarView())
         }
     }
 }

@@ -39,7 +39,6 @@ struct PostListView: View {
                     }.onDelete(perform: self.postListVM.deletePost)
                 }
             }//.onAppear(perform: loadData)
-                .navigationBarTitle("My Posts")
     }
 }
 
