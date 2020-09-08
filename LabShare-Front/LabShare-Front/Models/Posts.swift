@@ -19,3 +19,18 @@ struct Post: Hashable, Codable, Identifiable {
     var date_created: String
     var author: Int
 }
+
+struct PostEncodable: Codable {
+    var title: String
+    var content: String
+    var author: Int
+}
+    
+//    init(id: Int? = nil, title: String? = nil, content: String? = nil, date_created: String? = nil, author: Int? = nil) {
+//        self.id = id
+//        self.title = title
+//        self.content = content
+//        self.date_created = date_created
+//        self.author = author
+//    }
+
