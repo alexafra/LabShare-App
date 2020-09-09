@@ -5,10 +5,6 @@ from tester.models import Post
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from tester.serializers import UserSerializer, PostSerializer, UserLoginSerializer, UserRegisterSerializer
-<<<<<<< Updated upstream
-from django.http import Http404
-=======
->>>>>>> Stashed changes
 from tester.utils import get_and_authenticate_user, create_user_account
 
 class UserRegister(APIView):
