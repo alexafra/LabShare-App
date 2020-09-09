@@ -17,8 +17,8 @@ class UserSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
+        author = serializers.ReadOnlyField(source='author.username')
         fields = ['id', 'title', 'content', 'date_created', 'author']
-        #author = serializers.ReadOnlyField(source='author.username')
 
 class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=300, required=True)
