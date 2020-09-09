@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from tester.models import Post
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
-from tester.serializers import UserSerializer, PostSerializer, EmptySerializer, UserLoginSerializer, UserRegisterSerializer
+from tester.serializers import UserSerializer, PostSerializer, UserLoginSerializer, UserRegisterSerializer
 from django.http import Http404
 from tester.utils import get_and_authenticate_user, create_user_account
 

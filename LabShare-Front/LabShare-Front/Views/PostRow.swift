@@ -9,28 +9,31 @@
 import SwiftUI
 
 struct PostRow: View {
-    var userName: Int
-    var postTitle: String
-    var postText: String
-    var timeOfPost: String
+    var post: Post
+    
     var body: some View {
-        VStack {
-            Text(postTitle)
-                .font(.title)
+        VStack (alignment: .leading) {
+            Text(self.post.title)
+                .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(Color.black)
             HStack {
-                Text(String(userName))
+                Text(String(self.post.author)).font(Font.footnote).fontWeight(.thin)
                 Spacer()
-                Text(timeOfPost.description).font(Font.footnote)
+                Text(self.post.date_created).font(Font.footnote).fontWeight(.thin)
             }
-            Text(postText)
+            if self.post.content.count > 50 {
+                Text("\(String(self.post.content.prefix(50)))...")
+            } else {
+                Text(self.post.content)
+            }
         }.padding()
+            .navigationBarTitle(Text(post.title), displayMode: .inline)
     }
 }
 
 struct PostRow_Previews: PreviewProvider {
     static var previews: some View {
-        PostRow(userName: 4, postTitle: "Free Iphones", postText: "I would like to give away 10 iphones", timeOfPost: "2020-07-22 16:48:31")
+        PostRow(post: Post(id: 10, title: "Free Iphones", content: "I would like to give away 10 iphones", date_created: "2020-07-22 16:48:31", author: 4))
     }
 }
