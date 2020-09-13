@@ -44,10 +44,10 @@ class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateM
         return self.retrieve(request, *args, **kwargs)
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
     def delete(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+        return self.destroy(request, *args, **kwargs)
 
 class UserPosts(generics.GenericAPIView, mixins.ListModelMixin):
     lookup_field = 'author__id'
