@@ -4,12 +4,12 @@ from rest_framework import routers
 from LabShare import views
 
 urlpatterns = [
-    path('user/<str:email>/preferences/', views.Preferences.as_view()), #user preferences
+    path('user/<int:user_id>/preferences/', views.Preferences.as_view()), #user preferences
     path('user/current/', views.Current.as_view()), #currently logged in user email
-    path('user/<str:email>/feed/<int:id>/', views.SinglePost.as_view()), #
-    path('user/<str:email>/feed/', views.Feed.as_view()),
-    path('user/<str:email>/posts/', views.UserPosts.as_view()),
-    path('user/<str:email>/profile/', views.Profile.as_view()),
+    path('user/<int:user_id>/feed/<int:id>/', views.SinglePost.as_view()), #
+    path('user/<int:user_id>/feed/', views.Feed.as_view()),
+    path('user/<int:user_id>/posts/', views.UserPosts.as_view()),
+    path('user/<int:user_id>/profile/', views.Profile.as_view()),
     path('register/', views.UserRegister.as_view()),
     path('login/', views.UserLogin.as_view()),
     path('logout/', views.UserLogout.as_view()),
