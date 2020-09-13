@@ -6,8 +6,8 @@ from LabShare import views
 urlpatterns = [
     path('user/<int:user_id>/preferences/', views.Preferences.as_view()), #user preferences
     path('user/current/', views.Current.as_view()), #currently logged in user email
-    path('user/<int:user_id>/feed/<int:id>/', views.SinglePost.as_view()), #
-    path('user/<int:user_id>/feed/', views.Feed.as_view()),
+    path('user/feed/<int:id>/', views.SinglePost.as_view()), #
+    path('user/feed/', views.Feed.as_view()),
     path('user/<int:user_id>/posts/', views.UserPosts.as_view()),
     path('user/<int:user_id>/profile/', views.Profile.as_view()),
     path('register/', views.UserRegister.as_view()),

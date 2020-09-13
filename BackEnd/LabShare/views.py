@@ -57,13 +57,15 @@ class UserPosts(generics.GenericAPIView, mixins.ListModelMixin):
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
-class Feed(generics.GenericAPIView, mixins.ListModelMixin):
+class Feed(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    def perform_create(self, serializer):
+            serializer.save(author = self.request.user)
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
     def post(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+        return self.create(request, *args, **kwargs)
 
 class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     lookup_field = 'id'
