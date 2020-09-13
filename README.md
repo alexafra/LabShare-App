@@ -111,4 +111,6 @@ pip install django<br>
 pip install djangorestframework<br>
 pip install postgres<br>
 cd (to backend directory)<br>
+python3 manage.py makemigrations
+python3 manage.py migrate
 python3 manage.py runserver
