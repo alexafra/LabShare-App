@@ -103,3 +103,12 @@ post<br>
 **logout/**<br>
 post<br>
 {}
+
+<h1>Running Backend:</h1>
+virtualenv x<br>
+source x/bin/activate<br>
+pip install django<br>
+pip install djangorestframework<br>
+pip install postgres<br>
+cd (to backend directory)<br>
+python3 manage.py runserver
