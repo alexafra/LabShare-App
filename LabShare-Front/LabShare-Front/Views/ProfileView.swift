@@ -60,6 +60,7 @@ struct ProfileView: View {
                 //            }//.onAppear(perform: loadData)
                 .onAppear(perform: getUser)
         }
+            .navigationBarItems(trailing: SearchBarView())
     }
     
     func getUser() {
