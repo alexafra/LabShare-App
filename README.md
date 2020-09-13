@@ -1,6 +1,6 @@
 <h1>BackEnd API:</h1>
 
-**user/<str:email>/preferences/**<br>
+**user/<int:id>/preferences/**<br>
 Preferences of a user<br>
 get, put, *post*<br>
 {<br>
@@ -11,9 +11,9 @@ get, put, *post*<br>
 **user/current/**<br>
 Email id of logged in user<br>
 get<br>
-"email"/"no user is currently logged in"<br>
+id/"no user is currently logged in"<br>
 
-**user/<str:email>/feed/<int:id>/**<br>
+**user/feed/<int:id>/**<br>
 A single post<br>
 get, put, delete<br>
 {<br>
@@ -30,7 +30,7 @@ get, put, delete<br>
 &emsp;            }<br>
 }<br>
 
-**user/<str:email>/feed/**<br>
+**user/feed/**<br>
 All posts<br>
 get, post<br>
 {<br>
@@ -49,7 +49,7 @@ get, post<br>
 &emsp;  },<br>
 }<br>
 
-**user/<str:email>/posts/**<br>
+**user/<int:id>/posts/**<br>
 A users posts<br>
 get<br>
 {<br>
@@ -68,7 +68,7 @@ get<br>
 &emsp;  },<br>
 &emsp;}<br>
 
-**user/<str:email>/profile/**<br>
+**user/<int:id>/profile/**<br>
 A users profile<br>
 get, put, *post*<br>
 {<br>
