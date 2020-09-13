@@ -1,0 +1,6 @@
+framework module Pods_LabShare_Front_LabShare_FrontUITests {
+  umbrella header "Pods-LabShare-Front-LabShare-FrontUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
