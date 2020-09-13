@@ -4,8 +4,8 @@
 Preferences of a user<br>
 get, put, *post*<br>
 {<br>
-  "id":,<br>
-  "owner":<br>
+&emsp;"id":,<br>
+&emsp;"owner":<br>
 }<br>
 
 **user/current/**<br>
@@ -16,88 +16,88 @@ get<br>
 **user/<str:email>/feed/<int:id>/**<br>
 A single post<br>
 get, put, delete<br>
-
-  "id":,<br>
-  "title":,<br>
-  "content":,<br>
-  "date_created":,<br>
-  "author": {<br>
-              "id":,<br>
-              "email":,<br>
-              "profile":,<br>
-              "posts": [],<br>
-              "preferences":<br>
-            }<br>
+{<br>
+&emsp;  "id":,<br>
+&emsp;  "title":,<br>
+&emsp;  "content":,<br>
+&emsp;  "date_created":,<br>
+&emsp;  "author": {<br>
+&emsp;&emsp;              "id":,<br>
+&emsp;&emsp;              "email":,<br>
+&emsp;&emsp;              "profile":,<br>
+&emsp;&emsp;              "posts": [],<br>
+&emsp;&emsp;              "preferences":<br>
+&emsp;            }<br>
 }<br>
 
 **user/<str:email>/feed/**<br>
 All posts<br>
 get, post<br>
 {<br>
-  {<br>
-    "id":,<br>
-    "title":,<br>
-    "content":,<br>
-    "date_created":<br>
-    "author": {<br>
-              "id":,<br>
-              "email":,<br>
-              "profile":,<br>
-              "posts": [],<br>
-              "preferences":<br>
-            }<br>
-  },<br>
+&emsp;  {<br>
+&emsp;    "id":,<br>
+&emsp;    "title":,<br>
+&emsp;    "content":,<br>
+&emsp;    "date_created":<br>
+&emsp;    "author": {<br>
+&emsp;&emsp;              "id":,<br>
+&emsp;&emsp;              "email":,<br>
+&emsp;&emsp;              "profile":,<br>
+&emsp;&emsp;              "posts": [],<br>
+&emsp;&emsp;              "preferences":<br>
+&emsp;&emsp;            }<br>
+&emsp;  },<br>
 }<br>
 
 **user/<str:email>/posts/**<br>
 A users posts<br>
 get<br>
 {<br>
-  {<br>
-    "id":,<br>
-    "title":,<br>
-    "content":,<br>
-    "date_created":<br>
-    "author": {<br>
-              "id":,<br>
-              "email":,<br>
-              "profile":,<br>
-              "posts": [],<br>
-              "preferences":<br>
-            }<br>
-  },<br>
-}<br>
+&emsp;  {<br>
+&emsp;    "id":,<br>
+&emsp;    "title":,<br>
+&emsp;    "content":,<br>
+&emsp;    "date_created":<br>
+&emsp;    "author": {<br>
+&emsp;&emsp;              "id":,<br>
+&emsp;&emsp;              "email":,<br>
+&emsp;&emsp;              "profile":,<br>
+&emsp;&emsp;              "posts": [],<br>
+&emsp;&emsp;              "preferences":<br>
+&emsp;&emsp;            }<br>
+&emsp;  },<br>
+&emsp;}<br>
 
 **user/<str:email>/profile/**<br>
 A users profile<br>
 get, put, *post*<br>
 {<br>
-  "id":,<br>
-  "bio":,<br>
-  "dob":,<br>
-  "owner": {<br>
-              "id":,<br>
-              "email":,<br>
-              "profile":,<br>
-              "posts": [],<br>
-              "preferences":<br>
-            }<br>
-}<br>
+&emsp;  "id":,<br>
+&emsp;  "bio":,<br>
+&emsp;  "dob":,<br>
+&emsp;  "owner": {<br>
+&emsp;&emsp;              "id":,<br>
+&emsp;&emsp;              "email":,<br>
+&emsp;&emsp;              "profile":,<br>
+&emsp;&emsp;              "posts": [],<br>
+&emsp;&emsp;              "preferences":<br>
+&emsp;&emsp;            }<br>
+&emsp;}<br>
 
 **register/**<br>
 post<br>
 {<br>
-  "email":,<br>
-  "password":,<br>
-  "first_name":,<br>
-  "last_name":<br>
+&emsp;  "email":,<br>
+&emsp;  "password":,<br>
+&emsp;  "first_name":,<br>
+&emsp;  "last_name":<br>
 }<br>
 
 **login/**<br>
 post<br>
 {<br>
-  "email":,<br>
-  "password":,<br>
+&emsp;  "email":,<br>
+&emsp;  "password":,<br>
 }<br>
 
 **logout/**<br>
