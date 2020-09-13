@@ -1,5 +1,5 @@
 """
-WSGI config for djangoAPI2 project.
+WSGI config for BackEnd project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoAPI2.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'BackEnd.settings')
 
 application = get_wsgi_application()
