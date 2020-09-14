@@ -13,6 +13,7 @@ struct ProfileView: View {
     var userId: Int
     
     @State private var user: ProfileModel = ProfileModel(id: -1, name: "")
+//    @State private var posts = [PostModel]()
     
     var body: some View {
         
@@ -75,6 +76,10 @@ struct ProfileView: View {
                     DispatchQueue.main.async {
                         //Update our UI
                         self.user = decodedResponse
+//                        for index in 0..<self.posts.count {
+//                            self.posts[index].content = self.posts[index].content.trimmingCharacters(in: .whitespacesAndNewlines)
+//                            self.posts[index].title = self.posts[index].title.trimmingCharacters(in: .whitespacesAndNewlines)
+//                        }
                         //Everything is good, so we can exit
                         return
                     }

@@ -13,7 +13,6 @@ import SwiftUI
 import Combine
 
 class PostListViewModel: ObservableObject {
-    @Published var userId: Int = 1
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
     @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
