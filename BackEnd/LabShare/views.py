@@ -32,7 +32,8 @@ class UserLogout(APIView):
     authentication_classes = {TokenAuthentication,}
     def post(self, request, format = None):
         logout(request)
-        #request.user.auth_token.delete()
+        self.request.user = Token.objects.get(key = self.request.META['HTTP_AUTHORIZATION'][6:]).user
+        request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
 
 class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
@@ -61,7 +62,8 @@ class Feed(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMix
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     def perform_create(self, serializer):
-            serializer.save(author = self.request.user)
+        self.request.user = Token.objects.get(key = self.request.META['HTTP_AUTHORIZATION'][6:]).user
+        serializer.save(author = self.request.user)
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
     def post(self, request, *args, **kwargs):
@@ -82,7 +84,7 @@ class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Upda
 class Current(APIView):
     def get(self, request, format = None):
         try:
-            return Response(request.user.email)
+            return Response(Token.objects.get(key = self.request.META['HTTP_AUTHORIZATION'][6:]).user.id)
         except:
             return Response("no user currently logged in")
 
