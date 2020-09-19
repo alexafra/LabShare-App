@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		10FC88C596DF2B561DB6A527 /* Pods_LabShare_FrontTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F57E97853FC45E6A4C572E5 /* Pods_LabShare_FrontTests.framework */; };
-		1B92704D24FBDAF500D8CF34 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92704C24FBDAF500D8CF34 /* PostListView.swift */; };
 		1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */; };
 		1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92705224FBE07D00D8CF34 /* ProfileView.swift */; };
 		1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFD250473F5006C6F90 /* SearchBarView.swift */; };
@@ -31,6 +30,13 @@
 		F0519BBD250363CA006E580E /* UrlApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0519BBC250363CA006E580E /* UrlApi.swift */; };
 		F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */; };
 		F05E5E8F25039D9B004BC996 /* UserWebservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8E25039D9B004BC996 /* UserWebservice.swift */; };
+		F09C69A72516216700EC961C /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69A62516216700EC961C /* SetUpView.swift */; };
+		F09C69AF251635BD00EC961C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69AE251635BD00EC961C /* LoginView.swift */; };
+		F09C69B12516396200EC961C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B02516396200EC961C /* LoginViewModel.swift */; };
+		F09C69B325163FE800EC961C /* LoginWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B225163FE800EC961C /* LoginWebService.swift */; };
+		F09C69B52516408200EC961C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B42516408200EC961C /* UserModel.swift */; };
+		F09C69B72516446900EC961C /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B62516446900EC961C /* StartView.swift */; };
+		F09C69B92516450600EC961C /* UserAuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B82516450600EC961C /* UserAuthenticationViewModel.swift */; };
 		F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D331DB250390CB008A280A /* PostHeaderView.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +60,6 @@
 /* Begin PBXFileReference section */
 		0AED4C041A59F839562BED82 /* Pods-LabShare-FrontTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-FrontTests.release.xcconfig"; path = "Target Support Files/Pods-LabShare-FrontTests/Pods-LabShare-FrontTests.release.xcconfig"; sourceTree = "<group>"; };
 		156CAE522A85B462637BAF62 /* Pods-LabShare-Front.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front.debug.xcconfig"; path = "Target Support Files/Pods-LabShare-Front/Pods-LabShare-Front.debug.xcconfig"; sourceTree = "<group>"; };
-		1B92704C24FBDAF500D8CF34 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
 		1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		1B92705224FBE07D00D8CF34 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1BD01AFD250473F5006C6F90 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -87,6 +92,13 @@
 		F0519BBC250363CA006E580E /* UrlApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlApi.swift; sourceTree = "<group>"; };
 		F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05E5E8E25039D9B004BC996 /* UserWebservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebservice.swift; sourceTree = "<group>"; };
+		F09C69A62516216700EC961C /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
+		F09C69AE251635BD00EC961C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F09C69B02516396200EC961C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		F09C69B225163FE800EC961C /* LoginWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebService.swift; sourceTree = "<group>"; };
+		F09C69B42516408200EC961C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		F09C69B62516446900EC961C /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		F09C69B82516450600EC961C /* UserAuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewModel.swift; sourceTree = "<group>"; };
 		F0D331DB250390CB008A280A /* PostHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderView.swift; sourceTree = "<group>"; };
 		F383668E12D6B29CB9CA91DE /* Pods-LabShare-Front.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front.release.xcconfig"; path = "Target Support Files/Pods-LabShare-Front/Pods-LabShare-Front.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,6 +226,7 @@
 			children = (
 				F04A334F24F91C90004A86D9 /* PostsModel.swift */,
 				1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */,
+				F09C69B42516408200EC961C /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -221,8 +234,9 @@
 		F04A334E24F91C6A004A86D9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F09C69B62516446900EC961C /* StartView.swift */,
+				F09C69AD2516303900EC961C /* Login */,
 				1B92705224FBE07D00D8CF34 /* ProfileView.swift */,
-				1B92704C24FBDAF500D8CF34 /* PostListView.swift */,
 				F04A335124F91CAA004A86D9 /* PostRowView.swift */,
 				F04A335824FA234F004A86D9 /* PostDetailView.swift */,
 				F0D331DB250390CB008A280A /* PostHeaderView.swift */,
@@ -237,6 +251,7 @@
 				F0519BB725034A68006E580E /* PostWebservice.swift */,
 				F0519BBC250363CA006E580E /* UrlApi.swift */,
 				F05E5E8E25039D9B004BC996 /* UserWebservice.swift */,
+				F09C69B225163FE800EC961C /* LoginWebService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -246,8 +261,19 @@
 			children = (
 				F0519BBA25034CD9006E580E /* PostListViewModel.swift */,
 				F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */,
+				F09C69B02516396200EC961C /* LoginViewModel.swift */,
+				F09C69B82516450600EC961C /* UserAuthenticationViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F09C69AD2516303900EC961C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F09C69A62516216700EC961C /* SetUpView.swift */,
+				F09C69AE251635BD00EC961C /* LoginView.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,6 +480,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0519BBD250363CA006E580E /* UrlApi.swift in Sources */,
+				F09C69B72516446900EC961C /* StartView.swift in Sources */,
+				F09C69B52516408200EC961C /* UserModel.swift in Sources */,
 				1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */,
 				F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */,
 				F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */,
@@ -461,14 +489,18 @@
 				1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */,
 				F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */,
 				1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */,
+				F09C69B325163FE800EC961C /* LoginWebService.swift in Sources */,
 				F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */,
 				F04A335224F91CAA004A86D9 /* PostRowView.swift in Sources */,
-				1B92704D24FBDAF500D8CF34 /* PostListView.swift in Sources */,
 				F05E5E8F25039D9B004BC996 /* UserWebservice.swift in Sources */,
+				F09C69A72516216700EC961C /* SetUpView.swift in Sources */,
+				F09C69AF251635BD00EC961C /* LoginView.swift in Sources */,
 				F04A332224F91C43004A86D9 /* FeedView.swift in Sources */,
 				F04A335924FA234F004A86D9 /* PostDetailView.swift in Sources */,
 				F0519BB825034A68006E580E /* PostWebservice.swift in Sources */,
 				F04A335024F91C90004A86D9 /* PostsModel.swift in Sources */,
+				F09C69B92516450600EC961C /* UserAuthenticationViewModel.swift in Sources */,
+				F09C69B12516396200EC961C /* LoginViewModel.swift in Sources */,
 				F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
