@@ -2,14 +2,14 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from django.contrib.auth import password_validation
-from LabShare.models import Post, UserPreferences, UserProfile
+from LabShare.models import Post, UserProfile, Categories
 
 User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'profile', 'posts', 'preferences']
+        fields = ['id', 'email', 'profile']
 
     def get_auth_token(self, obj):
         token = Token.objects.create(user=obj)
@@ -36,24 +36,24 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['id', 'title', 'content', 'date_created']
+        fields = ['id', 'title', 'content', 'date_created', 'category']
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
         response['author'] = UserSerializer(instance.author).data
         return response
-    
-class UserPreferencesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserPreferences
-        fields = ['id', 'owner']
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['id', 'bio', 'dob']
+        fields = ['id', 'bio', 'dob', 'image']
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
         response['owner'] = UserSerializer(instance.owner).data
         return response
+
+class CategoriesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categories
+        fields = ['id', 'category_name']

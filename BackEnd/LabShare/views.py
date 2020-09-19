@@ -3,14 +3,18 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate, logout, login, get_user_model
+from django.utils.decorators import method_decorator
 from LabShare.utils import get_and_authenticate_user, create_user_account
-from LabShare.models import Post, UserPreferences, UserProfile
-from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, UserPreferencesSerializer, UserProfileSerializer
+from LabShare.models import Post, Categories, UserProfile
+from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, CategoriesSerializer, UserProfileSerializer
+from LabShare.permissions import unauthenticated
 
 User = get_user_model()
 
 class UserRegister(APIView):
+    permission_classes = [unauthenticated]
     def post(self, request, format = None):
         serializer = UserRegisterSerializer(data=request.data)
         if serializer.is_valid():
@@ -19,24 +23,27 @@ class UserRegister(APIView):
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
 class UserLogin(APIView):
+    permission_classes = [unauthenticated]
     def post(self, request, format = None):
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid():
             user = get_and_authenticate_user(**serializer.validated_data)
-            login(request, user)
             token, created = Token.objects.get_or_create(user = user)
-            return Response(token.key, status = status.HTTP_401_UNAUTHORIZED)
+            responseDict = {
+                'token': token.key,
+                'created': created
+            }
+            return Response(responseDict, status = status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
 class UserLogout(APIView):
-    authentication_classes = {TokenAuthentication,}
+    permission_classes = [IsAuthenticated]
     def post(self, request, format = None):
-        logout(request)
-        self.request.user = Token.objects.get(key = self.request.META['HTTP_AUTHORIZATION'][6:]).user
-        request.user.auth_token.delete()
+        self.request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
 
 class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
+    permission_classes = [IsAuthenticated]
     lookup_field = 'owner__id'
     lookup_url_kwarg = 'user_id'
     serializer_class = UserProfileSerializer
@@ -50,19 +57,19 @@ class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateM
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
-class UserPosts(generics.GenericAPIView, mixins.ListModelMixin):
-    lookup_field = 'author__id'
-    lookup_url_kwarg = 'user_id'
+class UserPosts(generics.GenericAPIView, mixins.ListModelMixin):     
+    permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
-    queryset = Post.objects.all()
+    def get_queryset(self):
+        return Post.objects.filter(author__id = self.kwargs['user_id'])
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
 class Feed(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+    permission_classes = [IsAuthenticated]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    def perform_create(self, serializer):
-        self.request.user = Token.objects.get(key = self.request.META['HTTP_AUTHORIZATION'][6:]).user
+    def perform_create(self, serializer) -> None:
         serializer.save(author = self.request.user)
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -70,6 +77,7 @@ class Feed(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMix
         return self.create(request, *args, **kwargs)
 
 class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    permission_classes = [IsAuthenticated]
     lookup_field = 'id'
     lookup_url_kwarg = 'id'
     serializer_class = PostSerializer
@@ -81,21 +89,51 @@ class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Upda
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
-class Current(APIView):
-    def get(self, request, format = None):
-        try:
-            return Response(Token.objects.get(key = self.request.META['HTTP_AUTHORIZATION'][6:]).user.id)
-        except:
-            return Response("no user currently logged in")
+class AvailableCategories(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+    permission_classes = [IsAuthenticated]
+    queryset = Categories.objects.all()
+    serializer_class = CategoriesSerializer
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
-class Preferences(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin):
-    lookup_field = 'owner__id'
-    lookup_url_kwarg = 'user_id'
-    serializer_class = UserPreferencesSerializer
-    queryset = UserPreferences.objects.all()
+class SingleCategory(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'id'
+    lookup_url_kwarg = 'id'
+    serializer_class = CategoriesSerializer
+    queryset = Categories.objects.all()
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+##TEST FUNCTIONS
+class Current(APIView):
+    def get(self, request, format = None):
+        if self.request.user.id != None:
+            Response(self.request.user.id)
+        else:
+            return Response("no user currently logged in")
+
+class GetUserInfo(APIView):
+    def get(self, request, user_id, format = None):
+        try:
+            user = User.objects.get(id = user_id)
+        except:
+            return Response("user does not exist")
+        try:
+            userToken = user.auth_token.key
+        except:
+            return Response("user does not have an associated token")
+        responseDict = {
+            'token': userToken,
+            'email': user.email
+        }
+        try:
+            return Response(responseDict)
+        except:
+            return Response("no token associated with this ID")

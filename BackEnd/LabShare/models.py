@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save
 from django.contrib.auth import get_user_model
+from rest_framework.authtoken.models import Token
+from django.dispatch import receiver
 from BackEnd import settings
 from datetime import datetime
 
@@ -37,11 +40,20 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.email
 
+@receiver(post_save, sender = settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
+
+class Categories(models.Model):
+    category_name = models.CharField(max_length = 80)
+
 class Post(models.Model):
     date_created = models.DateTimeField(auto_now_add= True)
     title = models.CharField(max_length = 80)
     content = models.TextField()
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = 'posts', on_delete=models.CASCADE)
+    author = models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name = 'posts', on_delete=models.CASCADE)
+    category = models.ForeignKey(Categories, related_name = 'posts', on_delete = models.CASCADE, blank = True, null = True)
 
     def author_first(self):
         return self.author.first_name
@@ -52,17 +64,16 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-class UserPreferences(models.Model):
-    owner = models.OneToOneField(settings.AUTH_USER_MODEL, related_name = 'preferences', on_delete = models.CASCADE)
-
-    def __str__(self):
-        return self.owner.email
-
 class UserProfile(models.Model):
     owner = models.OneToOneField(settings.AUTH_USER_MODEL, related_name = 'profile', on_delete = models.CASCADE)
-    bio = models.TextField()
-    dob = models.DateField(default = datetime.now(), blank = True)
+    bio = models.TextField(blank = True, null = True)
+    dob = models.DateField(default = datetime.now(), blank = True, null = True)
+    image = models.ImageField(upload_to = 'profile_image', blank = True, default = 'avatar.jpg')
 
     def __str__(self):
         return self.owner.email
 
+@receiver(post_save, sender = settings.AUTH_USER_MODEL)
+def create_profile(sender, instance=None, created=False, **kwargs):
+    if created:
+        profile = UserProfile.objects.create(owner=instance)
