@@ -10,17 +10,11 @@ import Foundation
 
 struct ProfileModel: Hashable, Codable, Identifiable {
     var id: Int
-    var email: String
-    var firstName: String
-    var lastName: String
-    var occupation: String
-    var employer: String
-    var dateOfBirth: String
-    var bio: String
+    var name: String
     
     init(id: Int) {
         self.id = id
-        self.email
+        self.name = ""
     }
 }
 
