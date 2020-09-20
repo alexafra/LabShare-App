@@ -49,20 +49,20 @@ class PostListViewModel: ObservableObject {
     }
     
     func updatePost(userId: Int, indexSet: IndexSet) {
-        let postToUpdate = self.posts[indexSet.first!]
-        let newPostTitle = self.newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-        let newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
-        if newPostContent.isEmpty || newPostTitle.isEmpty {
-            return
-        }
-        
-        let newPost = PostEncodable(title: newPostTitle, content: newPostContent, author: postToUpdate.author)
-        
-        PostWebservice().updatePost(postId: postToUpdate.id, post: newPost) { posts in
-            if let posts = posts {
-                self.posts = posts.map( PostViewModel.init )
-            }
-        }
+//        let postToUpdate = self.posts[indexSet.first!]
+//        let newPostTitle = self.newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+//        let newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
+//        if newPostContent.isEmpty || newPostTitle.isEmpty {
+//            return
+//        }
+//        
+//        let newPost = PostEncodable(title: newPostTitle, content: newPostContent, author: postToUpdate.author)
+//        
+//        PostWebservice().updatePost(postId: postToUpdate.id, post: newPost) { posts in
+//            if let posts = posts {
+//                self.posts = posts.map( PostViewModel.init )
+//            }
+//        }
         self.newPostTitle = ""
         self.newPostContent = ""
         
@@ -90,8 +90,8 @@ struct PostViewModel {
     var id: Int { return self.post.id }
     var title: String { return self.post.title }
     var content: String { return self.post.content }
-    var date_created: String { return self.post.date_created }
-    var author: Int { return self.post.author }
+    var date_created: String { return self.post.dateCreated }
+    var author: UserModel { return self.post.author }
     
     
 }

@@ -236,8 +236,8 @@
 			children = (
 				F09C69B62516446900EC961C /* StartView.swift */,
 				F09C69AD2516303900EC961C /* Login */,
-				1B92705224FBE07D00D8CF34 /* ProfileView.swift */,
 				F04A335124F91CAA004A86D9 /* PostRowView.swift */,
+				1B92705224FBE07D00D8CF34 /* ProfileView.swift */,
 				F04A335824FA234F004A86D9 /* PostDetailView.swift */,
 				F0D331DB250390CB008A280A /* PostHeaderView.swift */,
 				1BD01AFD250473F5006C6F90 /* SearchBarView.swift */,

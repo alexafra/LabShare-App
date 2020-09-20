@@ -8,18 +8,24 @@
 
 import Foundation
 
-struct PostsModel: Codable {
-    var posts: [PostModel]
-}
-
 //Changge to let
 struct PostModel: Hashable, Codable, Identifiable {
     var id: Int
     var title: String
     var content: String
-    var date_created: String
-    var author: Int
+    var dateCreated: String
+    var author: UserModel
+    
+    enum CodingKeys: String, CodingKey
+    {
+        case id
+        case title
+        case content
+        case dateCreated = "date_created"
+        case author
+    }
 }
+
 
 
 //I dont think this is right....

@@ -11,7 +11,12 @@ import Foundation
 struct UserModel: Hashable, Codable, Identifiable {
     var id: Int
     var email: String
-    var password: String
+    
+    enum CodingKeys: CodingKey
+    {
+        case id
+        case email
+    }
 }
 
 struct UserLoginModel: Codable {

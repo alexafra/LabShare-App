@@ -16,8 +16,9 @@ struct ProfileView: View {
     @ObservedObject private var postListVM: PostListViewModel
     
     init(userId: Int) {
-        self.postListVM = PostListViewModel(userId: userId)
         self.profileVM = ProfileViewModel(profileModel: ProfileModel(id: userId))
+        self.postListVM = PostListViewModel(userId: userId)
+        
     }
     
     var body: some View {
@@ -32,7 +33,7 @@ struct ProfileView: View {
                     Spacer()
                 }.padding(.top, 15)
                     .padding(.bottom, -10)
-                
+
                 VStack {
                     HStack {
                         VStack(alignment: .leading, spacing: 5) {
@@ -50,7 +51,7 @@ struct ProfileView: View {
                         Spacer()
                     }
                 }.padding(.leading, 5)
-       
+
                 Section(header: Text("Create new post")) {
                     HStack {
                         VStack {
@@ -65,7 +66,7 @@ struct ProfileView: View {
                                 .imageScale(.large)
                         }
                     }
-                    
+
                 }
                 Section(header: Text("Posts:")) {
                     ForEach(self.postListVM.posts, id: \.id) {
@@ -76,15 +77,11 @@ struct ProfileView: View {
                     }.onDelete(perform: self.postListVM.deletePost)
                 }
             }
-             
-        }
-        .navigationBarItems(trailing: SearchBarView())
-        .onAppear(perform: self.postListVM.getAllPosts)
+        }.onAppear(perform: self.postListVM.getAllPosts)
         .onAppear(perform: self.profileVM.getUser)
+        .navigationBarItems(trailing: SearchBarView())
     }
 }
-
-
 
 struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
