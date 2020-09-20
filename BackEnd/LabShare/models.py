@@ -70,7 +70,7 @@ class UserProfile(models.Model):
     dob = models.DateField(default = datetime.now(), blank = True, default = "")
     occupation = models.TextField(blank = True, default = "")
     employer = models.TextField(blank = True, default = "")
-    image = models.ImageField(upload_to = 'profile_image', blank = True, default = 'avatar.jpg')
+    #image = models.ImageField(upload_to = 'profile_image', blank = True, default = 'avatar.jpg')
 
     def __str__(self):
         return self.owner.email
