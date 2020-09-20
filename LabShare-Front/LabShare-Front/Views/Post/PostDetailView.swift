@@ -9,54 +9,61 @@
 import SwiftUI
 
 struct PostDetailView: View {
+<<<<<<< HEAD
     
+=======
+    @ObservedObject var postVM: PostViewModel
+>>>>>>> FixingPostDetailState
     @ViewBuilder
     var body: some View {
-            VStack (alignment:.leading) {
-                
-                PostHeaderView(post: post)
-                
-                HStack {
-                    Text(self.post.title)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.black)
-                    Spacer()
-                    VStack {
-                        Button(action: {
-                        }){
-                            Image(systemName: "pencil")
-                                .imageScale(.large)
-                            Text("Edit Post")
-                        }.foregroundColor(.black)
-                        Button(action: {
-                        }){
-                            Image(systemName: "rubbish")
-                                .imageScale(.large)
-                            Text("Delete Post")
-                        }.foregroundColor(.black)
-                    }
+        VStack (alignment:.leading) {
+            
+            NavigationLink (destination: ProfileView(userId: postVM.post.author.id)){
+                PostHeaderView(post: self.$postVM.post)
+            }.buttonStyle(PlainButtonStyle())
+            HStack {
+                Text(self.post.title)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.black)
+                Spacer()
+                VStack {
+                    Button(action: {
+                    }){
+                        Image(systemName: "pencil")
+                            .imageScale(.large)
+                        Text("Edit Post")
+                    }.foregroundColor(.black)
                     
+                    Button(action: {
+                        
+                    }){
+                    Image(systemName: "trash")
+                        .imageScale(.large)
+                    Text("Delete Post")
+                        
+                    }.foregroundColor(.black)
+                        .padding(.top, 10)
                 }
                 
-                Text("Date Posted: " + self.post.dateCreated.description).font(Font.footnote).fontWeight(.thin)
-                Text("\n" + self.post.content)
-                
-                
-                VStack(alignment: .leading) {
-                    Text("User Details:").font(.subheadline).fontWeight(.medium).foregroundColor(Color.black)
-                    Text(user.name+"\nEmail: 22499153@student.uwa.edu.au").font(.caption).foregroundColor(Color.black)
-                    NavigationLink(destination: ProfileView(userId: post.author.id)) {Text("See more")
-                        .font(.footnote)
-                    }
-                    }.onAppear(perform: getUser)
-                .padding(.all, 7)
-                    .padding(.top)
-                
-                Spacer()
-            }.padding([.top, .leading, .trailing])
-
+            }
             
+            Text("Date Posted: " + self.post.dateCreated.description).font(Font.footnote).fontWeight(.thin)
+            Text("\n" + self.post.content)
+            
+            
+            VStack(alignment: .leading) {
+                Text("User Details:").font(.subheadline).fontWeight(.medium).foregroundColor(Color.black)
+                Text(user.name+"\nEmail: 22499153@student.uwa.edu.au").font(.caption).foregroundColor(Color.black)
+                NavigationLink(destination: ProfileView(userId: post.author.id)) {Text("See more")
+                    .font(.footnote)
+                }
+                }.onAppear(perform: getUser)
+            .padding(.all, 7)
+                .padding(.top)
+            
+            Spacer()
+        }.padding([.top, .leading, .trailing])
     }
     
     func getUser() {

@@ -17,7 +17,7 @@ class PostListViewModel: ObservableObject {
     @Published var userId: Int
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
-    @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
+    @Published var posts = [PostModel]() //whenever you change the posts, it will publish an event
     
     init (userId: Int) {
         self.userId = userId
@@ -25,7 +25,7 @@ class PostListViewModel: ObservableObject {
     func getAllPosts() {
         PostWebservice().getAllPosts(userId: userId) { posts in
             if let posts = posts {
-                self.posts = posts.map( PostViewModel.init )
+                self.posts = posts.map( PostModel.init ) //Probs broken
             }
         }
     }
@@ -40,13 +40,27 @@ class PostListViewModel: ObservableObject {
         PostWebservice().createPost(post: newPost) { posts in
         
             if let posts = posts {
-                self.posts = posts.map( PostViewModel.init )
+                self.posts = posts.map( PostModel.init ) //Probs broken
             }
         }
         self.newPostTitle = ""
         self.newPostContent = ""
         
     }
+}
+
+class PostViewModel: ObservableObject {
+    @Published var post: PostModel
+    
+    init(post: PostModel) {
+        self.post = post
+    }
+    
+//    var id: Int { return self.post.id }
+//    var title: String { return self.post.title }
+//    var content: String { return self.post.content }
+//    var date_created: String { return self.post.dateCreated }
+//    var author: UserModel { return self.post.author }
     
     func updatePost(userId: Int, indexSet: IndexSet) {
 //        let postToUpdate = self.posts[indexSet.first!]
@@ -55,43 +69,29 @@ class PostListViewModel: ObservableObject {
 //        if newPostContent.isEmpty || newPostTitle.isEmpty {
 //            return
 //        }
-//        
+//
 //        let newPost = PostEncodable(title: newPostTitle, content: newPostContent, author: postToUpdate.author)
-//        
+//
 //        PostWebservice().updatePost(postId: postToUpdate.id, post: newPost) { posts in
 //            if let posts = posts {
 //                self.posts = posts.map( PostViewModel.init )
 //            }
 //        }
-        self.newPostTitle = ""
-        self.newPostContent = ""
         
     }
     
-    func deletePost(indexSet: IndexSet) {
-        let deleteItem = self.posts[indexSet.first!]
-        let deleteId = deleteItem.id
+    func deletePost() {
         
+<<<<<<< HEAD
         PostWebservice().deletePost(postId : deleteId) { posts in
+=======
+        PostWebservice().deletePost(itemId : self.post.id) { posts in
+>>>>>>> FixingPostDetailState
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init )
             }
         }
     }
-}
-
-struct PostViewModel {
-    var post: PostModel
-    
-    init(post: PostModel) {
-        self.post = post
-    }
-    
-    var id: Int { return self.post.id }
-    var title: String { return self.post.title }
-    var content: String { return self.post.content }
-    var date_created: String { return self.post.dateCreated }
-    var author: UserModel { return self.post.author }
     
     
 }
