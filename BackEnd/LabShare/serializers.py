@@ -46,7 +46,7 @@ class PostSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image']
+        fields = ['id', 'bio', 'dob', 'occupation', 'employer'] #image
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
