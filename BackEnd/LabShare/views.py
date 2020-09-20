@@ -42,6 +42,19 @@ class UserLogout(APIView):
         self.request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
 
+class SingleUser(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'id'
+    lookup_url_kwarg = 'user_id'
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs) 
+
 class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
     permission_classes = [IsAuthenticated]
     lookup_field = 'owner__id'
