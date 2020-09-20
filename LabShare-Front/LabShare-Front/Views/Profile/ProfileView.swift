@@ -21,41 +21,38 @@ struct ProfileView: View {
     }
     
     var body: some View {
-            VStack {
-                 ScrollView {
-                    ProfileHeaderView(userId: self.postListVM.userId)
-                    Text("Create new post")
-                    HStack {
-                        VStack {
-                            TextField("Title: Enter up to 20 characters", text: self.$postListVM.newPostTitle)
-                            TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent)
-                                
-                        }
-                        Button(action: {
-                            self.postListVM.createPost()
-                        }){
-                            Image(systemName: "plus.circle.fill")
-                                .foregroundColor(.green)
-                                .imageScale(.large)
-                        }
+        VStack {
+             ScrollView {
+                ProfileHeaderView(userId: self.postListVM.userId)
+                Text("Create new post")
+                HStack {
+                    VStack {
+                        TextField("Title: Enter up to 20 characters", text: self.$postListVM.newPostTitle)
+                        TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent)
+                            
                     }
+                    Button(action: {
+                        self.postListVM.createPost()
+                    }){
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.green)
+                            .imageScale(.large)
+                    }
+                }
+                
+               Text("Posts:")
                     
-                   Text("Posts:")
-                        
-                    ForEach(self.postListVM.posts, id: \.id) {
-                        postVM in
-                        NavigationLink(destination: PostDetailView(post: postVM.post)) {
-                            PostRowView(post: postVM.post)
-                                
-                        }.buttonStyle(PlainButtonStyle())
-                    }.onDelete(perform: self.postListVM.deletePost)
-                        
-                    
-                 }
-                 
-             }.onAppear(perform: self.postListVM.getAllPosts)
-                .navigationBarTitle(Text(""), displayMode: .inline)
-                .navigationBarItems(trailing: SearchBarView())
+                ForEach(self.postListVM.posts, id: \.id) {
+                    postVM in
+                    NavigationLink(destination: PostDetailView(post: postVM)) {
+                        PostRowView(post: postVM)
+                            
+                    }.buttonStyle(PlainButtonStyle())
+                }
+             }
+         }.onAppear(perform: self.postListVM.getAllPosts)
+            .navigationBarTitle(Text(""), displayMode: .inline)
+            .navigationBarItems(trailing: SearchBarView())
     }
 }
 
