@@ -65,7 +65,7 @@ class UserPosts(generics.GenericAPIView, mixins.ListModelMixin):
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
-class Feed(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+class Posts(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     permission_classes = [IsAuthenticated]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
@@ -115,7 +115,7 @@ class SingleCategory(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.
 class Current(APIView):
     def get(self, request, format = None):
         if self.request.user.id != None:
-            Response(self.request.user.id)
+            return Response(self.request.user.id)
         else:
             return Response("no user currently logged in")
 

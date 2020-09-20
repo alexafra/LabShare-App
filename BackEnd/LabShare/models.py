@@ -68,6 +68,8 @@ class UserProfile(models.Model):
     owner = models.OneToOneField(settings.AUTH_USER_MODEL, related_name = 'profile', on_delete = models.CASCADE)
     bio = models.TextField(blank = True, null = True)
     dob = models.DateField(default = datetime.now(), blank = True, null = True)
+    occupation = models.TextField(blank = True, null = True)
+    employer = models.TextField(blank = True, null = True)
     image = models.ImageField(upload_to = 'profile_image', blank = True, default = 'avatar.jpg')
 
     def __str__(self):

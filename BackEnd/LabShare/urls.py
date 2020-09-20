@@ -6,17 +6,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('userinfo/<int:user_id>/', views.GetUserInfo.as_view()),
-    path('current/', views.Current.as_view()),
-    path('feed/<int:id>/', views.SinglePost.as_view()), #This needs to change to posts/id
-    path('feed/', views.Feed.as_view()),
-    path('user/<int:user_id>/posts/', views.UserPosts.as_view()), #Need to be able to create posts here
-    path('user/<int:user_id>/profile/', views.Profile.as_view()),
-    path('categories/', views.AvailableCategories.as_view()),
-    path('categories/<int:id>/', views.SingleCategory.as_view()),
-    path('register/', views.UserRegister.as_view()),
-    path('login/', views.UserLogin.as_view()),
-    path('logout/', views.UserLogout.as_view()),
+    path('userinfo/<int:user_id>', views.GetUserInfo.as_view()),
+    path('current', views.Current.as_view()),
+    path('posts/<int:id>', views.SinglePost.as_view()), #This needs to change to posts/id
+    path('posts', views.Posts.as_view()),
+    path('users/<int:user_id>/posts', views.UserPosts.as_view()), #Need to be able to create posts here
+    path('users/<int:user_id>/profile', views.Profile.as_view()),
+    path('categories', views.AvailableCategories.as_view()),
+    path('categories/<int:id>', views.SingleCategory.as_view()),
+    path('register', views.UserRegister.as_view()),
+    path('login', views.UserLogin.as_view()),
+    path('logout', views.UserLogout.as_view()),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 #GRAE
@@ -31,6 +31,9 @@ urlpatterns = [
 #Get started on admin functionality
 #Pagination
 #Profile photos ##DONE
+#Make first_name and last_name essential
+#PUT request requires everything?
+#add comments
 
 #GREG
 #Reimplement Postgres
@@ -45,3 +48,8 @@ urlpatterns = [
 #register and login restricted to logged out users
 #pip install pillow
 #profile images now work
+
+#remove all trailing /'s
+#'feed' changed to 'posts'
+#all instances of 'user' now 'users'
+
