@@ -24,12 +24,21 @@ struct PostDetailView: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color.black)
                     Spacer()
-                    Button(action: {
-                    }){
-                        Image(systemName: "pencil")
-                            .imageScale(.large)
-                        Text("Edit Post")
-                    }.foregroundColor(.black)
+                    VStack {
+                        Button(action: {
+                        }){
+                            Image(systemName: "pencil")
+                                .imageScale(.large)
+                            Text("Edit Post")
+                        }.foregroundColor(.black)
+                        Button(action: {
+                        }){
+                            Image(systemName: "rubbish")
+                                .imageScale(.large)
+                            Text("Delete Post")
+                        }.foregroundColor(.black)
+                    }
+                    
                 }
                 
                 Text("Date Posted: " + self.post.dateCreated.description).font(Font.footnote).fontWeight(.thin)

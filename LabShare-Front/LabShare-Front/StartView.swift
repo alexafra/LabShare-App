@@ -19,6 +19,7 @@ struct StartView: View {
                 ProfileContainerView()
             }
         }
+        
     }
 }
 

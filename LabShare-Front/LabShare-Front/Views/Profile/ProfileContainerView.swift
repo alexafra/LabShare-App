@@ -10,26 +10,15 @@ import SwiftUI
 
 struct ProfileContainerView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
+    @State var forceNavLink = true // Bad hack to prevent NavView formatting
+    //May want to think of alternative, does this need to be in a view?
     var body: some View {
-        VStack {
-            NavigationView {
-                VStack {
-                    ProfileView(userId: self.userAuthVM.userAuth.id)
-                        .navigationBarTitle(Text(""), displayMode: .inline)
-                        .navigationBarItems(trailing: SearchBarView())
-                }
-                
-                    
-    //
-    //                .edgesIgnoringSafeArea(.top)
-            }
+        NavigationView {
+            ProfileView(userId: userAuthVM.userAuth.id)
         }
-        
-        
-//        .inline()
-//        .navigationBarHidden(true)
     }
 }
+
 
 struct ProfileContainerView_Previews: PreviewProvider {
     static var previews: some View {

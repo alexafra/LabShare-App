@@ -16,36 +16,37 @@ struct SearchBarView: View {
     @State var searchID = -1
     
     var body: some View {
-        
-        HStack {
-            VStack {
-                TextField("Search", text: $searchResult)
-                    .frame(width: 100.0)
-            }
-            
-            VStack {
-                NavigationLink(destination: ProfileView(userId: searchID), isActive: $show) {
-                    Image(systemName: "")
+//        NavigationView (){
+            HStack {
+                VStack {
+                    TextField("Search", text: $searchResult)
+                        .frame(width: 100.0)
                 }
                 
-                Button(action: {
-                    self.searchID = Int(self.searchResult) ?? -1
-                    if self.searchID == -1 {
-                        self.show = false
+                VStack {
+                    NavigationLink(destination: ProfileView(userId: searchID), isActive: $show) {
+                        Image(systemName: "")
                     }
-                    else {
-                        // Need to check if valid user
-                        self.show = true
-                    }
-                }) {
-                    Image(systemName: "magnifyingglass")
-                }.offset(x: -5, y: -4)
-            }
-            
-        }.padding(.all, 4)
-            .background(Color(.white))
-            .cornerRadius(10)
-    }
+                    
+                    Button(action: {
+                        self.searchID = Int(self.searchResult) ?? -1
+                        if self.searchID == -1 {
+                            self.show = false
+                        }
+                        else {
+                            // Need to check if valid user
+                            self.show = true
+                        }
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                    }.offset(x: -5, y: -4)
+                }
+                
+            }.padding(.all, 4)
+                .background(Color(.white))
+                .cornerRadius(10)
+        }
+//    }
 }
 
 struct SearchBarView_Previews: PreviewProvider {

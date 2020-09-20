@@ -14,7 +14,7 @@ struct ProfileHeaderView: View {
         self.profileVM = ProfileViewModel(profileModel: ProfileModel(id: userId))
     }
     var body: some View {
-        VStack {
+        VStack {  
             CircleImage()
                 .padding(.leading, 30)
                 .padding(.trailing, 30)
