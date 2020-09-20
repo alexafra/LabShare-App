@@ -18,8 +18,8 @@ class UserWebservice {
         Self.token = token
     }
     
-    func getUser(userId: Int, completion: @escaping (ProfileModel?) -> ()) {
-        guard let url = URL(string: "http://127.0.0.1:8000/users/\(String(userId))/profile/") else {
+    func getProfile(userId: Int, completion: @escaping (ProfileModel?) -> ()) {
+        guard let url = URL(string: "http://127.0.0.1:8000/users/\(String(userId))/profile") else {
             print("Invalid URL")
             return
         }

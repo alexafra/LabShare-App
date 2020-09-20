@@ -72,7 +72,7 @@ class PostListViewModel: ObservableObject {
         let deleteItem = self.posts[indexSet.first!]
         let deleteId = deleteItem.id
         
-        PostWebservice().deletePost(itemId : deleteId) { posts in
+        PostWebservice().deletePost(postId : deleteId) { posts in
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init )
             }

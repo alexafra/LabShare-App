@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct PostDetailView: View {
-    var post: PostModel
-    @State private var user: ProfileModel = ProfileModel(id: 1)
     
     @ViewBuilder
     var body: some View {
@@ -91,6 +89,6 @@ struct PostDetailView: View {
 
 struct PostDetail_Previews: PreviewProvider {
     static var previews: some View {
-        PostDetailView(post: PostModel(id: 10, title: "Free Iphones", content: "Dave found joy in the daily routine of life. He awoke at the same time, ate the same breakfast and drove the same commute. He worked at a job that never seemed to change and he got home at 6 pm sharp every night. It was who he had been for the last ten years and he had no idea that was all about to change.", dateCreated: "2020-07-22 16:48:31", author: UserModel(id: 3, email: "alexanderfrazis@gmail.com")))
+        PostDetailView(post: PostModel(id: 10, title: "Free Iphones", content: "Dave found joy in the daily routine of life. He awoke at the same time, ate the same breakfast and drove the same commute. He worked at a job that never seemed to change and he got home at 6 pm sharp every night. It was who he had been for the last ten years and he had no idea that was all about to change.", dateCreated: "2020-07-22 16:48:31", author: UserModel (id: 7, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis")))
     }
 }

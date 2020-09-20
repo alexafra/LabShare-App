@@ -30,7 +30,7 @@ class PostWebservice {
          4. Handle the result of that networking tak
          */
         
-        guard let url = URL(string: "http://127.0.0.1:8000/user/\(userId)/posts/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/user/\(userId)/posts") else {
             print("Invalid URL")
             return
         }
@@ -57,7 +57,7 @@ class PostWebservice {
     }
     
     func createPost (post: PostEncodable, completion: @escaping ([PostModel]?) -> ()) {
-        guard let url = URL(string: "http://127.0.0.1:8000/feed/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/posts") else {
             print("Invalid URL")
             return
         }
@@ -91,8 +91,8 @@ class PostWebservice {
         }.resume()
     }
     
-    func deletePost(itemId: Int, completion: @escaping ([PostModel]?) -> ()) {
-        guard let url = URL(string: "http://127.0.0.1:8000/feed/\(itemId)/") else {
+    func deletePost(postId: Int, completion: @escaping ([PostModel]?) -> ()) {
+        guard let url = URL(string: "http://127.0.0.1:8000/posts/\(postId)/") else {
             print("Invalid URL")
             return
         }
@@ -122,7 +122,7 @@ class PostWebservice {
     
     func updatePost(postId: Int, post: PostEncodable, completion: @escaping ([PostModel]?) -> ()) {
         
-        guard let url = URL(string: "http://127.0.0.1:8000/feed/\(postId)") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/posts/\(postId)") else {
             print("Invalid URL")
             return
         }

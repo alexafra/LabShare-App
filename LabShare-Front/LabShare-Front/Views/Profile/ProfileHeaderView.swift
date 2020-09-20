@@ -11,7 +11,7 @@ import SwiftUI
 struct ProfileHeaderView: View {
     @ObservedObject private var profileVM: ProfileViewModel
     init(userId: Int) {
-        self.profileVM = ProfileViewModel(profileModel: ProfileModel(id: userId))
+        self.profileVM = ProfileViewModel(profileModel: ProfileModel(id: self.profileVM.profile.owner.id))
     }
     var body: some View {
         VStack {  
@@ -40,7 +40,7 @@ struct ProfileHeaderView: View {
                     Spacer()
                 }
                 HStack{
-                    Text(self.profileVM.profile.name + "'s Posts")
+                    Text("\(self.profileVM.profile.owner.firstName) \(self.profileVM.profile.owner.lastName)'s Posts")
                         .font(.title)
                         .fontWeight(.medium)
                     Spacer()

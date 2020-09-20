@@ -8,13 +8,20 @@
 
 import Foundation
 
-struct ProfileModel: Hashable, Codable, Identifiable {
-    var id: Int
-    var name: String
+struct ProfileModel: Hashable, Codable {
+    var bio: String
+    var dob: String
+    var occupation: String
+    var employer: String
+    var owner: UserModel
     
-    init(id: Int) {
-        self.id = id
-        self.name = ""
+    enum CodingKeys: String, CodingKey
+    {
+        case bio
+        case dob
+        case occupation
+        case employer
+        case owner
     }
 }
 

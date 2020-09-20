@@ -11,17 +11,43 @@ import Foundation
 struct UserModel: Hashable, Codable, Identifiable {
     var id: Int
     var email: String
+    var firstName: String
+    var lastName: String
     
-    enum CodingKeys: CodingKey
+//    "id": 8,
+//    "email": "graycumming@gmail.com",
+//    "profile": 2,
+//    "first_name": "Gray",
+//    "last_name": "Cumming"
+    
+    enum CodingKeys: String, CodingKey
     {
         case id
         case email
+        case firstName = "first_name"
+        case lastName = "last_name"
     }
 }
 
 struct UserLoginModel: Codable {
     var email: String
     var password: String
+}
+
+struct UserRegisterModel: Codable {
+    var email: String
+    var password: String
+    var firstName: String
+    var lastName: String
+    
+    enum CodingKeys: String, CodingKey
+    {
+        case email
+        case password
+        case firstName = "first_name"
+        case lastName = "last_name"
+    }
+    
 }
 
 struct UserAuthenticationModel: Codable, Identifiable {
