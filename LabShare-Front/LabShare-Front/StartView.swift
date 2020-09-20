@@ -16,7 +16,7 @@ struct StartView: View {
             if self.userAuthVM.userAuth.isLoggedIn == false {
                 SetUpView()
             } else {
-                ProfileView(userId: self.userAuthVM.userAuth.id)
+                ProfileContainerView()
             }
         }
     }

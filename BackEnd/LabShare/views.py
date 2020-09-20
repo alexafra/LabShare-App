@@ -31,7 +31,7 @@ class UserLogin(APIView):
             token, created = Token.objects.get_or_create(user = user)
             responseDict = {
                 'token': token.key,
-                'created': created
+                'id': user.id
             }
             return Response(responseDict, status = status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
@@ -57,7 +57,7 @@ class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateM
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
-class UserPosts(generics.GenericAPIView, mixins.ListModelMixin):     
+class UserPosts(generics.GenericAPIView, mixins.ListModelMixin):
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
     def get_queryset(self):

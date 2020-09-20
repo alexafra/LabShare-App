@@ -11,7 +11,7 @@
 		1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */; };
 		1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92705224FBE07D00D8CF34 /* ProfileView.swift */; };
 		1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFD250473F5006C6F90 /* SearchBarView.swift */; };
-		1BD01B00250488B4006C6F90 /* myProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFF250488B4006C6F90 /* myProfileView.swift */; };
+		1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */; };
 		1E40D5CFC070094A1C8C84AD /* Pods_LabShare_Front.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B900551F389BECD52DCD2DD7 /* Pods_LabShare_Front.framework */; };
 		E470409723EB23F8766A4344 /* Pods_LabShare_Front_LabShare_FrontUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD28AB0AAB97049B83229062 /* Pods_LabShare_Front_LabShare_FrontUITests.framework */; };
 		F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A331D24F91C43004A86D9 /* AppDelegate.swift */; };
@@ -37,6 +37,8 @@
 		F09C69B52516408200EC961C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B42516408200EC961C /* UserModel.swift */; };
 		F09C69B72516446900EC961C /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B62516446900EC961C /* StartView.swift */; };
 		F09C69B92516450600EC961C /* UserAuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B82516450600EC961C /* UserAuthenticationViewModel.swift */; };
+		F0C21C4C2517557900EE3665 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C21C4B2517557900EE3665 /* ProfileHeaderView.swift */; };
+		F0C21C552517576500EE3665 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C21C542517576500EE3665 /* CircleImage.swift */; };
 		F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D331DB250390CB008A280A /* PostHeaderView.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +65,7 @@
 		1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		1B92705224FBE07D00D8CF34 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1BD01AFD250473F5006C6F90 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
-		1BD01AFF250488B4006C6F90 /* myProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myProfileView.swift; sourceTree = "<group>"; };
+		1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContainerView.swift; sourceTree = "<group>"; };
 		1F57E97853FC45E6A4C572E5 /* Pods_LabShare_FrontTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_FrontTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		305CF325481435D3912A9B8A /* Pods-LabShare-FrontTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-FrontTests.debug.xcconfig"; path = "Target Support Files/Pods-LabShare-FrontTests/Pods-LabShare-FrontTests.debug.xcconfig"; sourceTree = "<group>"; };
 		417B8354CF9748BD5D3D7790 /* Pods-LabShare-Front-LabShare-FrontUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front-LabShare-FrontUITests.debug.xcconfig"; path = "Target Support Files/Pods-LabShare-Front-LabShare-FrontUITests/Pods-LabShare-Front-LabShare-FrontUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +101,8 @@
 		F09C69B42516408200EC961C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		F09C69B62516446900EC961C /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		F09C69B82516450600EC961C /* UserAuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewModel.swift; sourceTree = "<group>"; };
+		F0C21C4B2517557900EE3665 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		F0C21C542517576500EE3665 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		F0D331DB250390CB008A280A /* PostHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderView.swift; sourceTree = "<group>"; };
 		F383668E12D6B29CB9CA91DE /* Pods-LabShare-Front.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front.release.xcconfig"; path = "Target Support Files/Pods-LabShare-Front/Pods-LabShare-Front.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,9 +188,9 @@
 				F0519BB625034A49006E580E /* Services */,
 				F04A334D24F91C62004A86D9 /* Models */,
 				F04A331D24F91C43004A86D9 /* AppDelegate.swift */,
+				F09C69B62516446900EC961C /* StartView.swift */,
 				F04A331F24F91C43004A86D9 /* SceneDelegate.swift */,
 				F04A332124F91C43004A86D9 /* FeedView.swift */,
-				1BD01AFF250488B4006C6F90 /* myProfileView.swift */,
 				F04A332324F91C44004A86D9 /* Assets.xcassets */,
 				F04A332824F91C44004A86D9 /* LaunchScreen.storyboard */,
 				F04A332B24F91C44004A86D9 /* Info.plist */,
@@ -234,13 +238,9 @@
 		F04A334E24F91C6A004A86D9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F09C69B62516446900EC961C /* StartView.swift */,
+				F0C21C502517558100EE3665 /* Profile */,
+				F0C21C472517541800EE3665 /* Post */,
 				F09C69AD2516303900EC961C /* Login */,
-				F04A335124F91CAA004A86D9 /* PostRowView.swift */,
-				1B92705224FBE07D00D8CF34 /* ProfileView.swift */,
-				F04A335824FA234F004A86D9 /* PostDetailView.swift */,
-				F0D331DB250390CB008A280A /* PostHeaderView.swift */,
-				1BD01AFD250473F5006C6F90 /* SearchBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -274,6 +274,28 @@
 				F09C69AE251635BD00EC961C /* LoginView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		F0C21C472517541800EE3665 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				F04A335124F91CAA004A86D9 /* PostRowView.swift */,
+				F04A335824FA234F004A86D9 /* PostDetailView.swift */,
+				F0D331DB250390CB008A280A /* PostHeaderView.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		F0C21C502517558100EE3665 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1BD01AFD250473F5006C6F90 /* SearchBarView.swift */,
+				F0C21C4B2517557900EE3665 /* ProfileHeaderView.swift */,
+				1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */,
+				1B92705224FBE07D00D8CF34 /* ProfileView.swift */,
+				F0C21C542517576500EE3665 /* CircleImage.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,7 +507,8 @@
 				1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */,
 				F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */,
 				F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */,
-				1BD01B00250488B4006C6F90 /* myProfileView.swift in Sources */,
+				1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */,
+				F0C21C4C2517557900EE3665 /* ProfileHeaderView.swift in Sources */,
 				1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */,
 				F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */,
 				1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */,
@@ -502,6 +525,7 @@
 				F09C69B92516450600EC961C /* UserAuthenticationViewModel.swift in Sources */,
 				F09C69B12516396200EC961C /* LoginViewModel.swift in Sources */,
 				F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */,
+				F0C21C552517576500EE3665 /* CircleImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

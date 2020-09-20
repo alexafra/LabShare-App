@@ -8,9 +8,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('userinfo/<int:user_id>/', views.GetUserInfo.as_view()),
     path('current/', views.Current.as_view()),
-    path('user/feed/<int:id>/', views.SinglePost.as_view()), #
-    path('user/feed/', views.Feed.as_view()),
-    path('user/<int:user_id>/posts/', views.UserPosts.as_view()),
+    path('feed/<int:id>/', views.SinglePost.as_view()), #This needs to change to posts/id
+    path('feed/', views.Feed.as_view()),
+    path('user/<int:user_id>/posts/', views.UserPosts.as_view()), #Need to be able to create posts here
     path('user/<int:user_id>/profile/', views.Profile.as_view()),
     path('categories/', views.AvailableCategories.as_view()),
     path('categories/<int:id>/', views.SingleCategory.as_view()),
@@ -39,7 +39,7 @@ urlpatterns = [
 
 #categories/ show all categories and add categories
 #categories/id/ shows a category for manipulation
-#userinfo/<user_id>/ now returns {token, email} 
+#userinfo/<user_id>/ now returns {token, email}
 #current/ now returns id of currently logged in user
 #views now restricted to logged in users
 #register and login restricted to logged out users

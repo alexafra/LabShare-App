@@ -12,11 +12,10 @@ struct ProfileView: View {
     
 //    var userId: Int
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @ObservedObject private var profileVM: ProfileViewModel
     @ObservedObject private var postListVM: PostListViewModel
     
     init(userId: Int) {
-        self.profileVM = ProfileViewModel(profileModel: ProfileModel(id: userId))
+        
         self.postListVM = PostListViewModel(userId: userId)
         
     }
@@ -24,34 +23,7 @@ struct ProfileView: View {
     var body: some View {
         VStack {
              List {
-                HStack {
-                    Spacer()
-                    Text(self.profileVM.profile.name)
-                        .font(.largeTitle)
-                        .fontWeight(.semibold)
-                        .padding(.bottom)
-                    Spacer()
-                }.padding(.top, 15)
-                    .padding(.bottom, -10)
-
-                VStack {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text("About")
-                                .font(.title)
-                                .fontWeight(.medium)
-                            Text("Email: 22499153@student.uwa.edu.au\nMobile: 0450215119\nLocation: QEII\nJoined in: 2020").font(.footnote).padding(.horizontal,5)
-                        }
-                        Spacer()
-                    }
-                    HStack{
-                        Text(self.profileVM.profile.name + "'s Posts")
-                            .font(.title)
-                            .fontWeight(.medium)
-                        Spacer()
-                    }
-                }.padding(.leading, 5)
-
+                ProfileHeaderView(userId: self.postListVM.userId)
                 Section(header: Text("Create new post")) {
                     HStack {
                         VStack {
@@ -76,10 +48,9 @@ struct ProfileView: View {
                         }
                     }.onDelete(perform: self.postListVM.deletePost)
                 }
-            }
+            }.navigationBarItems(trailing: SearchBarView())
         }.onAppear(perform: self.postListVM.getAllPosts)
-        .onAppear(perform: self.profileVM.getUser)
-        .navigationBarItems(trailing: SearchBarView())
+        
     }
 }
 
