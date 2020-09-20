@@ -30,7 +30,6 @@ class PostListViewModel: ObservableObject {
         }
     }
     
-    
     func createPost() {
         let newPostTitle = self.newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         let newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -95,10 +94,4 @@ struct PostViewModel {
     var author: Int { return self.post.author }
     
     
-}
-
-struct PostListViewModel_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
-    }
 }

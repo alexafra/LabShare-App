@@ -15,10 +15,6 @@ class PostWebservice {
     private static var loggedInUserId: Int = -1
     private static var token: String = ""
     
-    func printData() {
-        print(Self.loggedInUserId)
-        print(Self.token)
-    }
     func setLoggedInUserId(id: Int) {
         Self.loggedInUserId = id
     }

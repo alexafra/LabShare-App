@@ -42,9 +42,9 @@
 		6E91603A0085B5F94E28613F90D4454E /* Pods-LabShare-FrontTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LabShare-FrontTests-Info.plist"; sourceTree = "<group>"; };
 		76F8ACDE1F6625CFC8DE60FEC096189B /* Pods-LabShare-Front-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LabShare-Front-acknowledgements.markdown"; sourceTree = "<group>"; };
 		7DA8430F1270DD0BDB13C34B4EAD2D9B /* Pods-LabShare-Front-LabShare-FrontUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LabShare-Front-LabShare-FrontUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		81FD9E1EA94AF476174755EA561F40DD /* Pods_LabShare_FrontTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LabShare_FrontTests.framework; path = "Pods-LabShare-FrontTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81FD9E1EA94AF476174755EA561F40DD /* Pods_LabShare_FrontTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_FrontTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9476CA7CB4E634D0D390EEDB7FBA92A4 /* Pods-LabShare-Front-LabShare-FrontUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LabShare-Front-LabShare-FrontUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A207891060F8031087FC0C9D293715CB /* Pods-LabShare-FrontTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LabShare-FrontTests-umbrella.h"; sourceTree = "<group>"; };
 		ACFDABD443E6C06B26C006EA2154BF96 /* Pods-LabShare-Front.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LabShare-Front.debug.xcconfig"; sourceTree = "<group>"; };
 		C22D9780C234F810129DA5F4092CE854 /* Pods-LabShare-Front-LabShare-FrontUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LabShare-Front-LabShare-FrontUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -53,9 +53,9 @@
 		CD3C7CF0BBFFBF8BF4875C2D067F7441 /* Pods-LabShare-Front.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LabShare-Front.release.xcconfig"; sourceTree = "<group>"; };
 		CD4AF3D1257E228205BE7A43CAB772E6 /* Pods-LabShare-FrontTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LabShare-FrontTests-dummy.m"; sourceTree = "<group>"; };
 		D2B1D3C887BD91F5D7B44B939B78F03D /* Pods-LabShare-Front-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LabShare-Front-acknowledgements.plist"; sourceTree = "<group>"; };
-		DA91372717AC72A233E9DEE9D9B2F5A8 /* Pods_LabShare_Front_LabShare_FrontUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LabShare_Front_LabShare_FrontUITests.framework; path = "Pods-LabShare-Front-LabShare-FrontUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA91372717AC72A233E9DEE9D9B2F5A8 /* Pods_LabShare_Front_LabShare_FrontUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_Front_LabShare_FrontUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0DE521D6506A8C0236A104590B5593F /* Pods-LabShare-Front-LabShare-FrontUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LabShare-Front-LabShare-FrontUITests-Info.plist"; sourceTree = "<group>"; };
-		F85C59C0904587C4084C6E5B427D54E9 /* Pods_LabShare_Front.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LabShare_Front.framework; path = "Pods-LabShare-Front.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F85C59C0904587C4084C6E5B427D54E9 /* Pods_LabShare_Front.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_Front.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AD0FFD10CACA16334B7E1CFD26B38B /* Pods-LabShare-FrontTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LabShare-FrontTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FE526F29FC6E9E31740D13F857D42EF7 /* Pods-LabShare-Front-LabShare-FrontUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LabShare-Front-LabShare-FrontUITests-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -274,7 +274,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1200;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 9.3";
@@ -383,6 +383,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -524,6 +525,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

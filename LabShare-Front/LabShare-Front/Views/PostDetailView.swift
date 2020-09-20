@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PostDetailView: View {
     var post: PostModel
-    @State private var user: ProfileModel = ProfileModel(id: 1, name: "Liam")
+    @State private var user: ProfileModel = ProfileModel(id: 1)
     
     @ViewBuilder
     var body: some View {

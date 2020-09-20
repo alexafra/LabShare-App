@@ -12,20 +12,19 @@ struct PostRowView: View {
     var post: PostModel
     
     var body: some View {
-        
-            VStack (alignment: .leading, spacing: 5) {
-                PostHeaderView(post: post)
-                Text(self.post.title)
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.black)
-                
-                if self.post.content.count > 50 {
-                    Text("\(String(self.post.content.prefix(50)))...")
-                } else {
-                    Text(self.post.content)
-                }
-            }.padding()
+        VStack (alignment: .leading, spacing: 5) {
+            PostHeaderView(post: post)
+            Text(self.post.title)
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundColor(Color.black)
+            
+            if self.post.content.count > 50 {
+                Text("\(String(self.post.content.prefix(50)))...")
+            } else {
+                Text(self.post.content)
+            }
+        }.padding()
     }
 }
 

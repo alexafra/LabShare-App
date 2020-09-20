@@ -11,7 +11,14 @@ import Foundation
 struct ProfileModel: Hashable, Codable, Identifiable {
     var id: Int
     var name: String
+    
+    init(id: Int) {
+        self.id = id
+        self.name = ""
+    }
 }
+
+
 
 struct ProfileModelEncodable: Codable {
     var title: String
