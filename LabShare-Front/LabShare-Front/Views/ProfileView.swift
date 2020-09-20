@@ -10,14 +10,19 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    var userId: Int
-    
+//    var userId: Int
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @State private var user: ProfileModel = ProfileModel(id: -1, name: "")
-    @ObservedObject private var postListVM = PostListViewModel()
+    @ObservedObject private var profileVM = ProfileViewModel(userProfile: ProfileModel(id: -1, name: "CHUCK"))
+    @ObservedObject private var postListVM: PostListViewModel
+    
+    init(userId: Int) {
+        self.postListVM = PostListViewModel(userId: userId)
+    }
 //    @State private var posts = [PostModel]()
     
     var body: some View {
-        
+       
         VStack {
              List {
             //            ScrollView {
@@ -37,7 +42,6 @@ struct ProfileView: View {
                             Text("About")
                                 .font(.title)
                                 .fontWeight(.medium)
-                            
                             Text("Email: 22499153@student.uwa.edu.au\nMobile: 0450215119\nLocation: QEII\nJoined in: 2020").font(.footnote).padding(.horizontal,5)
                             
                         }
@@ -80,10 +84,11 @@ struct ProfileView: View {
             .onAppear(perform: getUser)
         }
         .navigationBarItems(trailing: SearchBarView())
+        .onAppear(perform: self.postListVM.getAllPosts)
     }
     
     func getUser() {
-        guard let url = URL(string: "http://127.0.0.1:8000/users/"+String(userId)+"/profile/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/users/"+String(postListVM.userId)+"/profile/") else {
             print("Invalid URL")
             return
         }
@@ -114,9 +119,6 @@ struct ProfileView: View {
         }.resume()
     }
 }
-
-
-
 
 
 

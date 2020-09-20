@@ -11,7 +11,6 @@ import SwiftUI
 import Combine
 
 class LoginViewModel: ObservableObject {
-    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @Published var userLogin: UserLoginModel
     
     init () {

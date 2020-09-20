@@ -12,7 +12,21 @@ import Foundation
 
 class PostWebservice {
     
-    func getAllPosts(completion: @escaping ([PostModel]?) -> ()) {
+    private static var loggedInUserId: Int = -1
+    private static var token: String = ""
+    
+    func printData() {
+        print(Self.loggedInUserId)
+        print(Self.token)
+    }
+    func setLoggedInUserId(id: Int) {
+        Self.loggedInUserId = id
+    }
+    func setToken(token: String) {
+        Self.token = token
+    }
+    
+    func getAllPosts(userId: Int, completion: @escaping ([PostModel]?) -> ()) {
         /*
          1. Create URL we want to read
          2. Wrap URLRequest which allows us to configuew how the url should be accessed
@@ -20,12 +34,15 @@ class PostWebservice {
          4. Handle the result of that networking tak
          */
         
-        guard let url = URL(string: "http://127.0.0.1:8000/posts/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/user/\(userId)/posts/") else {
             print("Invalid URL")
             return
         }
         
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        var request  = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Token \(Self.token)", forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             guard let data = data, error == nil else {
                 print("Failed to fetch data \(error.debugDescription)")
@@ -44,7 +61,7 @@ class PostWebservice {
     }
     
     func createPost (post: PostEncodable, completion: @escaping ([PostModel]?) -> ()) {
-        guard let url = URL(string: "http://127.0.0.1:8000/posts/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/feed/") else {
             print("Invalid URL")
             return
         }
@@ -56,6 +73,7 @@ class PostWebservice {
             return
         }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Token \(Self.token)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.uploadTask(with: request, from: postData) { (data, response, error) in
             //Check for error
@@ -73,12 +91,12 @@ class PostWebservice {
                 let dataString = String(data: data, encoding: .utf8) {
                 print("got data: \(dataString)")
             }
-            self.getAllPosts(completion: completion)
+            self.getAllPosts(userId: Self.loggedInUserId, completion: completion)
         }.resume()
     }
     
     func deletePost(itemId: Int, completion: @escaping ([PostModel]?) -> ()) {
-        guard let url = URL(string: "http://127.0.0.1:8000/posts/\(itemId)/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/feed/\(itemId)/") else {
             print("Invalid URL")
             return
         }
@@ -102,13 +120,13 @@ class PostWebservice {
                 let dataString = String(data: data, encoding: .utf8) {
                 print("got data: \(dataString)")
             }
-            self.getAllPosts(completion: completion)
+            self.getAllPosts(userId: Self.loggedInUserId, completion: completion)
         }.resume()
     }
     
     func updatePost(postId: Int, post: PostEncodable, completion: @escaping ([PostModel]?) -> ()) {
         
-        guard let url = URL(string: "http://127.0.0.1:8000/posts/\(postId)") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/feed/\(postId)") else {
             print("Invalid URL")
             return
         }
@@ -138,7 +156,7 @@ class PostWebservice {
                 let dataString = String(data: data, encoding: .utf8) {
                 print("got data: \(dataString)")
             }
-            self.getAllPosts(completion: completion)
+            self.getAllPosts(userId: Self.loggedInUserId, completion: completion)
         }.resume()
     }
 }

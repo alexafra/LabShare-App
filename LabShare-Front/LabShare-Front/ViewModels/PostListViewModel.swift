@@ -13,12 +13,17 @@ import SwiftUI
 import Combine
 
 class PostListViewModel: ObservableObject {
+//    @Published var loggedInUserId: Int
+    @Published var userId: Int
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
     @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
     
-    init() {
-        PostWebservice().getAllPosts { posts in
+    init (userId: Int) {
+        self.userId = userId
+    }
+    func getAllPosts() {
+        PostWebservice().getAllPosts(userId: userId) { posts in
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init )
             }
@@ -44,7 +49,7 @@ class PostListViewModel: ObservableObject {
         
     }
     
-    func updatePost(indexSet: IndexSet) {
+    func updatePost(userId: Int, indexSet: IndexSet) {
         let postToUpdate = self.posts[indexSet.first!]
         let newPostTitle = self.newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         let newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)

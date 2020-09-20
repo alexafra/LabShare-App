@@ -15,6 +15,9 @@ class ProfileViewModel: ObservableObject {
     init(userProfile: ProfileModel) {
        self.userProfile = userProfile
     }
+//    init() {
+//        self.userProfile = ProfileModel(from: Decoder)
+//    }
     func getUser() {
         UserWebservice().getUser(userId: userProfile.id) { userProfile in
             if let userProfile = userProfile {
