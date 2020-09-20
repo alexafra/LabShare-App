@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('userinfo/<int:user_id>', views.GetUserInfo.as_view()),
+    path('user/<int:user_id>', views.SingleUser.as_view()),
     path('current', views.Current.as_view()),
     path('posts/<int:id>', views.SinglePost.as_view()), #This needs to change to posts/id
     path('posts', views.Posts.as_view()),
