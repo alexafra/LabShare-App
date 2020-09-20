@@ -21,7 +21,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
-        
+
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
@@ -67,7 +67,7 @@ class Post(models.Model):
 class UserProfile(models.Model):
     owner = models.OneToOneField(settings.AUTH_USER_MODEL, related_name = 'profile', on_delete = models.CASCADE)
     bio = models.TextField(blank = True, default = "")
-    dob = models.DateField(default = datetime.now(), blank = True, default = "")
+    dob = models.DateField(default = datetime.now(), blank = True)
     occupation = models.TextField(blank = True, default = "")
     employer = models.TextField(blank = True, default = "")
     #image = models.ImageField(upload_to = 'profile_image', blank = True, default = 'avatar.jpg')
