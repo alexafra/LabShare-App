@@ -81,12 +81,7 @@ class PostViewModel: ObservableObject {
     }
     
     func deletePost() {
-        
-<<<<<<< HEAD
-        PostWebservice().deletePost(postId : deleteId) { posts in
-=======
         PostWebservice().deletePost(itemId : self.post.id) { posts in
->>>>>>> FixingPostDetailState
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init )
             }

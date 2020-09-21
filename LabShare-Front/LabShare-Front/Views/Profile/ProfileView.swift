@@ -44,7 +44,7 @@ struct ProfileView: View {
                     
                 ForEach(self.postListVM.posts, id: \.id) {
                     postVM in
-                    NavigationLink(destination: PostDetailView(post: postVM)) {
+                    NavigationLink(destination: PostDetailView()) {
                         PostRowView(post: postVM)
                             
                     }.buttonStyle(PlainButtonStyle())

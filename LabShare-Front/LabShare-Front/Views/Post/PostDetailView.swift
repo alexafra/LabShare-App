@@ -9,15 +9,11 @@
 import SwiftUI
 
 struct PostDetailView: View {
-<<<<<<< HEAD
-    
-=======
     @ObservedObject var postVM: PostViewModel
->>>>>>> FixingPostDetailState
     @ViewBuilder
     var body: some View {
         VStack (alignment:.leading) {
-            
+
             NavigationLink (destination: ProfileView(userId: postVM.post.author.id)){
                 PostHeaderView(post: self.$postVM.post)
             }.buttonStyle(PlainButtonStyle())
@@ -34,24 +30,24 @@ struct PostDetailView: View {
                             .imageScale(.large)
                         Text("Edit Post")
                     }.foregroundColor(.black)
-                    
+
                     Button(action: {
-                        
+
                     }){
                     Image(systemName: "trash")
                         .imageScale(.large)
                     Text("Delete Post")
-                        
+
                     }.foregroundColor(.black)
                         .padding(.top, 10)
                 }
-                
+
             }
-            
+
             Text("Date Posted: " + self.post.dateCreated.description).font(Font.footnote).fontWeight(.thin)
             Text("\n" + self.post.content)
-            
-            
+
+
             VStack(alignment: .leading) {
                 Text("User Details:").font(.subheadline).fontWeight(.medium).foregroundColor(Color.black)
                 Text(user.name+"\nEmail: 22499153@student.uwa.edu.au").font(.caption).foregroundColor(Color.black)
@@ -61,17 +57,17 @@ struct PostDetailView: View {
                 }.onAppear(perform: getUser)
             .padding(.all, 7)
                 .padding(.top)
-            
+
             Spacer()
         }.padding([.top, .leading, .trailing])
     }
-    
+
     func getUser() {
 //        guard let url = URL(string: "http://127.0.0.1:8000/users/"+String(post.author.id)+"/profile/") else {
 //            print("Invalid URL")
 //            return
 //        }
-//        
+//
 //        URLSession.shared.dataTask(with: url) { (data, response, error) in
 //            if let data = data {
 //                if let decodedResponse = try? JSONDecoder().decode(ProfileModel.self, from: data) {
@@ -84,12 +80,12 @@ struct PostDetailView: View {
 //                } else {
 //                    print("Failed to decode")
 //                }
-//                
+//
 //            } else {
 //                print("Failed to fetch data \(error.debugDescription)")
 //                return
 //            }
-//            
+//
 //        }.resume()
     }
 }
