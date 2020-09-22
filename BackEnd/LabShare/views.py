@@ -80,7 +80,7 @@ class UserPosts(generics.GenericAPIView, mixins.ListModelMixin):
 
 class Posts(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     permission_classes = [IsAuthenticated]
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-date_created')
     serializer_class = PostSerializer
     def perform_create(self, serializer) -> None:
         serializer.save(author = self.request.user)

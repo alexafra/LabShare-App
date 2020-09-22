@@ -56,14 +56,15 @@ urlpatterns = [
 
 #Make first_name and last_name essential
 #Implement PATCH functions rather than PUT
-#Add comments to posts ##
-#Search function by name
+#Add comments to posts ###
+#Search function by name ###
 #Global admin
 #Profile  
 #Feed
-#AWS Server ##
+#AWS Server ###
 #Finalise restrictions on posts ##
 #Query posts on categories
 #Reverse posts order
+#Profile image in User
 
 
