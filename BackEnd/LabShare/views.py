@@ -74,7 +74,7 @@ class UserPosts(generics.GenericAPIView, mixins.ListModelMixin):
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
     def get_queryset(self):
-        return Post.objects.filter(author__id = self.kwargs['user_id'])
+        return Post.objects.filter(author__id = self.kwargs['user_id']).order_by("-date_created")
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
