@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct ProfileModel: Hashable, Codable {
+struct ProfileModel: Codable, Identifiable, Hashable {
+    var id: Int
     var bio: String
     var dob: String
     var occupation: String
@@ -17,6 +18,7 @@ struct ProfileModel: Hashable, Codable {
     
     enum CodingKeys: String, CodingKey
     {
+        case id
         case bio
         case dob
         case occupation
@@ -24,7 +26,8 @@ struct ProfileModel: Hashable, Codable {
         case owner
     }
     
-    init(bio: String, dob: String, occupation: String, employer: String, owner: UserModel) {
+    init(id: Int, bio: String, dob: String, occupation: String, employer: String, owner: UserModel) {
+        self.id = id
         self.bio = bio
         self.dob = dob
         self.occupation = occupation
@@ -32,7 +35,15 @@ struct ProfileModel: Hashable, Codable {
         self.owner = owner
     }
     init() {
-        self.init(bio: "", dob: "", occupation: "", employer: "", owner: UserModel())
+        self.init(id: -1, bio: "", dob: "", occupation: "", employer: "", owner: UserModel())
+    }
+    init(profile: ProfileModel) {
+        self.id = profile.id
+        self.bio = profile.bio
+        self.dob = profile.dob
+        self.occupation = profile.occupation
+        self.employer = profile.employer
+        self.owner = profile.owner
     }
 }
 

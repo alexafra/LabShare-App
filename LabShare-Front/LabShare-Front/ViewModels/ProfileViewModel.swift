@@ -18,10 +18,11 @@ class ProfileViewModel: ObservableObject {
     }
 
     func getProfile() {
-        UserWebservice().getProfile(userId: profile.owner.id) { profile in
+        UserWebservice().getProfile(userId: self.userId) { profile in
             if let profile = profile {
-                self.profile = profile
+                self.profile = ProfileModel(profile: profile)
             }
         }
     }
 }
+

@@ -30,7 +30,7 @@ class PostWebservice {
          4. Handle the result of that networking tak
          */
         
-        guard let url = URL(string: "http://127.0.0.1:8000/user/\(userId)/posts") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/users/\(userId)/posts") else {
             print("Invalid URL")
             return
         }
