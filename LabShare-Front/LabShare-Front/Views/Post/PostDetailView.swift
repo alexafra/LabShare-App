@@ -58,7 +58,7 @@ struct PostDetailView: View {
                 NavigationLink(destination: ProfileView(userId: self.postVM.post.author.id)) {Text("See more")
                     .font(.footnote)
                 }
-                }.onAppear(perform: getUser)
+                }
             .padding(.all, 7)
                 .padding(.top)
 

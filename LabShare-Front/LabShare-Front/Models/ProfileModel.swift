@@ -23,6 +23,17 @@ struct ProfileModel: Hashable, Codable {
         case employer
         case owner
     }
+    
+    init(bio: String, dob: String, occupation: String, employer: String, owner: UserModel) {
+        self.bio = bio
+        self.dob = dob
+        self.occupation = occupation
+        self.employer = employer
+        self.owner = owner
+    }
+    init() {
+        self.init(bio: "", dob: "", occupation: "", employer: "", owner: UserModel())
+    }
 }
 
 

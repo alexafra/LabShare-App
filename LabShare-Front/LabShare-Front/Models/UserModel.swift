@@ -27,6 +27,17 @@ struct UserModel: Hashable, Codable, Identifiable {
         case firstName = "first_name"
         case lastName = "last_name"
     }
+    
+    init(id: Int, email: String, firstName: String, lastName: String) {
+        self.id = id
+        self.email = email
+        self.firstName = firstName
+        self.lastName = lastName
+    }
+    
+    init() {
+        self.init(id: -1, email: "", firstName: "", lastName: "")
+    }
 }
 
 struct UserLoginModel: Codable {

@@ -92,7 +92,7 @@ class PostWebservice {
     }
     
     func deletePost(postId: Int, completion: @escaping ([PostModel]?) -> ()) {
-        guard let url = URL(string: "http://127.0.0.1:8000/posts/\(postId)/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/posts/\(postId)") else {
             print("Invalid URL")
             return
         }

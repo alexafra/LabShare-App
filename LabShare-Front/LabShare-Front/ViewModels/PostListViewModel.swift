@@ -12,6 +12,7 @@ import Foundation
 import SwiftUI
 import Combine
 
+//Probably can use this for the feed
 class PostListViewModel: ObservableObject {
 //    @Published var loggedInUserId: Int
     @Published var userId: Int

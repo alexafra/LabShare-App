@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
-    @ObservedObject private var profileVM: ProfileViewModel
+    @ObservedObject var profileVM: ProfileViewModel
     init(userId: Int) {
-        self.profileVM = ProfileViewModel(profileModel: ProfileModel(id: self.profileVM.profile.owner.id))
+        self.profileVM = ProfileViewModel(userId: userId)
     }
     var body: some View {
         VStack {  
@@ -47,7 +47,7 @@ struct ProfileHeaderView: View {
                 }
             }.padding(.leading, 5)
             Spacer()
-        }.onAppear(perform: self.profileVM.getUser)
+        }.onAppear(perform: self.profileVM.getProfile)
         
         
         
