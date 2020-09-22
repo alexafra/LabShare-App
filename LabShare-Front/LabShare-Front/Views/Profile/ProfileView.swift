@@ -26,7 +26,7 @@ struct ProfileView: View {
                 ProfileHeaderView(profileVM: self.profileVM)
                 PostListView(postListVM: self.postListVM)
              }
-         }.onAppear(perform: self.postListVM.getAllPosts)
+         }.onAppear(perform: self.postListVM.getProfilePosts)
             .navigationBarTitle(Text(""), displayMode: .inline)
             .navigationBarItems(trailing: SearchBarView())
     }

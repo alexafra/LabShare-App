@@ -6,6 +6,14 @@
 //  Copyright © 2020 CITS3200. All rights reserved.
 //
 
+/*
+ Want to Look at creating a new ViewModel for ProfileView
+ Somehow avoid passing userId down everywhere - feels like a waste
+ 
+ 
+ 
+ */
+
 import SwiftUI
 
 struct StartView: View {
@@ -16,7 +24,7 @@ struct StartView: View {
             if self.userAuthVM.userAuth.isLoggedIn == false {
                 SetUpView()
             } else {
-                ProfileContainerView()
+                ContainerView()
             }
         }
         

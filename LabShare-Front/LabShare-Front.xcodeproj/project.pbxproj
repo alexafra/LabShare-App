@@ -30,6 +30,8 @@
 		F0519BBD250363CA006E580E /* UrlApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0519BBC250363CA006E580E /* UrlApi.swift */; };
 		F0545E0A251A54CD0037EFC9 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E09251A54CD0037EFC9 /* PostListView.swift */; };
 		F0545E18251A564A0037EFC9 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E17251A564A0037EFC9 /* FeedView.swift */; };
+		F0545E2F251A5F590037EFC9 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E2E251A5F590037EFC9 /* ContainerView.swift */; };
+		F0545E37251A62780037EFC9 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E36251A62780037EFC9 /* RegisterView.swift */; };
 		F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */; };
 		F05E5E8F25039D9B004BC996 /* UserWebservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8E25039D9B004BC996 /* UserWebservice.swift */; };
 		F09C69A72516216700EC961C /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69A62516216700EC961C /* SetUpView.swift */; };
@@ -96,6 +98,8 @@
 		F0519BBC250363CA006E580E /* UrlApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlApi.swift; sourceTree = "<group>"; };
 		F0545E09251A54CD0037EFC9 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
 		F0545E17251A564A0037EFC9 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		F0545E2E251A5F590037EFC9 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		F0545E36251A62780037EFC9 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05E5E8E25039D9B004BC996 /* UserWebservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebservice.swift; sourceTree = "<group>"; };
 		F09C69A62516216700EC961C /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
@@ -187,12 +191,12 @@
 		F04A331C24F91C43004A86D9 /* LabShare-Front */ = {
 			isa = PBXGroup;
 			children = (
+				F09C69B62516446900EC961C /* StartView.swift */,
 				F04A334E24F91C6A004A86D9 /* Views */,
 				F0519BB925034CC5006E580E /* ViewModels */,
 				F0519BB625034A49006E580E /* Services */,
 				F04A334D24F91C62004A86D9 /* Models */,
 				F04A331D24F91C43004A86D9 /* AppDelegate.swift */,
-				F09C69B62516446900EC961C /* StartView.swift */,
 				F04A331F24F91C43004A86D9 /* SceneDelegate.swift */,
 				F04A332124F91C43004A86D9 /* FeedView2.swift */,
 				F04A332324F91C44004A86D9 /* Assets.xcassets */,
@@ -242,6 +246,8 @@
 		F04A334E24F91C6A004A86D9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F0545E2E251A5F590037EFC9 /* ContainerView.swift */,
+				1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */,
 				F0545E17251A564A0037EFC9 /* FeedView.swift */,
 				F0C21C502517558100EE3665 /* Profile */,
 				F0C21C472517541800EE3665 /* Post */,
@@ -277,6 +283,7 @@
 			children = (
 				F09C69A62516216700EC961C /* SetUpView.swift */,
 				F09C69AE251635BD00EC961C /* LoginView.swift */,
+				F0545E36251A62780037EFC9 /* RegisterView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -297,7 +304,6 @@
 			children = (
 				1BD01AFD250473F5006C6F90 /* SearchBarView.swift */,
 				F0C21C4B2517557900EE3665 /* ProfileHeaderView.swift */,
-				1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */,
 				1B92705224FBE07D00D8CF34 /* ProfileView.swift */,
 				F0C21C542517576500EE3665 /* CircleImage.swift */,
 			);
@@ -515,10 +521,12 @@
 				F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */,
 				F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */,
 				1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */,
+				F0545E37251A62780037EFC9 /* RegisterView.swift in Sources */,
 				F0C21C4C2517557900EE3665 /* ProfileHeaderView.swift in Sources */,
 				1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */,
 				F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */,
 				1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */,
+				F0545E2F251A5F590037EFC9 /* ContainerView.swift in Sources */,
 				F09C69B325163FE800EC961C /* LoginWebService.swift in Sources */,
 				F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */,
 				F04A335224F91CAA004A86D9 /* PostRowView.swift in Sources */,

@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ProfileContainerView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @State var forceNavLink = true // Bad hack to prevent NavView formatting
     //May want to think of alternative, does this need to be in a view?
     var body: some View {
         NavigationView {

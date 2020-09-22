@@ -14,7 +14,6 @@ import Combine
 
 //Probably can use this for the feed
 class PostListViewModel: ObservableObject {
-//    @Published var loggedInUserId: Int
     @Published var userId: Int
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
@@ -23,8 +22,16 @@ class PostListViewModel: ObservableObject {
     init (userId: Int) {
         self.userId = userId
     }
-    func getAllPosts() {
-        PostWebservice().getAllPosts(userId: userId) { posts in
+    func getProfilePosts() {
+        PostWebservice().getProfilePosts(userId: userId) { posts in
+            if let posts = posts {
+                self.posts = posts.map( PostViewModel.init ) //Probs broken
+            }
+        }
+    }
+    
+    func getFeedPosts() {
+        PostWebservice().getProfilePosts(userId: userId) { posts in
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init ) //Probs broken
             }
