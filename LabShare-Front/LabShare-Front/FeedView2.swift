@@ -8,7 +8,7 @@
 //
 //import SwiftUI
 //
-//struct FeedView: View {
+//struct FeedView2: View {
 //    @State private var posts = [PostModel]()
 //    @State private var newPostTitle = ""
 //    @State private var newPostContent = ""

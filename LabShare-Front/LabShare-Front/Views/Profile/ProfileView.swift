@@ -24,31 +24,7 @@ struct ProfileView: View {
         VStack {
              ScrollView {
                 ProfileHeaderView(profileVM: self.profileVM)
-                Text("Create new post")
-                HStack {
-                    VStack {
-                        TextField("Title: Enter up to 20 characters", text: self.$postListVM.newPostTitle)
-                        TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent)
-                            
-                    }
-                    Button(action: {
-                        self.postListVM.createPost()
-                    }){
-                        Image(systemName: "plus.circle.fill")
-                            .foregroundColor(.green)
-                            .imageScale(.large)
-                    }
-                }
-                
-               Text("Posts:")
-                    
-                ForEach(self.postListVM.posts, id: \.post.id) {
-                    postVM in
-                    NavigationLink(destination: PostDetailView(postVM: postVM)) {
-                        PostRowView(postVM: postVM)
-                            
-                    }.buttonStyle(PlainButtonStyle())
-                }
+                PostListView(postListVM: self.postListVM)
              }
          }.onAppear(perform: self.postListVM.getAllPosts)
             .navigationBarTitle(Text(""), displayMode: .inline)
