@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct RegisterView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var loginVM = LoginViewModel()
     
@@ -67,7 +67,7 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView().environmentObject(
             UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true))
