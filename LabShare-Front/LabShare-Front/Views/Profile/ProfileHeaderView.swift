@@ -9,25 +9,27 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
-    @ObservedObject private var profileVM: ProfileViewModel
-    init(userId: Int) {
-        self.profileVM = ProfileViewModel(profileModel: ProfileModel(id: userId))
-    }
+    @ObservedObject var profileVM: ProfileViewModel
+//    init(userId: Int) {
+//        self.profileVM = ProfileViewModel(userId: userId)
+//    }
     var body: some View {
         VStack {  
             CircleImage()
                 .padding(.leading, 30)
                 .padding(.trailing, 30)
-            HStack {
-                Spacer()
-//                Text(self.profileVM.profile.name)
-                Text("Alex Frazis")
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-                    .padding(.bottom)
-                Spacer()
-            }.padding(.top, 15)
-                .padding(.bottom, -10)
+//            Text("Alex")
+            Text("\(self.profileVM.profile.owner.firstName) \(self.profileVM.profile.owner.lastName)")
+                .font(.largeTitle)
+                .fontWeight(.semibold)
+                .padding(.bottom)
+//            HStack {
+//                Spacer()
+////                Text(self.profileVM.profile.name)
+//                
+//                Spacer()
+//            }.padding(.top, 15)
+//                .padding(.bottom, -10)
 
             VStack {
                 HStack {
@@ -35,19 +37,22 @@ struct ProfileHeaderView: View {
                         Text("About")
                             .font(.title)
                             .fontWeight(.medium)
-                        Text("Email: 22499153@student.uwa.edu.au\nMobile: 0450215119\nLocation: QEII\nJoined in: 2020").font(.footnote).padding(.horizontal,5)
+                        Text("Email: \(self.profileVM.profile.owner.email)")
+                        Text("Born: \(self.profileVM.profile.dob)")
+                        Text("Occupation: \(self.profileVM.profile.occupation)")
+                        Text("Employer: \(self.profileVM.profile.employer)")
                     }
                     Spacer()
                 }
                 HStack{
-                    Text(self.profileVM.profile.name + "'s Posts")
+                    Text("\(self.profileVM.profile.owner.firstName) \(self.profileVM.profile.owner.lastName)'s Posts")
                         .font(.title)
                         .fontWeight(.medium)
                     Spacer()
                 }
             }.padding(.leading, 5)
             Spacer()
-        }.onAppear(perform: self.profileVM.getUser)
+        }.onAppear(perform: self.profileVM.getProfile)
         
         
         
@@ -56,6 +61,6 @@ struct ProfileHeaderView: View {
 
 struct ProfileHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileHeaderView(userId: 3)
+        ProfileHeaderView(profileVM: ProfileViewModel(userId: 10))
     }
 }

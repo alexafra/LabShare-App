@@ -12,6 +12,7 @@ import Foundation
 import SwiftUI
 import Combine
 
+//Probably can use this for the feed
 class PostListViewModel: ObservableObject {
 //    @Published var loggedInUserId: Int
     @Published var userId: Int
@@ -25,7 +26,7 @@ class PostListViewModel: ObservableObject {
     func getAllPosts() {
         PostWebservice().getAllPosts(userId: userId) { posts in
             if let posts = posts {
-                self.posts = posts.map( PostViewModel.init )
+                self.posts = posts.map( PostViewModel.init ) //Probs broken
             }
         }
     }
@@ -38,15 +39,28 @@ class PostListViewModel: ObservableObject {
         }
         let newPost = PostEncodable(title: newPostTitle, content:newPostContent, author: 1)
         PostWebservice().createPost(post: newPost) { posts in
-        
             if let posts = posts {
-                self.posts = posts.map( PostViewModel.init )
+                self.posts = posts.map( PostViewModel.init ) //Probs broken
             }
         }
         self.newPostTitle = ""
         self.newPostContent = ""
         
     }
+}
+
+class PostViewModel: ObservableObject {
+    @Published var post: PostModel
+    
+    init(post: PostModel) {
+        self.post = post
+    }
+    
+//    var id: Int { return self.post.id }
+//    var title: String { return self.post.title }
+//    var content: String { return self.post.content }
+//    var date_created: String { return self.post.dateCreated }
+//    var author: UserModel { return self.post.author }
     
     func updatePost(userId: Int, indexSet: IndexSet) {
 //        let postToUpdate = self.posts[indexSet.first!]
@@ -55,43 +69,24 @@ class PostListViewModel: ObservableObject {
 //        if newPostContent.isEmpty || newPostTitle.isEmpty {
 //            return
 //        }
-//        
+//
 //        let newPost = PostEncodable(title: newPostTitle, content: newPostContent, author: postToUpdate.author)
-//        
+//
 //        PostWebservice().updatePost(postId: postToUpdate.id, post: newPost) { posts in
 //            if let posts = posts {
 //                self.posts = posts.map( PostViewModel.init )
 //            }
 //        }
-        self.newPostTitle = ""
-        self.newPostContent = ""
         
     }
     
-    func deletePost(indexSet: IndexSet) {
-        let deleteItem = self.posts[indexSet.first!]
-        let deleteId = deleteItem.id
-        
-        PostWebservice().deletePost(itemId : deleteId) { posts in
-            if let posts = posts {
-                self.posts = posts.map( PostViewModel.init )
-            }
-        }
-    }
-}
-
-struct PostViewModel {
-    var post: PostModel
-    
-    init(post: PostModel) {
-        self.post = post
-    }
-    
-    var id: Int { return self.post.id }
-    var title: String { return self.post.title }
-    var content: String { return self.post.content }
-    var date_created: String { return self.post.dateCreated }
-    var author: UserModel { return self.post.author }
+//    func deletePost() {
+//        PostWebservice().deletePost(itemId : self.post.id) { posts in
+//            if let posts = posts {
+//                self.posts = posts.map( PostViewModel.init )
+//            }
+//        }
+//    }
     
     
 }

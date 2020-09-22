@@ -18,8 +18,8 @@ class UserWebservice {
         Self.token = token
     }
     
-    func getUser(userId: Int, completion: @escaping (ProfileModel?) -> ()) {
-        guard let url = URL(string: "http://127.0.0.1:8000/users/\(String(userId))/profile/") else {
+    func getProfile(userId: Int, completion: @escaping (ProfileModel?) -> ()) {
+        guard let url = URL(string: "http://127.0.0.1:8000/users/\(String(userId))/profile") else {
             print("Invalid URL")
             return
         }
@@ -28,22 +28,20 @@ class UserWebservice {
         request.setValue("Token \(Self.token)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let data = data {
-                if let user = try? JSONDecoder().decode(ProfileModel.self, from: data) {
-                    //                    We have good data - go back to the main thread
-                    DispatchQueue.main.async {
-                        //Update our UI
-                        completion(user)
-                        return
-                    }
-                } else {
-                    print("Failed to decode")
-                }
-            } else {
+            
+            guard let data = data, error == nil else {
                 print("Failed to fetch data \(error.debugDescription)")
+                completion(nil)
                 return
             }
             
+            let profile = try? JSONDecoder().decode(ProfileModel.self, from: data)
+                    //                    We have good data - go back to the main thread
+            DispatchQueue.main.async {
+                //Update our UI
+                completion(profile)
+                return
+            }
         }.resume()
     }
 

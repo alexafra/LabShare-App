@@ -11,18 +11,19 @@ import SwiftUI
 import Combine
 
 class ProfileViewModel: ObservableObject {
-    @Published var profile : ProfileModel
-    init(profileModel: ProfileModel) {
-       self.profile = profileModel
+    @Published var userId: Int
+    @Published var profile = ProfileModel()
+    
+    init(userId: Int) {
+       self.userId = userId
     }
-//    init() {
-//        self.userProfile = ProfileModel(from: Decoder)
-//    }
-    func getUser() {
-        UserWebservice().getUser(userId: profile.id) { profile in
+
+    func getProfile() {
+        UserWebservice().getProfile(userId: self.userId) { profile in
             if let profile = profile {
-                self.profile = profile
+                self.profile = ProfileModel(profile: profile)
             }
         }
     }
 }
+

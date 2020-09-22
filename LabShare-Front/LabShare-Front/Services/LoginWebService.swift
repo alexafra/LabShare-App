@@ -10,7 +10,7 @@ import Foundation
 
 class LoginWebService {
     func login (user: UserLoginModel, completion: @escaping (UserAuthenticationModel?) -> ()) {
-        guard let url = URL(string: "http://127.0.0.1:8000/login/") else {
+        guard let url = URL(string: "http://127.0.0.1:8000/login") else {
             print("Invalid URL")
             return
         }
