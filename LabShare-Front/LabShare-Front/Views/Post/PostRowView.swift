@@ -9,22 +9,22 @@
 import SwiftUI
 
 struct PostRowView: View {
-    var post: PostModel
+    @ObservedObject var postVM: PostViewModel
     
     var body: some View {
         VStack (alignment: .leading, spacing: 5) {
             Divider()
-            PostHeaderView(post: post)
-            Text(self.post.title)
+            PostHeaderView(postVM: self.postVM)
+            Text(self.postVM.post.title)
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(Color.black)
                 
             
-            if self.post.content.count > 50 {
-                Text("\(String(self.post.content.prefix(50)))...")
+            if self.postVM.post.content.count > 50 {
+                Text("\(String(self.postVM.post.content.prefix(50)))...")
             } else {
-                Text(self.post.content)
+                Text(self.postVM.post.content)
             }
            
         }.padding()
@@ -34,7 +34,7 @@ struct PostRowView: View {
 
 struct PostRow_Previews: PreviewProvider {
     static var previews: some View {
-        PostRowView(post: PostModel(id: 10, title: "Free Iphones", content: "I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones", dateCreated: "2020-07-22 16:48:31", author: UserModel (id: 7, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis")))
+        PostRowView(postVM: PostViewModel(post: PostModel(id: 10, title: "Free Iphones", content: "I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones", dateCreated: "2020-07-22 16:48:31", author: UserModel (id: 7, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis"))))
     }
     
 }

@@ -15,10 +15,10 @@ struct PostDetailView: View {
         VStack (alignment:.leading) {
 
             NavigationLink (destination: ProfileView(userId: postVM.post.author.id)){
-                PostHeaderView(post: self.$postVM.post)
+                PostHeaderView(postVM: self.postVM)
             }.buttonStyle(PlainButtonStyle())
             HStack {
-                Text(self.post.title)
+                Text(self.postVM.post.title)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(Color.black)
@@ -44,14 +44,18 @@ struct PostDetailView: View {
 
             }
 
-            Text("Date Posted: " + self.post.dateCreated.description).font(Font.footnote).fontWeight(.thin)
-            Text("\n" + self.post.content)
+            Text("Date Posted: \(self.postVM.post.dateCreated.description)")
+                .font(Font.footnote).fontWeight(.thin)
+            Text("\n" + self.postVM.post.content)
 
 
             VStack(alignment: .leading) {
                 Text("User Details:").font(.subheadline).fontWeight(.medium).foregroundColor(Color.black)
-                Text(user.name+"\nEmail: 22499153@student.uwa.edu.au").font(.caption).foregroundColor(Color.black)
-                NavigationLink(destination: ProfileView(userId: post.author.id)) {Text("See more")
+                Text("Name: \(self.postVM.post.author.firstName) \(self.postVM.post.author.lastName)")
+                    .font(.caption).foregroundColor(Color.black)
+                Text("Email: \(self.postVM.post.author.email)")
+                    .font(.caption).foregroundColor(Color.black)
+                NavigationLink(destination: ProfileView(userId: self.postVM.post.author.id)) {Text("See more")
                     .font(.footnote)
                 }
                 }.onAppear(perform: getUser)
@@ -92,6 +96,6 @@ struct PostDetailView: View {
 
 struct PostDetail_Previews: PreviewProvider {
     static var previews: some View {
-        PostDetailView(post: PostModel(id: 10, title: "Free Iphones", content: "Dave found joy in the daily routine of life. He awoke at the same time, ate the same breakfast and drove the same commute. He worked at a job that never seemed to change and he got home at 6 pm sharp every night. It was who he had been for the last ten years and he had no idea that was all about to change.", dateCreated: "2020-07-22 16:48:31", author: UserModel (id: 7, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis")))
+        PostDetailView(postVM: PostViewModel(post: PostModel(id: 10, title: "Free Iphones", content: "Dave found joy in the daily routine of life. He awoke at the same time, ate the same breakfast and drove the same commute. He worked at a job that never seemed to change and he got home at 6 pm sharp every night. It was who he had been for the last ten years and he had no idea that was all about to change.", dateCreated: "2020-07-22 16:48:31", author: UserModel (id: 7, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis"))))
     }
 }

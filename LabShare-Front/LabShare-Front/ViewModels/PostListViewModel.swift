@@ -17,7 +17,7 @@ class PostListViewModel: ObservableObject {
     @Published var userId: Int
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
-    @Published var posts = [PostModel]() //whenever you change the posts, it will publish an event
+    @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
     
     init (userId: Int) {
         self.userId = userId
@@ -25,7 +25,7 @@ class PostListViewModel: ObservableObject {
     func getAllPosts() {
         PostWebservice().getAllPosts(userId: userId) { posts in
             if let posts = posts {
-                self.posts = posts.map( PostModel.init ) //Probs broken
+                self.posts = posts.map( PostViewModel.init ) //Probs broken
             }
         }
     }
@@ -38,9 +38,8 @@ class PostListViewModel: ObservableObject {
         }
         let newPost = PostEncodable(title: newPostTitle, content:newPostContent, author: 1)
         PostWebservice().createPost(post: newPost) { posts in
-        
             if let posts = posts {
-                self.posts = posts.map( PostModel.init ) //Probs broken
+                self.posts = posts.map( PostViewModel.init ) //Probs broken
             }
         }
         self.newPostTitle = ""
@@ -80,13 +79,13 @@ class PostViewModel: ObservableObject {
         
     }
     
-    func deletePost() {
-        PostWebservice().deletePost(itemId : self.post.id) { posts in
-            if let posts = posts {
-                self.posts = posts.map( PostViewModel.init )
-            }
-        }
-    }
+//    func deletePost() {
+//        PostWebservice().deletePost(itemId : self.post.id) { posts in
+//            if let posts = posts {
+//                self.posts = posts.map( PostViewModel.init )
+//            }
+//        }
+//    }
     
     
 }

@@ -15,9 +15,7 @@ struct ProfileView: View {
     @ObservedObject private var postListVM: PostListViewModel
     
     init(userId: Int) {
-        
         self.postListVM = PostListViewModel(userId: userId)
-        
     }
     
     var body: some View {
@@ -42,10 +40,10 @@ struct ProfileView: View {
                 
                Text("Posts:")
                     
-                ForEach(self.postListVM.posts, id: \.id) {
+                ForEach(self.postListVM.posts, id: \.post.id) {
                     postVM in
-                    NavigationLink(destination: PostDetailView()) {
-                        PostRowView(post: postVM)
+                    NavigationLink(destination: PostDetailView(postVM: postVM)) {
+                        PostRowView(postVM: postVM)
                             
                     }.buttonStyle(PlainButtonStyle())
                 }
