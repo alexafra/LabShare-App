@@ -28,19 +28,13 @@ urlpatterns = [
 #Add categories to posts ##DONE
 #Add the ability to query these posts by categories
 #Add page restrictions based on permissions of logged in user ##DONE
-#search functionality
-#Get started on admin functionality
-#Pagination
 #Profile photos ##DONE
-#Make first_name and last_name essential
-#PUT request requires everything?
-#add comments
+
 
 #GREG
 #Reimplement Postgres
 #Host app on AWS server
 #Strengthen authentication security
-
 #categories/ show all categories and add categories
 #categories/id/ shows a category for manipulation
 #userinfo/<user_id>/ now returns {token, email}
@@ -53,4 +47,23 @@ urlpatterns = [
 #remove all trailing /'s
 #'feed' changed to 'posts'
 #all instances of 'user' now 'users'
+#search functionality
+#Get started on admin functionality
+#Pagination
+#Make first_name and last_name essential
+#PUT request requires everything?
+#add comments
+
+#Make first_name and last_name essential
+#Implement PATCH functions rather than PUT
+#Add comments to posts ##
+#Search function by name
+#Global admin
+#Profile  
+#Feed
+#AWS Server ##
+#Finalise restrictions on posts ##
+#Query posts on categories
+#Reverse posts order
+
 
