@@ -13,6 +13,7 @@ import Combine
 class ProfileViewModel: ObservableObject {
     @Published var userId: Int
     @Published var profile = ProfileModel()
+    
     init(userId: Int) {
        self.userId = userId
     }

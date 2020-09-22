@@ -10,9 +10,9 @@ import SwiftUI
 
 struct ProfileHeaderView: View {
     @ObservedObject var profileVM: ProfileViewModel
-    init(userId: Int) {
-        self.profileVM = ProfileViewModel(userId: userId)
-    }
+//    init(userId: Int) {
+//        self.profileVM = ProfileViewModel(userId: userId)
+//    }
     var body: some View {
         VStack {  
             CircleImage()
@@ -61,6 +61,6 @@ struct ProfileHeaderView: View {
 
 struct ProfileHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileHeaderView(userId: 10)
+        ProfileHeaderView(profileVM: ProfileViewModel(userId: 10))
     }
 }

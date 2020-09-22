@@ -12,16 +12,18 @@ struct ProfileView: View {
     
 //    var userId: Int
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @ObservedObject private var postListVM: PostListViewModel
+    @ObservedObject var postListVM: PostListViewModel
+    @ObservedObject var profileVM: ProfileViewModel
     
     init(userId: Int) {
         self.postListVM = PostListViewModel(userId: userId)
+        self.profileVM = ProfileViewModel(userId: userId)
     }
     
     var body: some View {
         VStack {
              ScrollView {
-                ProfileHeaderView(userId: self.postListVM.userId)
+                ProfileHeaderView(profileVM: self.profileVM)
                 Text("Create new post")
                 HStack {
                     VStack {
