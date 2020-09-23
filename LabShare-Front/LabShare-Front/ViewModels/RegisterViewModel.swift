@@ -21,7 +21,7 @@ class RegisterViewModel: ObservableObject {
         hasRegistered = false
     }
     
-    func register(completion: @escaping (UserAuthenticationModel?, Bool) -> ()) {
+    func register(completion: @escaping (UserRegisterModel?, Bool) -> ()) {
         LoginWebService().register(user: userRegister, completion: completion)
     }
 }

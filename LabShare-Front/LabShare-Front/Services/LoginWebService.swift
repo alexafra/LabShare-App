@@ -54,7 +54,7 @@ class LoginWebService {
         }.resume()
     }
     
-    func register (user: UserRegisterModel, completion: @escaping (UserAuthenticationModel?, Bool) -> ()) {
+    func register (user: UserRegisterModel, completion: @escaping (UserRegisterModel?, Bool) -> ()) {
         guard let url = URL(string: "http://127.0.0.1:8000/register") else {
             print("Invalid URL")
             return
@@ -87,13 +87,13 @@ class LoginWebService {
                 return
             }
             
-            let userSettings = try? JSONDecoder().decode(UserAuthenticationModel.self, from: data)
+            let userRegisterModel = try? JSONDecoder().decode(UserRegisterModel.self, from: data)
             let hasRegistered = response.statusCode == 201
             
             
             DispatchQueue.main.async {
                 //Update our UI
-                completion(userSettings, hasRegistered)
+                completion(userRegisterModel, hasRegistered)
                 return
             }
         }.resume()
