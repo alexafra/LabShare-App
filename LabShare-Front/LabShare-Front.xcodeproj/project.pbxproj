@@ -34,6 +34,8 @@
 		F0545E37251A62780037EFC9 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E36251A62780037EFC9 /* RegisterView.swift */; };
 		F0545E42251ACE5A0037EFC9 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E41251ACE5A0037EFC9 /* RegisterViewModel.swift */; };
 		F0545E53251B0FAE0037EFC9 /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E52251B0FAE0037EFC9 /* ViewHelpers.swift */; };
+		F0545E58251B341E0037EFC9 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E57251B341E0037EFC9 /* RegistrationModel.swift */; };
+		F0545E65251B68090037EFC9 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E64251B68090037EFC9 /* ProfileEditView.swift */; };
 		F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */; };
 		F05E5E8F25039D9B004BC996 /* UserWebservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8E25039D9B004BC996 /* UserWebservice.swift */; };
 		F09C69A72516216700EC961C /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69A62516216700EC961C /* SetUpView.swift */; };
@@ -104,6 +106,8 @@
 		F0545E36251A62780037EFC9 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		F0545E41251ACE5A0037EFC9 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		F0545E52251B0FAE0037EFC9 /* ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
+		F0545E57251B341E0037EFC9 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
+		F0545E64251B68090037EFC9 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05E5E8E25039D9B004BC996 /* UserWebservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebservice.swift; sourceTree = "<group>"; };
 		F09C69A62516216700EC961C /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 				F04A334F24F91C90004A86D9 /* PostModel.swift */,
 				1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */,
 				F09C69B42516408200EC961C /* UserModel.swift */,
+				F0545E57251B341E0037EFC9 /* RegistrationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 				F0C21C4B2517557900EE3665 /* ProfileHeaderView.swift */,
 				1B92705224FBE07D00D8CF34 /* ProfileView.swift */,
 				F0C21C542517576500EE3665 /* CircleImage.swift */,
+				F0545E64251B68090037EFC9 /* ProfileEditView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -535,6 +541,7 @@
 				F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */,
 				1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */,
 				F0545E2F251A5F590037EFC9 /* ContainerView.swift in Sources */,
+				F0545E65251B68090037EFC9 /* ProfileEditView.swift in Sources */,
 				F09C69B325163FE800EC961C /* LoginWebService.swift in Sources */,
 				F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */,
 				F04A335224F91CAA004A86D9 /* PostRowView.swift in Sources */,
@@ -549,6 +556,7 @@
 				F09C69B92516450600EC961C /* UserAuthenticationViewModel.swift in Sources */,
 				F09C69B12516396200EC961C /* LoginViewModel.swift in Sources */,
 				F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */,
+				F0545E58251B341E0037EFC9 /* RegistrationModel.swift in Sources */,
 				F0C21C552517576500EE3665 /* CircleImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

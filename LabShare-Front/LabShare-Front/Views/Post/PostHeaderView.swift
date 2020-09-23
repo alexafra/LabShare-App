@@ -19,7 +19,7 @@ struct PostHeaderView: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.gray, lineWidth: 2))
             VStack (alignment: .leading) {
-                Text(String(self.postVM.post.author.email))
+                Text("\(self.postVM.post.author.firstName) \(self.postVM.post.author.lastName)")
                     .font(Font.subheadline)
                     .fontWeight(.bold)
                 Text(self.postVM.post.dateCreated).font(Font.footnote).fontWeight(.thin)

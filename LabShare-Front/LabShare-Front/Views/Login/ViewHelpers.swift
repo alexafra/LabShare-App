@@ -33,6 +33,27 @@ struct TextError: ViewModifier {
     }
 }
 
+struct HiddenTextError: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(Font.footnote)
+            .foregroundColor(.white)
+            
+    }
+}
+
+struct AuthButton: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(.vertical, 20)
+            .padding(.horizontal, 40)
+            .background(Color.green)
+            .cornerRadius(50)
+            .padding(.vertical, 10)
+            
+    }
+}
+
 struct ViewHelpers_Previews: PreviewProvider {
 //    @State var value: String
     static var previews: some View {
@@ -43,3 +64,5 @@ struct ViewHelpers_Previews: PreviewProvider {
         
     }
 }
+
+

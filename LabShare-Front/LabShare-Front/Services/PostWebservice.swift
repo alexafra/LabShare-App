@@ -104,8 +104,9 @@ class PostWebservice {
         }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Token \(Self.token)", forHTTPHeaderField: "Authorization")
+        request.httpBody = postData
         
-        URLSession.shared.uploadTask(with: request, from: postData) { (data, response, error) in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             //Check for error
             if let error = error {
                 print("Error took place \(error)")
@@ -125,6 +126,13 @@ class PostWebservice {
         }.resume()
     }
     
+    
+    
+    
+    
+    
+    
+    //POSSIBLE PROBLEMS
     func deletePost(postId: Int, completion: @escaping ([PostModel]?) -> ()) {
         guard let url = URL(string: "http://127.0.0.1:8000/posts/\(postId)") else {
             print("Invalid URL")

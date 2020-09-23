@@ -45,21 +45,6 @@ struct UserLoginModel: Codable {
     var password: String
 }
 
-struct UserRegisterModel: Codable {
-    var email: String
-    var password: String
-    var firstName: String
-    var lastName: String
-    
-    enum CodingKeys: String, CodingKey
-    {
-        case email
-        case password
-        case firstName = "first_name"
-        case lastName = "last_name"
-    }
-    
-}
 
 struct UserAuthenticationModel: Codable, Identifiable {
     var id: Int = -1

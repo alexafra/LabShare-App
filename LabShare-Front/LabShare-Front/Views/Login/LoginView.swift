@@ -22,32 +22,37 @@ struct LoginView: View {
                     .font(Font.largeTitle.weight(.bold))
                 
                 TextField("Enter email address", text: self.$loginVM.userLogin.email).modifier(TextFieldAuthorization())
+                if (self.loginVM.userLogin.email.isEmpty) {
+                    Text("Email Required").modifier(TextError())
+                } else {
+                    Text("a").modifier(HiddenTextError())
+                }
                     
                 SecureField("Enter password", text: self.$loginVM.userLogin.password).modifier(TextFieldAuthorization())
-                    
-                    Button(action: {
-                        self.loginVM.login(completion: self.updateEnvironmentObject)
-                        self.loginVM.userLogin.email = ""
-                        self.loginVM.userLogin.password = ""
-                        
-                        
-                        
-                        //Loop back to start view
-                    }) {
-                        Text("Login")
-                            .foregroundColor(Color.white)
-                            .font(Font.headline.weight(.bold))
-                    }.padding(.vertical, 20)
-                        .padding(.horizontal, 40)
-                        .background(Color.green)
-                        .cornerRadius(20)
-                        .padding(.top, 10)
+                if (self.loginVM.userLogin.password.isEmpty) {
+                    Text("Password Required").modifier(TextError())
+                } else {
+                    Text("a").modifier(HiddenTextError())
+                }
+                
+                if (self.loginVM.loginFailed) {
+                    Text("Oops! Your email or password were incorrect.").modifier(TextError()).padding(.top, 10)
+                }
+
+                Button(action: {
+                    self.loginVM.login(completion: self.loginEnvironmentObject)
+                }) {
+                    Text("Login")
+                        .foregroundColor(Color.white)
+                        .font(Font.title.weight(.bold))
+                }.modifier(AuthButton())
                 
                 Spacer()
             }
         }.padding()
     }
-    func updateEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
+    func loginEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
+        
         if let userAuthModel = userAuthModel {
             if userAuthModel.token.isEmpty == false {
                 self.userAuthVM.userAuth.id = userAuthModel.id
@@ -59,6 +64,9 @@ struct LoginView: View {
                 UserWebservice().setToken(token: self.userAuthVM.userAuth.token)
             }
         }
+        
+        self.loginVM.attemptingLogin = false
+        self.loginVM.loginFailed = false
     }
 }
 

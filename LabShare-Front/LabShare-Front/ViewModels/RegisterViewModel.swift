@@ -14,36 +14,27 @@ class RegisterViewModel: ObservableObject {
     @Published var userRegister: UserRegisterModel
     @Published var repeatPassword: String
     
-    @Published var hasAttemptedRegister: Bool
-    @Published var isReattempting: Bool
-    @Published var hasRegistered: Bool
+    @Published var attemptingRegistration: Bool
+    @Published var registrationFailed: Bool
     
     @Published var passwordError: String
     @Published var emailError: String
     
-    @Published var isRegistering: Bool
-//    @Published var
-    
     init () {
         userRegister = UserRegisterModel(email: "", password: "", firstName: "", lastName: "")
-        isRegistering = false
-        hasRegistered = false
         repeatPassword = ""
-        hasAttemptedRegister = false
+        attemptingRegistration = false
+        registrationFailed = false
         passwordError = ""
         emailError = ""
-        isReattempting = false
     }
     
-    func register(completion: @escaping (UserRegisterModel?, Bool) -> ()) {
-        if (userRegister.password == repeatPassword && userRegister.email != "" && userRegister.firstName != "" && userRegister.lastName != "") {
-            isRegistering = true
-            hasRegistered = false
-            LoginWebService().register(user: userRegister, completion: completion)
-        } else {
+    func register(completion: @escaping (UserAuthenticationModel?) -> ()) {
+        if (!userRegister.password.isEmpty && userRegister.password == repeatPassword && !userRegister.email.isEmpty && !userRegister.firstName.isEmpty && !userRegister.lastName.isEmpty) {
             
+            attemptingRegistration = true
+            LoginWebService().register(user: userRegister, registerVM: self, completion: completion)
         }
-        
     }
     var equalPasswords : Bool {
         return self.repeatPassword == self.userRegister.password

@@ -12,14 +12,17 @@ struct PostListView: View {
     @ObservedObject var postListVM: PostListViewModel
     
     var body: some View {
-        VStack {
-            Text("Create new post")
+        VStack(alignment: .leading) {
+            
+            Text("Create new post").font(Font.headline)
+            Divider()
             HStack {
                 VStack {
-                    TextField("Title: Enter up to 20 characters", text: self.$postListVM.newPostTitle)
-                    TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent)
+                    TextField("Title: Enter up to 20 characters", text: self.$postListVM.newPostTitle).padding()
+                    Divider()
+                    TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent).padding()
                         
-                }
+                }.padding(10)
                 Button(action: {
                     self.postListVM.createPost()
                 }){
@@ -28,8 +31,8 @@ struct PostListView: View {
                         .imageScale(.large)
                 }
             }
-            
-           Text("Posts:")
+            Divider()
+            Text("Posts:").font(Font.headline).padding(.top, 10)
                 
             ForEach(self.postListVM.posts, id: \.post.id) {
                 postVM in
@@ -38,7 +41,7 @@ struct PostListView: View {
                         
                 }.buttonStyle(PlainButtonStyle())
             }
-        }
+        }.padding()
     }
 }
 

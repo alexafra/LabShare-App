@@ -12,13 +12,24 @@ import Combine
 
 class LoginViewModel: ObservableObject {
     @Published var userLogin: UserLoginModel
+    @Published var attemptingLogin: Bool
+    @Published var loginFailed: Bool
     
     init () {
         userLogin = UserLoginModel(email: "", password: "")
+        attemptingLogin = false
+        loginFailed = false
     }
     
     func login(completion: @escaping (UserAuthenticationModel?) -> ()) {
-        LoginWebService().login(user: userLogin, completion: completion)
+        attemptingLogin = true
+        if !self.userLogin.email.isEmpty && !self.userLogin.password.isEmpty {
+            LoginWebService().login(user: userLogin, loginVM: self, completion: completion)
+        } 
     }
+    
+//    func loginFailed() {
+//        self.loginFailed = !self.loginFailed
+//    }
 }
 

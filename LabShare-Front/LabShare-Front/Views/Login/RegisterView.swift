@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+//Successful register equals login
 struct RegisterView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var registerVM = RegisterViewModel()
@@ -18,69 +19,90 @@ struct RegisterView: View {
             if self.userAuthVM.userAuth.isLoggedIn {
                 ContainerView()
             } else {
-                VStack (alignment: .center ,spacing: 20) {
+                VStack (alignment: .center) {
                     Text("Register to Lab Share")
                         .font(Font.largeTitle.weight(.bold))
-//                    VStack() {
-                    TextField("Enter email address", text: self.$registerVM.userRegister.email).modifier(TextFieldAuthorization())
-                    if (self.registerVM.userRegister.email.isEmpty) {
-                        Text("Email required").modifier(TextError())
-                    }
-                    
+                    VStack() {
+                        TextField("Enter email address", text: self.$registerVM.userRegister.email).modifier(TextFieldAuthorization())
+                            .onTapGesture {
+                                self.registerVM.emailError = ""
+                            }
                         
-                    TextField("Enter first name", text: self.$registerVM.userRegister.firstName).modifier(TextFieldAuthorization())
-                    if (self.registerVM.userRegister.firstName.isEmpty) {
-                        Text("First name required").modifier(TextError())
-                    }
-                        
-                    TextField("Enter last name", text: self.$registerVM.userRegister.lastName).modifier(TextFieldAuthorization())
-                    if (self.registerVM.userRegister.lastName.isEmpty) {
-                        Text("Last name required").modifier(TextError())
-                    }
-                        
-                    SecureField("Enter password", text: self.$registerVM.userRegister.password).modifier(TextFieldAuthorization())
-                    if (!self.registerVM.hasAttemptedRegister) {
-                        Text("Passwords do not match").modifier(TextError())
-                    }
-                    SecureField("Repeat password", text: self.$registerVM.repeatPassword).modifier(TextFieldAuthorization())
-                    if (!self.registerVM.hasAttemptedRegister) {
-                        Text("Passwords do not match").modifier(TextError())
-                    }
-                    
-                    NavigationLink(destination: LoginView(), isActive: self.$registerVM.hasRegistered) {
-                        Button(action: {
-                            self.registerVM.isRegistering = true
-                            self.registerVM.register(completion: self.registerUser)
+                        if (self.registerVM.registrationFailed && !self.registerVM.emailError.isEmpty) {
+                            Text(self.registerVM.emailError).modifier(TextError())
                             
-                            //Loop back to start view
-                        }) {
-                            Text("Login")
-                                .foregroundColor(Color.white)
-                                .font(Font.headline.weight(.bold))
-                        }.padding(.vertical, 10)
-                            .padding(.horizontal, 40)
-                            .background(Color.green)
-                            .cornerRadius(20)
+                        } else if (self.registerVM.userRegister.email.isEmpty) {
+                            Text("Email required").modifier(TextError())
+                            
+                        } else {
+                            Text("a").modifier(HiddenTextError())
+                        }
+                        
+                            
+                        TextField("Enter first name", text: self.$registerVM.userRegister.firstName).modifier(TextFieldAuthorization())
+                        if (self.registerVM.userRegister.firstName.isEmpty) {
+                            Text("First name required").modifier(TextError())
+                        } else {
+                            Text("a").modifier(HiddenTextError())
+                        }
+                            
+                        TextField("Enter last name", text: self.$registerVM.userRegister.lastName).modifier(TextFieldAuthorization())
+                        if (self.registerVM.userRegister.lastName.isEmpty) {
+                            Text("Last name required").modifier(TextError())
+                        } else {
+                            Text("a").modifier(HiddenTextError())
+                        }
+                            
+                        SecureField("Enter password", text: self.$registerVM.userRegister.password).modifier(TextFieldAuthorization())
+                            .onTapGesture {
+                                self.registerVM.passwordError = ""
+                            }
+                        if (self.registerVM.registrationFailed && !self.registerVM.passwordError.isEmpty) {
+                            Text(self.registerVM.passwordError).modifier(TextError())
+                            
+                        } else if (self.registerVM.userRegister.password.isEmpty) {
+                            Text("Password required").modifier(TextError())
+                            
+                        } else {
+                            Text("a").modifier(HiddenTextError())
+                        }
+                        
+                        SecureField("Repeat password", text: self.$registerVM.repeatPassword).modifier(TextFieldAuthorization())
+                        if (self.registerVM.userRegister.password != self.registerVM.repeatPassword) {
+                            Text("Passwords do not match").modifier(TextError())
+                        } else {
+                            Text("a").modifier(HiddenTextError())
+                        }
                     }
                     
-                    
+//                    NavigationLink(destination: LoginView(), isActive: self.$registerVM.hasRegistered) {
+                    Button(action: {
+                        self.registerVM.register(completion: self.loginEnvironmentObject)
+                    }) {
+                        Text("Register")
+                            .foregroundColor(Color.white)
+                            .font(Font.title.weight(.bold))
+                    }.modifier(AuthButton())
+//                    }
                 }.padding()
                 Spacer()
             }
         }
     }
     
-    func registerUser(userRegisterModel: UserRegisterModel?, hasRegistered: Bool) {
+    func loginEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
         
-        self.registerVM.hasRegistered = hasRegistered
-        self.registerVM.isRegistering = false
-//        if let userRegisterModel = userRegisterModel {
-//            self.registerVM.userRegister.email = userRegisterModel.email
-//            self.registerVM.userRegister.firstName = userRegisterModel.firstName
-//            self.registerVM.userRegister.lastName = userRegisterModel.email
-//            self.registerVM.userRegister.email = userRegisterModel.email
-//
-//        }
+        if let userAuthModel = userAuthModel {
+            if userAuthModel.token.isEmpty == false {
+                self.userAuthVM.userAuth.id = userAuthModel.id
+                self.userAuthVM.userAuth.token = userAuthModel.token
+                self.userAuthVM.userAuth.isLoggedIn = true
+                PostWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
+                PostWebservice().setToken(token: self.userAuthVM.userAuth.token)
+                UserWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
+                UserWebservice().setToken(token: self.userAuthVM.userAuth.token)
+            }
+        }
         
         
     }

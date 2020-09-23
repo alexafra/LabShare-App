@@ -12,28 +12,21 @@ struct SetUpView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Spacer()
                 Text("See what people are giving away")
                     .font(Font.largeTitle.weight(.bold))
                 Spacer()
                 NavigationLink(destination: LoginView()) {
                     Text("Login")
                         .foregroundColor(Color.white)
-                        .font(Font.headline.weight(.bold))
-                }.padding(.vertical, 10)
-                    .padding(.horizontal, 40)
-                    .background(Color.green)
-                    .cornerRadius(20)
+                        .font(Font.title.weight(.bold))
+                }.modifier(AuthButton())
                 Spacer()
                 NavigationLink(destination: RegisterView()) {
                     Text("Create account")
                         .foregroundColor(Color.white)
-                        .font(Font.headline.weight(.bold))
+                        .font(Font.title.weight(.bold))
                         
-                }.padding(.vertical, 10)
-                    .padding(.horizontal, 40)
-                    .background(Color.green)
-                    .cornerRadius(20)
+                }.modifier(AuthButton())
                 Spacer()
             }
         }

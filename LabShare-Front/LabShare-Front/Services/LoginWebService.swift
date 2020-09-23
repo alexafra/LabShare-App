@@ -9,7 +9,7 @@
 import Foundation
 
 class LoginWebService {
-    func login (user: UserLoginModel, completion: @escaping (UserAuthenticationModel?) -> ()) {
+    func login (user: UserLoginModel, loginVM: LoginViewModel, completion: @escaping (UserAuthenticationModel?) -> ()) {
         guard let url = URL(string: "http://127.0.0.1:8000/login") else {
             print("Invalid URL")
             return
@@ -22,18 +22,26 @@ class LoginWebService {
             return
         }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = userLoginData
         
-        
-        URLSession.shared.uploadTask(with: request, from: userLoginData) { (data, response, error) in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             //Check for error
-            if let error = error {
-                print("Error took place \(error)")
-                print("Stuff")
+            guard let response = response as? HTTPURLResponse else {
+                print("Error took place \(error.debugDescription)")
                 return
             }
-            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                print ("Server Error: ")
-                print("Stuff")
+            
+            if (response.statusCode == 400 || response.statusCode == 401) {
+                DispatchQueue.main.async {
+                    //Update our UI
+                    loginVM.attemptingLogin = false
+                    loginVM.loginFailed = true
+                    loginVM.userLogin.password = ""
+                    return
+                }
+            }
+            if !(200...299).contains(response.statusCode) {
+                print ("Server Error: \(error.debugDescription)")
                 return
             }
             guard let data = data, error == nil else {
@@ -42,20 +50,82 @@ class LoginWebService {
                 return
             }
             
-            let userSettings = try? JSONDecoder().decode(UserAuthenticationModel.self, from: data)
-            
-            
+            guard let userSettings = try? JSONDecoder().decode(UserAuthenticationModel.self, from: data) else {
+                print("Decoding error \(data)")
+                return
+            }
             
             DispatchQueue.main.async {
                 //Update our UI
+                
                 completion(userSettings)
                 return
             }
         }.resume()
     }
     
-    func register (user: UserRegisterModel, completion: @escaping (UserRegisterModel?, Bool) -> ()) {
+    func register (user: UserRegisterModel, registerVM: RegisterViewModel, completion: @escaping (UserAuthenticationModel?) -> ()) {
         guard let url = URL(string: "http://127.0.0.1:8000/register") else {
+            print("Invalid URL")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+
+        guard let userRegistrationData = try? JSONEncoder().encode(user) else {
+            print("Error Encoding")
+            return
+        }
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = userRegistrationData
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            //Check for error
+            guard let data = data else {
+                print("Error took place \(error.debugDescription)")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(RegistrationResponse.self, from: data)
+                switch response {
+                    case .success(let userModel):
+                        DispatchQueue.main.async {
+                            registerVM.attemptingRegistration = false
+                            registerVM.registrationFailed = false
+                            let userLoginModel = UserLoginModel(email: userModel.email, password: registerVM.repeatPassword)
+                            self.loginFromRegistration(user: userLoginModel, completion: completion)
+                            //Update our UI
+                            //Call Login
+                            
+                            return
+                        }
+                    case .failure(let registrationError):
+                        DispatchQueue.main.async {
+                            //Update our UI
+                            if let emailError = registrationError.email {
+                                registerVM.emailError = emailError[0]
+                            }
+                            if let passwordError = registrationError.password {
+                                registerVM.passwordError = passwordError[0]
+                            }
+                            registerVM.attemptingRegistration = false
+                            registerVM.registrationFailed = true
+                            registerVM.repeatPassword = ""
+                            registerVM.userRegister.password = ""
+                            return
+                        }
+                }
+            } catch {
+                print("Error took place \(error)")
+            }
+        }.resume()
+    }
+    
+    
+    func loginFromRegistration (user: UserLoginModel, completion: @escaping (UserAuthenticationModel?) -> ()) {
+        guard let url = URL(string: "http://127.0.0.1:8000/login") else {
             print("Invalid URL")
             return
         }
@@ -67,18 +137,18 @@ class LoginWebService {
             return
         }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = userLoginData
         
-        
-        URLSession.shared.uploadTask(with: request, from: userLoginData) { (data, response, error) in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             //Check for error
-            if let error = error {
-                print("Error took place \(error)")
-                print("Stuff")
+            guard let response = response as? HTTPURLResponse else {
+                print("Error took place \(error.debugDescription)")
                 return
             }
-            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                print ("Server Error: ")
-                print("Stuff")
+            //If the response fails your fucked
+            
+            if !(200...299).contains(response.statusCode) {
+                print ("Server Error: \(error.debugDescription)")
                 return
             }
             guard let data = data, error == nil else {
@@ -87,13 +157,15 @@ class LoginWebService {
                 return
             }
             
-            let userRegisterModel = try? JSONDecoder().decode(UserRegisterModel.self, from: data)
-            let hasRegistered = response.statusCode == 201
-            
+            guard let userSettings = try? JSONDecoder().decode(UserAuthenticationModel.self, from: data) else {
+                print("Decoding error \(data)")
+                return
+            }
             
             DispatchQueue.main.async {
                 //Update our UI
-                completion(userRegisterModel, hasRegistered)
+                
+                completion(userSettings)
                 return
             }
         }.resume()
