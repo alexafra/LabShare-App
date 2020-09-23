@@ -55,6 +55,7 @@ urlpatterns = [
 #add comments
 
 #Make first_name and last_name essential
+#Comments
 #Implement PATCH functions rather than PUT
 #Add comments to posts ###
 #Search function by name ###
@@ -68,3 +69,10 @@ urlpatterns = [
 #Profile image in User
 
 
+#create categories for posts
+#Add the ability to query these posts by categories
+#Attach profile and permissions to users automatically upon registration ##DONE
+#Give ability to update these categories and permissions available ##DONE
+#Change a user’s permissions ##DONE
+#Add page restrictions based on permissions of logged in user ##DONE
+#Profile photos ##DONE
