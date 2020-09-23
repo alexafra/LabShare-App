@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RegisterView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @ObservedObject var loginVM = LoginViewModel()
+    @ObservedObject var registerVM = RegisterViewModel()
     
 
     var body: some View {
@@ -21,20 +21,27 @@ struct RegisterView: View {
                 Text("Login to Lab Share")
                     .font(Font.largeTitle.weight(.bold))
                 
-                TextField("Enter email address", text: self.$loginVM.userLogin.email)
+                TextField("Enter email address", text: self.$registerVM.userRegister.email)
+                    .padding()
+                    .border(Color.gray, width: 1)
+                    .autocapitalization(.none)
+                TextField("Enter first name", text: self.$registerVM.userRegister.firstName)
+                    .padding()
+                    .border(Color.gray, width: 1)
+                    .autocapitalization(.none)
+                TextField("Enter last name", text: self.$registerVM.userRegister.lastName)
                     .padding()
                     .border(Color.gray, width: 1)
                     .autocapitalization(.none)
                     
-                SecureField("Enter password", text: self.$loginVM.userLogin.password)
+                SecureField("Enter password", text: self.$registerVM.userRegister.email)
                     .padding()
                     .border(Color.gray, width: 1)
                     .autocapitalization(.none)
                     
                     Button(action: {
-                        self.loginVM.login(completion: self.updateEnvironmentObject)
-                        self.loginVM.userLogin.email = ""
-                        self.loginVM.userLogin.password = ""
+                        self.registerVM.register(completion: self.registerUser)
+                        
                         
                         
                         
@@ -52,24 +59,28 @@ struct RegisterView: View {
             }
         }
     }
-    func updateEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
-        if let userAuthModel = userAuthModel {
-            if userAuthModel.token.isEmpty == false {
-                self.userAuthVM.userAuth.id = userAuthModel.id
-                self.userAuthVM.userAuth.token = userAuthModel.token
-                self.userAuthVM.userAuth.isLoggedIn = true
-                PostWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
-                PostWebservice().setToken(token: self.userAuthVM.userAuth.token)
-                UserWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
-                UserWebservice().setToken(token: self.userAuthVM.userAuth.token)
-            }
-        }
+    
+    func registerUser(userRegisterModel: UserRegisterModel, hasRegistered: Bool) {
+        
     }
+//    func updateEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
+//        if let userAuthModel = userAuthModel {
+//            if userAuthModel.token.isEmpty == false {
+//                self.userAuthVM.userAuth.id = userAuthModel.id
+//                self.userAuthVM.userAuth.token = userAuthModel.token
+//                self.userAuthVM.userAuth.isLoggedIn = true
+//                PostWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
+//                PostWebservice().setToken(token: self.userAuthVM.userAuth.token)
+//                UserWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
+//                UserWebservice().setToken(token: self.userAuthVM.userAuth.token)
+//            }
+//        }
+//    }
 }
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView().environmentObject(
+        RegisterView().environmentObject(
             UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true))
     }
 }

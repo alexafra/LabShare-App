@@ -53,4 +53,49 @@ class LoginWebService {
             }
         }.resume()
     }
+    
+    func register (user: UserRegisterModel, completion: @escaping (UserAuthenticationModel?, Bool) -> ()) {
+        guard let url = URL(string: "http://127.0.0.1:8000/register") else {
+            print("Invalid URL")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+
+        guard let userLoginData = try? JSONEncoder().encode(user) else {
+            print("Error Encoding")
+            return
+        }
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        
+        URLSession.shared.uploadTask(with: request, from: userLoginData) { (data, response, error) in
+            //Check for error
+            if let error = error {
+                print("Error took place \(error)")
+                print("Stuff")
+                return
+            }
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print ("Server Error: ")
+                print("Stuff")
+                return
+            }
+            guard let data = data, error == nil else {
+                print("Failed to fetch data \(error.debugDescription)")
+                print("Stuff")
+                return
+            }
+            
+            let userSettings = try? JSONDecoder().decode(UserAuthenticationModel.self, from: data)
+            let hasRegistered = response.statusCode == 201
+            
+            
+            DispatchQueue.main.async {
+                //Update our UI
+                completion(userSettings, hasRegistered)
+                return
+            }
+        }.resume()
+    }
 }
