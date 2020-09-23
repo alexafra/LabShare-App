@@ -18,60 +18,60 @@ struct RegisterView: View {
             if self.userAuthVM.userAuth.isLoggedIn {
                 ContainerView()
             } else {
-//                NavigationView {
+                VStack (alignment: .center ,spacing: 20) {
                     Text("Register to Lab Share")
                         .font(Font.largeTitle.weight(.bold))
+//                    VStack() {
+                    TextField("Enter email address", text: self.$registerVM.userRegister.email).modifier(TextFieldAuthorization())
+                    if (self.registerVM.userRegister.email.isEmpty) {
+                        Text("Email required").modifier(TextError())
+                    }
                     
-                    TextField("Enter email address", text: self.$registerVM.userRegister.email)
-                        .padding()
-                        .border(Color.gray, width: 1)
-                        .autocapitalization(.none)
-                    TextField("Enter first name", text: self.$registerVM.userRegister.firstName)
-                        .padding()
-                        .border(Color.gray, width: 1)
-                        .autocapitalization(.none)
-                    TextField("Enter last name", text: self.$registerVM.userRegister.lastName)
-                        .padding()
-                        .border(Color.gray, width: 1)
-                        .autocapitalization(.none)
                         
-                    SecureField("Enter password", text: self.$registerVM.userRegister.password)
-                        .padding()
-                        .border(Color.gray, width: 1)
-                        .autocapitalization(.none)
+                    TextField("Enter first name", text: self.$registerVM.userRegister.firstName).modifier(TextFieldAuthorization())
+                    if (self.registerVM.userRegister.firstName.isEmpty) {
+                        Text("First name required").modifier(TextError())
+                    }
                         
-                    NavigationLink(
-                        destination: LoginView(),
-                        isActive: self.$registerVM.hasRegistered,
-                        label: {
-                            Button(action: {
-                                self.registerVM.isRegistering = true
-                                self.registerVM.register(completion: self.registerUser)
-                                
-                                
-                                
-                                
-                                
-                                //Loop back to start view
-                            }) {
-                                Text("Login")
-                                    .foregroundColor(Color.white)
-                                    .font(Font.headline.weight(.bold))
-                            }.padding(.vertical, 10)
-                                .padding(.horizontal, 40)
-                                .background(Color.green)
-                                .cornerRadius(20)
-                        })
+                    TextField("Enter last name", text: self.$registerVM.userRegister.lastName).modifier(TextFieldAuthorization())
+                    if (self.registerVM.userRegister.lastName.isEmpty) {
+                        Text("Last name required").modifier(TextError())
+                    }
+                        
+                    SecureField("Enter password", text: self.$registerVM.userRegister.password).modifier(TextFieldAuthorization())
+                    if (!self.registerVM.hasAttemptedRegister) {
+                        Text("Passwords do not match").modifier(TextError())
+                    }
+                    SecureField("Repeat password", text: self.$registerVM.repeatPassword).modifier(TextFieldAuthorization())
+                    if (!self.registerVM.hasAttemptedRegister) {
+                        Text("Passwords do not match").modifier(TextError())
+                    }
+                    
+                    NavigationLink(destination: LoginView(), isActive: self.$registerVM.hasRegistered) {
+                        Button(action: {
+                            self.registerVM.isRegistering = true
+                            self.registerVM.register(completion: self.registerUser)
+                            
+                            //Loop back to start view
+                        }) {
+                            Text("Login")
+                                .foregroundColor(Color.white)
+                                .font(Font.headline.weight(.bold))
+                        }.padding(.vertical, 10)
+                            .padding(.horizontal, 40)
+                            .background(Color.green)
+                            .cornerRadius(20)
+                    }
                     
                     
-                    Spacer()
-//                }
-                
+                }.padding()
+                Spacer()
             }
         }
     }
     
     func registerUser(userRegisterModel: UserRegisterModel?, hasRegistered: Bool) {
+        
         self.registerVM.hasRegistered = hasRegistered
         self.registerVM.isRegistering = false
 //        if let userRegisterModel = userRegisterModel {
@@ -84,20 +84,6 @@ struct RegisterView: View {
         
         
     }
-//    func updateEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
-//        if let userAuthModel = userAuthModel {
-//            if userAuthModel.token.isEmpty == false {
-//                self.userAuthVM.userAuth.id = userAuthModel.id
-//                self.userAuthVM.userAuth.token = userAuthModel.token
-//                self.userAuthVM.userAuth.isLoggedIn = true
-//                PostWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
-//                PostWebservice().setToken(token: self.userAuthVM.userAuth.token)
-//                UserWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
-//                UserWebservice().setToken(token: self.userAuthVM.userAuth.token)
-//            }
-//        }
-//    }
-
 }
 
 struct RegisterView_Previews: PreviewProvider {
@@ -106,3 +92,5 @@ struct RegisterView_Previews: PreviewProvider {
             UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true))
     }
 }
+
+

@@ -21,15 +21,9 @@ struct LoginView: View {
                 Text("Login to Lab Share")
                     .font(Font.largeTitle.weight(.bold))
                 
-                TextField("Enter email address", text: self.$loginVM.userLogin.email)
-                    .padding()
-                    .border(Color.gray, width: 1)
-                    .autocapitalization(.none)
+                TextField("Enter email address", text: self.$loginVM.userLogin.email).modifier(TextFieldAuthorization())
                     
-                SecureField("Enter password", text: self.$loginVM.userLogin.password)
-                    .padding()
-                    .border(Color.gray, width: 1)
-                    .autocapitalization(.none)
+                SecureField("Enter password", text: self.$loginVM.userLogin.password).modifier(TextFieldAuthorization())
                     
                     Button(action: {
                         self.loginVM.login(completion: self.updateEnvironmentObject)
@@ -43,14 +37,15 @@ struct LoginView: View {
                         Text("Login")
                             .foregroundColor(Color.white)
                             .font(Font.headline.weight(.bold))
-                    }.padding(.vertical, 10)
+                    }.padding(.vertical, 20)
                         .padding(.horizontal, 40)
                         .background(Color.green)
                         .cornerRadius(20)
+                        .padding(.top, 10)
                 
                 Spacer()
             }
-        }
+        }.padding()
     }
     func updateEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
         if let userAuthModel = userAuthModel {
