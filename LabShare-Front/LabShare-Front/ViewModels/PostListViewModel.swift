@@ -31,7 +31,7 @@ class PostListViewModel: ObservableObject {
     }
     
     func getFeedPosts() {
-        PostWebservice().getProfilePosts(userId: userId) { posts in
+        PostWebservice().getFeedPosts(userId: userId) { posts in
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init ) //Probs broken
             }

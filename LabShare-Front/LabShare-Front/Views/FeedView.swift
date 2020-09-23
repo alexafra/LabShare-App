@@ -19,8 +19,11 @@ struct FeedView: View {
     var body: some View {
         VStack {
             NavigationView {
-                PostListView(postListVM: self.postListVM)
+                ScrollView{
+                    PostListView(postListVM: self.postListVM)
+                }
             }.onAppear(perform: self.postListVM.getFeedPosts)
+            .navigationBarTitle(Text(""), displayMode: .inline)
         }
         
     }

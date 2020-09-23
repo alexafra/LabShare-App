@@ -25,6 +25,7 @@ struct PostDetailView: View {
                 Spacer()
                 VStack {
                     Button(action: {
+                    
                     }){
                         Image(systemName: "pencil")
                             .imageScale(.large)
@@ -63,33 +64,6 @@ struct PostDetailView: View {
 
             Spacer()
         }.padding([.top, .leading, .trailing])
-    }
-
-    func getUser() {
-//        guard let url = URL(string: "http://127.0.0.1:8000/users/"+String(post.author.id)+"/profile/") else {
-//            print("Invalid URL")
-//            return
-//        }
-//
-//        URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            if let data = data {
-//                if let decodedResponse = try? JSONDecoder().decode(ProfileModel.self, from: data) {
-//                    //                    We have good data - go back to the main thread
-//                    DispatchQueue.main.async {
-//                        //Update our UI
-//                        self.user = decodedResponse
-//                        return
-//                    }
-//                } else {
-//                    print("Failed to decode")
-//                }
-//
-//            } else {
-//                print("Failed to fetch data \(error.debugDescription)")
-//                return
-//            }
-//
-//        }.resume()
     }
 }
 

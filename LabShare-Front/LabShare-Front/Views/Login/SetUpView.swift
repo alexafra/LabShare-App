@@ -25,7 +25,7 @@ struct SetUpView: View {
                     .background(Color.green)
                     .cornerRadius(20)
                 Spacer()
-                NavigationLink(destination: LoginView()) {
+                NavigationLink(destination: RegisterView()) {
                     Text("Create account")
                         .foregroundColor(Color.white)
                         .font(Font.headline.weight(.bold))
