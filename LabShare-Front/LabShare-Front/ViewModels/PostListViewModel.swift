@@ -71,9 +71,9 @@ class PostListViewModel: ObservableObject {
                 self.newPostTitle = ""
                 self.newPostContent = ""
                 return
-           }, completionSuccessful: {(posts: PostModel?) -> Void in
-                if let posts = posts {
-                    self.posts = posts.map( self.modelToModelView ) //Probs broken
+           }, completionSuccessful: {(post: PostModel?) -> Void in
+                if let post = post {
+                    self.posts.insert(self.modelToModelView(postModel: post), at: 0) //Probs broken
                 }
                 self.newPostTitle = ""
                 self.newPostContent = ""
@@ -85,17 +85,6 @@ class PostListViewModel: ObservableObject {
 class PostViewModel: ObservableObject {
     @Published var post: PostModel
     var userAuthVM: UserAuthenticationViewModel
-//    init(post: PostModel) {
-//        self.post = post
-////        self.userAuthVM = userAuthVM
-//    }
-    
-    
-    
-    
-    //IMPORTANT GET POST NOT QUIRE WORKING!!!!!
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     init(post: PostModel, userAuthVM: UserAuthenticationViewModel) {
         self.post = post
         self.userAuthVM = userAuthVM
@@ -129,14 +118,5 @@ class PostViewModel: ObservableObject {
 //        }
         
     }
-    
-//    func deletePost() {
-//        PostWebservice().deletePost(itemId : self.post.id) { posts in
-//            if let posts = posts {
-//                self.posts = posts.map( PostViewModel.init )
-//            }
-//        }
-//    }
-    
     
 }

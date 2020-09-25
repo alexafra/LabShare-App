@@ -37,7 +37,7 @@ class ProfileViewModel: ObservableObject {
             
         }, completionSuccessful: { (profile: ProfileModel?) -> Void in
             if let profile = profile {
-                self.profile = ProfileModel(profile: profile)
+                self.profile = profile
             }
         })
     }

@@ -8,16 +8,6 @@
 
 import Foundation
 class ProfileWebService: WebService {
-    private static var loggedInUserId: Int = -1
-    private static var token: String = ""
-    
-    class func setLoggedInUserId(id: Int) {
-        Self.loggedInUserId = id
-    }
-    class func setToken(token: String) {
-        Self.token = token
-    }
-    
     init(userAuth: UserAuthenticationModel) {
         super.init(userAuthModel: userAuth)
     }

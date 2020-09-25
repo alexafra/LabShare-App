@@ -63,6 +63,10 @@ class WebService {
         
         //Should only be for POST and PUT
         
+       
+        
+        request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
+    
         if let model = model, apiMethod == ApiMethod.POST || apiMethod == ApiMethod.PUT {
             guard let modelData = try? JSONEncoder().encode(model) else {
                 print("Error Encoding")
@@ -72,7 +76,7 @@ class WebService {
             request.httpBody = modelData
         }
         
-        request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
+    
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             guard let data = data, let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode), error == nil else {
