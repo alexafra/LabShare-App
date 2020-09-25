@@ -10,7 +10,7 @@
 
 import Foundation
 
-class ProfilePostsWebService: WebService {
+class UserPostsWebService: WebService {
     
     init(userAuth: UserAuthenticationModel) {
         super.init(userAuthModel: userAuth)
@@ -19,15 +19,30 @@ class ProfilePostsWebService: WebService {
 //        self.loggedInUserId = userAuthModel.id
 //        self.token = userAuthModel.token
 //    }
-    func generateURLString(userId: Int) -> String {
-        return "http://127.0.0.1:8000/users/\(userId)/posts"
+    func generateURLString(userId: Int, postId: Int? = nil) -> String {
+        var urlString =  "http://127.0.0.1:8000/users/\(userId)/posts"
+        if let postId = postId {
+            urlString = urlString + String(postId)
+        }
+        return urlString
     }
     
-    func getUserPosts(userId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
+    func getAllUserPosts(userId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
         
         let urlString = generateURLString(userId: userId)
         
         super.getAll(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure)
+    }
+    
+    func getUserPost (userId: Int, postId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping (ProfileModel?) -> ()) {
+
+        let urlString = generateURLString(userId: userId, postId: postId)
+        super.get(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure)
+    }
+    
+    func deleteUserPost (userId: Int, postId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping () -> ()) {
+        let urlString = generateURLString(userId: userId, postId: postId)
+        super.delete(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure)
     }
     
 //    func getFeedPosts(userId: Int, completion: @escaping ([PostModel]?) -> ()) {

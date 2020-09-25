@@ -8,31 +8,43 @@
 
 //Enum to create URLS
 
-//import Foundation
-//
-//class PostWebService2 : WebService {
-//
-//    init(userAuth: UserAuthenticationModel) {
-//        super.init(userAuthModel: userAuth)
+import Foundation
+
+class UserPostsWebService: WebService {
+    
+    init(userAuth: UserAuthenticationModel) {
+        super.init(userAuthModel: userAuth)
+    }
+//    init (userAuthModel: UserAuthenticationModel) {
+//        self.loggedInUserId = userAuthModel.id
+//        self.token = userAuthModel.token
 //    }
-//
-//
-////    init (userAuthModel: UserAuthenticationModel) {
-////        self.loggedInUserId = userAuthModel.id
-////        self.token = userAuthModel.token
-////    }
-//    func generateURLString(userId: Int, postId: Int) -> String {
-//        return "http://127.0.0.1:8000/users/\(userId)/posts/\(postId)"
-//    }
-//
-//
-//
-//
-//    func get (userId: Int, postId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping (ProfileModel?) -> ()) {
-//
-//        let urlString = generateURLString(userId: userId, postId: postId)
-//        super.get(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure)
-//    }
+    func generateURLString(userId: Int, postId: Int? = nil) -> String {
+        var urlString =  "http://127.0.0.1:8000/users/\(userId)/posts"
+        if let postId = postId {
+            urlString = urlString + String(postId)
+        }
+        return urlString
+    }
+    
+    func getAllUserPosts(userId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
+        
+        let urlString = generateURLString(userId: userId)
+        
+        super.getAll(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
+    }
+    
+    func getUserPost (userId: Int, postId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping (PostModel?) -> ()) {
+
+        let urlString = generateURLString(userId: userId, postId: postId)
+        super.get(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
+    }
+    
+    func deleteUserPost (userId: Int, postId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping (PostModel?) -> ()) {
+        
+        let urlString = generateURLString(userId: userId, postId: postId)
+        super.delete(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
+    }
     
 //    func getFeedPosts(userId: Int, completion: @escaping ([PostModel]?) -> ()) {
 //        /*
@@ -67,7 +79,7 @@
 //        }.resume()
 //
 //    }
-    
+//
 //    func createPost (post: PostEncodable, completion: @escaping ([PostModel]?) -> ()) {
 //        guard let url = URL(string: "http://127.0.0.1:8000/posts") else {
 //            print("Invalid URL")
@@ -104,12 +116,12 @@
 //        }.resume()
 //    }
 //
-    
-    
-    
-    
-    
-    
+//
+//
+//
+//
+//
+//
 //    //POSSIBLE PROBLEMS
 //    func deletePost(postId: Int, completion: @escaping ([PostModel]?) -> ()) {
 //        guard let url = URL(string: "http://127.0.0.1:8000/posts/\(postId)") else {
@@ -175,4 +187,4 @@
 //            self.getProfilePosts(userId: Self.loggedInUserId, completion: completion)
 //        }.resume()
 //    }
-//}
+}

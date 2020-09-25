@@ -22,8 +22,67 @@ class WebService {
         self.init(userAuthModel: UserAuthenticationModel(id: -1, token: "", isLoggedIn: false))
     }
     
+    func get<T:Codable>(urlString: String, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
+        
+        apiMethodHelper(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure, apiMethod: ApiMethod.GET)
+    }
     
-    func getAll<T:Codable>(urlString: String, completionSuccessful: @escaping ([T]?) -> (), completionFailure: @escaping()->()) {
+    func post<T:Codable>(urlString: String, completionSuccessful: @escaping (T?) -> (), completionFailure: @escaping()->()) {
+        
+        apiMethodHelper(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure, apiMethod: ApiMethod.POST)
+    }
+    
+    func update<T:Codable> (urlString: String, model: T, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
+        
+        apiMethodHelper(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure, apiMethod: ApiMethod.PUT)
+        
+    }
+
+    func delete<T:Codable> (urlString: String, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
+
+        apiMethodHelper(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure, apiMethod: ApiMethod.DELETE)
+    }
+    
+    private func apiMethodHelper<T:Codable> (urlString: String, completionSuccessful: @escaping (T?) -> (), completionFailure: @escaping()->(), apiMethod: ApiMethod) {
+        guard let url = URL(string: urlString) else {
+            completionFailure()
+            print("Invalid URL")
+            return
+        }
+        
+        var request  = URLRequest(url: url)
+        if apiMethod == ApiMethod.GET {
+            request.httpMethod = "GET"
+        } else if apiMethod == ApiMethod.POST {
+            request.httpMethod = "POST"
+        } else if apiMethod == ApiMethod.PUT {
+            request.httpMethod = "PUT"
+        } else if apiMethod == ApiMethod.DELETE {
+            request.httpMethod = "DELETE"
+        }
+        
+        request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            guard let data = data, let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode), error == nil else {
+                DispatchQueue.main.async {
+                    completionFailure()
+                    print("Failed to fetch data \(error.debugDescription)")
+                    return
+                }
+                return
+            }
+            let model = try? JSONDecoder().decode(T.self, from: data)
+            DispatchQueue.main.async {
+                //Update our UI
+                
+                completionSuccessful(model)
+                return
+            }
+        }.resume()
+    }
+    
+    func getAll<T:Codable>(urlString: String, completionFailure: @escaping()->(), completionSuccessful: @escaping ([T]?) -> ()) {
         /*
          1. Create URL we want to read
          2. Wrap URLRequest which allows us to configuew how the url should be accessed
@@ -32,6 +91,7 @@ class WebService {
          */
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
+            completionFailure()
             return
         }
         
@@ -40,9 +100,12 @@ class WebService {
         request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            guard let data = data, error == nil else {
-                print("Failed to fetch data \(error.debugDescription)")
-                completionFailure()
+            guard let data = data, let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode), error == nil else {
+                DispatchQueue.main.async {
+                    completionFailure()
+                    print("Failed to fetch data \(error.debugDescription)")
+                    return
+                }
                 return
             }
             let modelArray = try? JSONDecoder().decode([T].self, from: data)
@@ -55,77 +118,10 @@ class WebService {
         }.resume()
     }
     
-    func get<T:Codable>(urlString: String, completionSuccessful: @escaping (T?) -> (), completionFailure: @escaping()->()) {
-        /*
-         1. Create URL we want to read
-         2. Wrap URLRequest which allows us to configuew how the url should be accessed
-         3. Create and start a networking task from that url request
-         4. Handle the result of that networking tak
-         */
-        guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            return
-        }
-        
-        var request  = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-            guard let data = data, error == nil else {
-                print("Failed to fetch data \(error.debugDescription)")
-                completionFailure()
-                return
-            }
-            let model = try? JSONDecoder().decode(T.self, from: data)
-                //                    We have good data - go back to the main thread
-            DispatchQueue.main.async {
-                //Update our UI
-                completionSuccessful(model)
-                return
-            }
-        }.resume()
-    }
-    
-    func post<T:Codable>(urlString: String, completionSuccessful: @escaping ([T]?) -> (), completionFailure: @escaping()->()) {
-    }
-    
-//    func createPost (post: PostEncodable, completion: @escaping ([PostModel]?) -> ()) {
-//        guard let url = URL(string: "http://127.0.0.1:8000/posts") else {
-//            print("Invalid URL")
-//            return
-//        }
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//
-//        guard let postData = try? JSONEncoder().encode(post) else {
-//            print("Error Encoding")
-//            return
-//        }
-//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
-//        request.httpBody = postData
-//
-//        URLSession.shared.dataTask(with: request) { (data, response, error) in
-//            //Check for error
-//            if let error = error {
-//                print("Error took place \(error)")
-//                return
-//            }
-//            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-//                print ("Server Error: ")
-//                return
-//            }
-//            if let mimeType = response.mimeType,
-//                mimeType == "application/json",
-//                let data = data,
-//                let dataString = String(data: data, encoding: .utf8) {
-//                print("got data: \(dataString)")
-//            }
-//            self.getProfilePosts(userId: self.loggedInUserId, completion: completion)
-//        }.resume()
-//    }
     
     
-    
+}
+
+enum ApiMethod {
+    case GET, PUT, POST, DELETE, GETALL
 }

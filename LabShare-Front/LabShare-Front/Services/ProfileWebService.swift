@@ -29,40 +29,16 @@ class ProfileWebService: WebService {
     func getProfile(userId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping (ProfileModel?) -> ()) {
         
         let urlString = generateURLString(userId: userId)
-        
-        super.get(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure)
+        super.get(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
     }
     
-    func updateProfile(profileModel: ProfileModel, completion: @escaping (Bool) -> ()) {
-        guard let url = URL(string: "http://127.0.0.1:8000/users/\(String(profileModel.owner.id))/profile") else {
-            print("Invalid URL")
-            return
-        }
-        guard let profileData = try? JSONEncoder().encode(profileModel) else {
-            print("Error Encoding")
-            return
-        }
-        var request  = URLRequest(url: url)
-        request.httpMethod = "PUT"
-        request.setValue("Token \(Self.token)", forHTTPHeaderField: "Authorization")
-        request.httpBody = profileData
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-            if  data == nil, error != nil {
-                print("Failed to fetch data \(error.debugDescription)")
-                completion(false)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                //Update our UI
-                completion(true)
-                return
-            }
-        }.resume()
+    func updateProfile(userId: Int, profileModel: ProfileModel, completionFailure: @escaping () -> (), completionSuccessful: @escaping (ProfileModel?) -> ()) {
+        
+        let urlString = generateURLString(userId: userId)
+        
+        super.update(urlString: urlString, model: profileModel, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
+        
     }
-
-
 }
 
 

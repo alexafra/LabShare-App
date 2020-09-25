@@ -29,15 +29,21 @@ class PostListViewModel: ObservableObject {
         self.userId = userId
         self.userAuthVM = userAuthVM
     }
-    func getProfilePosts() {
-        let profilePostWebService = ProfilePostsWebService(userAuth: self.userAuthVM.userAuth)
+    func getAllUserPosts() {
+        let userPostWebService = UserPostsWebService(userAuth: self.userAuthVM.userAuth)
 
-        profilePostWebService.getUserPosts(userId: userId, completionFailure: {() -> Void in  return }, completionSuccessful: { (posts: [PostModel]?) -> Void in
+        userPostWebService.getAllUserPosts(userId: userId, completionFailure: {() -> Void in  return }, completionSuccessful: { (posts: [PostModel]?) -> Void in
             if let posts = posts {
-                self.posts = posts.map( PostViewModel.init ) //Probs broken
+                self.posts = posts.map( self.modelToModelView )
             }
         })
     }
+    
+    func modelToModelView (postModel : PostModel) -> PostViewModel {
+        return PostViewModel(post: postModel, userAuthVM: userAuthVM)
+    }
+    
+    
     
 //    func getProfilePosts() {
 //        let profilePostWebService = ProfilePostsWebService(userAuth: self.userAuthVM.userAuth)
@@ -52,7 +58,7 @@ class PostListViewModel: ObservableObject {
     func getFeedPosts() {
         PostWebService().getFeedPosts(userId: userId) { posts in
             if let posts = posts {
-                self.posts = posts.map( PostViewModel.init ) //Probs broken
+                self.posts = posts.map( self.modelToModelView ) //Probs broken
             }
         }
     }
@@ -66,7 +72,7 @@ class PostListViewModel: ObservableObject {
         let newPost = PostEncodable(title: newPostTitle, content:newPostContent, author: 1)
         PostWebService().createPost(post: newPost) { posts in
             if let posts = posts {
-                self.posts = posts.map( PostViewModel.init ) //Probs broken
+                self.posts = posts.map( self.modelToModelView ) //Probs broken
             }
         }
         self.newPostTitle = ""
@@ -77,17 +83,34 @@ class PostListViewModel: ObservableObject {
 
 class PostViewModel: ObservableObject {
     @Published var post: PostModel
+    var userAuthVM: UserAuthenticationViewModel
+//    init(post: PostModel) {
+//        self.post = post
+////        self.userAuthVM = userAuthVM
+//    }
     
-    init(post: PostModel) {
+    
+    
+    
+    //IMPORTANT GET POST NOT QUIRE WORKING!!!!!
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    init(post: PostModel, userAuthVM: UserAuthenticationViewModel) {
         self.post = post
+        self.userAuthVM = userAuthVM
     }
+
     
-//    var id: Int { return self.post.id }
-//    var title: String { return self.post.title }
-//    var content: String { return self.post.content }
-//    var date_created: String { return self.post.dateCreated }
-//    var author: UserModel { return self.post.author }
-    
+    func getUserPost() {
+        let userPostWebService = UserPostsWebService(userAuth: self.userAuthVM.userAuth)
+
+        userPostWebService.getUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in  return }, completionSuccessful: { (post: PostModel?) -> Void in
+            if let post = post {
+                self.post = post
+            }
+        })
+    }
+
     func updatePost(userId: Int, indexSet: IndexSet) {
 //        let postToUpdate = self.posts[indexSet.first!]
 //        let newPostTitle = self.newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
