@@ -12,20 +12,20 @@ import Foundation
 
 class PostWebService {
     
-    private var loggedInUserId: Int = -1
-    private var token: String = ""
+    private static var loggedInUserId: Int = -1
+    private static var token: String = ""
     
-//    class func setLoggedInUserId(id: Int) {
-//        Self.loggedInUserId = id
-//    }
-//    class func setToken(token: String) {
-//        Self.token = token
-//    }
-    
-    init (userAuthModel: UserAuthenticationModel) {
-        self.loggedInUserId = userAuthModel.id
-        self.token = userAuthModel.token
+    class func setLoggedInUserId(id: Int) {
+        Self.loggedInUserId = id
     }
+    class func setToken(token: String) {
+        Self.token = token
+    }
+    
+//    init (userAuthModel: UserAuthenticationModel) {
+//        self.loggedInUserId = userAuthModel.id
+//        self.token = userAuthModel.token
+//    }
     
     func getProfilePosts(userId: Int, completion: @escaping ([PostModel]?) -> ()) {
         /*
@@ -42,7 +42,7 @@ class PostWebService {
         
         var request  = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
+        request.setValue("Token \(Self.token)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             guard let data = data, error == nil else {
@@ -76,7 +76,7 @@ class PostWebService {
         
         var request  = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
+        request.setValue("Token \(Self.token)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             guard let data = data, error == nil else {
@@ -108,7 +108,7 @@ class PostWebService {
             return
         }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
+        request.setValue("Token \(Self.token)", forHTTPHeaderField: "Authorization")
         request.httpBody = postData
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -127,7 +127,7 @@ class PostWebService {
                 let dataString = String(data: data, encoding: .utf8) {
                 print("got data: \(dataString)")
             }
-            self.getProfilePosts(userId: self.loggedInUserId, completion: completion)
+            self.getProfilePosts(userId: Self.loggedInUserId, completion: completion)
         }.resume()
     }
     
@@ -163,7 +163,7 @@ class PostWebService {
                 let dataString = String(data: data, encoding: .utf8) {
                 print("got data: \(dataString)")
             }
-            self.getProfilePosts(userId: self.loggedInUserId, completion: completion)
+            self.getProfilePosts(userId: Self.loggedInUserId, completion: completion)
         }.resume()
     }
     
@@ -199,7 +199,7 @@ class PostWebService {
                 let dataString = String(data: data, encoding: .utf8) {
                 print("got data: \(dataString)")
             }
-            self.getProfilePosts(userId: self.loggedInUserId, completion: completion)
+            self.getProfilePosts(userId: Self.loggedInUserId, completion: completion)
         }.resume()
     }
 }

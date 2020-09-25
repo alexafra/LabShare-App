@@ -33,19 +33,19 @@ struct FeedView: View {
 
 
 struct FeedView_Previews: PreviewProvider {
-    static func supplyAuth (){
-        PostWebService.setToken(token: "e3ef7d0655f1698e348a81eb184156b74612ad59")
-        PostWebService.setLoggedInUserId(id: 1)
-        ProfileWebService.setToken(token: "e3ef7d0655f1698e348a81eb184156b74612ad59")
-        ProfileWebService.setLoggedInUserId(id: 1)
-    }
-    supplyAuth()
+//    static func supplyAuth (){
+//        PostWebService.setToken(token: "e3ef7d0655f1698e348a81eb184156b74612ad59")
+//        PostWebService.setLoggedInUserId(id: 1)
+//        ProfileWebService.setToken(token: "e3ef7d0655f1698e348a81eb184156b74612ad59")
+//        ProfileWebService.setLoggedInUserId(id: 1)
+//    }
+//    supplyAuth()
     
     static var previews: some View {
         
         FeedView(userId: 10)
             .environmentObject(UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))
-            .onAppear(perform: supplyAuth)
+//            .onAppear(perform: supplyAuth)
         
 //        NavigationView {
 //        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {

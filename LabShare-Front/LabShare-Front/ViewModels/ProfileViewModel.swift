@@ -15,16 +15,19 @@ class ProfileViewModel: ObservableObject {
     @Published var profile = ProfileModel()
     @Published var hasCompletedLoading: Bool = false
     @Published var loadingSuccessful: Bool = false
+    var userAuth: UserAuthenticationViewModel
     
-    init(userId: Int) {
+    init(userId: Int, userAuth: UserAuthenticationViewModel) {
         self.userId = userId
         self.hasCompletedLoading = false
         self.loadingSuccessful = false
+        self.userAuth = userAuth
     }
     
-    init(userId: Int, profile: ProfileModel) {
+    init(userId: Int, profile: ProfileModel, userAuth: UserAuthenticationViewModel ) {
         self.userId = userId
         self.profile = profile
+        self.userAuth = userAuth
     }
 
     func getProfile() {

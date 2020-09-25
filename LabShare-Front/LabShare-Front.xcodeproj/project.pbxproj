@@ -37,6 +37,7 @@
 		F0545E58251B341E0037EFC9 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E57251B341E0037EFC9 /* RegistrationModel.swift */; };
 		F0545E65251B68090037EFC9 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E64251B68090037EFC9 /* ProfileEditView.swift */; };
 		F05A03A8251CD4D7001563AF /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05A03A7251CD4D7001563AF /* WebService.swift */; };
+		F05A03B6251DAE08001563AF /* PostWebService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05A03B5251DAE08001563AF /* PostWebService2.swift */; };
 		F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */; };
 		F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */; };
 		F09C69A72516216700EC961C /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69A62516216700EC961C /* SetUpView.swift */; };
@@ -110,6 +111,7 @@
 		F0545E57251B341E0037EFC9 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		F0545E64251B68090037EFC9 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		F05A03A7251CD4D7001563AF /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		F05A03B5251DAE08001563AF /* PostWebService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWebService2.swift; sourceTree = "<group>"; };
 		F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileWebService.swift; sourceTree = "<group>"; };
 		F09C69A62516216700EC961C /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */,
 				F09C69B225163FE800EC961C /* LoginWebService.swift */,
 				F05A03A7251CD4D7001563AF /* WebService.swift */,
+				F05A03B5251DAE08001563AF /* PostWebService2.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				F09C69B325163FE800EC961C /* LoginWebService.swift in Sources */,
 				F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */,
 				F04A335224F91CAA004A86D9 /* PostRowView.swift in Sources */,
+				F05A03B6251DAE08001563AF /* PostWebService2.swift in Sources */,
 				F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */,
 				F09C69A72516216700EC961C /* SetUpView.swift in Sources */,
 				F09C69AF251635BD00EC961C /* LoginView.swift in Sources */,

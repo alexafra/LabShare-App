@@ -12,14 +12,16 @@ class WebService {
     
     var loggedInUserId: Int = -1
     var token: String = ""
+    var url: URL?
     
-    init (userAuthModel: UserAuthenticationModel) {
+    init (userAuthModel: UserAuthenticationModel, url: String) {
         self.loggedInUserId = userAuthModel.id
         self.token = userAuthModel.token
+        self.url = URL(string: url)
     }
     
     convenience init () {
-        self.init(userAuthModel: UserAuthenticationModel(id: -1, token: "", isLoggedIn: false))
+        self.init(userAuthModel: UserAuthenticationModel(id: -1, token: "", isLoggedIn: false), url: "")
     }
     
     func getAll<T>(userId: Int, completion: @escaping (T?) -> ()) {

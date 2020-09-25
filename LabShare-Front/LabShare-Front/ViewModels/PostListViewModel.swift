@@ -18,9 +18,11 @@ class PostListViewModel: ObservableObject {
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
     @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
+    var userAuth: UserAuthenticationViewModel
     
-    init (userId: Int) {
+    init (userId: Int, userAuth: UserAuthenticationViewModel) {
         self.userId = userId
+        self.userAuth = userAuth
     }
     func getProfilePosts() {
         PostWebService().getProfilePosts(userId: userId) { posts in
