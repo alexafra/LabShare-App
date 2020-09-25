@@ -10,17 +10,24 @@
 
 import Foundation
 
-class PostWebservice {
+class PostWebService {
     
     private static var loggedInUserId: Int = -1
     private static var token: String = ""
     
-    func setLoggedInUserId(id: Int) {
+    class func setLoggedInUserId(id: Int) {
         Self.loggedInUserId = id
     }
-    func setToken(token: String) {
+    class func setToken(token: String) {
         Self.token = token
     }
+    
+    
+    
+//    init (userAuthModel: UserAuthenticationModel) {
+//        self.loggedInUserId = userAuthModel.id
+//        self.token = userAuthModel.token
+//    }
     
     func getProfilePosts(userId: Int, completion: @escaping ([PostModel]?) -> ()) {
         /*

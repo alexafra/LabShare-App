@@ -11,6 +11,10 @@ import SwiftUI
 struct PostListView: View {
     @ObservedObject var postListVM: PostListViewModel
     
+    init (postListVM: PostListViewModel) {
+        self.postListVM = postListVM
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -47,6 +51,6 @@ struct PostListView: View {
 
 struct PostListView_Previews: PreviewProvider {
     static var previews: some View {
-        PostListView(postListVM: PostListViewModel(userId: 10))
+        PostListView(postListVM: PostListViewModel(userId: 1, userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true)))
     }
 }

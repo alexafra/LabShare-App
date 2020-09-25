@@ -45,10 +45,10 @@ struct HiddenTextError: ViewModifier {
 struct AuthButton: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .padding(.vertical, 20)
+            .padding(.vertical, 15)
             .padding(.horizontal, 40)
             .background(Color.green)
-            .cornerRadius(50)
+            .cornerRadius(40)
             .padding(.vertical, 10)
             
     }
@@ -60,9 +60,14 @@ struct ViewHelpers_Previews: PreviewProvider {
         VStack {
             /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
             /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
+            Button(action: {
+            }) {
+                Text("Register")
+                    .foregroundColor(Color.white)
+                    .font(Font.title.weight(.bold))
+            }.modifier(AuthButton())
         }.padding(20)
         
     }
 }
-
 

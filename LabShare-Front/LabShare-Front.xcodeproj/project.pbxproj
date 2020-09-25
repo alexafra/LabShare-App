@@ -25,7 +25,7 @@
 		F04A335024F91C90004A86D9 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A334F24F91C90004A86D9 /* PostModel.swift */; };
 		F04A335224F91CAA004A86D9 /* PostRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A335124F91CAA004A86D9 /* PostRowView.swift */; };
 		F04A335924FA234F004A86D9 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A335824FA234F004A86D9 /* PostDetailView.swift */; };
-		F0519BB825034A68006E580E /* PostWebservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0519BB725034A68006E580E /* PostWebservice.swift */; };
+		F0519BB825034A68006E580E /* PostWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0519BB725034A68006E580E /* PostWebService.swift */; };
 		F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0519BBA25034CD9006E580E /* PostListViewModel.swift */; };
 		F0519BBD250363CA006E580E /* UrlApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0519BBC250363CA006E580E /* UrlApi.swift */; };
 		F0545E0A251A54CD0037EFC9 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E09251A54CD0037EFC9 /* PostListView.swift */; };
@@ -36,8 +36,10 @@
 		F0545E53251B0FAE0037EFC9 /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E52251B0FAE0037EFC9 /* ViewHelpers.swift */; };
 		F0545E58251B341E0037EFC9 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E57251B341E0037EFC9 /* RegistrationModel.swift */; };
 		F0545E65251B68090037EFC9 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E64251B68090037EFC9 /* ProfileEditView.swift */; };
+		F05A03A8251CD4D7001563AF /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05A03A7251CD4D7001563AF /* WebService.swift */; };
+		F05A03B6251DAE08001563AF /* ProfilePostsWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05A03B5251DAE08001563AF /* ProfilePostsWebService.swift */; };
 		F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */; };
-		F05E5E8F25039D9B004BC996 /* UserWebservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8E25039D9B004BC996 /* UserWebservice.swift */; };
+		F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */; };
 		F09C69A72516216700EC961C /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69A62516216700EC961C /* SetUpView.swift */; };
 		F09C69AF251635BD00EC961C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69AE251635BD00EC961C /* LoginView.swift */; };
 		F09C69B12516396200EC961C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B02516396200EC961C /* LoginViewModel.swift */; };
@@ -97,7 +99,7 @@
 		F04A334F24F91C90004A86D9 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		F04A335124F91CAA004A86D9 /* PostRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRowView.swift; sourceTree = "<group>"; };
 		F04A335824FA234F004A86D9 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
-		F0519BB725034A68006E580E /* PostWebservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWebservice.swift; sourceTree = "<group>"; };
+		F0519BB725034A68006E580E /* PostWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWebService.swift; sourceTree = "<group>"; };
 		F0519BBA25034CD9006E580E /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
 		F0519BBC250363CA006E580E /* UrlApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlApi.swift; sourceTree = "<group>"; };
 		F0545E09251A54CD0037EFC9 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
@@ -108,8 +110,10 @@
 		F0545E52251B0FAE0037EFC9 /* ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 		F0545E57251B341E0037EFC9 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		F0545E64251B68090037EFC9 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		F05A03A7251CD4D7001563AF /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		F05A03B5251DAE08001563AF /* ProfilePostsWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostsWebService.swift; sourceTree = "<group>"; };
 		F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		F05E5E8E25039D9B004BC996 /* UserWebservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebservice.swift; sourceTree = "<group>"; };
+		F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileWebService.swift; sourceTree = "<group>"; };
 		F09C69A62516216700EC961C /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
 		F09C69AE251635BD00EC961C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F09C69B02516396200EC961C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -268,10 +272,12 @@
 		F0519BB625034A49006E580E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F0519BB725034A68006E580E /* PostWebservice.swift */,
+				F0519BB725034A68006E580E /* PostWebService.swift */,
 				F0519BBC250363CA006E580E /* UrlApi.swift */,
-				F05E5E8E25039D9B004BC996 /* UserWebservice.swift */,
+				F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */,
 				F09C69B225163FE800EC961C /* LoginWebService.swift */,
+				F05A03A7251CD4D7001563AF /* WebService.swift */,
+				F05A03B5251DAE08001563AF /* ProfilePostsWebService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -529,6 +535,7 @@
 				F0545E42251ACE5A0037EFC9 /* RegisterViewModel.swift in Sources */,
 				F0545E18251A564A0037EFC9 /* FeedView.swift in Sources */,
 				F0545E53251B0FAE0037EFC9 /* ViewHelpers.swift in Sources */,
+				F05A03A8251CD4D7001563AF /* WebService.swift in Sources */,
 				F09C69B72516446900EC961C /* StartView.swift in Sources */,
 				F09C69B52516408200EC961C /* UserModel.swift in Sources */,
 				1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */,
@@ -545,12 +552,13 @@
 				F09C69B325163FE800EC961C /* LoginWebService.swift in Sources */,
 				F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */,
 				F04A335224F91CAA004A86D9 /* PostRowView.swift in Sources */,
-				F05E5E8F25039D9B004BC996 /* UserWebservice.swift in Sources */,
+				F05A03B6251DAE08001563AF /* ProfilePostsWebService.swift in Sources */,
+				F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */,
 				F09C69A72516216700EC961C /* SetUpView.swift in Sources */,
 				F09C69AF251635BD00EC961C /* LoginView.swift in Sources */,
 				F04A332224F91C43004A86D9 /* FeedView2.swift in Sources */,
 				F04A335924FA234F004A86D9 /* PostDetailView.swift in Sources */,
-				F0519BB825034A68006E580E /* PostWebservice.swift in Sources */,
+				F0519BB825034A68006E580E /* PostWebService.swift in Sources */,
 				F0545E0A251A54CD0037EFC9 /* PostListView.swift in Sources */,
 				F04A335024F91C90004A86D9 /* PostModel.swift in Sources */,
 				F09C69B92516450600EC961C /* UserAuthenticationViewModel.swift in Sources */,

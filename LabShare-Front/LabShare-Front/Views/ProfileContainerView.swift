@@ -13,7 +13,7 @@ struct ProfileContainerView: View {
     //May want to think of alternative, does this need to be in a view?
     var body: some View {
         NavigationView {
-            ProfileView(userId: userAuthVM.userAuth.id)
+            ProfileView(userId: userAuthVM.userAuth.id, userAuthVM: self.userAuthVM)
         }
     }
 }

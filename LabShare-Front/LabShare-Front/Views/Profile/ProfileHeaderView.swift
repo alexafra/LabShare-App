@@ -9,13 +9,14 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var profileVM: ProfileViewModel
+    
     var body: some View {
         VStack(alignment: .leading) {
             CircleImage()
                 .padding(.leading, 30)
                 .padding(.trailing, 30)
-//            Text("Alex")
             HStack (alignment: .center) {
                 Text("\(self.profileVM.profile.owner.firstName) \(self.profileVM.profile.owner.lastName)")
                     .font(.largeTitle)
@@ -26,25 +27,6 @@ struct ProfileHeaderView: View {
                 }) {
                     Image(systemName: "line.horizontal.3").font(Font.largeTitle)
                 }
-                    
-//                Spacer()
-                
-//                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-//                    Image(systemName: "line.horizontal.3")
-//                })
-//                Image(systemName: "line.horizontal.3")
-//                    .contextMenu(ContextMenu(menuItems: {
-//                        Text("Menu Item 1")
-//                        Text("Menu Item 2")
-//                        Text("Menu Item 3")
-//                    })/*@END_MENU_TOKEN@*/)
-                    //.font(.system(size: 16, weight: .regular))
-//                contextMenu(menuItems: /*@START_MENU_TOKEN@*/{
-//                    Text("Menu Item 1")
-//                    Text("Menu Item 2")
-//                    Text("Menu Item 3")
-//                }/*@END_MENU_TOKEN@*/)
-////
             }
             
 
@@ -67,6 +49,6 @@ struct ProfileHeaderView: View {
 
 struct ProfileHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileHeaderView(profileVM: ProfileViewModel(userId: 10, profile: ProfileModel(id: 5, bio: "I like to dance and sing and be happy", dob: "2/4/1998", occupation: "Undergraduate", employer: "University of Western Australia", owner: UserModel(id: 10, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis"))))
+        ProfileHeaderView(profileVM: ProfileViewModel(userId: 1, userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true)))
     }
 }

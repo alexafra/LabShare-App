@@ -58,10 +58,10 @@ struct LoginView: View {
                 self.userAuthVM.userAuth.id = userAuthModel.id
                 self.userAuthVM.userAuth.token = userAuthModel.token
                 self.userAuthVM.userAuth.isLoggedIn = true
-                PostWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
-                PostWebservice().setToken(token: self.userAuthVM.userAuth.token)
-                UserWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
-                UserWebservice().setToken(token: self.userAuthVM.userAuth.token)
+                PostWebService.setLoggedInUserId(id: self.userAuthVM.userAuth.id)
+                PostWebService.setToken(token: self.userAuthVM.userAuth.token)
+                ProfileWebService.setLoggedInUserId(id: self.userAuthVM.userAuth.id)
+                ProfileWebService.setToken(token: self.userAuthVM.userAuth.token)
             }
         }
         
