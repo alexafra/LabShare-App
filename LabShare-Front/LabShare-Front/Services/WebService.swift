@@ -73,6 +73,7 @@ class WebService {
                 completionFailure()
                 return
             }
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = modelData
         }
         
@@ -137,3 +138,4 @@ class WebService {
 enum ApiMethod {
     case GET, PUT, POST, DELETE, GETALL
 }
+

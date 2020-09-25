@@ -42,6 +42,7 @@ class ProfileViewModel: ObservableObject {
         })
     }
     
+    //Are you sure about profile .... no edited values?
     func updateProfile() {
         let profileWebService = ProfileWebService(userAuth: self.userAuthVM.userAuth)
             
