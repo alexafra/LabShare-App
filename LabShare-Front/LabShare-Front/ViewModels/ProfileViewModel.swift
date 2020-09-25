@@ -32,18 +32,39 @@ class ProfileViewModel: ObservableObject {
 
     func getProfile() {
         let profileWebService = ProfileWebService(userAuth: self.userAuthVM.userAuth)
-        profileWebService.getProfile(userId: self.userId, completionFailure: {() -> Void in  return }, completionSuccessful: { (profile: ProfileModel?) -> Void in
-                if let profile = profile {
+        profileWebService.getProfile(userId: self.userId, completionFailure: {() -> Void in
+            return
+            
+        }, completionSuccessful: { (profile: ProfileModel?) -> Void in
+            if let profile = profile {
                 self.profile = ProfileModel(profile: profile)
             }
         })
     }
     
     func updateProfile() {
-        ProfileWebService(userAuth: self.userAuthVM.userAuth).updateProfile(profileModel: self.profile) { successfulCompletion in
+        let profileWebService = ProfileWebService(userAuth: self.userAuthVM.userAuth)
+            
+        profileWebService.updateProfile(profileModel: self.profile, completionFailure: {() -> Void in
             self.hasCompletedLoading = true
-            self.loadingSuccessful = successfulCompletion
-        }
+            self.loadingSuccessful = false
+            return
+            
+        }, completionSuccessful: { (profile: ProfileModel?) -> Void in
+            self.hasCompletedLoading = true
+            self.loadingSuccessful = true
+            if let profile = profile {
+                self.profile = profile
+            }
+        })
     }
 }
+
+//let userPostWebService = UserPostsWebService(userAuth: self.userAuthVM.userAuth)
+//
+//userPostWebService.getUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in  return }, completionSuccessful: { (post: PostModel?) -> Void in
+//    if let post = post {
+//        self.post = post
+//    }
+//})
 

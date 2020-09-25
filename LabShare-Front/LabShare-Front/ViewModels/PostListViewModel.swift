@@ -32,7 +32,7 @@ class PostListViewModel: ObservableObject {
     func getAllUserPosts() {
         let userPostWebService = UserPostsWebService(userAuth: self.userAuthVM.userAuth)
 
-        userPostWebService.getAllUserPosts(userId: userId, completionFailure: {() -> Void in  return }, completionSuccessful: { (posts: [PostModel]?) -> Void in
+        userPostWebService.getAllUserPosts(userId: userId, completionFailure: {() -> Void in return }, completionSuccessful: { (posts: [PostModel]?) -> Void in
             if let posts = posts {
                 self.posts = posts.map( self.modelToModelView )
             }
@@ -44,23 +44,16 @@ class PostListViewModel: ObservableObject {
     }
     
     
-    
-//    func getProfilePosts() {
-//        let profilePostWebService = ProfilePostsWebService(userAuth: self.userAuthVM.userAuth)
-//
-//        profilePostWebService.getUserPosts(userId: userId, completionFailure: {() -> Void in  return })  { posts in
-//            if let posts = posts {
-//                self.posts = posts.map( PostViewModel.init ) //Probs broken
-//            }
-//        }
-//    }
-    
     func getFeedPosts() {
-        PostWebService().getFeedPosts(userId: userId) { posts in
-            if let posts = posts {
-                self.posts = posts.map( self.modelToModelView ) //Probs broken
-            }
-        }
+        let userFeedWebService = UserFeedWebService(userAuth: self.userAuthVM.userAuth)
+        userFeedWebService.getAllFeedPosts(userId: userAuthVM.userAuth.id,
+           completionFailure: {() -> Void in
+                return
+           }, completionSuccessful: {(posts: [PostModel]?) -> Void in
+                if let posts = posts {
+                    self.posts = posts.map( self.modelToModelView ) //Probs broken
+                }
+       })
     }
     
     func createPost() {
@@ -69,15 +62,23 @@ class PostListViewModel: ObservableObject {
         if newPostContent.isEmpty || newPostTitle.isEmpty {
             return
         }
-        let newPost = PostEncodable(title: newPostTitle, content:newPostContent, author: 1)
-        PostWebService().createPost(post: newPost) { posts in
-            if let posts = posts {
-                self.posts = posts.map( self.modelToModelView ) //Probs broken
-            }
-        }
-        self.newPostTitle = ""
-        self.newPostContent = ""
         
+        let newPost = PostModel(title: newPostTitle, content:newPostContent)
+        
+        let userFeedWebService = UserFeedWebService(userAuth: self.userAuthVM.userAuth)
+        userFeedWebService.createFeedPost(userId: userAuthVM.userAuth.id, postModel: newPost,
+           completionFailure: {() -> Void in
+                self.newPostTitle = ""
+                self.newPostContent = ""
+                return
+           }, completionSuccessful: {(posts: PostModel?) -> Void in
+                if let posts = posts {
+                    self.posts = posts.map( self.modelToModelView ) //Probs broken
+                }
+                self.newPostTitle = ""
+                self.newPostContent = ""
+           }
+       )
     }
 }
 

@@ -32,9 +32,9 @@ class ProfileWebService: WebService {
         super.get(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
     }
     
-    func updateProfile(userId: Int, profileModel: ProfileModel, completionFailure: @escaping () -> (), completionSuccessful: @escaping (ProfileModel?) -> ()) {
+    func updateProfile(profileModel: ProfileModel, completionFailure: @escaping () -> (), completionSuccessful: @escaping (ProfileModel?) -> ()) {
         
-        let urlString = generateURLString(userId: userId)
+        let urlString = generateURLString(userId: profileModel.owner.id)
         
         super.update(urlString: urlString, model: profileModel, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
         

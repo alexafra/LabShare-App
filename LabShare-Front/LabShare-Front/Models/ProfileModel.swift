@@ -34,17 +34,19 @@ struct ProfileModel: Codable, Identifiable, Hashable {
         self.employer = employer
         self.owner = owner
     }
+    
     init() {
         self.init(id: -1, bio: "", dob: "", occupation: "", employer: "", owner: UserModel())
     }
-    init(profile: ProfileModel) {
-        self.id = profile.id
-        self.bio = profile.bio
-        self.dob = profile.dob
-        self.occupation = profile.occupation
-        self.employer = profile.employer
-        self.owner = profile.owner
-    }
+    
+//    init(profile: ProfileModel) {
+//        self.id = profile.id
+//        self.bio = profile.bio
+//        self.dob = profile.dob
+//        self.occupation = profile.occupation
+//        self.employer = profile.employer
+//        self.owner = profile.owner
+//    }
 }
 
 
