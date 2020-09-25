@@ -13,9 +13,13 @@ import Combine
 class ProfileViewModel: ObservableObject {
     @Published var userId: Int
     @Published var profile = ProfileModel()
+    @Published var hasCompletedLoading: Bool = false
+    @Published var loadingSuccessful: Bool = false
     
     init(userId: Int) {
-       self.userId = userId
+        self.userId = userId
+        self.hasCompletedLoading = false
+        self.loadingSuccessful = false
     }
     
     init(userId: Int, profile: ProfileModel) {
@@ -24,10 +28,17 @@ class ProfileViewModel: ObservableObject {
     }
 
     func getProfile() {
-        UserWebservice().getProfile(userId: self.userId) { profile in
+        ProfileWebService().getProfile(userId: self.userId) { profile in
             if let profile = profile {
                 self.profile = ProfileModel(profile: profile)
             }
+        }
+    }
+    
+    func updateProfile() {
+        ProfileWebService().updateProfile(profileModel: self.profile) { successfulCompletion in
+            self.hasCompletedLoading = true
+            self.loadingSuccessful = successfulCompletion
         }
     }
 }

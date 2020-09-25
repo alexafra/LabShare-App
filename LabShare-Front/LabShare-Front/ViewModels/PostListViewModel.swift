@@ -23,7 +23,7 @@ class PostListViewModel: ObservableObject {
         self.userId = userId
     }
     func getProfilePosts() {
-        PostWebservice().getProfilePosts(userId: userId) { posts in
+        PostWebService().getProfilePosts(userId: userId) { posts in
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init ) //Probs broken
             }
@@ -31,7 +31,7 @@ class PostListViewModel: ObservableObject {
     }
     
     func getFeedPosts() {
-        PostWebservice().getFeedPosts(userId: userId) { posts in
+        PostWebService().getFeedPosts(userId: userId) { posts in
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init ) //Probs broken
             }
@@ -45,7 +45,7 @@ class PostListViewModel: ObservableObject {
             return
         }
         let newPost = PostEncodable(title: newPostTitle, content:newPostContent, author: 1)
-        PostWebservice().createPost(post: newPost) { posts in
+        PostWebService().createPost(post: newPost) { posts in
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init ) //Probs broken
             }

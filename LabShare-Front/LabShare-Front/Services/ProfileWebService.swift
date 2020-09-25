@@ -7,14 +7,14 @@
 //
 
 import Foundation
-class UserWebservice {
+class ProfileWebService {
     private static var loggedInUserId: Int = -1
     private static var token: String = ""
     
-    func setLoggedInUserId(id: Int) {
+    class func setLoggedInUserId(id: Int) {
         Self.loggedInUserId = id
     }
-    func setToken(token: String) {
+    class func setToken(token: String) {
         Self.token = token
     }
     
@@ -44,6 +44,36 @@ class UserWebservice {
             }
         }.resume()
     }
+    
+    func updateProfile(profileModel: ProfileModel, completion: @escaping (Bool) -> ()) {
+        guard let url = URL(string: "http://127.0.0.1:8000/users/\(String(profileModel.owner.id))/profile") else {
+            print("Invalid URL")
+            return
+        }
+        guard let profileData = try? JSONEncoder().encode(profileModel) else {
+            print("Error Encoding")
+            return
+        }
+        var request  = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.setValue("Token \(Self.token)", forHTTPHeaderField: "Authorization")
+        request.httpBody = profileData
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if  data == nil, error != nil {
+                print("Failed to fetch data \(error.debugDescription)")
+                completion(false)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                //Update our UI
+                completion(true)
+                return
+            }
+        }.resume()
+    }
+
 
 }
 

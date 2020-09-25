@@ -17,7 +17,7 @@ struct RegisterView: View {
     var body: some View {
         VStack {
             if self.userAuthVM.userAuth.isLoggedIn {
-                ContainerView()
+                ProfileEditView(profileVM: ProfileViewModel(userId: self.userAuthVM.userAuth.id))
             } else {
                 VStack (alignment: .center) {
                     Text("Register to Lab Share")
@@ -74,8 +74,6 @@ struct RegisterView: View {
                             Text("a").modifier(HiddenTextError())
                         }
                     }
-                    
-//                    NavigationLink(destination: LoginView(), isActive: self.$registerVM.hasRegistered) {
                     Button(action: {
                         self.registerVM.register(completion: self.loginEnvironmentObject)
                     }) {
@@ -83,7 +81,6 @@ struct RegisterView: View {
                             .foregroundColor(Color.white)
                             .font(Font.title.weight(.bold))
                     }.modifier(AuthButton())
-//                    }
                 }.padding()
                 Spacer()
             }
@@ -97,10 +94,10 @@ struct RegisterView: View {
                 self.userAuthVM.userAuth.id = userAuthModel.id
                 self.userAuthVM.userAuth.token = userAuthModel.token
                 self.userAuthVM.userAuth.isLoggedIn = true
-                PostWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
-                PostWebservice().setToken(token: self.userAuthVM.userAuth.token)
-                UserWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
-                UserWebservice().setToken(token: self.userAuthVM.userAuth.token)
+                PostWebService.setLoggedInUserId(id: self.userAuthVM.userAuth.id)
+                PostWebService.setToken(token: self.userAuthVM.userAuth.token)
+                ProfileWebService.setLoggedInUserId(id: self.userAuthVM.userAuth.id)
+                ProfileWebService.setToken(token: self.userAuthVM.userAuth.token)
             }
         }
         
@@ -109,7 +106,10 @@ struct RegisterView: View {
 }
 
 struct RegisterView_Previews: PreviewProvider {
+    
+    
     static var previews: some View {
+        
         RegisterView().environmentObject(
             UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true))
     }

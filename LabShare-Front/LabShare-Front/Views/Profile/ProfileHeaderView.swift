@@ -15,7 +15,6 @@ struct ProfileHeaderView: View {
             CircleImage()
                 .padding(.leading, 30)
                 .padding(.trailing, 30)
-//            Text("Alex")
             HStack (alignment: .center) {
                 Text("\(self.profileVM.profile.owner.firstName) \(self.profileVM.profile.owner.lastName)")
                     .font(.largeTitle)
@@ -26,25 +25,6 @@ struct ProfileHeaderView: View {
                 }) {
                     Image(systemName: "line.horizontal.3").font(Font.largeTitle)
                 }
-                    
-//                Spacer()
-                
-//                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-//                    Image(systemName: "line.horizontal.3")
-//                })
-//                Image(systemName: "line.horizontal.3")
-//                    .contextMenu(ContextMenu(menuItems: {
-//                        Text("Menu Item 1")
-//                        Text("Menu Item 2")
-//                        Text("Menu Item 3")
-//                    })/*@END_MENU_TOKEN@*/)
-                    //.font(.system(size: 16, weight: .regular))
-//                contextMenu(menuItems: /*@START_MENU_TOKEN@*/{
-//                    Text("Menu Item 1")
-//                    Text("Menu Item 2")
-//                    Text("Menu Item 3")
-//                }/*@END_MENU_TOKEN@*/)
-////
             }
             
 
