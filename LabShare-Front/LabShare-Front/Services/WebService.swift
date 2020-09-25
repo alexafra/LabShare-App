@@ -24,26 +24,26 @@ class WebService {
     
     func get<T:Codable>(urlString: String, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
         
-        apiMethodHelper(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure, apiMethod: ApiMethod.GET)
+        apiMethodHelper(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.GET)
     }
     
-    func post<T:Codable>(urlString: String, completionSuccessful: @escaping (T?) -> (), completionFailure: @escaping()->()) {
+    func post<T:Codable>(urlString: String, model: T, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
         
-        apiMethodHelper(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure, apiMethod: ApiMethod.POST)
+        apiMethodHelper(urlString: urlString, model: model, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.POST)
     }
     
     func update<T:Codable> (urlString: String, model: T, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
         
-        apiMethodHelper(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure, apiMethod: ApiMethod.PUT)
+        apiMethodHelper(urlString: urlString, model: model, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.PUT)
         
     }
 
     func delete<T:Codable> (urlString: String, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
 
-        apiMethodHelper(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure, apiMethod: ApiMethod.DELETE)
+        apiMethodHelper(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.DELETE)
     }
     
-    private func apiMethodHelper<T:Codable> (urlString: String, completionSuccessful: @escaping (T?) -> (), completionFailure: @escaping()->(), apiMethod: ApiMethod) {
+    private func apiMethodHelper<T:Codable> (urlString: String, model: T? = nil, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> (), apiMethod: ApiMethod) {
         guard let url = URL(string: urlString) else {
             completionFailure()
             print("Invalid URL")
@@ -59,6 +59,17 @@ class WebService {
             request.httpMethod = "PUT"
         } else if apiMethod == ApiMethod.DELETE {
             request.httpMethod = "DELETE"
+        }
+        
+        //Should only be for POST and PUT
+        
+        if let model = model, apiMethod == ApiMethod.POST || apiMethod == ApiMethod.PUT {
+            guard let modelData = try? JSONEncoder().encode(model) else {
+                print("Error Encoding")
+                completionFailure()
+                return
+            }
+            request.httpBody = modelData
         }
         
         request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
@@ -117,9 +128,6 @@ class WebService {
             }
         }.resume()
     }
-    
-    
-    
 }
 
 enum ApiMethod {
