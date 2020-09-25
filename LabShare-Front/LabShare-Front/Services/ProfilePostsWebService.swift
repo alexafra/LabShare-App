@@ -10,29 +10,24 @@
 
 import Foundation
 
-class ProfilePostsWebService2: WebService {
-    var url: String {
-        "http://127.0.0.1:8000/users/\(super.userId)/posts"
-    }
+class ProfilePostsWebService: WebService {
     
-    init(userAuth: UserAuthenticationModel, url: String) {
-        super.init(userAuthModel: userAuth, url: url)
+    init(userAuth: UserAuthenticationModel) {
+        super.init(userAuthModel: userAuth)
     }
 //    init (userAuthModel: UserAuthenticationModel) {
 //        self.loggedInUserId = userAuthModel.id
 //        self.token = userAuthModel.token
 //    }
+    func generateURLString(userId: Int) -> String {
+        return "http://127.0.0.1:8000/users/\(userId)/posts"
+    }
     
-    func getUserPosts(userId: Int, completionSuccessful: @escaping ([PostModel]?) -> (), completionFailure: @escaping () -> ()) {
-        /*
-         1. Create URL we want to read
-         2. Wrap URLRequest which allows us to configuew how the url should be accessed
-         3. Create and start a networking task from that url request
-         4. Handle the result of that networking tak
-         */
+    func getUserPosts(userId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
         
-        super.getAll(userId: userId, completionSuccessful: completionSuccessful, completionFailure: completionFailure)
+        let urlString = generateURLString(userId: userId)
         
+        super.getAll(urlString: urlString, completionSuccessful: completionSuccessful, completionFailure: completionFailure)
     }
     
 //    func getFeedPosts(userId: Int, completion: @escaping ([PostModel]?) -> ()) {

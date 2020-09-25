@@ -14,7 +14,7 @@ struct ProfileEditView: View {
     var body: some View {
         VStack {
             if (profileVM.hasCompletedLoading) {
-                ProfileView(userId: userAuthVM.userAuth.id)
+                ProfileView(userId: userAuthVM.userAuth.id, userAuthVM: userAuthVM)
             } else {
                 VStack(alignment: .center, spacing: 40) {
                     Text("\(profileVM.profile.owner.firstName) \(profileVM.profile.owner.lastName)")
@@ -56,6 +56,6 @@ struct ProfileEditView: View {
 
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEditView(profileVM: ProfileViewModel(userId: 10, profile: ProfileModel(id: 5, bio: "I like to dance and sing and be happy", dob: "2/4/1998", occupation: "Undergraduate", employer: "University of Western Australia", owner: UserModel(id: 10, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis")))).environmentObject(UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true))
+        ProfileEditView(profileVM: ProfileViewModel(userId: 10, userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true)))
     }
 }

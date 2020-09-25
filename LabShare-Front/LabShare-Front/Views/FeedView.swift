@@ -11,9 +11,9 @@ import SwiftUI
 struct FeedView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var postListVM: PostListViewModel
-    //May want to think of alternative, does this need to be in a view?
-    init(userId: Int) {
-        self.postListVM = PostListViewModel(userId: userId)
+
+    init (userAuthVM: UserAuthenticationViewModel) {
+        postListVM = PostListViewModel(userAuthVM: userAuthVM)
     }
     
     var body: some View {
@@ -26,11 +26,8 @@ struct FeedView: View {
             .navigationBarTitle(Text(""), displayMode: .inline)
         }.onAppear(perform: self.postListVM.getFeedPosts)
         
-        
-        
     }
 }
-
 
 struct FeedView_Previews: PreviewProvider {
 //    static func supplyAuth (){
@@ -43,7 +40,7 @@ struct FeedView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        FeedView(userId: 10)
+        FeedView(userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))
             .environmentObject(UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))
 //            .onAppear(perform: supplyAuth)
         

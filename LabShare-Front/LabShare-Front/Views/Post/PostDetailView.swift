@@ -10,11 +10,12 @@ import SwiftUI
 
 struct PostDetailView: View {
     @ObservedObject var postVM: PostViewModel
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ViewBuilder
     var body: some View {
         VStack (alignment:.leading) {
 
-            NavigationLink (destination: ProfileView(userId: postVM.post.author.id)){
+            NavigationLink (destination: ProfileView(userId: postVM.post.author.id, userAuthVM: self.userAuthVM)){
                 PostHeaderView(postVM: self.postVM)
             }.buttonStyle(PlainButtonStyle())
             HStack {
@@ -56,7 +57,7 @@ struct PostDetailView: View {
                     .font(.caption).foregroundColor(Color.black)
                 Text("Email: \(self.postVM.post.author.email)")
                     .font(.caption).foregroundColor(Color.black)
-                NavigationLink(destination: ProfileView(userId: self.postVM.post.author.id)) {Text("See more")
+                NavigationLink(destination: ProfileView(userId: self.postVM.post.author.id, userAuthVM: self.userAuthVM)) {Text("See more")
                     .font(.footnote)
                 }
             }.padding(.all, 7)

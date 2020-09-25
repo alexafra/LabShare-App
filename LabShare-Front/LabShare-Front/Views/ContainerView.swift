@@ -13,7 +13,7 @@ struct ContainerView: View {
     //May want to think of alternative, does this need to be in a view?
     var body: some View {
         TabView {
-            FeedView(userId: userAuthVM.userAuth.id)
+            FeedView(userAuthVM: self.userAuthVM)
                 .tabItem {
                     Image(systemName: "house")
                 }

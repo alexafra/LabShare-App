@@ -11,6 +11,7 @@ import SwiftUI
 
 struct SearchBarView: View {
     
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @State var searchResult = ""
     @State var show = false
     @State var searchID = -1
@@ -24,7 +25,7 @@ struct SearchBarView: View {
                 }
                 
                 VStack {
-                    NavigationLink(destination: ProfileView(userId: searchID), isActive: $show) {
+                    NavigationLink(destination: ProfileView(userId: searchID, userAuthVM: self.userAuthVM), isActive: $show) {
                         Image(systemName: "")
                     }
                     

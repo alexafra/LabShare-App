@@ -22,6 +22,8 @@ class PostWebService {
         Self.token = token
     }
     
+    
+    
 //    init (userAuthModel: UserAuthenticationModel) {
 //        self.loggedInUserId = userAuthModel.id
 //        self.token = userAuthModel.token

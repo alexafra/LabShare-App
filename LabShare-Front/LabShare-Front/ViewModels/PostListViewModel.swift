@@ -18,19 +18,36 @@ class PostListViewModel: ObservableObject {
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
     @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
-    var userAuth: UserAuthenticationViewModel
+    var userAuthVM: UserAuthenticationViewModel
     
-    init (userId: Int, userAuth: UserAuthenticationViewModel) {
+    init (userAuthVM: UserAuthenticationViewModel) {
+        self.userId = userAuthVM.userAuth.id
+        self.userAuthVM = userAuthVM
+    }
+    
+    init (userId: Int, userAuthVM: UserAuthenticationViewModel) {
         self.userId = userId
-        self.userAuth = userAuth
+        self.userAuthVM = userAuthVM
     }
     func getProfilePosts() {
-        PostWebService().getProfilePosts(userId: userId) { posts in
+        let profilePostWebService = ProfilePostsWebService(userAuth: self.userAuthVM.userAuth)
+
+        profilePostWebService.getUserPosts(userId: userId, completionFailure: {() -> Void in  return }, completionSuccessful: { (posts: [PostModel]?) -> Void in
             if let posts = posts {
                 self.posts = posts.map( PostViewModel.init ) //Probs broken
             }
-        }
+        })
     }
+    
+//    func getProfilePosts() {
+//        let profilePostWebService = ProfilePostsWebService(userAuth: self.userAuthVM.userAuth)
+//
+//        profilePostWebService.getUserPosts(userId: userId, completionFailure: {() -> Void in  return })  { posts in
+//            if let posts = posts {
+//                self.posts = posts.map( PostViewModel.init ) //Probs broken
+//            }
+//        }
+//    }
     
     func getFeedPosts() {
         PostWebService().getFeedPosts(userId: userId) { posts in

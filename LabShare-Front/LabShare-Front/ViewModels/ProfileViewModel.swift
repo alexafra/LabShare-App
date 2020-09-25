@@ -15,31 +15,32 @@ class ProfileViewModel: ObservableObject {
     @Published var profile = ProfileModel()
     @Published var hasCompletedLoading: Bool = false
     @Published var loadingSuccessful: Bool = false
-    var userAuth: UserAuthenticationViewModel
+    var userAuthVM: UserAuthenticationViewModel
     
-    init(userId: Int, userAuth: UserAuthenticationViewModel) {
+    init(userId: Int, userAuthVM: UserAuthenticationViewModel) {
         self.userId = userId
         self.hasCompletedLoading = false
         self.loadingSuccessful = false
-        self.userAuth = userAuth
+        self.userAuthVM = userAuthVM
     }
     
-    init(userId: Int, profile: ProfileModel, userAuth: UserAuthenticationViewModel ) {
+    init(userId: Int, profile: ProfileModel, userAuthVM: UserAuthenticationViewModel ) {
         self.userId = userId
         self.profile = profile
-        self.userAuth = userAuth
+        self.userAuthVM = userAuthVM
     }
 
     func getProfile() {
-        ProfileWebService().getProfile(userId: self.userId) { profile in
-            if let profile = profile {
+        let profileWebService = ProfileWebService(userAuth: self.userAuthVM.userAuth)
+        profileWebService.getProfile(userId: self.userId, completionFailure: {() -> Void in  return }, completionSuccessful: { (profile: ProfileModel?) -> Void in
+                if let profile = profile {
                 self.profile = ProfileModel(profile: profile)
             }
-        }
+        })
     }
     
     func updateProfile() {
-        ProfileWebService().updateProfile(profileModel: self.profile) { successfulCompletion in
+        ProfileWebService(userAuth: self.userAuthVM.userAuth).updateProfile(profileModel: self.profile) { successfulCompletion in
             self.hasCompletedLoading = true
             self.loadingSuccessful = successfulCompletion
         }

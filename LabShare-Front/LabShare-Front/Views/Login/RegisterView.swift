@@ -17,7 +17,7 @@ struct RegisterView: View {
     var body: some View {
         VStack {
             if self.userAuthVM.userAuth.isLoggedIn {
-                ProfileEditView(profileVM: ProfileViewModel(userId: self.userAuthVM.userAuth.id))
+                ProfileEditView(profileVM: ProfileViewModel(userId: self.userAuthVM.userAuth.id, userAuthVM: self.userAuthVM))
             } else {
                 VStack (alignment: .center) {
                     Text("Register to Lab Share")
