@@ -10,6 +10,11 @@ import Foundation
 import SwiftUI
 import Combine
 
+class PushRegisterViewModel: ObservableObject {
+    @Published var loginFailed: Bool = false
+    @Published var loginSuccessful: Bool = false
+}
+
 class RegisterViewModel: ObservableObject {
     @Published var userRegisterModel: UserRegisterModel
     @Published var repeatPassword: String
@@ -19,12 +24,11 @@ class RegisterViewModel: ObservableObject {
     
     @Published var passwordError: String
     @Published var emailError: String
-    @Published var loginFailed: Bool
-    @Published var loginSuccessful: Bool
     
+    var pushRegisterVM: PushRegisterViewModel
     var userAuthVM: UserAuthenticationViewModel
     
-    init (userAuthVM: UserAuthenticationViewModel) {
+    init (userAuthVM: UserAuthenticationViewModel, pushRegisterVM: PushRegisterViewModel) {
         self.userRegisterModel = UserRegisterModel(email: "", password: "", firstName: "", lastName: "")
         self.repeatPassword = ""
         self.attemptingRegistrationAndLogin = false
@@ -32,8 +36,7 @@ class RegisterViewModel: ObservableObject {
         self.passwordError = ""
         self.emailError = ""
         self.userAuthVM = userAuthVM
-        self.loginFailed = false
-        self.loginSuccessful = false
+        self.pushRegisterVM = pushRegisterVM
     }
     
     func register() {
@@ -64,17 +67,16 @@ class RegisterViewModel: ObservableObject {
                         LoginRegisterWebService().login(user: userLoginModel,
                             completionFailure: { () -> Void in
                                 self.attemptingRegistrationAndLogin = false
-                                self.loginFailed = true
+                                self.loginFailed = 2
                             },
                             completionSuccessful: { (userAuthModel: UserAuthenticationModel?) in
                                 self.attemptingRegistrationAndLogin = false
                                 if let userSettings = userAuthModel {
-                                    self.loginFailed = false
-                                    self.loginSuccessful = true
+                                    self.loginFailed = 0
+                                    self.loginSuccessful = 1
                                     self.userAuthVM.userAuth = userSettings
-                                    self.userAuthVM.userAuth.isLoggedIn = true
                                 } else {
-                                    self.loginFailed = true
+                                    self.loginFailed = 2
                                 }
                             }
                         )
@@ -86,13 +88,13 @@ class RegisterViewModel: ObservableObject {
         }
     }
     
-    func register2(completion: @escaping (UserAuthenticationModel?) -> ()) {
-        if (!userRegisterModel.password.isEmpty && userRegisterModel.password == repeatPassword && !userRegisterModel.email.isEmpty && !userRegisterModel.firstName.isEmpty && !userRegisterModel.lastName.isEmpty) {
-            
-            attemptingRegistrationAndLogin = true
-            LoginWebService().register(user: userRegisterModel, registerVM: self, completion: completion)
-        }
-    }
+//    func register2(completion: @escaping (UserAuthenticationModel?) -> ()) {
+//        if (!userRegisterModel.password.isEmpty && userRegisterModel.password == repeatPassword && !userRegisterModel.email.isEmpty && !userRegisterModel.firstName.isEmpty && !userRegisterModel.lastName.isEmpty) {
+//            
+//            attemptingRegistrationAndLogin = true
+//            LoginWebService().register(user: userRegisterModel, registerVM: self, completion: completion)
+//        }
+//    }
 //    var equalPasswords : Bool {
 //        return self.repeatPassword == self.userRegisterModel.password
 //    }

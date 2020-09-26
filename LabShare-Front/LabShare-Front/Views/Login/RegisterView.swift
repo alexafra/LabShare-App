@@ -12,16 +12,17 @@ import SwiftUI
 struct RegisterView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var registerVM: RegisterViewModel
+    @EnvironmentObject var pushRegisterVM: PushRegisterViewModel
     
     init(userAuthVM: UserAuthenticationViewModel) {
-        self.registerVM = RegisterViewModel(userAuthVM: userAuthVM)
+        self.registerVM = RegisterViewModel(userAuthVM: userAuthVM, pushRegisterVM: PushRegisterViewModel())
     }
 
     var body: some View {
         VStack {
-            if self.registerVM.loginFailed {
+            if self.pushRegisterVM.loginFailed {
                 LoginView(userAuthVM: self.userAuthVM)
-            } else if self.registerVM.loginSuccessful {
+            } else if self.pushRegisterVM.loginSuccessful {
                 ProfileEditView(profileVM: ProfileViewModel(userId: self.userAuthVM.userAuth.id, userAuthVM: self.userAuthVM))
             } else {
                 VStack (alignment: .center) {
