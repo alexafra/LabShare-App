@@ -24,26 +24,101 @@ class WebService {
     
     func get<T:Codable>(urlString: String, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
         
-        apiMethodHelper(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.GET)
+        generalApiMethodHelper(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.GET)
     }
     
     func post<T:Codable>(urlString: String, model: T, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
+        
+        generalApiMethodHelper(urlString: urlString, model: model, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.POST)
+    }
+    
+    func postReturnDifferentModel<T:Codable, V:Codable>(urlString: String, modelEncode: T, modelDecode: V, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
         
         apiMethodHelper(urlString: urlString, model: model, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.POST)
     }
     
     func update<T:Codable> (urlString: String, model: T, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
         
-        apiMethodHelper(urlString: urlString, model: model, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.PUT)
+        generalApiMethodHelper(urlString: urlString, model: model, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.PUT)
         
     }
 
     func delete<T:Codable> (urlString: String, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {
 
-        apiMethodHelper(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.DELETE)
+        generalApiMethodHelper(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful, apiMethod: ApiMethod.DELETE)
     }
     
-    private func apiMethodHelper<T:Codable> (urlString: String, model: T? = nil, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> (), apiMethod: ApiMethod) {
+    private func loginRegisterHelper<T:Codable, V:Codable> (urlString: String, modelEncode: T, modelDecode: V, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> (), apiMethod: ApiMethod) {
+        
+        guard let url = URL(string: urlString) else {
+            completionFailure()
+            print("Invalid URL")
+            return
+        }
+        var request  = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
+    
+        
+        guard let requestData = try? JSONEncoder().encode(modelEncode) else {
+            print("Error Encoding")
+            completionFailure()
+            return
+        }
+        request.httpBody = requestData
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            //Check for error
+            guard let responseData = data, let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode), error == nil else {
+                DispatchQueue.main.async{
+                    completionFailure()
+                    print("Error took place \(error.debugDescription)")
+                    return
+                }
+                return
+            }
+            
+            let responseModel = try? JSONDecoder().decode(V.self, from: responseData)
+            do {
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(RegistrationResponse.self, from: data)
+                switch response {
+                    case .success(let userModel):
+                        DispatchQueue.main.async {
+                            registerVM.attemptingRegistration = false
+                            registerVM.registrationFailed = false
+                            let userLoginModel = UserLoginModel(email: userModel.email, password: registerVM.repeatPassword)
+                            self.loginFromRegistration(user: userLoginModel, completion: completion)
+                            //Update our UI
+                            //Call Login
+                            
+                            return
+                        }
+                    case .failure(let registrationError):
+                        DispatchQueue.main.async {
+                            //Update our UI
+                            if let emailError = registrationError.email {
+                                registerVM.emailError = emailError[0]
+                            }
+                            if let passwordError = registrationError.password {
+                                registerVM.passwordError = passwordError[0]
+                            }
+                            registerVM.attemptingRegistration = false
+                            registerVM.registrationFailed = true
+                            registerVM.repeatPassword = ""
+                            registerVM.userRegister.password = ""
+                            return
+                        }
+                }
+            } catch {
+                print("Error took place \(error)")
+            }
+        }.resume()
+        
+    }
+    
+    private func generalApiMethodHelper<T:Codable> (urlString: String, model: T? = nil, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> (), apiMethod: ApiMethod) {
         guard let url = URL(string: urlString) else {
             completionFailure()
             print("Invalid URL")

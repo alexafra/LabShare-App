@@ -18,7 +18,7 @@ struct PostListView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-//            if userAuthVM.userAuth.id == postListVM.userId {
+            if userAuthVM.userAuth.id == postListVM.userId {
                 Text("Create new post").font(Font.headline)
                 Divider()
                 HStack {
@@ -33,11 +33,12 @@ struct PostListView: View {
                     }){
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.green)
-                            .imageScale(.large)
+                            .font(Font.largeTitle.weight(.bold))
+                            
                     }
                 }
                 Divider()
-//            }
+            }
             
             Text("Posts:").font(Font.headline).padding(.top, 10)
                 
@@ -54,6 +55,6 @@ struct PostListView: View {
 
 struct PostListView_Previews: PreviewProvider {
     static var previews: some View {
-        PostListView(postListVM: PostListViewModel(userId: 1, userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true)))
+        PostListView(postListVM: PostListViewModel(userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))).environmentObject(UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))
     }
 }

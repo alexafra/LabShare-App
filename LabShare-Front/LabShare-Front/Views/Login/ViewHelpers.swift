@@ -15,10 +15,13 @@ struct TextFieldAuthorization: ViewModifier {
         content
             .padding()
             .autocapitalization(.none)
+            .frame(minWidth: 0, maxWidth: .infinity)
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.green, lineWidth: 1)
                     .shadow(radius:5))
+            
+            
 //            .padding()
             
     }
@@ -58,15 +61,32 @@ struct ViewHelpers_Previews: PreviewProvider {
 //    @State var value: String
     static var previews: some View {
         VStack {
-            /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
-            /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
+            VStack {
+                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
+                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
+            }.frame(minHeight: 0, maxHeight: .infinity)
+            
+            VStack {
+                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
+                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
+            }.frame(minHeight: 0, maxHeight: .infinity)
+            VStack {
+                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
+                Text("Hello, World!").modifier(TextError())
+            }.frame(minHeight: 0, maxHeight: .infinity)
+            VStack {
+                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
+                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
+            }.frame(minHeight: 0, maxHeight: .infinity)
             Button(action: {
             }) {
                 Text("Register")
                     .foregroundColor(Color.white)
                     .font(Font.title.weight(.bold))
             }.modifier(AuthButton())
-        }.padding(20)
+        }
+        .padding(20)
+        
         
     }
 }

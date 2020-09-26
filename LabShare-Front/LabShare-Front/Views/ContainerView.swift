@@ -17,8 +17,8 @@ struct ContainerView: View {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
 
         UINavigationBar.appearance().barTintColor = UIColor.white
-        UINavigationBar.appearance().tintColor = .green
-        UINavigationBar.appearance().isTranslucent = true
+//        UINavigationBar.appearance().tintColor = .green
+//        UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().shadowImage = UIImage()
         
 //        UITabBar.appearance().backgroundColor = UIColor.white

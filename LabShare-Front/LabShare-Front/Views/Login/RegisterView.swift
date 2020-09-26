@@ -25,8 +25,8 @@ struct RegisterView: View {
                 VStack (alignment: .center) {
                     Text("Register to Lab Share")
                         .font(Font.title.weight(.bold))
+                        .foregroundColor(.green)
                     VStack {
-                        
                         TextField("Enter email address", text: self.$registerVM.userRegister.email).modifier(TextFieldAuthorization())
                             .onTapGesture {
                                 self.registerVM.emailError = ""
@@ -41,22 +41,25 @@ struct RegisterView: View {
                         } else {
                             Text("a").modifier(HiddenTextError())
                         }
-                        
-                            
+                    }.frame(minHeight: 0, maxHeight: .infinity)
+                    VStack {
                         TextField("Enter first name", text: self.$registerVM.userRegister.firstName).modifier(TextFieldAuthorization())
                         if (self.registerVM.userRegister.firstName.isEmpty) {
                             Text("First name required").modifier(TextError())
                         } else {
                             Text("a").modifier(HiddenTextError())
                         }
-                            
+                    }.frame(minHeight: 0, maxHeight: .infinity)
+                    
+                    VStack {
                         TextField("Enter last name", text: self.$registerVM.userRegister.lastName).modifier(TextFieldAuthorization())
                         if (self.registerVM.userRegister.lastName.isEmpty) {
                             Text("Last name required").modifier(TextError())
                         } else {
                             Text("a").modifier(HiddenTextError())
                         }
-                            
+                    }.frame(minHeight: 0, maxHeight: .infinity)
+                    VStack {
                         SecureField("Enter password", text: self.$registerVM.userRegister.password).modifier(TextFieldAuthorization())
                             .onTapGesture {
                                 self.registerVM.passwordError = ""
@@ -70,14 +73,15 @@ struct RegisterView: View {
                         } else {
                             Text("a").modifier(HiddenTextError())
                         }
-                        
+                    }.frame(minHeight: 0, maxHeight: .infinity)
+                    VStack {
                         SecureField("Repeat password", text: self.$registerVM.repeatPassword).modifier(TextFieldAuthorization())
                         if (self.registerVM.userRegister.password != self.registerVM.repeatPassword) {
                             Text("Passwords do not match").modifier(TextError())
                         } else {
                             Text("a").modifier(HiddenTextError())
                         }
-                    }
+                    }.frame(minHeight: 0, maxHeight: .infinity)
                     Button(action: {
                         self.registerVM.register(completion: self.loginEnvironmentObject)
                     }) {
@@ -85,10 +89,10 @@ struct RegisterView: View {
                             .foregroundColor(Color.white)
                             .font(Font.title.weight(.bold))
                     }.modifier(AuthButton())
-                    Spacer()
                 }.padding()
                 
             }
+            Spacer()
         }
 //        .navigationBarHidden(true)
         //.navigationBarTitle(Text("Register").font(Font.largeTitle), displayMode: .inline)
@@ -109,14 +113,35 @@ struct RegisterView: View {
 }
 
 struct RegisterView_Previews: PreviewProvider {
-    
+    init() {
+            //Use this if NavigationBarTitle is with Large Font
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
+
+        //Use this if NavigationBarTitle is with displayMode = .inline
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
+
+        UINavigationBar.appearance().barTintColor = UIColor.white
+//        UINavigationBar.appearance().tintColor = .green
+//        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().shadowImage = UIImage()
+        
+//        UITabBar.appearance().backgroundColor = UIColor.white
+//        UITabBar.appearance().isTranslucent = false
+        UITabBar.appearance().barTintColor = UIColor.white
+        
+//        self.tabBar.tintColor = UIColor.whiteColor()
+
+    }
     
     static var previews: some View {
-        NavigationView {
+        
+        
+//        NavigationView {
             RegisterView().environmentObject(
-                UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true)).navigationBarTitle(Text(""), displayMode: .inline)
-//                .navigationBarHidden(true)
-        }
+                UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false)).navigationBarTitle(Text(""), displayMode: .inline)
+                .navigationBarHidden(true)
+//
+//        }
             
         
         

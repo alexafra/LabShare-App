@@ -10,11 +10,14 @@ import SwiftUI
 
 struct PostRowView: View {
     @ObservedObject var postVM: PostViewModel
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     
     var body: some View {
         VStack (alignment: .leading, spacing: 5) {
             Divider()
-            PostHeaderView(postVM: self.postVM)
+            NavigationLink (destination: ProfileView(userId: postVM.post.author.id, userAuthVM: self.userAuthVM)){
+                PostHeaderView(postVM: self.postVM)
+            }.buttonStyle(PlainButtonStyle())
             Text(self.postVM.post.title)
                 .font(.headline)
                 .fontWeight(.bold)

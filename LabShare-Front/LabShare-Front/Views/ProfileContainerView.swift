@@ -14,7 +14,7 @@ struct ProfileContainerView: View {
     var body: some View {
         NavigationView {
             ProfileView(userId: userAuthVM.userAuth.id, userAuthVM: self.userAuthVM)
-        }
+        }.accentColor(.green)
     }
 }
 

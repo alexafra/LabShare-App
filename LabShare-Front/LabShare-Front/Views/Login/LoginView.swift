@@ -19,6 +19,7 @@ struct LoginView: View {
             } else {
                 Text("Login to Lab Share")
                     .font(Font.largeTitle.weight(.bold))
+                    .foregroundColor(.green)
                 
                 TextField("Enter email address", text: self.$loginVM.userLogin.email).modifier(TextFieldAuthorization())
                 if (self.loginVM.userLogin.email.isEmpty) {

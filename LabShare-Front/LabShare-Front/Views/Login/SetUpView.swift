@@ -12,13 +12,13 @@ struct SetUpView: View {
     
     init() {
             //Use this if NavigationBarTitle is with Large Font
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
-
-        //Use this if NavigationBarTitle is with displayMode = .inline
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
+//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
+//
+//        //Use this if NavigationBarTitle is with displayMode = .inline
+//        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
 
         UINavigationBar.appearance().barTintColor = UIColor.white
-        UINavigationBar.appearance().tintColor = .green
+//        UINavigationBar.appearance().tintColor = .green
         UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().shadowImage = UIImage()
         
@@ -35,6 +35,7 @@ struct SetUpView: View {
             VStack {
                 Text("See what people are giving away")
                     .font(Font.largeTitle.weight(.bold))
+                    .foregroundColor(.green)
                 Spacer()
                 NavigationLink(destination: LoginView()) {
                     Text("Login")
@@ -51,7 +52,7 @@ struct SetUpView: View {
                 .navigationBarTitle("", displayMode: .inline)
                 Spacer()
             }
-        }
+        }.accentColor(.green)
     }
 }
 
