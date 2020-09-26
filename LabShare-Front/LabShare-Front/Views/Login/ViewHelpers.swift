@@ -13,13 +13,13 @@ struct TextFieldAuthorization: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .padding(20)
+            .padding()
             .autocapitalization(.none)
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.green, lineWidth: 1)
                     .shadow(radius:5))
-            .padding(.top, 10)
+//            .padding()
             
     }
 }
@@ -49,7 +49,7 @@ struct AuthButton: ViewModifier {
             .padding(.horizontal, 40)
             .background(Color.green)
             .cornerRadius(40)
-            .padding(.vertical, 10)
+//            .padding(.vertical, 10)
             
     }
 }

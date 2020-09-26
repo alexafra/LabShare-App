@@ -11,7 +11,6 @@ import SwiftUI
 struct LoginView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var loginVM = LoginViewModel()
-    
 
     var body: some View {
         VStack {
@@ -50,6 +49,7 @@ struct LoginView: View {
                 Spacer()
             }
         }.padding()
+//        .navigationBarTitle("Login", displayMode: .inline)
     }
     func loginEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
         
@@ -68,7 +68,10 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView().environmentObject(
-            UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true))
+        NavigationView {
+            LoginView().environmentObject(UserAuthenticationViewModel())
+                .navigationBarTitle("", displayMode: .inline)
+        }
+        
     }
 }

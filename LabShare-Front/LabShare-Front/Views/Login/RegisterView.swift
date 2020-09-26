@@ -13,6 +13,9 @@ struct RegisterView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var registerVM = RegisterViewModel()
     
+//    init(userAuthVM: UserAuthenticationViewModel) {
+//        self.userAuthVM = UserAuthenticationViewModel()
+//    }
 
     var body: some View {
         VStack {
@@ -21,8 +24,9 @@ struct RegisterView: View {
             } else {
                 VStack (alignment: .center) {
                     Text("Register to Lab Share")
-                        .font(Font.largeTitle.weight(.bold))
-                    VStack() {
+                        .font(Font.title.weight(.bold))
+                    VStack {
+                        
                         TextField("Enter email address", text: self.$registerVM.userRegister.email).modifier(TextFieldAuthorization())
                             .onTapGesture {
                                 self.registerVM.emailError = ""
@@ -81,10 +85,13 @@ struct RegisterView: View {
                             .foregroundColor(Color.white)
                             .font(Font.title.weight(.bold))
                     }.modifier(AuthButton())
+                    Spacer()
                 }.padding()
-                Spacer()
+                
             }
         }
+//        .navigationBarHidden(true)
+        //.navigationBarTitle(Text("Register").font(Font.largeTitle), displayMode: .inline)
     }
     
     func loginEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
@@ -105,10 +112,17 @@ struct RegisterView_Previews: PreviewProvider {
     
     
     static var previews: some View {
+        NavigationView {
+            RegisterView().environmentObject(
+                UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true)).navigationBarTitle(Text(""), displayMode: .inline)
+//                .navigationBarHidden(true)
+        }
+            
         
-        RegisterView().environmentObject(
-            UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true))
+        
     }
 }
 
 
+//Text("Register")
+//                                                                                                                                .font(Font.largeTitle.weight(.bold))

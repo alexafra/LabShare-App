@@ -9,6 +9,27 @@
 import SwiftUI
 
 struct SetUpView: View {
+    
+    init() {
+            //Use this if NavigationBarTitle is with Large Font
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
+
+        //Use this if NavigationBarTitle is with displayMode = .inline
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
+
+        UINavigationBar.appearance().barTintColor = UIColor.white
+        UINavigationBar.appearance().tintColor = .green
+        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().shadowImage = UIImage()
+        
+//        UITabBar.appearance().backgroundColor = UIColor.white
+//        UITabBar.appearance().isTranslucent = false
+        UITabBar.appearance().barTintColor = UIColor.white
+        
+//        self.tabBar.tintColor = UIColor.whiteColor()
+
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -27,6 +48,7 @@ struct SetUpView: View {
                         .font(Font.title.weight(.bold))
                         
                 }.modifier(AuthButton())
+                .navigationBarTitle("", displayMode: .inline)
                 Spacer()
             }
         }

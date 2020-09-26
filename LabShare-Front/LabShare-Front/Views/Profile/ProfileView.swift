@@ -22,13 +22,15 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-             ScrollView {
-                ProfileHeaderView(profileVM: self.profileVM)
-                PostListView(postListVM: self.postListVM)
-             }
-        }.onAppear(perform: self.postListVM.getAllUserPosts)
-            .navigationBarTitle(Text(""), displayMode: .inline)
-            .navigationBarItems(trailing: SearchBarView())
+            ScrollView {
+               ProfileHeaderView(profileVM: self.profileVM)
+               PostListView(postListVM: self.postListVM)
+            }
+            
+        }.navigationBarTitle(Text(""), displayMode: .inline)
+    //            .navigationBarHidden(true)
+                .onAppear(perform: self.postListVM.getAllUserPosts)
+            
     }
 }
 

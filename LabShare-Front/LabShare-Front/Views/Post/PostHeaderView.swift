@@ -13,7 +13,7 @@ struct PostHeaderView: View {
     
     var body: some View {
         HStack() {
-            Image(systemName: "square.fill")
+            Image(systemName: "person")
                 .resizable()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())

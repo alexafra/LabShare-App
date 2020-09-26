@@ -32,8 +32,9 @@ struct StartView: View {
 }
 
 struct StartView_Previews: PreviewProvider {
-//    var environment2 = UserAuthenticationViewModel()
+    
     static var previews: some View {
-        StartView().environmentObject(UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true))
+        StartView()
+            .environmentObject(UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))
     }
 }

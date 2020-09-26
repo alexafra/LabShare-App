@@ -41,7 +41,6 @@ struct ProfileHeaderView: View {
                 Text("Employer: \(self.profileVM.profile.employer)")
                 Text("Bio: \(self.profileVM.profile.bio)")
             }.padding(.leading, 5)
-            Spacer()
         }.padding()
         .onAppear(perform: self.profileVM.getProfile)
     }

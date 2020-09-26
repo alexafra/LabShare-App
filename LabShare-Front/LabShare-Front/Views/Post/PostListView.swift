@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PostListView: View {
     @ObservedObject var postListVM: PostListViewModel
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     
     init (postListVM: PostListViewModel) {
         self.postListVM = postListVM
@@ -17,25 +18,27 @@ struct PostListView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            
-            Text("Create new post").font(Font.headline)
-            Divider()
-            HStack {
-                VStack {
-                    TextField("Title: Enter up to 20 characters", text: self.$postListVM.newPostTitle).padding()
-                    Divider()
-                    TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent).padding()
-                        
-                }.padding(10)
-                Button(action: {
-                    self.postListVM.createPost()
-                }){
-                    Image(systemName: "plus.circle.fill")
-                        .foregroundColor(.green)
-                        .imageScale(.large)
+//            if userAuthVM.userAuth.id == postListVM.userId {
+                Text("Create new post").font(Font.headline)
+                Divider()
+                HStack {
+                    VStack {
+                        TextField("Title: Enter up to 20 characters", text: self.$postListVM.newPostTitle).padding()
+                        Divider()
+                        TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent).padding()
+                            
+                    }.padding(10)
+                    Button(action: {
+                        self.postListVM.createPost()
+                    }){
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.green)
+                            .imageScale(.large)
+                    }
                 }
-            }
-            Divider()
+                Divider()
+//            }
+            
             Text("Posts:").font(Font.headline).padding(.top, 10)
                 
             ForEach(self.postListVM.posts, id: \.post.id) {
