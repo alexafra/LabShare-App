@@ -38,6 +38,7 @@
 		F05A03A8251CD4D7001563AF /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05A03A7251CD4D7001563AF /* WebService.swift */; };
 		F05A03B6251DAE08001563AF /* UserPostsWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05A03B5251DAE08001563AF /* UserPostsWebService.swift */; };
 		F05A03E0251E466D001563AF /* UserFeedWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05A03DF251E466D001563AF /* UserFeedWebService.swift */; };
+		F05A0409251F6DCD001563AF /* LoginRegisterWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05A0408251F6DCC001563AF /* LoginRegisterWebService.swift */; };
 		F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */; };
 		F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */; };
 		F09C69A72516216700EC961C /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69A62516216700EC961C /* SetUpView.swift */; };
@@ -111,6 +112,7 @@
 		F05A03A7251CD4D7001563AF /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		F05A03B5251DAE08001563AF /* UserPostsWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsWebService.swift; sourceTree = "<group>"; };
 		F05A03DF251E466D001563AF /* UserFeedWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedWebService.swift; sourceTree = "<group>"; };
+		F05A0408251F6DCC001563AF /* LoginRegisterWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterWebService.swift; sourceTree = "<group>"; };
 		F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileWebService.swift; sourceTree = "<group>"; };
 		F09C69A62516216700EC961C /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				F05A03A7251CD4D7001563AF /* WebService.swift */,
 				F05A03B5251DAE08001563AF /* UserPostsWebService.swift */,
 				F05A03DF251E466D001563AF /* UserFeedWebService.swift */,
+				F05A0408251F6DCC001563AF /* LoginRegisterWebService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				F09C69B12516396200EC961C /* LoginViewModel.swift in Sources */,
 				1B4FC244251F010A006E4A3D /* CircleImage.swift in Sources */,
 				F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */,
+				F05A0409251F6DCD001563AF /* LoginRegisterWebService.swift in Sources */,
 				F0545E58251B341E0037EFC9 /* RegistrationModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

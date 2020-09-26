@@ -9,24 +9,15 @@
 import SwiftUI
 
 struct SetUpView: View {
-    
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     init() {
-            //Use this if NavigationBarTitle is with Large Font
-//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
-//
-//        //Use this if NavigationBarTitle is with displayMode = .inline
-//        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
 
         UINavigationBar.appearance().barTintColor = UIColor.white
-//        UINavigationBar.appearance().tintColor = .green
         UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().shadowImage = UIImage()
         
-//        UITabBar.appearance().backgroundColor = UIColor.white
-//        UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().barTintColor = UIColor.white
         
-//        self.tabBar.tintColor = UIColor.whiteColor()
 
     }
     
@@ -37,13 +28,13 @@ struct SetUpView: View {
                     .font(Font.largeTitle.weight(.bold))
                     .foregroundColor(.green)
                 Spacer()
-                NavigationLink(destination: LoginView()) {
+                NavigationLink(destination: LoginView(userAuthVM: self.userAuthVM)) {
                     Text("Login")
                         .foregroundColor(Color.white)
                         .font(Font.title.weight(.bold))
                 }.modifier(AuthButton())
                 Spacer()
-                NavigationLink(destination: RegisterView()) {
+                NavigationLink(destination: RegisterView(userAuthVM: self.userAuthVM)) {
                     Text("Create account")
                         .foregroundColor(Color.white)
                         .font(Font.title.weight(.bold))
@@ -61,3 +52,22 @@ struct SetUpView_Previews: PreviewProvider {
         SetUpView()
     }
 }
+
+
+
+////Use this if NavigationBarTitle is with Large Font
+////        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
+////
+////        //Use this if NavigationBarTitle is with displayMode = .inline
+////        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
+//
+//UINavigationBar.appearance().barTintColor = UIColor.white
+////        UINavigationBar.appearance().tintColor = .green
+//UINavigationBar.appearance().isTranslucent = true
+//UINavigationBar.appearance().shadowImage = UIImage()
+//
+////        UITabBar.appearance().backgroundColor = UIColor.white
+////        UITabBar.appearance().isTranslucent = false
+//UITabBar.appearance().barTintColor = UIColor.white
+//
+////        self.tabBar.tintColor = UIColor.whiteColor()

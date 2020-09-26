@@ -43,6 +43,19 @@ struct UserModel: Hashable, Codable, Identifiable {
 struct UserLoginModel: Codable {
     var email: String
     var password: String
+    
+    init (email: String, password: String) {
+        self.email = email
+        self.password = password
+    }
+    
+    init () {
+        self.init(email: "", password: "")
+    }
+    
+    init (userRegisterModel: UserRegisterModel) {
+        self.init (email: userRegisterModel.email, password: userRegisterModel.password)
+    }
 }
 
 

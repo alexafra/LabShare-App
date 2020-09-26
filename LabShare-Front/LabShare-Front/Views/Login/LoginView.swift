@@ -10,7 +10,11 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @ObservedObject var loginVM = LoginViewModel()
+    @ObservedObject var loginVM: LoginViewModel
+    
+    init (userAuthVM: UserAuthenticationViewModel) {
+        loginVM = LoginViewModel(userAuthVM: userAuthVM)
+    }
 
     var body: some View {
         VStack {
@@ -40,7 +44,7 @@ struct LoginView: View {
                 }
 
                 Button(action: {
-                    self.loginVM.login(completion: self.loginEnvironmentObject)
+                    self.loginVM.login()
                 }) {
                     Text("Login")
                         .foregroundColor(Color.white)
@@ -52,27 +56,30 @@ struct LoginView: View {
         }.padding()
 //        .navigationBarTitle("Login", displayMode: .inline)
     }
-    func loginEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
-        
-        if let userAuthModel = userAuthModel {
-            if userAuthModel.token.isEmpty == false {
-                self.userAuthVM.userAuth.id = userAuthModel.id
-                self.userAuthVM.userAuth.token = userAuthModel.token
-                self.userAuthVM.userAuth.isLoggedIn = true
-            }
-        }
-        
-        self.loginVM.attemptingLogin = false
-        self.loginVM.loginFailed = false
-    }
+
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LoginView().environmentObject(UserAuthenticationViewModel())
+            LoginView(userAuthVM: UserAuthenticationViewModel()).environmentObject(UserAuthenticationViewModel())
                 .navigationBarTitle("", displayMode: .inline)
         }
         
     }
 }
+
+
+//    func loginEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
+//
+//        if let userAuthModel = userAuthModel {
+//            if userAuthModel.token.isEmpty == false {
+//                self.userAuthVM.userAuth.id = userAuthModel.id
+//                self.userAuthVM.userAuth.token = userAuthModel.token
+//                self.userAuthVM.userAuth.isLoggedIn = true
+//            }
+//        }
+//
+//        self.loginVM.attemptingLogin = false
+//        self.loginVM.loginSuccessful = false
+//    }

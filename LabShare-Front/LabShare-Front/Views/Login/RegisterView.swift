@@ -11,15 +11,17 @@ import SwiftUI
 //Successful register equals login
 struct RegisterView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @ObservedObject var registerVM = RegisterViewModel()
+    @ObservedObject var registerVM: RegisterViewModel
     
-//    init(userAuthVM: UserAuthenticationViewModel) {
-//        self.userAuthVM = UserAuthenticationViewModel()
-//    }
+    init(userAuthVM: UserAuthenticationViewModel) {
+        self.registerVM = RegisterViewModel(userAuthVM: userAuthVM)
+    }
 
     var body: some View {
         VStack {
-            if self.userAuthVM.userAuth.isLoggedIn {
+            if self.registerVM.loginFailed {
+                LoginView(userAuthVM: self.userAuthVM)
+            } else if self.registerVM.loginSuccessful {
                 ProfileEditView(profileVM: ProfileViewModel(userId: self.userAuthVM.userAuth.id, userAuthVM: self.userAuthVM))
             } else {
                 VStack (alignment: .center) {
@@ -27,7 +29,7 @@ struct RegisterView: View {
                         .font(Font.title.weight(.bold))
                         .foregroundColor(.green)
                     VStack {
-                        TextField("Enter email address", text: self.$registerVM.userRegister.email).modifier(TextFieldAuthorization())
+                        TextField("Enter email address", text: self.$registerVM.userRegisterModel.email).modifier(TextFieldAuthorization())
                             .onTapGesture {
                                 self.registerVM.emailError = ""
                             }
@@ -35,7 +37,7 @@ struct RegisterView: View {
                         if (self.registerVM.registrationFailed && !self.registerVM.emailError.isEmpty) {
                             Text(self.registerVM.emailError).modifier(TextError())
                             
-                        } else if (self.registerVM.userRegister.email.isEmpty) {
+                        } else if (self.registerVM.userRegisterModel.email.isEmpty) {
                             Text("Email required").modifier(TextError())
                             
                         } else {
@@ -43,8 +45,8 @@ struct RegisterView: View {
                         }
                     }.frame(minHeight: 0, maxHeight: .infinity)
                     VStack {
-                        TextField("Enter first name", text: self.$registerVM.userRegister.firstName).modifier(TextFieldAuthorization())
-                        if (self.registerVM.userRegister.firstName.isEmpty) {
+                        TextField("Enter first name", text: self.$registerVM.userRegisterModel.firstName).modifier(TextFieldAuthorization())
+                        if (self.registerVM.userRegisterModel.firstName.isEmpty) {
                             Text("First name required").modifier(TextError())
                         } else {
                             Text("a").modifier(HiddenTextError())
@@ -52,22 +54,22 @@ struct RegisterView: View {
                     }.frame(minHeight: 0, maxHeight: .infinity)
                     
                     VStack {
-                        TextField("Enter last name", text: self.$registerVM.userRegister.lastName).modifier(TextFieldAuthorization())
-                        if (self.registerVM.userRegister.lastName.isEmpty) {
+                        TextField("Enter last name", text: self.$registerVM.userRegisterModel.lastName).modifier(TextFieldAuthorization())
+                        if (self.registerVM.userRegisterModel.lastName.isEmpty) {
                             Text("Last name required").modifier(TextError())
                         } else {
                             Text("a").modifier(HiddenTextError())
                         }
                     }.frame(minHeight: 0, maxHeight: .infinity)
                     VStack {
-                        SecureField("Enter password", text: self.$registerVM.userRegister.password).modifier(TextFieldAuthorization())
+                        SecureField("Enter password", text: self.$registerVM.userRegisterModel.password).modifier(TextFieldAuthorization())
                             .onTapGesture {
                                 self.registerVM.passwordError = ""
                             }
                         if (self.registerVM.registrationFailed && !self.registerVM.passwordError.isEmpty) {
                             Text(self.registerVM.passwordError).modifier(TextError())
                             
-                        } else if (self.registerVM.userRegister.password.isEmpty) {
+                        } else if (self.registerVM.userRegisterModel.password.isEmpty) {
                             Text("Password required").modifier(TextError())
                             
                         } else {
@@ -76,14 +78,14 @@ struct RegisterView: View {
                     }.frame(minHeight: 0, maxHeight: .infinity)
                     VStack {
                         SecureField("Repeat password", text: self.$registerVM.repeatPassword).modifier(TextFieldAuthorization())
-                        if (self.registerVM.userRegister.password != self.registerVM.repeatPassword) {
+                        if (self.registerVM.userRegisterModel.password != self.registerVM.repeatPassword) {
                             Text("Passwords do not match").modifier(TextError())
                         } else {
                             Text("a").modifier(HiddenTextError())
                         }
                     }.frame(minHeight: 0, maxHeight: .infinity)
                     Button(action: {
-                        self.registerVM.register(completion: self.loginEnvironmentObject)
+                        self.registerVM.register()
                     }) {
                         Text("Register")
                             .foregroundColor(Color.white)
@@ -94,23 +96,11 @@ struct RegisterView: View {
             }
             Spacer()
         }
-//        .navigationBarHidden(true)
-        //.navigationBarTitle(Text("Register").font(Font.largeTitle), displayMode: .inline)
-    }
-    
-    func loginEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
-        
-        if let userAuthModel = userAuthModel {
-            if userAuthModel.token.isEmpty == false {
-                self.userAuthVM.userAuth.id = userAuthModel.id
-                self.userAuthVM.userAuth.token = userAuthModel.token
-                self.userAuthVM.userAuth.isLoggedIn = true
-            }
-        }
-        
-        
     }
 }
+
+
+
 
 struct RegisterView_Previews: PreviewProvider {
     init() {
@@ -137,7 +127,7 @@ struct RegisterView_Previews: PreviewProvider {
         
         
 //        NavigationView {
-            RegisterView().environmentObject(
+            RegisterView(userAuthVM: UserAuthenticationViewModel()).environmentObject(
                 UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false)).navigationBarTitle(Text(""), displayMode: .inline)
                 .navigationBarHidden(true)
 //
