@@ -85,6 +85,8 @@ class PostListViewModel: ObservableObject {
 class PostViewModel: ObservableObject {
     @Published var post: PostModel
     var userAuthVM: UserAuthenticationViewModel
+    @Published var makingRequest: Bool = false
+    @Published var requestSuccessful: Bool = false
     
     //When you transition to new view (for updating), you want to still use a PostViewModel BUT you need to make sure its a copy. THis can be done simply by using this initialiser i believe, because PostModel is a struct and structs are copy by value
     init(post: PostModel, userAuthVM: UserAuthenticationViewModel) {
@@ -112,16 +114,21 @@ class PostViewModel: ObservableObject {
             return
             //Do nothing
         }
-        
+        self.makingRequest = true
         let userPostsWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
         userPostsWebService.updateUserPost(userId: self.post.author.id, postModel: self.post,
            completionFailure: {() -> Void in
+                self.makingRequest = false
+                self.requestSuccessful = false
                 return
            },
            completionSuccessful: { (postModel: PostModel?) -> Void in
+                self.makingRequest = false
+                self.requestSuccessful = true
                 if let postModel = postModel {
                     self.post = postModel
                 }
+                
             }
         )
     }
