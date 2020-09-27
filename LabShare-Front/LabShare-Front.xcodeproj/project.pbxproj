@@ -41,6 +41,8 @@
 		F05A0409251F6DCD001563AF /* LoginRegisterWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05A0408251F6DCC001563AF /* LoginRegisterWebService.swift */; };
 		F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */; };
 		F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */; };
+		F060778E25207FC900503D2E /* RegisterViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060778D25207FC900503D2E /* RegisterViewContainer.swift */; };
+		F060779325207FEF00503D2E /* RegisterViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060779225207FEF00503D2E /* RegisterViewRouter.swift */; };
 		F09C69A72516216700EC961C /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69A62516216700EC961C /* SetUpView.swift */; };
 		F09C69AF251635BD00EC961C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69AE251635BD00EC961C /* LoginView.swift */; };
 		F09C69B12516396200EC961C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B02516396200EC961C /* LoginViewModel.swift */; };
@@ -114,6 +116,8 @@
 		F05A0408251F6DCC001563AF /* LoginRegisterWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterWebService.swift; sourceTree = "<group>"; };
 		F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileWebService.swift; sourceTree = "<group>"; };
+		F060778D25207FC900503D2E /* RegisterViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewContainer.swift; sourceTree = "<group>"; };
+		F060779225207FEF00503D2E /* RegisterViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewRouter.swift; sourceTree = "<group>"; };
 		F09C69A62516216700EC961C /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
 		F09C69AE251635BD00EC961C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F09C69B02516396200EC961C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 				F09C69B02516396200EC961C /* LoginViewModel.swift */,
 				F09C69B82516450600EC961C /* UserAuthenticationViewModel.swift */,
 				F0545E41251ACE5A0037EFC9 /* RegisterViewModel.swift */,
+				F060779225207FEF00503D2E /* RegisterViewRouter.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -299,6 +304,7 @@
 				F0545E36251A62780037EFC9 /* RegisterView.swift */,
 				F0545E52251B0FAE0037EFC9 /* ViewHelpers.swift */,
 				F0545E64251B68090037EFC9 /* ProfileEditView.swift */,
+				F060778D25207FC900503D2E /* RegisterViewContainer.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -548,6 +554,7 @@
 				F05A03E0251E466D001563AF /* UserFeedWebService.swift in Sources */,
 				F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */,
 				F04A335224F91CAA004A86D9 /* PostRowView.swift in Sources */,
+				F060779325207FEF00503D2E /* RegisterViewRouter.swift in Sources */,
 				F05A03B6251DAE08001563AF /* UserPostsWebService.swift in Sources */,
 				F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */,
 				F09C69A72516216700EC961C /* SetUpView.swift in Sources */,
@@ -557,6 +564,7 @@
 				F0545E0A251A54CD0037EFC9 /* PostListView.swift in Sources */,
 				F04A335024F91C90004A86D9 /* PostModel.swift in Sources */,
 				F09C69B92516450600EC961C /* UserAuthenticationViewModel.swift in Sources */,
+				F060778E25207FC900503D2E /* RegisterViewContainer.swift in Sources */,
 				F09C69B12516396200EC961C /* LoginViewModel.swift in Sources */,
 				1B4FC244251F010A006E4A3D /* CircleImage.swift in Sources */,
 				F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */,

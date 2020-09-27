@@ -18,6 +18,7 @@ import SwiftUI
 
 struct StartView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
+//    @EnvironmentObject var registerViewRouter: RegisterViewRouter
     //Check if id = -1 OR token is empty for now, in future, may want to hit api to confirm valid token
     var body: some View {
         VStack {
@@ -36,5 +37,6 @@ struct StartView_Previews: PreviewProvider {
     static var previews: some View {
         StartView()
             .environmentObject(UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false))
+            .environmentObject(RegisterViewRouter())
     }
 }

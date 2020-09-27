@@ -11,96 +11,89 @@ import SwiftUI
 //Successful register equals login
 struct RegisterView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @State var registerVM: RegisterViewModel = RegisterViewModel()
-//    @EnvironmentObject var pushRegisterVM: PushRegisterViewModel
-    @State private var loginSuccessful: Bool = false
-    @State private var loginFailure: Bool = false
+    @EnvironmentObject var registerViewRouter: RegisterViewRouter
+    @ObservedObject var registerVM: RegisterViewModel
     
-//    init(userAuthVM: UserAuthenticationViewModel) {
-//        self.registerVM = RegisterViewModel(userAuthVM: userAuthVM)
-//    }
+    
+//    @EnvironmentObject var pushRegisterVM: PushRegisterViewModel
+//    @State private var loginSuccessful: Bool = false
+//    @State private var loginFailure: Bool = false
+    
+    init(userAuthVM: UserAuthenticationViewModel) {
+        self.registerVM = RegisterViewModel(userAuthVM: userAuthVM)
+    }
 
     var body: some View {
-        VStack {
-            if self.registerVM.loginFailure {
-                LoginView(userAuthVM: self.userAuthVM)
-            } else if self.registerVM.loginSuccessful {
-                ProfileEditView(userAuthVM: self.userAuthVM, firstName: self.registerVM.userRegisterModel.firstName, lastName: self.registerVM.userRegisterModel.lastName)
-            } else {
-                VStack (alignment: .center) {
-                    Text("Register to Lab Share")
-                        .font(Font.title.weight(.bold))
-                        .foregroundColor(.green)
-                    VStack {
-                        TextField("Enter email address", text: self.$registerVM.userRegisterModel.email).modifier(TextFieldAuthorization())
-                            .onTapGesture {
-                                self.registerVM.emailError = ""
-                            }
-                        
-                        if (self.registerVM.registrationFailed && !self.registerVM.emailError.isEmpty) {
-                            Text(self.registerVM.emailError).modifier(TextError())
-                            
-                        } else if (self.registerVM.userRegisterModel.email.isEmpty) {
-                            Text("Email required").modifier(TextError())
-                            
-                        } else {
-                            Text("a").modifier(HiddenTextError())
-                        }
-                    }.frame(minHeight: 0, maxHeight: .infinity)
-                    VStack {
-                        TextField("Enter first name", text: self.$registerVM.userRegisterModel.firstName).modifier(TextFieldAuthorization())
-                        if (self.registerVM.userRegisterModel.firstName.isEmpty) {
-                            Text("First name required").modifier(TextError())
-                        } else {
-                            Text("a").modifier(HiddenTextError())
-                        }
-                    }.frame(minHeight: 0, maxHeight: .infinity)
-                    
-                    VStack {
-                        TextField("Enter last name", text: self.$registerVM.userRegisterModel.lastName).modifier(TextFieldAuthorization())
-                        if (self.registerVM.userRegisterModel.lastName.isEmpty) {
-                            Text("Last name required").modifier(TextError())
-                        } else {
-                            Text("a").modifier(HiddenTextError())
-                        }
-                    }.frame(minHeight: 0, maxHeight: .infinity)
-                    VStack {
-                        SecureField("Enter password", text: self.$registerVM.userRegisterModel.password).modifier(TextFieldAuthorization())
-                            .onTapGesture {
-                                self.registerVM.passwordError = ""
-                            }
-                        if (self.registerVM.registrationFailed && !self.registerVM.passwordError.isEmpty) {
-                            Text(self.registerVM.passwordError).modifier(TextError())
-                            
-                        } else if (self.registerVM.userRegisterModel.password.isEmpty) {
-                            Text("Password required").modifier(TextError())
-                            
-                        } else {
-                            Text("a").modifier(HiddenTextError())
-                        }
-                    }.frame(minHeight: 0, maxHeight: .infinity)
-                    VStack {
-                        SecureField("Repeat password", text: self.$registerVM.repeatPassword).modifier(TextFieldAuthorization())
-                        if (self.registerVM.userRegisterModel.password != self.registerVM.repeatPassword) {
-                            Text("Passwords do not match").modifier(TextError())
-                        } else {
-                            Text("a").modifier(HiddenTextError())
-                        }
-                    }.frame(minHeight: 0, maxHeight: .infinity)
-                    Button(action: {
-                        self.registerVM.register()
-                    }) {
-                        Text("Register")
-                            .foregroundColor(Color.white)
-                            .font(Font.title.weight(.bold))
-                    }.modifier(AuthButton())
-                }.padding()
+       
+        VStack (alignment: .center) {
+            Text("Register to Lab Share")
+                .font(Font.title.weight(.bold))
+                .foregroundColor(.green)
+            VStack {
+                TextField("Enter email address", text: self.$registerVM.userRegisterModel.email).modifier(TextFieldAuthorization())
+                    .onTapGesture {
+                        self.registerVM.emailError = ""
+                    }
                 
-            }
+                if (self.registerVM.registrationFailed && !self.registerVM.emailError.isEmpty) {
+                    Text(self.registerVM.emailError).modifier(TextError())
+                    
+                } else if (self.registerVM.userRegisterModel.email.isEmpty) {
+                    Text("Email required").modifier(TextError())
+                    
+                } else {
+                    Text("a").modifier(HiddenTextError())
+                }
+            }.frame(minHeight: 0, maxHeight: .infinity)
+            VStack {
+                TextField("Enter first name", text: self.$registerVM.userRegisterModel.firstName).modifier(TextFieldAuthorization())
+                if (self.registerVM.userRegisterModel.firstName.isEmpty) {
+                    Text("First name required").modifier(TextError())
+                } else {
+                    Text("a").modifier(HiddenTextError())
+                }
+            }.frame(minHeight: 0, maxHeight: .infinity)
+            
+            VStack {
+                TextField("Enter last name", text: self.$registerVM.userRegisterModel.lastName).modifier(TextFieldAuthorization())
+                if (self.registerVM.userRegisterModel.lastName.isEmpty) {
+                    Text("Last name required").modifier(TextError())
+                } else {
+                    Text("a").modifier(HiddenTextError())
+                }
+            }.frame(minHeight: 0, maxHeight: .infinity)
+            VStack {
+                SecureField("Enter password", text: self.$registerVM.userRegisterModel.password).modifier(TextFieldAuthorization())
+                    .onTapGesture {
+                        self.registerVM.passwordError = ""
+                    }
+                if (self.registerVM.registrationFailed && !self.registerVM.passwordError.isEmpty) {
+                    Text(self.registerVM.passwordError).modifier(TextError())
+                    
+                } else if (self.registerVM.userRegisterModel.password.isEmpty) {
+                    Text("Password required").modifier(TextError())
+                    
+                } else {
+                    Text("a").modifier(HiddenTextError())
+                }
+            }.frame(minHeight: 0, maxHeight: .infinity)
+            VStack {
+                SecureField("Repeat password", text: self.$registerVM.repeatPassword).modifier(TextFieldAuthorization())
+                if (self.registerVM.userRegisterModel.password != self.registerVM.repeatPassword) {
+                    Text("Passwords do not match").modifier(TextError())
+                } else {
+                    Text("a").modifier(HiddenTextError())
+                }
+            }.frame(minHeight: 0, maxHeight: .infinity)
+            Button(action: {
+                self.registerVM.register(userAuthVM: userAuthVM, registerViewRouter: registerViewRouter)
+            }) {
+                Text("Register")
+                    .foregroundColor(Color.white)
+                    .font(Font.title.weight(.bold))
+            }.modifier(AuthButton())
             Spacer()
-        }.onAppear(perform: {
-            self.registerVM = RegisterViewModel(userAuthVM: userAuthVM)
-        })
+        }.padding()
     }
 }
 
@@ -132,8 +125,11 @@ struct RegisterView_Previews: PreviewProvider {
         
         
 //        NavigationView {
-            RegisterView().environmentObject(
-                UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false)).navigationBarTitle(Text(""), displayMode: .inline)
+            RegisterView(userAuthVM: UserAuthenticationViewModel())
+                .environmentObject(
+                    UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false)
+                ).environmentObject(RegisterViewRouter())
+                .navigationBarTitle(Text(""), displayMode: .inline)
                 .navigationBarHidden(true)
 //
 //        }

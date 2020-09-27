@@ -10,14 +10,17 @@ import SwiftUI
 
 struct ProfileEditView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
+    //    @Enviro var registerViewRouter: RegisterViewRouter
     @ObservedObject var profileVM: ProfileViewModel
+
     
     init(userAuthVM: UserAuthenticationViewModel) {
         self.profileVM = ProfileViewModel(userId: userAuthVM.userAuth.id, userAuthVM: userAuthVM)
+//        self.registerViewRouter = registerViewRouter
     }
-    init(userAuthVM: UserAuthenticationViewModel, firstName: String, lastName: String) {
-        self.profileVM = ProfileViewModel(userId: userAuthVM.userAuth.id, userAuthVM: userAuthVM, firstName: firstName, lastName: lastName)
-    }
+//    init(userAuthVM: UserAuthenticationViewModel, firstName: String, lastName: String) {
+//        self.profileVM = ProfileViewModel(userId: userAuthVM.userAuth.id, userAuthVM: userAuthVM, firstName: firstName, lastName: lastName)
+//    }
     
     var body: some View {
         VStack {
@@ -60,6 +63,6 @@ struct ProfileEditView: View {
 
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEditView(userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false), firstName: "Alex", lastName: "Frazis")
+        ProfileEditView(userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false))
     }
 }

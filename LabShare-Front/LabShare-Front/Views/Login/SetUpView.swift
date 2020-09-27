@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SetUpView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
+//    @ObservedObject var registerViewRouter: RegisterViewRouter
     init() {
 
         UINavigationBar.appearance().barTintColor = UIColor.white
@@ -17,6 +18,7 @@ struct SetUpView: View {
         UINavigationBar.appearance().shadowImage = UIImage()
         
         UITabBar.appearance().barTintColor = UIColor.white
+//        self.registerViewRouter = registerViewRouter
         
 
     }
@@ -34,7 +36,7 @@ struct SetUpView: View {
                         .font(Font.title.weight(.bold))
                 }.modifier(AuthButton())
                 Spacer()
-                NavigationLink(destination: RegisterView()) {
+                NavigationLink(destination: RegisterViewContainer()) {
                     Text("Create account")
                         .foregroundColor(Color.white)
                         .font(Font.title.weight(.bold))
@@ -49,7 +51,7 @@ struct SetUpView: View {
 
 struct SetUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SetUpView()
+        SetUpView().environmentObject(UserAuthenticationViewModel())
     }
 }
 

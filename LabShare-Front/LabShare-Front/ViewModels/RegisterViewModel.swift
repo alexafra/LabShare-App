@@ -15,22 +15,23 @@ class PushRegisterViewModel: ObservableObject {
     @Published var loginSuccessful: Bool = false
 }
 
-class RegisterViewModel {
-     var userRegisterModel: UserRegisterModel
-     var repeatPassword: String
+class RegisterViewModel: ObservableObject {
+     @Published var userRegisterModel: UserRegisterModel
+     @Published var repeatPassword: String
     
-     var attemptingRegistrationAndLogin: Bool
-     var registrationFailed: Bool
+     @Published var attemptingRegistrationAndLogin: Bool
+     @Published var registrationFailed: Bool
     
-     var passwordError: String
-     var emailError: String
+     @Published var passwordError: String
+     @Published var emailError: String
     
-     var loginFailure: Bool = false
-     var loginSuccessful: Bool = false
+     @Published var loginFailure: Bool = false
+     @Published var loginSuccessful: Bool = false
     
     
 //    var pushRegisterVM: PushRegisterViewModel
-    var userAuthVM: UserAuthenticationViewModel
+//    var userAuthVM: UserAuthenticationViewModel
+//    var registerViewRouter: RegisterViewRouter
     
     init (userAuthVM: UserAuthenticationViewModel) {
         self.userRegisterModel = UserRegisterModel(email: "", password: "", firstName: "", lastName: "")
@@ -39,24 +40,25 @@ class RegisterViewModel {
         self.registrationFailed = false
         self.passwordError = ""
         self.emailError = ""
-        self.userAuthVM = userAuthVM
+//        self.userAuthVM = userAuthVM
+//        self.registerViewRouter = registerViewRouter
 //        self.pushRegisterVM = pushRegisterVM
     }
     
-    init () {
-        self.userRegisterModel = UserRegisterModel(email: "", password: "", firstName: "", lastName: "")
-        self.repeatPassword = ""
-        self.attemptingRegistrationAndLogin = false
-        self.registrationFailed = false
-        self.passwordError = ""
-        self.emailError = ""
-        self.userAuthVM = UserAuthenticationViewModel()
-//        self.pushRegisterVM = pushRegisterVM
-    }
+//    init () {
+//        self.userRegisterModel = UserRegisterModel(email: "", password: "", firstName: "", lastName: "")
+//        self.repeatPassword = ""
+//        self.attemptingRegistrationAndLogin = false
+//        self.registrationFailed = false
+//        self.passwordError = ""
+//        self.emailError = ""
+//        self.userAuthVM = UserAuthenticationViewModel()
+////        self.pushRegisterVM = pushRegisterVM
+//    }
     
 //    func register(loginSuccessful: inout Bool, loginFailure: inout Bool) {
-    func register() {
-        if (!userRegisterModel.password.isEmpty && userRegisterModel.password == repeatPassword && !userRegisterModel.email.isEmpty && !userRegisterModel.firstName.isEmpty && !userRegisterModel.lastName.isEmpty) {
+    func register(userAuthVM: UserAuthenticationViewModel, registerViewRouter: RegisterViewRouter) {
+        if (!self.userRegisterModel.password.isEmpty && self.userRegisterModel.password == self.repeatPassword && !self.userRegisterModel.email.isEmpty && !self.userRegisterModel.firstName.isEmpty && !self.userRegisterModel.lastName.isEmpty) {
             
             self.attemptingRegistrationAndLogin = true
             LoginRegisterWebService().register(userRegisterModel: self.userRegisterModel,
@@ -82,16 +84,15 @@ class RegisterViewModel {
                         LoginRegisterWebService().login(user: userLoginModel,
                             completionFailure: { () -> Void in
                                 self.attemptingRegistrationAndLogin = false
-                                self.loginFailure = true
+                                registerViewRouter.currentPage = "Login"
                             },
                             completionSuccessful: { (userAuthModel: UserAuthenticationModel?) in
                                 self.attemptingRegistrationAndLogin = false
                                 if let userSettings = userAuthModel {
-                                    self.loginFailure = false
-                                    self.loginSuccessful = true
-                                    self.userAuthVM.userAuth = userSettings
+                                    registerViewRouter.currentPage = "ProfileEdit"
+                                    userAuthVM.userAuth = userSettings
                                 } else {
-                                    self.loginFailure = true
+                                    registerViewRouter.currentPage = "Login"
                                 }
                             }
                         )
