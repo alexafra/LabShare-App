@@ -18,12 +18,27 @@ class PostListViewModel: ObservableObject {
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
     @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
+    @Published var postListType: PostListType
     
-    init (userId: Int) {
+    init (userId: Int, postListType: PostListType) {
         self.userId = userId
+        self.postListType = postListType
     }
     func getAllUserPosts(userAuthVM: UserAuthenticationViewModel) {
         getAllUserPostsClosure(userAuthVM: userAuthVM)()
+    }
+    
+    func getAllPostsClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
+            if self.postListType == PostListType.Feed {
+                return {
+                    self.getFeedPostsClosure(userAuthVM: userAuthVM)()
+                }
+            } else {
+                return {
+                    self.getAllUserPostsClosure(userAuthVM: userAuthVM)()
+                }
+            }
+        
     }
     func getAllUserPostsClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
         return {
@@ -142,62 +157,7 @@ class PostViewModel: ObservableObject {
     
 }
 
-
-//class PostViewModel: ObservableObject {
-//    @Published var post: PostModel
-//    @Published var editedPostTitle: String
-//    @Published var editedPostContent: String
-//    var userAuthVM: UserAuthenticationViewModel
-//    init(post: PostModel, userAuthVM: UserAuthenticationViewModel) {
-//        self.post = post
-//        self.userAuthVM = userAuthVM
-//        self.editedPostTitle = ""
-//        self.editedPostContent = ""
-//    }
-//
-//    func editViewAppear () {
-//        self.editedPostContent = self.post.content
-//        self.editedPostTitle = self.post.title
-//    }
-//
-//    func getUserPost() {
-//        let userPostWebService = UserPostsWebService(userAuth: self.userAuthVM.userAuth)
-//
-//        userPostWebService.getUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
-//                return
-//            },
-//        completionSuccessful: { (post: PostModel?) -> Void in
-//            if let post = post {
-//                self.post = post
-//            }
-//        })
-//    }
-//
-//    //Are you sure about profile .... no edited values?
-//    func updatePost() {
-//        let newPostTitle = self.editedPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-//        let newPostContent = self.editedPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
-//        //CHeck if there has been any change
-//        if editedPostContent == post.content && editedPostTitle == post.title {
-//            return
-//            //Do nothing
-//        }
-//
-//        var updatedPost = self.post
-//        updatedPost.content = newPostContent
-//        updatedPost.title = newPostTitle
-//
-//        let userPostsWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
-//        userPostsWebService.updateUserPost(userId: self.post.author.id, postModel: updatedPost,
-//           completionFailure: {() -> Void in
-//                return
-//           },
-//           completionSuccessful: { (postModel: PostModel?) -> Void in
-//                if let postModel = postModel {
-//                    self.post = postModel
-//                }
-//            }
-//        )
-//    }
-//
-//}
+enum PostListType {
+    case Profile
+    case Feed
+}

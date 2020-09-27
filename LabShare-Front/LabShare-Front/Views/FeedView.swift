@@ -22,7 +22,7 @@ struct FeedView: View {
                 .navigationBarItems(trailing: SearchBarView())
             }
             
-        }.onAppear(perform: self.postListVM.getFeedPostsClosure(userAuthVM: userAuthVM))
+        }.onAppear(perform: self.postListVM.getAllPostsClosure(userAuthVM: userAuthVM))
         
     }
 }
@@ -31,7 +31,7 @@ struct FeedView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        FeedView(postListVM: PostListViewModel(userId: 37))
+        FeedView(postListVM: PostListViewModel(userId: 37, postListType: PostListType.Feed))
             .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
         
     }

@@ -21,7 +21,10 @@ struct PostListView: View {
                     VStack {
                         TextField("Title: Enter up to 20 characters", text: self.$postListVM.newPostTitle).padding()
                         Divider()
-                        TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent).padding()
+                        TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent)
+                            .lineLimit(nil)
+                            .padding()
+                        
                             
                     }.padding(10)
                     Button(action: {
@@ -46,11 +49,17 @@ struct PostListView: View {
                 }.buttonStyle(PlainButtonStyle())
             }
         }.padding()
+        .onAppear(perform: self.postListVM.getAllPostsClosure(userAuthVM: userAuthVM))
     }
 }
 
 struct PostListView_Previews: PreviewProvider {
+    static let  userAuthVM: UserAuthenticationViewModel = UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true)
     static var previews: some View {
-        PostListView(postListVM: PostListViewModel(userId: 37)).environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+        VStack {
+            PostListView(postListVM: PostListViewModel(userId: 37, postListType: PostListType.Profile)).environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+                
+        }
+        
     }
 }

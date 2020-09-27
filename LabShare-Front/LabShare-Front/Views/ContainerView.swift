@@ -31,7 +31,7 @@ struct ContainerView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     var body: some View {
         TabView {
-            FeedView(postListVM: PostListViewModel(userId: 37))
+            FeedView(postListVM: PostListViewModel(userId: 37, postListType: PostListType.Feed))
                 .tabItem {
                     Image(systemName: "house")
                 }
