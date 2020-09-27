@@ -86,14 +86,14 @@ class RegisterViewModel: ObservableObject {
         }
     }
     
-    func register2(completion: @escaping (UserAuthenticationModel?) -> ()) {
-        if (!userRegisterModel.password.isEmpty && userRegisterModel.password == repeatPassword && !userRegisterModel.email.isEmpty && !userRegisterModel.firstName.isEmpty && !userRegisterModel.lastName.isEmpty) {
-            
-            attemptingRegistrationAndLogin = true
-            LoginWebService().register(user: userRegisterModel, registerVM: self, completion: completion)
-        }
-    }
-//    var equalPasswords : Bool {
+//    func register2(completion: @escaping (UserAuthenticationModel?) -> ()) {
+//        if (!userRegisterModel.password.isEmpty && userRegisterModel.password == repeatPassword && !userRegisterModel.email.isEmpty && !userRegisterModel.firstName.isEmpty && !userRegisterModel.lastName.isEmpty) {
+//            
+//            attemptingRegistrationAndLogin = true
+//            LoginWebService().register(user: userRegisterModel, registerVM: self, completion: completion)
+//        }
+//    }
+////    var equalPasswords : Bool {
 //        return self.repeatPassword == self.userRegisterModel.password
 //    }
 //    var isfirstNameEmpty: Bool {
