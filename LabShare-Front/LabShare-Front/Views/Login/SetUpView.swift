@@ -34,7 +34,7 @@ struct SetUpView: View {
                         .font(Font.title.weight(.bold))
                 }.modifier(AuthButton())
                 Spacer()
-                NavigationLink(destination: RegisterView(userAuthVM: self.userAuthVM)) {
+                NavigationLink(destination: RegisterView()) {
                     Text("Create account")
                         .foregroundColor(Color.white)
                         .font(Font.title.weight(.bold))

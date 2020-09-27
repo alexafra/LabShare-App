@@ -11,19 +11,21 @@ import SwiftUI
 //Successful register equals login
 struct RegisterView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @ObservedObject var registerVM: RegisterViewModel
-    @EnvironmentObject var pushRegisterVM: PushRegisterViewModel
+    @State var registerVM: RegisterViewModel = RegisterViewModel()
+//    @EnvironmentObject var pushRegisterVM: PushRegisterViewModel
+    @State private var loginSuccessful: Bool = false
+    @State private var loginFailure: Bool = false
     
-    init(userAuthVM: UserAuthenticationViewModel) {
-        self.registerVM = RegisterViewModel(userAuthVM: userAuthVM, pushRegisterVM: PushRegisterViewModel())
-    }
+//    init(userAuthVM: UserAuthenticationViewModel) {
+//        self.registerVM = RegisterViewModel(userAuthVM: userAuthVM)
+//    }
 
     var body: some View {
         VStack {
-            if self.pushRegisterVM.loginFailed {
+            if self.registerVM.loginFailure {
                 LoginView(userAuthVM: self.userAuthVM)
-            } else if self.pushRegisterVM.loginSuccessful {
-                ProfileEditView(profileVM: ProfileViewModel(userId: self.userAuthVM.userAuth.id, userAuthVM: self.userAuthVM))
+            } else if self.registerVM.loginSuccessful {
+                ProfileEditView(userAuthVM: self.userAuthVM)
             } else {
                 VStack (alignment: .center) {
                     Text("Register to Lab Share")
@@ -96,7 +98,9 @@ struct RegisterView: View {
                 
             }
             Spacer()
-        }
+        }.onAppear(perform: {
+            self.registerVM = RegisterViewModel(userAuthVM: userAuthVM)
+        })
     }
 }
 
@@ -128,7 +132,7 @@ struct RegisterView_Previews: PreviewProvider {
         
         
 //        NavigationView {
-            RegisterView(userAuthVM: UserAuthenticationViewModel()).environmentObject(
+            RegisterView().environmentObject(
                 UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false)).navigationBarTitle(Text(""), displayMode: .inline)
                 .navigationBarHidden(true)
 //
