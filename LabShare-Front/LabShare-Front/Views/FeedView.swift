@@ -13,10 +13,6 @@ struct FeedView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var postListVM: PostListViewModel
 
-    init (userAuthVM: UserAuthenticationViewModel) {
-        postListVM = PostListViewModel(userAuthVM: userAuthVM)
-    }
-    
     var body: some View {
         VStack {
             NavigationView {
@@ -26,7 +22,7 @@ struct FeedView: View {
                 .navigationBarItems(trailing: SearchBarView())
             }
             
-        }.onAppear(perform: self.postListVM.getFeedPosts)
+        }.onAppear(perform: self.postListVM.getFeedPostsClosure(userAuthVM: userAuthVM))
         
     }
 }
@@ -35,8 +31,8 @@ struct FeedView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        FeedView(userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))
-            .environmentObject(UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))
+        FeedView(postListVM: PostListViewModel(userId: 37))
+            .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
         
     }
 }

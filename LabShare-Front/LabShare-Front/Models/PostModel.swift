@@ -33,6 +33,10 @@ struct PostModel: Hashable, Codable, Identifiable {
         self.author = author
     }
     
+    init () {
+        self.init (id: -1, title: "", content: "", dateCreated: "", author: UserModel())
+    }
+    
     
     init (title: String, content: String) {
         self.init(id: -1, title: title, content: content, dateCreated: "", author: UserModel())

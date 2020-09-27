@@ -15,7 +15,7 @@ struct PostRowView: View {
     var body: some View {
         VStack (alignment: .leading, spacing: 5) {
             Divider()
-            NavigationLink (destination: ProfileView(userId: postVM.post.author.id, userAuthVM: self.userAuthVM)){
+            NavigationLink (destination: ProfileView(userId: postVM.post.author.id)){
                 PostHeaderView(postVM: self.postVM)
             }.buttonStyle(PlainButtonStyle())
             Text(self.postVM.post.title)
@@ -37,7 +37,7 @@ struct PostRowView: View {
 
 struct PostRow_Previews: PreviewProvider {
     static var previews: some View {
-        PostRowView(postVM: PostViewModel(post: PostModel(id: 10, title: "Free Iphones", content: "I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones", dateCreated: "2020-07-22 16:48:31", author: UserModel (id: 7, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis")), userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true)))
+        PostRowView(postVM: PostViewModel(post: PostModel(id: 10, title: "Free Iphones", content: "I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones", dateCreated: "2020-07-22 16:48:31", author: UserModel (id: 37, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis")))).environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
     }
     
 }

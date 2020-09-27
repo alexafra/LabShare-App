@@ -12,10 +12,6 @@ struct PostListView: View {
     @ObservedObject var postListVM: PostListViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     
-    init (postListVM: PostListViewModel) {
-        self.postListVM = postListVM
-    }
-    
     var body: some View {
         VStack(alignment: .leading) {
             if userAuthVM.userAuth.id == postListVM.userId {
@@ -29,7 +25,7 @@ struct PostListView: View {
                             
                     }.padding(10)
                     Button(action: {
-                        self.postListVM.createPost()
+                        self.postListVM.createPost(userAuthVM: userAuthVM)
                     }){
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.green)
@@ -55,6 +51,6 @@ struct PostListView: View {
 
 struct PostListView_Previews: PreviewProvider {
     static var previews: some View {
-        PostListView(postListVM: PostListViewModel(userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))).environmentObject(UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))
+        PostListView(postListVM: PostListViewModel(userId: 37)).environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
     }
 }

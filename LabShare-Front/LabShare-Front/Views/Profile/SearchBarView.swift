@@ -25,7 +25,7 @@ struct SearchBarView: View {
                 }
                 
                 VStack {
-                    NavigationLink(destination: ProfileView(userId: searchID, userAuthVM: self.userAuthVM), isActive: $show) {
+                    NavigationLink(destination: ProfileView(userId: searchID), isActive: $show) {
                         Image(systemName: "")
                     }
                     

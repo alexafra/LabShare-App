@@ -15,7 +15,7 @@ struct PostDetailView: View {
     var body: some View {
         VStack (alignment:.leading) {
 
-            NavigationLink (destination: ProfileView(userId: postVM.post.author.id, userAuthVM: self.userAuthVM)){
+            NavigationLink (destination: ProfileView(userId: postVM.post.author.id)) {
                 PostHeaderView(postVM: self.postVM)
             }.buttonStyle(PlainButtonStyle())
             HStack {
@@ -57,8 +57,9 @@ struct PostDetailView: View {
                     .font(.caption).foregroundColor(Color.black)
                 Text("Email: \(self.postVM.post.author.email)")
                     .font(.caption).foregroundColor(Color.black)
-                NavigationLink(destination: ProfileView(userId: self.postVM.post.author.id, userAuthVM: self.userAuthVM)) {Text("See more")
-                    .font(.footnote)
+                NavigationLink(destination: ProfileView(userId: self.postVM.post.author.id)) {
+                    Text("See more")
+                        .font(.footnote)
                 }
             }.padding(.all, 7)
                 .padding(.top)
@@ -70,6 +71,6 @@ struct PostDetailView: View {
 
 struct PostDetail_Previews: PreviewProvider {
     static var previews: some View {
-        PostDetailView(postVM: PostViewModel(post: PostModel(id: 10, title: "Free Iphones", content: "Dave found joy in the daily routine of life. He awoke at the same time, ate the same breakfast and drove the same commute. He worked at a job that never seemed to change and he got home at 6 pm sharp every night. It was who he had been for the last ten years and he had no idea that was all about to change.", dateCreated: "2020-07-22 16:48:31", author: UserModel (id: 7, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis")), userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true)))
+        PostDetailView(postVM: PostViewModel(post: PostModel(id: 10, title: "Free Iphones", content: "Dave found joy in the daily routine of life. He awoke at the same time, ate the same breakfast and drove the same commute. He worked at a job that never seemed to change and he got home at 6 pm sharp every night. It was who he had been for the last ten years and he had no idea that was all about to change.", dateCreated: "2020-07-22 16:48:31", author: UserModel (id: 7, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis")))).environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
     }
 }

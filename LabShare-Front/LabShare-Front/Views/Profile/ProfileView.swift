@@ -15,8 +15,8 @@ struct ProfileView: View {
     @ObservedObject var postListVM: PostListViewModel
     @ObservedObject var profileVM: ProfileViewModel
     
-    init(userId: Int, userAuthVM: UserAuthenticationViewModel) {
-        self.postListVM = PostListViewModel(userId: userId, userAuthVM: userAuthVM)
+    init(userId: Int) {
+        self.postListVM = PostListViewModel(userId: userId)
         self.profileVM = ProfileViewModel(userId: userId)
     }
     
@@ -29,15 +29,15 @@ struct ProfileView: View {
             
         }.navigationBarTitle(Text(""), displayMode: .inline)
     //            .navigationBarHidden(true)
-                .onAppear(perform: self.postListVM.getAllUserPosts)
+                .onAppear(perform: self.postListVM.getAllUserPostsClosure(userAuthVM: userAuthVM))
             
     }
 }
 
 struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(userId: 1, userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))
-            .environmentObject(UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))
+        ProfileView(userId: 1)
+            .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
     }
 }
 
