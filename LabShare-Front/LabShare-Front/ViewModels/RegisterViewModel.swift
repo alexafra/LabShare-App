@@ -18,21 +18,21 @@ class PushRegisterViewModel: ObservableObject {
 class RegisterViewModel: ObservableObject {
      @Published var userRegisterModel: UserRegisterModel
      @Published var repeatPassword: String
-    
+
      @Published var attemptingRegistrationAndLogin: Bool
      @Published var registrationFailed: Bool
-    
+
      @Published var passwordError: String
      @Published var emailError: String
-    
+
      @Published var loginFailure: Bool = false
      @Published var loginSuccessful: Bool = false
-    
-    
+
+
 //    var pushRegisterVM: PushRegisterViewModel
 //    var userAuthVM: UserAuthenticationViewModel
 //    var registerViewRouter: RegisterViewRouter
-    
+
     init (userAuthVM: UserAuthenticationViewModel) {
         self.userRegisterModel = UserRegisterModel(email: "", password: "", firstName: "", lastName: "")
         self.repeatPassword = ""
@@ -44,7 +44,7 @@ class RegisterViewModel: ObservableObject {
 //        self.registerViewRouter = registerViewRouter
 //        self.pushRegisterVM = pushRegisterVM
     }
-    
+
 //    init () {
 //        self.userRegisterModel = UserRegisterModel(email: "", password: "", firstName: "", lastName: "")
 //        self.repeatPassword = ""
@@ -55,11 +55,11 @@ class RegisterViewModel: ObservableObject {
 //        self.userAuthVM = UserAuthenticationViewModel()
 ////        self.pushRegisterVM = pushRegisterVM
 //    }
-    
+
 //    func register(loginSuccessful: inout Bool, loginFailure: inout Bool) {
     func register(userAuthVM: UserAuthenticationViewModel, registerViewRouter: RegisterViewRouter) {
         if (!self.userRegisterModel.password.isEmpty && self.userRegisterModel.password == self.repeatPassword && !self.userRegisterModel.email.isEmpty && !self.userRegisterModel.firstName.isEmpty && !self.userRegisterModel.lastName.isEmpty) {
-            
+
             self.attemptingRegistrationAndLogin = true
             LoginRegisterWebService().register(userRegisterModel: self.userRegisterModel,
                completionFailure: { (registrationError) in
@@ -76,7 +76,7 @@ class RegisterViewModel: ObservableObject {
                         }
 
                     }
-                        
+
                 },
                completionSuccessful: { (userModel, userLoginModel) in
                     self.registrationFailed = false
@@ -97,16 +97,16 @@ class RegisterViewModel: ObservableObject {
                             }
                         )
                     }
-                    
+
                 }
             )
 
         }
     }
-    
+
 //    func register2(completion: @escaping (UserAuthenticationModel?) -> ()) {
 //        if (!userRegisterModel.password.isEmpty && userRegisterModel.password == repeatPassword && !userRegisterModel.email.isEmpty && !userRegisterModel.firstName.isEmpty && !userRegisterModel.lastName.isEmpty) {
-//            
+//
 //            attemptingRegistrationAndLogin = true
 //            LoginWebService().register(user: userRegisterModel, registerVM: self, completion: completion)
 //        }
