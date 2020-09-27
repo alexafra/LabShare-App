@@ -35,10 +35,8 @@ struct ProfileModel: Codable, Identifiable, Hashable {
         self.owner = owner
     }
     
-    init(firstName: String, lastName: String, ownerId: Int) {
+    init(ownerId: Int) {
         self.init()
-        self.owner.firstName = firstName
-        self.owner.lastName = lastName
         self.owner.id = ownerId
     }
     init() {

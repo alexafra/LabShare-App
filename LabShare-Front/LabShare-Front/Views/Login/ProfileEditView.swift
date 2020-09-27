@@ -14,8 +14,8 @@ struct ProfileEditView: View {
     @ObservedObject var profileVM: ProfileViewModel
 
     
-    init(userAuthVM: UserAuthenticationViewModel) {
-        self.profileVM = ProfileViewModel(userId: userAuthVM.userAuth.id, userAuthVM: userAuthVM)
+    init(userId: Int) {
+        self.profileVM = ProfileViewModel(userId: userId)
 //        self.registerViewRouter = registerViewRouter
     }
 //    init(userAuthVM: UserAuthenticationViewModel, firstName: String, lastName: String) {
@@ -24,10 +24,10 @@ struct ProfileEditView: View {
     
     var body: some View {
         VStack {
-            VStack(alignment: .center, spacing: 40) {
-                Text("\(profileVM.profile.owner.firstName) \(profileVM.profile.owner.lastName)")
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
+            VStack(alignment: .center) {
+//                Text("\(profileVM.profile.owner.firstName) \(profileVM.profile.owner.lastName)")
+//                    .font(.largeTitle)
+//                    .fontWeight(.semibold)
                 VStack(alignment: .leading) {
                     Text("dob:")
                     TextField("dob", text: self.$profileVM.profile.dob)
@@ -50,7 +50,7 @@ struct ProfileEditView: View {
                         .modifier(TextFieldAuthorization())
                 }.frame(minHeight: 0, maxHeight: .infinity)
                 Button(action: {
-                    self.profileVM.updateProfile()
+                    self.profileVM.updateProfile(userAuthVM: userAuthVM)
                 }) {
                     Text("Save")
                         .foregroundColor(Color.white)
@@ -63,6 +63,6 @@ struct ProfileEditView: View {
 
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEditView(userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false))
+        ProfileEditView(userId: 37).environmentObject( UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: false))
     }
 }

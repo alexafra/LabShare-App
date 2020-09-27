@@ -90,7 +90,8 @@ class RegisterViewModel: ObservableObject {
                                 self.attemptingRegistrationAndLogin = false
                                 if let userSettings = userAuthModel {
                                     registerViewRouter.currentPage = "ProfileEdit"
-                                    userAuthVM.userAuth = userSettings
+                                    userAuthVM.userAuth.id = userSettings.id
+                                    userAuthVM.userAuth.token = userSettings.token
                                 } else {
                                     registerViewRouter.currentPage = "Login"
                                 }

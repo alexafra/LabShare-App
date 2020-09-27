@@ -42,12 +42,13 @@ struct ProfileHeaderView: View {
                 Text("Bio: \(self.profileVM.profile.bio)")
             }.padding(.leading, 5)
         }.padding()
-        .onAppear(perform: self.profileVM.getProfile)
+        .onAppear(perform: self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
     }
 }
 
 struct ProfileHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileHeaderView(profileVM: ProfileViewModel(userId: 1, userAuthVM: UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true)))
+        ProfileHeaderView(profileVM: ProfileViewModel(userId: 37))
+            .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
     }
 }

@@ -17,7 +17,7 @@ struct RegisterViewContainer: View {
             if registerViewRouter.currentPage == "Register" {
                 RegisterView(userAuthVM: userAuthVM)
             } else if registerViewRouter.currentPage == "ProfileEdit" {
-                ProfileEditView(userAuthVM: userAuthVM)
+                ProfileEditView(userId: userAuthVM.userAuth.id)
             } else if registerViewRouter.currentPage == "Login" {
                 LoginView(userAuthVM: userAuthVM)
             } else {

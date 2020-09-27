@@ -12,47 +12,44 @@ import Combine
 
 class ProfileViewModel: ObservableObject {
     @Published var userId: Int
-    @Published var profile = ProfileModel()
+    @Published var profile: ProfileModel
     @Published var hasCompletedLoading: Bool = false
     @Published var loadingSuccessful: Bool = false
-    var userAuthVM: UserAuthenticationViewModel
     
-    init(userId: Int, userAuthVM: UserAuthenticationViewModel) {
+    init(userId: Int) {
         self.userId = userId
         self.hasCompletedLoading = false
         self.loadingSuccessful = false
-        self.userAuthVM = userAuthVM
+        self.profile = ProfileModel(ownerId: userId)
     }
     
-    init(userId: Int, userAuthVM: UserAuthenticationViewModel, firstName: String, lastName: String) {
-        self.userId = userId
-        self.hasCompletedLoading = false
-        self.loadingSuccessful = false
-        self.userAuthVM = userAuthVM
-        self.profile = ProfileModel(firstName: firstName, lastName: lastName, ownerId: userId)
-    }
-    
-    init(userId: Int, userAuthVM: UserAuthenticationViewModel, profile: ProfileModel ) {
-        self.userId = userId
+    init(profile: ProfileModel ) {
+        self.userId = profile.owner.id
         self.profile = profile
-        self.userAuthVM = userAuthVM
+        self.hasCompletedLoading = false
+        self.loadingSuccessful = false
     }
 
-    func getProfile() {
-        let profileWebService = ProfileWebService(userAuth: self.userAuthVM.userAuth)
-        profileWebService.getProfile(userId: self.userId, completionFailure: {() -> Void in
-            return
-            
-        }, completionSuccessful: { (profile: ProfileModel?) -> Void in
-            if let profile = profile {
-                self.profile = profile
-            }
-        })
+    func getProfileClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
+        return {
+            let profileWebService = ProfileWebService(userAuth: userAuthVM.userAuth)
+            profileWebService.getProfile(userId: self.userId, completionFailure: {() -> Void in
+                return
+                
+            }, completionSuccessful: { (profile: ProfileModel?) -> Void in
+                if let profile = profile {
+                    self.profile = profile
+                }
+            })
+        }
+    }
+    func getProfile(userAuthVM: UserAuthenticationViewModel) {
+        getProfileClosure(userAuthVM: userAuthVM)()
     }
     
     //Are you sure about profile .... no edited values?
-    func updateProfile() {
-        let profileWebService = ProfileWebService(userAuth: self.userAuthVM.userAuth)
+    func updateProfile(userAuthVM: UserAuthenticationViewModel) {
+        let profileWebService = ProfileWebService(userAuth: userAuthVM.userAuth)
             
         profileWebService.updateProfile(profileModel: self.profile, completionFailure: {() -> Void in
             self.hasCompletedLoading = true
@@ -66,7 +63,7 @@ class ProfileViewModel: ObservableObject {
                 self.profile = profile
             }
         })
-        self.userAuthVM.userAuth.isLoggedIn = true
+        userAuthVM.userAuth.isLoggedIn = true
     }
 }
 

@@ -17,7 +17,7 @@ struct ProfileView: View {
     
     init(userId: Int, userAuthVM: UserAuthenticationViewModel) {
         self.postListVM = PostListViewModel(userId: userId, userAuthVM: userAuthVM)
-        self.profileVM = ProfileViewModel(userId: userId, userAuthVM: userAuthVM)
+        self.profileVM = ProfileViewModel(userId: userId)
     }
     
     var body: some View {
