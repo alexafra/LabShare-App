@@ -24,7 +24,15 @@ class ProfileViewModel: ObservableObject {
         self.userAuthVM = userAuthVM
     }
     
-    init(userId: Int, profile: ProfileModel, userAuthVM: UserAuthenticationViewModel ) {
+    init(userId: Int, userAuthVM: UserAuthenticationViewModel, firstName: String, lastName: String) {
+        self.userId = userId
+        self.hasCompletedLoading = false
+        self.loadingSuccessful = false
+        self.userAuthVM = userAuthVM
+        self.profile = ProfileModel(firstName: firstName, lastName: lastName, ownerId: userId)
+    }
+    
+    init(userId: Int, userAuthVM: UserAuthenticationViewModel, profile: ProfileModel ) {
         self.userId = userId
         self.profile = profile
         self.userAuthVM = userAuthVM
@@ -58,6 +66,7 @@ class ProfileViewModel: ObservableObject {
                 self.profile = profile
             }
         })
+        self.userAuthVM.userAuth.isLoggedIn = true
     }
 }
 

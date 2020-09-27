@@ -39,8 +39,6 @@ class LoginRegisterWebService {
         }.resume()
     }
     
-    //Two fail conditions - successful return from api, with error messafe
-    //OR complete unsuccessful return from api and no error message
     func register (userRegisterModel: UserRegisterModel, completionFailure: @escaping(RegistrationErrorResponse?)->(), completionSuccessful: @escaping (UserModel?, UserLoginModel?) -> ()) {
         
         guard let url = URL(string: "http://127.0.0.1:8000/register"), let userRegistrationData = try? JSONEncoder().encode(userRegisterModel)  else {

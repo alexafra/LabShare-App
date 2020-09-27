@@ -298,6 +298,7 @@
 				F09C69AE251635BD00EC961C /* LoginView.swift */,
 				F0545E36251A62780037EFC9 /* RegisterView.swift */,
 				F0545E52251B0FAE0037EFC9 /* ViewHelpers.swift */,
+				F0545E64251B68090037EFC9 /* ProfileEditView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -320,7 +321,6 @@
 				1BD01AFD250473F5006C6F90 /* SearchBarView.swift */,
 				F0C21C4B2517557900EE3665 /* ProfileHeaderView.swift */,
 				1B92705224FBE07D00D8CF34 /* ProfileView.swift */,
-				F0545E64251B68090037EFC9 /* ProfileEditView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";

@@ -15,18 +15,19 @@ class PushRegisterViewModel: ObservableObject {
     @Published var loginSuccessful: Bool = false
 }
 
-class RegisterViewModel: ObservableObject {
-    var userRegisterModel: UserRegisterModel
-    var repeatPassword: String
+class RegisterViewModel {
+     var userRegisterModel: UserRegisterModel
+     var repeatPassword: String
     
-    var attemptingRegistrationAndLogin: Bool
-    var registrationFailed: Bool
+     var attemptingRegistrationAndLogin: Bool
+     var registrationFailed: Bool
     
-    var passwordError: String
-    var emailError: String
+     var passwordError: String
+     var emailError: String
     
-    var loginFailure: Bool = false
-    var loginSuccessful: Bool = false
+     var loginFailure: Bool = false
+     var loginSuccessful: Bool = false
+    
     
 //    var pushRegisterVM: PushRegisterViewModel
     var userAuthVM: UserAuthenticationViewModel

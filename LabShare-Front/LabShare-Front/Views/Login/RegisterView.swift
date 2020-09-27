@@ -25,7 +25,7 @@ struct RegisterView: View {
             if self.registerVM.loginFailure {
                 LoginView(userAuthVM: self.userAuthVM)
             } else if self.registerVM.loginSuccessful {
-                ProfileEditView(userAuthVM: self.userAuthVM)
+                ProfileEditView(userAuthVM: self.userAuthVM, firstName: self.registerVM.userRegisterModel.firstName, lastName: self.registerVM.userRegisterModel.lastName)
             } else {
                 VStack (alignment: .center) {
                     Text("Register to Lab Share")
