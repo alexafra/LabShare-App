@@ -20,24 +20,27 @@ struct ProfileEditView: View {
     var body: some View {
         VStack {
             ScrollView {
-            
-//                VStack(alignment: .center) {
                     
                 VStack(alignment: .leading) {
                     Text("occupation:")
                     TextField("occupation", text: self.$profileVM.profile.occupation)
                         .modifier(TextFieldAuthorization())
                 }.frame(minHeight: 0, maxHeight: .infinity)
+                .padding(.top)
+                
                 VStack(alignment: .leading) {
                     Text("employer:")
                     TextField("employer", text: self.$profileVM.profile.employer).modifier(TextFieldAuthorization())
                 }.frame(minHeight: 0, maxHeight: .infinity)
+                .padding(.top)
         
                 VStack(alignment: .leading) {
                     Text("bio:")
                     TextField("bio", text: self.$profileVM.profile.bio)
                         .modifier(TextFieldAuthorization())
+                        .lineLimit(nil)
                 }.frame(minHeight: 0, maxHeight: .infinity)
+                .padding(.top)
                 
                 VStack(alignment: .leading) {
                     HStack {
@@ -46,13 +49,11 @@ struct ProfileEditView: View {
                             .labelsHidden()
                         Spacer()
                     }
-                    
 //                        .modifier(TextFieldAuthorization())
-                    
-                    
-                    
                         //.border(Color.green, width: 3)
-                }.frame(minHeight: 0, maxHeight: .infinity)
+                }
+                .frame(minHeight: 0, maxHeight: .infinity)
+                .padding(.top)
                 
                 Button(action: {
                     self.profileVM.updateProfile(userAuthVM: userAuthVM)
@@ -60,7 +61,9 @@ struct ProfileEditView: View {
                     Text("Save")
                         .foregroundColor(Color.white)
                         .font(Font.title.weight(.bold))
-                }.modifier(AuthButton())
+                }
+                .modifier(AuthButton())
+                .padding(.top)
                     
             }.padding()
             .frame(minHeight: 0, maxHeight: .infinity)
@@ -68,8 +71,23 @@ struct ProfileEditView: View {
     }
 }
 
+struct TextView: UIViewRepresentable {
+    
+    typealias UIViewType = UITextView
+    var configuration = { (view: UIViewType) in }
+    
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIViewType {
+        UIViewType()
+    }
+    
+    func updateUIView(_ uiView: UIViewType, context: UIViewRepresentableContext<Self>) {
+        configuration(uiView)
+    }
+}
+
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEditView(userId: 37).environmentObject( UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: false))
+        ProfileEditView(userId: 37)
+            .environmentObject( UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: false))
     }
 }
