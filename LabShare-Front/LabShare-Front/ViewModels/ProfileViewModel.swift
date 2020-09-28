@@ -42,8 +42,14 @@ class ProfileViewModel: ObservableObject {
                 print("ERROR")
                 return
                 
+                //SUPER USER NEEDS TO CHANGE HERE
             }, completionSuccessful: { (profile: ProfileModel?) -> Void in
-                return
+                if (true) {
+                    userAuthVM.userAuth.isLoggedIn = false
+                } else {
+                    //Change to go back feed
+                }
+                
             })
         }
     }
