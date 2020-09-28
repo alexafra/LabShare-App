@@ -22,7 +22,7 @@ class UserPostsWebService: WebService {
     func generateURLString(userId: Int, postId: Int? = nil) -> String {
         var urlString =  "http://127.0.0.1:8000/users/\(userId)/posts"
         if let postId = postId {
-            urlString = urlString + String(postId)
+            urlString = urlString + "/" + String(postId)
         }
         return urlString
     }

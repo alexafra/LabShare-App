@@ -27,6 +27,23 @@ struct TextFieldAuthorization: ViewModifier {
     }
 }
 
+struct MultiLineTextFieldAuthorization: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(.top)
+            .autocapitalization(.none)
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color.green, lineWidth: 1)
+                    .shadow(radius:5))
+            
+            
+//            .padding()
+            
+    }
+}
+
 struct TextError: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -57,14 +74,19 @@ struct AuthButton: ViewModifier {
     }
 }
 
-struct ViewHelpers_Previews: PreviewProvider {
-//    @State var value: String
+struct ViewModifier_Previews: PreviewProvider {
+    @State var text: String = "Hello"
     static var previews: some View {
         VStack {
             VStack {
                 /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
                 /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
             }.frame(minHeight: 0, maxHeight: .infinity)
+            
+            VStack {
+                MultilineTextView(text: Binding.constant("Hello")).modifier(MultiLineTextFieldAuthorization())
+            }
+            
             
             VStack {
                 /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())

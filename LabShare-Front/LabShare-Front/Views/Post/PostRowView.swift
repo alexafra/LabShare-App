@@ -24,8 +24,8 @@ struct PostRowView: View {
                 .foregroundColor(Color.black)
                 
             
-            if self.postVM.post.content.count > 50 {
-                Text("\(String(self.postVM.post.content.prefix(50)))...")
+            if self.postVM.post.content.count > 100 {
+                Text("\(String(self.postVM.post.content.prefix(100)))\n...")
             } else {
                 Text(self.postVM.post.content)
             }

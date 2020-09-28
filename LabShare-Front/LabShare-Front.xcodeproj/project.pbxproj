@@ -9,13 +9,15 @@
 /* Begin PBXBuildFile section */
 		10FC88C596DF2B561DB6A527 /* Pods_LabShare_FrontTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F57E97853FC45E6A4C572E5 /* Pods_LabShare_FrontTests.framework */; };
 		1B4FC244251F010A006E4A3D /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4FC243251F010A006E4A3D /* CircleImage.swift */; };
-		1B8EC5E12521B3A200D43412 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EC5E02521B3A200D43412 /* EditPostView.swift */; };
+		1B8EC5E12521B3A200D43412 /* PostEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EC5E02521B3A200D43412 /* PostEditView.swift */; };
 		1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */; };
 		1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92705224FBE07D00D8CF34 /* ProfileView.swift */; };
 		1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFD250473F5006C6F90 /* SearchBarView.swift */; };
 		1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */; };
 		1E40D5CFC070094A1C8C84AD /* Pods_LabShare_Front.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B900551F389BECD52DCD2DD7 /* Pods_LabShare_Front.framework */; };
 		E470409723EB23F8766A4344 /* Pods_LabShare_Front_LabShare_FrontUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD28AB0AAB97049B83229062 /* Pods_LabShare_Front_LabShare_FrontUITests.framework */; };
+		F00BEBD42521F4E3007674F4 /* PostSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00BEBD32521F4E3007674F4 /* PostSettingsView.swift */; };
+		F00BEBE0252204EC007674F4 /* KitToSwiftUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00BEBDF252204EC007674F4 /* KitToSwiftUIHelper.swift */; };
 		F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A331D24F91C43004A86D9 /* AppDelegate.swift */; };
 		F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A331F24F91C43004A86D9 /* SceneDelegate.swift */; };
 		F04A332224F91C43004A86D9 /* FeedView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A332124F91C43004A86D9 /* FeedView2.swift */; };
@@ -33,7 +35,7 @@
 		F0545E2F251A5F590037EFC9 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E2E251A5F590037EFC9 /* ContainerView.swift */; };
 		F0545E37251A62780037EFC9 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E36251A62780037EFC9 /* RegisterView.swift */; };
 		F0545E42251ACE5A0037EFC9 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E41251ACE5A0037EFC9 /* RegisterViewModel.swift */; };
-		F0545E53251B0FAE0037EFC9 /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E52251B0FAE0037EFC9 /* ViewHelpers.swift */; };
+		F0545E53251B0FAE0037EFC9 /* ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E52251B0FAE0037EFC9 /* ViewModifier.swift */; };
 		F0545E58251B341E0037EFC9 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E57251B341E0037EFC9 /* RegistrationModel.swift */; };
 		F0545E65251B68090037EFC9 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0545E64251B68090037EFC9 /* ProfileEditView.swift */; };
 		F05A03A8251CD4D7001563AF /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05A03A7251CD4D7001563AF /* WebService.swift */; };
@@ -76,7 +78,7 @@
 		0AED4C041A59F839562BED82 /* Pods-LabShare-FrontTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-FrontTests.release.xcconfig"; path = "Target Support Files/Pods-LabShare-FrontTests/Pods-LabShare-FrontTests.release.xcconfig"; sourceTree = "<group>"; };
 		156CAE522A85B462637BAF62 /* Pods-LabShare-Front.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front.debug.xcconfig"; path = "Target Support Files/Pods-LabShare-Front/Pods-LabShare-Front.debug.xcconfig"; sourceTree = "<group>"; };
 		1B4FC243251F010A006E4A3D /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CircleImage.swift; path = ../ViewHelpers/CircleImage.swift; sourceTree = "<group>"; };
-		1B8EC5E02521B3A200D43412 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
+		1B8EC5E02521B3A200D43412 /* PostEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditView.swift; sourceTree = "<group>"; };
 		1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		1B92705224FBE07D00D8CF34 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1BD01AFD250473F5006C6F90 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,8 @@
 		94BB4FA7E2526214CB88C49D /* Pods-LabShare-Front-LabShare-FrontUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front-LabShare-FrontUITests.release.xcconfig"; path = "Target Support Files/Pods-LabShare-Front-LabShare-FrontUITests/Pods-LabShare-Front-LabShare-FrontUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B900551F389BECD52DCD2DD7 /* Pods_LabShare_Front.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_Front.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD28AB0AAB97049B83229062 /* Pods_LabShare_Front_LabShare_FrontUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_Front_LabShare_FrontUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F00BEBD32521F4E3007674F4 /* PostSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSettingsView.swift; sourceTree = "<group>"; };
+		F00BEBDF252204EC007674F4 /* KitToSwiftUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitToSwiftUIHelper.swift; sourceTree = "<group>"; };
 		F04A331A24F91C43004A86D9 /* LabShare-Front.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LabShare-Front.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04A331D24F91C43004A86D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F04A331F24F91C43004A86D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,7 +114,7 @@
 		F0545E2E251A5F590037EFC9 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		F0545E36251A62780037EFC9 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		F0545E41251ACE5A0037EFC9 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
-		F0545E52251B0FAE0037EFC9 /* ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
+		F0545E52251B0FAE0037EFC9 /* ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier.swift; sourceTree = "<group>"; };
 		F0545E57251B341E0037EFC9 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		F0545E64251B68090037EFC9 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		F05A03A7251CD4D7001563AF /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -182,6 +186,13 @@
 				0AED4C041A59F839562BED82 /* Pods-LabShare-FrontTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F00BEBDB25220478007674F4 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		F04A331124F91C43004A86D9 = {
@@ -265,6 +276,7 @@
 		F04A334E24F91C6A004A86D9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F00BEBDB25220478007674F4 /* New Group */,
 				F0545E2E251A5F590037EFC9 /* ContainerView.swift */,
 				F0A1222425218C1B00478FD0 /* ViewHelpers */,
 				F0A1222325218C0100478FD0 /* Feed */,
@@ -306,7 +318,6 @@
 				F09C69A62516216700EC961C /* SetUpView.swift */,
 				F09C69AE251635BD00EC961C /* LoginView.swift */,
 				F0545E36251A62780037EFC9 /* RegisterView.swift */,
-				F0545E52251B0FAE0037EFC9 /* ViewHelpers.swift */,
 				F060778D25207FC900503D2E /* RegisterViewContainer.swift */,
 			);
 			path = Login;
@@ -324,6 +335,8 @@
 		F0A1222425218C1B00478FD0 /* ViewHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				F0545E52251B0FAE0037EFC9 /* ViewModifier.swift */,
+				F00BEBDF252204EC007674F4 /* KitToSwiftUIHelper.swift */,
 			);
 			path = ViewHelpers;
 			sourceTree = "<group>";
@@ -335,7 +348,8 @@
 				F04A335124F91CAA004A86D9 /* PostRowView.swift */,
 				F04A335824FA234F004A86D9 /* PostDetailView.swift */,
 				F0D331DB250390CB008A280A /* PostHeaderView.swift */,
-				1B8EC5E02521B3A200D43412 /* EditPostView.swift */,
+				1B8EC5E02521B3A200D43412 /* PostEditView.swift */,
+				F00BEBD32521F4E3007674F4 /* PostSettingsView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -557,8 +571,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0545E42251ACE5A0037EFC9 /* RegisterViewModel.swift in Sources */,
+				F00BEBE0252204EC007674F4 /* KitToSwiftUIHelper.swift in Sources */,
 				F0545E18251A564A0037EFC9 /* FeedView.swift in Sources */,
-				F0545E53251B0FAE0037EFC9 /* ViewHelpers.swift in Sources */,
+				F0545E53251B0FAE0037EFC9 /* ViewModifier.swift in Sources */,
 				F05A03A8251CD4D7001563AF /* WebService.swift in Sources */,
 				F09C69B72516446900EC961C /* StartView.swift in Sources */,
 				F09C69B52516408200EC961C /* UserModel.swift in Sources */,
@@ -573,6 +588,7 @@
 				F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */,
 				1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */,
 				F0545E2F251A5F590037EFC9 /* ContainerView.swift in Sources */,
+				F00BEBD42521F4E3007674F4 /* PostSettingsView.swift in Sources */,
 				F0545E65251B68090037EFC9 /* ProfileEditView.swift in Sources */,
 				F05A03E0251E466D001563AF /* UserFeedWebService.swift in Sources */,
 				F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */,
@@ -580,7 +596,7 @@
 				F060779325207FEF00503D2E /* RegisterViewRouter.swift in Sources */,
 				F05A03B6251DAE08001563AF /* UserPostsWebService.swift in Sources */,
 				F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */,
-				1B8EC5E12521B3A200D43412 /* EditPostView.swift in Sources */,
+				1B8EC5E12521B3A200D43412 /* PostEditView.swift in Sources */,
 				F09C69A72516216700EC961C /* SetUpView.swift in Sources */,
 				F09C69AF251635BD00EC961C /* LoginView.swift in Sources */,
 				F04A332224F91C43004A86D9 /* FeedView2.swift in Sources */,

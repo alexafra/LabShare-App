@@ -110,6 +110,11 @@ class PostViewModel: ObservableObject {
     init (post: PostModel) {
         self.post = post
     }
+    
+    init (userId: Int, postId: Int) {
+        self.post = PostModel(userId: userId, postId: postId)
+    }
+    
     init () {
         self.post = PostModel()
     }
@@ -117,20 +122,27 @@ class PostViewModel: ObservableObject {
     //When you transition to new view (for updating), you want to still use a PostViewModel BUT you need to make sure its a copy. THis can be done simply by using this initialiser i believe, because PostModel is a struct and structs are copy by value
     
     func getUserPost(userAuthVM: UserAuthenticationViewModel) {
-        let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
+        getPostClosure(userAuthVM: userAuthVM)()
+    }
+    
+    func getPostClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
+        return {
+            let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
 
-        userPostWebService.getUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
+            userPostWebService.getUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
+                    return
+                },
+            completionSuccessful: { (post: PostModel?) -> Void in
+                if let post = post {
+                    self.post = post
+                }
                 return
-            },
-        completionSuccessful: { (post: PostModel?) -> Void in
-            if let post = post {
-                self.post = post
-            }
-        })
+            })
+        }
     }
 
     //Are you sure about profile .... no edited values?
-    func updatePost(userAuthVM: UserAuthenticationViewModel, newPost: PostModel) {
+    func updatePost(userAuthVM: UserAuthenticationViewModel) {
         //CHeck if there has been any change
         if post.content.isEmpty || post.title.isEmpty {
             return
@@ -138,7 +150,7 @@ class PostViewModel: ObservableObject {
         }
         self.makingRequest = true
         let userPostsWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
-        userPostsWebService.updateUserPost(userId: self.post.author.id, postModel: newPost,
+        userPostsWebService.updateUserPost(userId: self.post.author.id, postModel: self.post,
            completionFailure: {() -> Void in
                 self.makingRequest = false
                 self.requestSuccessful = false

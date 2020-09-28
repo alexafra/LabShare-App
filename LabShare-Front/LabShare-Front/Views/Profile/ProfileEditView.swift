@@ -21,6 +21,7 @@ struct ProfileEditView: View {
         VStack {
             ScrollView {
                     
+                
                 VStack(alignment: .leading) {
                     Text("occupation:")
                     TextField("occupation", text: self.$profileVM.profile.occupation)
@@ -34,11 +35,21 @@ struct ProfileEditView: View {
                 }.frame(minHeight: 0, maxHeight: .infinity)
                 .padding(.top)
         
-                VStack(alignment: .leading) {
-                    Text("bio:")
-                    TextField("bio", text: self.$profileVM.profile.bio)
-                        .modifier(TextFieldAuthorization())
-                        .lineLimit(nil)
+//                VStack(alignment: .leading) {
+//                    Text("bio:")
+//                    TextField("bio", text: self.$profileVM.profile.bio)
+//                        .modifier(TextFieldAuthorization())
+//                        .lineLimit(nil)
+//                }.frame(minHeight: 0, maxHeight: .infinity)
+//                .padding(.top)
+                VStack() {
+//                    Text("bio:")
+                    MultilineTextView(text: self.$profileVM.profile.bio)
+                        .modifier(MultiLineTextFieldAuthorization())
+                    
+//                    ("bio", text: self.$profileVM.profile.bio)
+//                        .modifier(TextFieldAuthorization())
+//                        .lineLimit(nil)
                 }.frame(minHeight: 0, maxHeight: .infinity)
                 .padding(.top)
                 
@@ -67,6 +78,7 @@ struct ProfileEditView: View {
                     
             }.padding()
             .frame(minHeight: 0, maxHeight: .infinity)
+            
         }.onAppear(perform: self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
     }
 }
