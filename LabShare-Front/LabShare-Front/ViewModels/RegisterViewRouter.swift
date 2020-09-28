@@ -14,9 +14,15 @@ class RegisterViewRouter: ObservableObject {
     
     let objectWillChange = PassthroughSubject<RegisterViewRouter,Never>()
     
-    var currentPage: String = "Register" {
+    var currentPage: RegisterRouterEnum = RegisterRouterEnum.Register {
         didSet {
             objectWillChange.send(self)
         }
     }
+}
+
+enum RegisterRouterEnum: String {
+    case Register = "Register"
+    case ProfileEdit = "ProfileEdit"
+    case Login = "Login"
 }

@@ -11,7 +11,7 @@ import Foundation
 struct ProfileModel: Codable, Identifiable, Hashable {
     var id: Int
     var bio: String
-    var dob: String
+    var dob: Date
     var occupation: String
     var employer: String
     var owner: UserModel
@@ -26,7 +26,7 @@ struct ProfileModel: Codable, Identifiable, Hashable {
         case owner
     }
     
-    init(id: Int, bio: String, dob: String, occupation: String, employer: String, owner: UserModel) {
+    init(id: Int, bio: String, dob: Date, occupation: String, employer: String, owner: UserModel) {
         self.id = id
         self.bio = bio
         self.dob = dob
@@ -40,7 +40,7 @@ struct ProfileModel: Codable, Identifiable, Hashable {
         self.owner.id = ownerId
     }
     init() {
-        self.init(id: -1, bio: "", dob: "", occupation: "", employer: "", owner: UserModel())
+        self.init(id: -1, bio: "", dob: Date(), occupation: "", employer: "", owner: UserModel())
     }
     
 //    init(profile: ProfileModel) {

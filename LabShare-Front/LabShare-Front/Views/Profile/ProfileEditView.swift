@@ -10,30 +10,19 @@ import SwiftUI
 
 struct ProfileEditView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    //    @Enviro var registerViewRouter: RegisterViewRouter
     @ObservedObject var profileVM: ProfileViewModel
 
     
     init(userId: Int) {
         self.profileVM = ProfileViewModel(userId: userId)
-//        self.registerViewRouter = registerViewRouter
     }
-//    init(userAuthVM: UserAuthenticationViewModel, firstName: String, lastName: String) {
-//        self.profileVM = ProfileViewModel(userId: userAuthVM.userAuth.id, userAuthVM: userAuthVM, firstName: firstName, lastName: lastName)
-//    }
     
     var body: some View {
         VStack {
-            VStack(alignment: .center) {
-//                Text("\(profileVM.profile.owner.firstName) \(profileVM.profile.owner.lastName)")
-//                    .font(.largeTitle)
-//                    .fontWeight(.semibold)
-                VStack(alignment: .leading) {
-                    Text("dob:")
-                    TextField("dob", text: self.$profileVM.profile.dob)
-                        .modifier(TextFieldAuthorization())
-                }.frame(minHeight: 0, maxHeight: .infinity)
+            ScrollView {
             
+//                VStack(alignment: .center) {
+                    
                 VStack(alignment: .leading) {
                     Text("occupation:")
                     TextField("occupation", text: self.$profileVM.profile.occupation)
@@ -49,6 +38,22 @@ struct ProfileEditView: View {
                     TextField("bio", text: self.$profileVM.profile.bio)
                         .modifier(TextFieldAuthorization())
                 }.frame(minHeight: 0, maxHeight: .infinity)
+                
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("dob:")
+                        DatePicker("", selection: self.$profileVM.profile.dob, in: Date()..., displayedComponents: .date)
+                            .labelsHidden()
+                        Spacer()
+                    }
+                    
+//                        .modifier(TextFieldAuthorization())
+                    
+                    
+                    
+                        //.border(Color.green, width: 3)
+                }.frame(minHeight: 0, maxHeight: .infinity)
+                
                 Button(action: {
                     self.profileVM.updateProfile(userAuthVM: userAuthVM)
                 }) {
@@ -56,8 +61,10 @@ struct ProfileEditView: View {
                         .foregroundColor(Color.white)
                         .font(Font.title.weight(.bold))
                 }.modifier(AuthButton())
+                    
             }.padding()
-        }.onAppear()
+            .frame(minHeight: 0, maxHeight: .infinity)
+        }.onAppear(perform: self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
     }
 }
 

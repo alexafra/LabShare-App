@@ -49,6 +49,7 @@
 		F09C69B52516408200EC961C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B42516408200EC961C /* UserModel.swift */; };
 		F09C69B72516446900EC961C /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B62516446900EC961C /* StartView.swift */; };
 		F09C69B92516450600EC961C /* UserAuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69B82516450600EC961C /* UserAuthenticationViewModel.swift */; };
+		F0A122192521867E00478FD0 /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A122182521867E00478FD0 /* ProfileSettingsView.swift */; };
 		F0C21C4C2517557900EE3665 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C21C4B2517557900EE3665 /* ProfileHeaderView.swift */; };
 		F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D331DB250390CB008A280A /* PostHeaderView.swift */; };
 /* End PBXBuildFile section */
@@ -73,7 +74,7 @@
 /* Begin PBXFileReference section */
 		0AED4C041A59F839562BED82 /* Pods-LabShare-FrontTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-FrontTests.release.xcconfig"; path = "Target Support Files/Pods-LabShare-FrontTests/Pods-LabShare-FrontTests.release.xcconfig"; sourceTree = "<group>"; };
 		156CAE522A85B462637BAF62 /* Pods-LabShare-Front.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front.debug.xcconfig"; path = "Target Support Files/Pods-LabShare-Front/Pods-LabShare-Front.debug.xcconfig"; sourceTree = "<group>"; };
-		1B4FC243251F010A006E4A3D /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CircleImage.swift; path = ../Post/CircleImage.swift; sourceTree = "<group>"; };
+		1B4FC243251F010A006E4A3D /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CircleImage.swift; path = ../ViewHelpers/CircleImage.swift; sourceTree = "<group>"; };
 		1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		1B92705224FBE07D00D8CF34 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1BD01AFD250473F5006C6F90 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -124,6 +125,7 @@
 		F09C69B42516408200EC961C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		F09C69B62516446900EC961C /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		F09C69B82516450600EC961C /* UserAuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewModel.swift; sourceTree = "<group>"; };
+		F0A122182521867E00478FD0 /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
 		F0C21C4B2517557900EE3665 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		F0D331DB250390CB008A280A /* PostHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderView.swift; sourceTree = "<group>"; };
 		F383668E12D6B29CB9CA91DE /* Pods-LabShare-Front.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front.release.xcconfig"; path = "Target Support Files/Pods-LabShare-Front/Pods-LabShare-Front.release.xcconfig"; sourceTree = "<group>"; };
@@ -262,8 +264,8 @@
 			isa = PBXGroup;
 			children = (
 				F0545E2E251A5F590037EFC9 /* ContainerView.swift */,
-				1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */,
-				F0545E17251A564A0037EFC9 /* FeedView.swift */,
+				F0A1222425218C1B00478FD0 /* ViewHelpers */,
+				F0A1222325218C0100478FD0 /* Feed */,
 				F0C21C502517558100EE3665 /* Profile */,
 				F0C21C472517541800EE3665 /* Post */,
 				F09C69AD2516303900EC961C /* Login */,
@@ -303,10 +305,25 @@
 				F09C69AE251635BD00EC961C /* LoginView.swift */,
 				F0545E36251A62780037EFC9 /* RegisterView.swift */,
 				F0545E52251B0FAE0037EFC9 /* ViewHelpers.swift */,
-				F0545E64251B68090037EFC9 /* ProfileEditView.swift */,
 				F060778D25207FC900503D2E /* RegisterViewContainer.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		F0A1222325218C0100478FD0 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				F0545E17251A564A0037EFC9 /* FeedView.swift */,
+				1BD01AFD250473F5006C6F90 /* SearchBarView.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		F0A1222425218C1B00478FD0 /* ViewHelpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewHelpers;
 			sourceTree = "<group>";
 		};
 		F0C21C472517541800EE3665 /* Post */ = {
@@ -324,9 +341,11 @@
 			isa = PBXGroup;
 			children = (
 				1B4FC243251F010A006E4A3D /* CircleImage.swift */,
-				1BD01AFD250473F5006C6F90 /* SearchBarView.swift */,
+				1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */,
 				F0C21C4B2517557900EE3665 /* ProfileHeaderView.swift */,
+				F0545E64251B68090037EFC9 /* ProfileEditView.swift */,
 				1B92705224FBE07D00D8CF34 /* ProfileView.swift */,
+				F0A122182521867E00478FD0 /* ProfileSettingsView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -544,6 +563,7 @@
 				F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */,
 				F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */,
 				1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */,
+				F0A122192521867E00478FD0 /* ProfileSettingsView.swift in Sources */,
 				F0545E37251A62780037EFC9 /* RegisterView.swift in Sources */,
 				F0C21C4C2517557900EE3665 /* ProfileHeaderView.swift in Sources */,
 				1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */,

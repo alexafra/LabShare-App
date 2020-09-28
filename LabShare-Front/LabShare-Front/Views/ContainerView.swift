@@ -11,10 +11,10 @@ import SwiftUI
 struct ContainerView: View {
     init() {
             //Use this if NavigationBarTitle is with Large Font
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
-
-        //Use this if NavigationBarTitle is with displayMode = .inline
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
+//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
+//
+//        //Use this if NavigationBarTitle is with displayMode = .inline
+//        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
 
         UINavigationBar.appearance().barTintColor = UIColor.white
 //        UINavigationBar.appearance().tintColor = .green
