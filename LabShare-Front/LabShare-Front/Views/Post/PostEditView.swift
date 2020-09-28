@@ -19,7 +19,7 @@ struct PostEditView: View {
     
     //    @ViewBuilder
     var body: some View {
-        VStack (alignment:.leading) {
+        VStack (alignment:.center) {
             PostHeaderView(postVM: self.postVM)
             VStack {
                 HStack {
@@ -48,23 +48,32 @@ struct PostEditView: View {
                 MultilineTextView(text: self.$postVM.post.content)
             }
             
-            
-            HStack {
-                Button(action: {
-                    self.showingAlert = true
-                }){
-                    Text("Cancel")
-                }.alert(isPresented:$showingAlert) {
-                    Alert(title: Text("Are you sure you want to cancel"), message: Text("All edits will be lost"), primaryButton: .destructive(Text("Continue")) {
-                    }, secondaryButton: .cancel())
-                }
-                
-                Spacer()
-                Button(action: {
-                }){
-                    Text("Save")
-                }
+            Button(action: {
+                self.postVM.updatePost(userAuthVM: self.userAuthVM)
+            }) {
+                Text("Save")
+                    .foregroundColor(Color.white)
+                    .font(Font.title.weight(.bold))
             }
+            .modifier(AuthButton())
+            .padding(.bottom)
+            
+//            HStack {
+//                Button(action: {
+//                    self.showingAlert = true
+//                }){
+//                    Text("Cancel")
+//                }.alert(isPresented:$showingAlert) {
+//                    Alert(title: Text("Are you sure you want to cancel"), message: Text("All edits will be lost"), primaryButton: .destructive(Text("Continue")) {
+//                    }, secondaryButton: .cancel())
+//                }
+//
+//                Spacer()
+//                Button(action: {
+//                }){
+//                    Text("Save")
+//                }
+//            }
             
             Spacer()
         }.padding([.top, .leading, .trailing])
@@ -82,3 +91,25 @@ struct PostEditView_Previews: PreviewProvider {
         
     }
 }
+
+
+//                    .foregroundColor(.black)
+//                        .sheet(isPresented: $isEdit) {
+//                            PostEditView(postVM: PostViewModel(post: self.postVM.post), oldpostVM: self.postVM, isPresented: self.$isEdit)
+//                    }
+//                    Button(action: {
+//                        self.showingAlert = true
+//
+//                    }){
+//                        Image(systemName: "trash")
+//                            .imageScale(.large)
+//                        Text("Delete Post")
+//
+//                    }.foregroundColor(.black)
+//                        .padding(.top, 10)
+//                        .alert(isPresented:$showingAlert) {
+//                            Alert(title: Text("Are you sure you want to delete this post?"), primaryButton: .destructive(Text("Delete")) {
+//                                    // Actions
+//                            }, secondaryButton: .cancel())
+//                        }
+//                }

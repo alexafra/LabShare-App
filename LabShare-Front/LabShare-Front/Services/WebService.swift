@@ -118,8 +118,9 @@ class WebService {
             
             guard let data = data, let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode), error == nil else {
                 DispatchQueue.main.async {
-                    completionFailure()
                     print("Failed to fetch data \(error.debugDescription)")
+                    completionFailure()
+                    
                     return
                 }
                 return

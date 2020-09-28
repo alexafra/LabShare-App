@@ -34,6 +34,7 @@ class ProfileViewModel: ObservableObject {
         return {
             let profileWebService = ProfileWebService(userAuth: userAuthVM.userAuth)
             profileWebService.getProfile(userId: self.userId, completionFailure: {() -> Void in
+                print("ERROR")
                 return
                 
             }, completionSuccessful: { (profile: ProfileModel?) -> Void in

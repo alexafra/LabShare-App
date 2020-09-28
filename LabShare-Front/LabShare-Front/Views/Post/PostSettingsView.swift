@@ -32,6 +32,27 @@ struct PostSettingsView: View {
     }
 }
 
+//                    .foregroundColor(.black)
+//                        .sheet(isPresented: $isEdit) {
+//                            PostEditView(postVM: PostViewModel(post: self.postVM.post), oldpostVM: self.postVM, isPresented: self.$isEdit)
+//                    }
+//                    Button(action: {
+//                        self.showingAlert = true
+//
+//                    }){
+//                        Image(systemName: "trash")
+//                            .imageScale(.large)
+//                        Text("Delete Post")
+//
+//                    }.foregroundColor(.black)
+//                        .padding(.top, 10)
+//                        .alert(isPresented:$showingAlert) {
+//                            Alert(title: Text("Are you sure you want to delete this post?"), primaryButton: .destructive(Text("Delete")) {
+//                                    // Actions
+//                            }, secondaryButton: .cancel())
+//                        }
+//                }
+
 struct PostSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileSettingsView(userId: 37)

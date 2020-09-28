@@ -33,26 +33,7 @@ struct PostDetailView: View {
                             Image(systemName: "line.horizontal.3").font(Font.largeTitle)
                         })
                     }
-//                    .foregroundColor(.black)
-//                        .sheet(isPresented: $isEdit) {
-//                            PostEditView(postVM: PostViewModel(post: self.postVM.post), oldpostVM: self.postVM, isPresented: self.$isEdit)
-//                    }
-//                    Button(action: {
-//                        self.showingAlert = true
-//                        
-//                    }){
-//                        Image(systemName: "trash")
-//                            .imageScale(.large)
-//                        Text("Delete Post")
-//                        
-//                    }.foregroundColor(.black)
-//                        .padding(.top, 10)
-//                        .alert(isPresented:$showingAlert) {
-//                            Alert(title: Text("Are you sure you want to delete this post?"), primaryButton: .destructive(Text("Delete")) {
-//                                    // Actions
-//                            }, secondaryButton: .cancel())
-//                        }
-//                }
+
                 
             }
             
@@ -60,22 +41,9 @@ struct PostDetailView: View {
                 .font(Font.footnote).fontWeight(.thin)
             Text("\n" + self.postVM.post.content)
             
-            
-            VStack(alignment: .leading) {
-                Text("User Details:").font(.subheadline).fontWeight(.medium).foregroundColor(Color.black)
-                Text("Name: \(self.postVM.post.author.firstName) \(self.postVM.post.author.lastName)")
-                    .font(.caption).foregroundColor(Color.black)
-                Text("Email: \(self.postVM.post.author.email)")
-                    .font(.caption).foregroundColor(Color.black)
-                NavigationLink(destination: ProfileView(userId: self.postVM.post.author.id)) {
-                    Text("See more")
-                        .font(.footnote)
-                }
-            }.padding(.all, 7)
-                .padding(.top)
-            
             Spacer()
         }.padding([.top, .leading, .trailing])
+        .onAppear(perform: postVM.getPostClosure(userAuthVM: userAuthVM))
     }
 }
 
