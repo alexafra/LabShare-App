@@ -25,13 +25,14 @@ struct ProfileHeaderView: View {
                     .padding()
 //                    .border(Color.green, width: 3)
                 Spacer()
-                NavigationLink(
-                    destination: ProfileSettingsView(userId: profileVM.userId),
-                    label: {
-                        Image(systemName: "line.horizontal.3").font(Font.largeTitle)
-                    })
-                
-                
+                if (profileVM.profile.owner.id == userAuthVM.userAuth.id) {
+                    NavigationLink(
+                        destination: ProfileSettingsView(profileVM: profileVM),
+                        label: {
+                            Image(systemName: "line.horizontal.3").font(Font.largeTitle)
+                        })
+                    
+                }
             }//.border(Color.green, width: 3)
             
 

@@ -29,6 +29,24 @@ class ProfileViewModel: ObservableObject {
         self.hasCompletedLoading = false
         self.loadingSuccessful = false
     }
+    
+    func deleteProfile(userAuthVM: UserAuthenticationViewModel) {
+        deleteProfileClosure(userAuthVM: userAuthVM)()
+    }
+    
+    func deleteProfileClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
+        return {
+            let profileWebService = ProfileWebService(userAuth: userAuthVM.userAuth)
+            
+            profileWebService.deleteUser(userId: self.userId, completionFailure: {() -> Void in
+                print("ERROR")
+                return
+                
+            }, completionSuccessful: { (profile: ProfileModel?) -> Void in
+                return
+            })
+        }
+    }
 
     func getProfileClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
         return {

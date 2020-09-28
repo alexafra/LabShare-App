@@ -9,21 +9,27 @@
 import SwiftUI
 
 struct ProfileSettingsView: View {
-    @State var userId: Int
+//    @State var userId: Int
+    @ObservedObject var profileVM: ProfileViewModel
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     
     var body: some View {
         VStack {
             List {
-                NavigationLink(destination: ProfileEditView(userId: self.userId)) {
+                NavigationLink(destination: ProfileEditView(userId: self.profileVM.userId)) {
                     HStack {
                         Image(systemName: "pencil")
                         Text("Edit Profile")
                     }
                 }.buttonStyle(PlainButtonStyle())
                 HStack {
-                    Image(systemName: "trash")
-                        .imageScale(.large)
-                    Text("Delete Profile")
+                    Button(action: self.profileVM.deleteProfileClosure(userAuthVM: userAuthVM)) {
+                        HStack {
+                            Image(systemName: "trash")
+                            Text("Delete User")
+                        }
+                    }
+                    
                 }
             }
         }.navigationBarTitle(Text("Settings"), displayMode: .inline)
@@ -33,6 +39,7 @@ struct ProfileSettingsView: View {
 
 struct ProfileSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileSettingsView(userId: 37)
+        ProfileSettingsView(profileVM: ProfileViewModel(userId: 37))
+            .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
     }
 }

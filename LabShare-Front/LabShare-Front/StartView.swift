@@ -37,6 +37,6 @@ struct StartView_Previews: PreviewProvider {
     static var previews: some View {
         StartView()
             .environmentObject(UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false))
-            .environmentObject(RegisterViewRouter())
+            .environmentObject(AppState())
     }
 }

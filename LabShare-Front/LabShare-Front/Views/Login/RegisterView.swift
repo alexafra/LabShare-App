@@ -11,7 +11,7 @@ import SwiftUI
 //Successful register equals login
 struct RegisterView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @EnvironmentObject var registerViewRouter: RegisterViewRouter
+    @EnvironmentObject var registerViewRouter: AppState
     @ObservedObject var registerVM: RegisterViewModel
     
     
@@ -128,7 +128,7 @@ struct RegisterView_Previews: PreviewProvider {
             RegisterView(userAuthVM: UserAuthenticationViewModel())
                 .environmentObject(
                     UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false)
-                ).environmentObject(RegisterViewRouter())
+                ).environmentObject(AppState())
                 .navigationBarTitle(Text(""), displayMode: .inline)
                 .navigationBarHidden(true)
 //

@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         let userAuthVM = UserAuthenticationViewModel()
-        let registerViewRouter = RegisterViewRouter()
+        let registerViewRouter = AppState()
         let contentView = StartView()
             .environmentObject(userAuthVM)
             .environmentObject(registerViewRouter)

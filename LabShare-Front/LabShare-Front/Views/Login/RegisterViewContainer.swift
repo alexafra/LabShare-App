@@ -10,15 +10,15 @@ import SwiftUI
 
 struct RegisterViewContainer: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @EnvironmentObject var registerViewRouter: RegisterViewRouter
+    @EnvironmentObject var registerViewRouter: AppState
     
     var body: some View {
         VStack {
-            if registerViewRouter.currentPage == RegisterRouterEnum.Register {
+            if registerViewRouter.RegisterPage == RegisterRouterEnum.Register {
                 RegisterView(userAuthVM: userAuthVM)
-            } else if registerViewRouter.currentPage == RegisterRouterEnum.ProfileEdit {
+            } else if registerViewRouter.RegisterPage == RegisterRouterEnum.ProfileEdit {
                 ProfileEditView(userId: userAuthVM.userAuth.id)
-            } else if registerViewRouter.currentPage == RegisterRouterEnum.Login {
+            } else if registerViewRouter.RegisterPage == RegisterRouterEnum.Login {
                 LoginView(userAuthVM: userAuthVM)
             } else {
                 Text("Hello World!")
@@ -30,6 +30,6 @@ struct RegisterViewContainer: View {
 struct RegisterViewContainer_Previews: PreviewProvider {
     static var previews: some View {
         RegisterViewContainer().environmentObject(UserAuthenticationViewModel())
-            .environmentObject(RegisterViewRouter())
+            .environmentObject(AppState())
     }
 }

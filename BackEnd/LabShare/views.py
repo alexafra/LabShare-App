@@ -55,7 +55,7 @@ class SingleUser(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Upda
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
-class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
+class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     permission_classes = [IsAuthenticated]
     lookup_field = 'owner__id'
     lookup_url_kwarg = 'user_id'

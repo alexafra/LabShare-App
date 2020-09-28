@@ -14,7 +14,7 @@ struct PostListView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if userAuthVM.userAuth.id == postListVM.userId {
+            if userAuthVM.userAuth.id == postListVM.userId || postListVM.postListType == PostListType.Feed {
                 Text("Create new post").font(Font.headline)
                 Divider()
                 HStack {

@@ -55,6 +55,6 @@ struct PostSettingsView: View {
 
 struct PostSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileSettingsView(userId: 37)
+        PostSettingsView(userId: 37, postId: 27)
     }
 }
