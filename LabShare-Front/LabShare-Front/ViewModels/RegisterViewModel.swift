@@ -57,7 +57,7 @@ class RegisterViewModel: ObservableObject {
 //    }
 
 //    func register(loginSuccessful: inout Bool, loginFailure: inout Bool) {
-    func register(userAuthVM: UserAuthenticationViewModel, registerViewRouter: AppState) {
+    func register(userAuthVM: UserAuthenticationViewModel, appState: AppState) {
         if (!self.userRegisterModel.password.isEmpty && self.userRegisterModel.password == self.repeatPassword && !self.userRegisterModel.email.isEmpty && !self.userRegisterModel.firstName.isEmpty && !self.userRegisterModel.lastName.isEmpty) {
 
             self.attemptingRegistrationAndLogin = true
@@ -84,16 +84,16 @@ class RegisterViewModel: ObservableObject {
                         LoginRegisterWebService().login(user: userLoginModel,
                             completionFailure: { () -> Void in
                                 self.attemptingRegistrationAndLogin = false
-                                registerViewRouter.registerPage = RegisterRouterEnum.Login
+                                appState.registerPage = RegisterRouterEnum.Login
                             },
                             completionSuccessful: { (userAuthModel: UserAuthenticationModel?) in
                                 self.attemptingRegistrationAndLogin = false
                                 if let userSettings = userAuthModel {
-                                    registerViewRouter.registerPage = RegisterRouterEnum.ProfileEdit
+                                    appState.registerPage = RegisterRouterEnum.ProfileEdit
                                     userAuthVM.userAuth.id = userSettings.id
                                     userAuthVM.userAuth.token = userSettings.token
                                 } else {
-                                    registerViewRouter.registerPage = RegisterRouterEnum.Login
+                                    appState.registerPage = RegisterRouterEnum.Login
                                 }
                             }
                         )

@@ -11,7 +11,7 @@ import SwiftUI
 //Successful register equals login
 struct RegisterView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @EnvironmentObject var registerViewRouter: AppState
+    @EnvironmentObject var appState: AppState
     @ObservedObject var registerVM: RegisterViewModel
     
     
@@ -86,7 +86,7 @@ struct RegisterView: View {
                 }
             }.frame(minHeight: 0, maxHeight: .infinity)
             Button(action: {
-                self.registerVM.register(userAuthVM: self.userAuthVM, registerViewRouter: self.registerViewRouter)
+                self.registerVM.register(userAuthVM: self.userAuthVM, appState: self.appState)
             }) {
                 Text("Register")
                     .foregroundColor(Color.white)

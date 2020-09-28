@@ -21,13 +21,7 @@ class AppState: ObservableObject {
         deletePostPage = PostDeleteRouterEnum.NotDeletePost
         
     }
-//    let objectWillChange = PassthroughSubject<RegisterViewRouter,Never>()
-//    
-//    var currentPage: RegisterRouterEnum = RegisterRouterEnum.Register {
-//        didSet {
-//            objectWillChange.send(self)
-//        }
-//    }
+    
 }
 
 enum RegisterRouterEnum: String {
