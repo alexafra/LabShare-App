@@ -84,16 +84,16 @@ class RegisterViewModel: ObservableObject {
                         LoginRegisterWebService().login(user: userLoginModel,
                             completionFailure: { () -> Void in
                                 self.attemptingRegistrationAndLogin = false
-                                registerViewRouter.RegisterPage = RegisterRouterEnum.Login
+                                registerViewRouter.registerPage = RegisterRouterEnum.Login
                             },
                             completionSuccessful: { (userAuthModel: UserAuthenticationModel?) in
                                 self.attemptingRegistrationAndLogin = false
                                 if let userSettings = userAuthModel {
-                                    registerViewRouter.RegisterPage = RegisterRouterEnum.ProfileEdit
+                                    registerViewRouter.registerPage = RegisterRouterEnum.ProfileEdit
                                     userAuthVM.userAuth.id = userSettings.id
                                     userAuthVM.userAuth.token = userSettings.token
                                 } else {
-                                    registerViewRouter.RegisterPage = RegisterRouterEnum.Login
+                                    registerViewRouter.registerPage = RegisterRouterEnum.Login
                                 }
                             }
                         )

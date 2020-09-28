@@ -14,11 +14,11 @@ struct RegisterViewContainer: View {
     
     var body: some View {
         VStack {
-            if registerViewRouter.RegisterPage == RegisterRouterEnum.Register {
+            if registerViewRouter.registerPage == RegisterRouterEnum.Register {
                 RegisterView(userAuthVM: userAuthVM)
-            } else if registerViewRouter.RegisterPage == RegisterRouterEnum.ProfileEdit {
+            } else if registerViewRouter.registerPage == RegisterRouterEnum.ProfileEdit {
                 ProfileEditView(userId: userAuthVM.userAuth.id)
-            } else if registerViewRouter.RegisterPage == RegisterRouterEnum.Login {
+            } else if registerViewRouter.registerPage == RegisterRouterEnum.Login {
                 LoginView(userAuthVM: userAuthVM)
             } else {
                 Text("Hello World!")

@@ -11,12 +11,15 @@ import Combine
 import SwiftUI
 
 class AppState: ObservableObject {
-    @Published var RegisterPage: RegisterRouterEnum
-//    @Published var DeleteProfilePage: ProfileDeleteRouterEnum
-//    @Published var DeletePostPage: PostDeleteRouterEnum
+    @Published var registerPage: RegisterRouterEnum
+    @Published var deleteProfilePage: ProfileDeleteRouterEnum
+    @Published var deletePostPage: PostDeleteRouterEnum
     
     init () {
-        RegisterPage = RegisterRouterEnum.Register
+        registerPage = RegisterRouterEnum.Register
+        deleteProfilePage = ProfileDeleteRouterEnum.NotDeleteProfile
+        deletePostPage = PostDeleteRouterEnum.NotDeletePost
+        
     }
 //    let objectWillChange = PassthroughSubject<RegisterViewRouter,Never>()
 //    
@@ -34,13 +37,13 @@ enum RegisterRouterEnum: String {
 }
 
 enum ProfileDeleteRouterEnum: String {
-    case Delete
-    case NotDelete
+    case DeleteProfile = "DeleteProfile"
+    case NotDeleteProfile = "NotDeleteProfile"
 }
 
 enum PostDeleteRouterEnum: String {
-    case Delete
-    case NotDelete
+    case DeletePost = "DeletePost"
+    case NotDeletePost = "NotDeletePost"
 }
 
 
