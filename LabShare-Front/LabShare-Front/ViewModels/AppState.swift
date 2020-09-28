@@ -12,6 +12,8 @@ import SwiftUI
 
 class AppState: ObservableObject {
     @Published var RegisterPage: RegisterRouterEnum
+//    @Published var DeleteProfilePage: ProfileDeleteRouterEnum
+//    @Published var DeletePostPage: PostDeleteRouterEnum
     
     init () {
         RegisterPage = RegisterRouterEnum.Register
@@ -30,5 +32,16 @@ enum RegisterRouterEnum: String {
     case ProfileEdit = "ProfileEdit"
     case Login = "Login"
 }
+
+enum ProfileDeleteRouterEnum: String {
+    case Delete
+    case NotDelete
+}
+
+enum PostDeleteRouterEnum: String {
+    case Delete
+    case NotDelete
+}
+
 
 

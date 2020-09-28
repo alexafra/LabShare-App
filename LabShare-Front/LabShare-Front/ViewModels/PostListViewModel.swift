@@ -141,7 +141,11 @@ class PostViewModel: ObservableObject {
         }
     }
 
-    func deletePost (userAuthVM: UserAuthenticationViewModel) -> () -> () {
+    func deletePost (userAuthVM: UserAuthenticationViewModel) {
+        deletePostClosure(userAuthVM: userAuthVM)()
+    }
+    
+    func deletePostClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
         return {
             let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
 
