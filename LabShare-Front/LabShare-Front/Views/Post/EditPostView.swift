@@ -10,6 +10,7 @@ import SwiftUI
 
 struct EditPostView: View {
     @ObservedObject var postVM: PostViewModel
+    @ObservedObject var oldpostVM: PostViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @Binding var isPresented: Bool
     @State var showingAlert = false
@@ -62,7 +63,8 @@ struct EditPostView: View {
                 Spacer()
                 
                 Button(action: {
-                    
+                    self.oldpostVM.updatePost(userAuthVM: self.userAuthVM, newPost: self.postVM.post)
+                    self.isPresented = false
                 }){
                     Text("Save")
                 }

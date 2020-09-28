@@ -105,8 +105,6 @@ class PostListViewModel: ObservableObject {
 
 class PostViewModel: ObservableObject {
     @Published var post: PostModel
-    @Published var newPostTitle: String = ""
-    @Published var newPostContent: String = ""
     @Published var makingRequest: Bool = false
     @Published var requestSuccessful: Bool = false
     init (post: PostModel) {
@@ -132,7 +130,7 @@ class PostViewModel: ObservableObject {
     }
 
     //Are you sure about profile .... no edited values?
-    func updatePost(userAuthVM: UserAuthenticationViewModel) {
+    func updatePost(userAuthVM: UserAuthenticationViewModel, newPost: PostModel) {
         //CHeck if there has been any change
         if post.content.isEmpty || post.title.isEmpty {
             return
@@ -140,7 +138,7 @@ class PostViewModel: ObservableObject {
         }
         self.makingRequest = true
         let userPostsWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
-        userPostsWebService.updateUserPost(userId: self.post.author.id, postModel: self.post,
+        userPostsWebService.updateUserPost(userId: self.post.author.id, postModel: newPost,
            completionFailure: {() -> Void in
                 self.makingRequest = false
                 self.requestSuccessful = false

@@ -35,7 +35,7 @@ struct PostDetailView: View {
                         Text("Edit Post")
                     }.foregroundColor(.black)
                         .sheet(isPresented: $isEdit) {
-                            EditPostView(postVM: PostViewModel(post: self.postVM.post), isPresented: self.$isEdit)
+                            EditPostView(postVM: PostViewModel(post: self.postVM.post), oldpostVM: self.postVM, isPresented: self.$isEdit)
                     }
                     Button(action: {
                         self.showingAlert = true
