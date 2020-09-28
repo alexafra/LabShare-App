@@ -28,7 +28,7 @@ struct PostDetailView: View {
                 Spacer()
                 VStack {
                     NavigationLink (
-                        destination: PostSettingsView(userId: self.postVM.post.author.id, postId: self.postVM.post.id),
+                        destination: PostSettingsView(postVM: self.postVM),
                         label: {
                             Image(systemName: "line.horizontal.3").font(Font.largeTitle)
                         })
