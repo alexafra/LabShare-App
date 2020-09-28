@@ -9,26 +9,44 @@
 import SwiftUI
 
 struct PostSettingsView: View {
-    @State var userId: Int
-    @State var postId: Int
+    @ObservedObject var postVM: PostViewModel
+    @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
+    @State private var showingDeleteAlert = false
     
     var body: some View {
         VStack {
             List {
-                NavigationLink(destination: PostEditView(userId: self.userId, postId: self.postId)) {
+                NavigationLink(destination: PostEditView(userId: self.postVM.post.author.id, postId: self.postVM.post.id)) {
                     HStack {
                         Image(systemName: "pencil")
                         Text("Edit Post")
                     }
                 }.buttonStyle(PlainButtonStyle())
-                HStack {
-                    Image(systemName: "trash")
-                        .imageScale(.large)
-                    Text("Delete Post")
+                
+                Button(action: {
+                    self.showingDeleteAlert = true
+                }) {
+                    HStack {
+                        Image(systemName: "trash")
+                            .imageScale(.large)
+                        Text("Delete Post")
+                        
+                    }
+                    
+                }.navigationBarTitle(Text("Settings"), displayMode: .inline)
+                    .alert(isPresented: $showingDeleteAlert) {
+                        Alert(title: Text("Delete book"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
+                            self.postVM.deletePost(userAuthVM: self.userAuthVM)
+                            self.presentationMode.wrappedValue.dismiss()
+                            self.presentationMode.wrappedValue.dismiss()
+                            }, secondaryButton: .cancel()
+                        )
                 }
+                
             }
-        }.navigationBarTitle(Text("Settings"), displayMode: .inline)
-        
+        }
     }
 }
 
@@ -53,8 +71,9 @@ struct PostSettingsView: View {
 //                        }
 //                }
 
-struct PostSettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        PostSettingsView(userId: 37, postId: 27)
-    }
-}
+//struct PostSettingsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PostSettingsView(userId: 37, postId: 27)
+//    }
+//}
+
