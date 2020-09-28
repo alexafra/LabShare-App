@@ -86,7 +86,7 @@ struct RegisterView: View {
                 }
             }.frame(minHeight: 0, maxHeight: .infinity)
             Button(action: {
-                self.registerVM.register(userAuthVM: userAuthVM, registerViewRouter: registerViewRouter)
+                self.registerVM.register(userAuthVM: self.userAuthVM, registerViewRouter: self.registerViewRouter)
             }) {
                 Text("Register")
                     .foregroundColor(Color.white)

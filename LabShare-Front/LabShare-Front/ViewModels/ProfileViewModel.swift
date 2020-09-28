@@ -24,7 +24,7 @@ class ProfileViewModel: ObservableObject {
     }
     
     init(profile: ProfileModel ) {
-        self.userId = profile.owner.id
+        self.userId = profile.owner.id 
         self.profile = profile
         self.hasCompletedLoading = false
         self.loadingSuccessful = false

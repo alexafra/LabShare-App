@@ -28,7 +28,7 @@ struct PostListView: View {
                             
                     }.padding(10)
                     Button(action: {
-                        self.postListVM.createPost(userAuthVM: userAuthVM)
+                        self.postListVM.createPost(userAuthVM: self.userAuthVM)
                     }){
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.green)

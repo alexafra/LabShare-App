@@ -56,7 +56,7 @@ struct ProfileEditView: View {
                 .padding(.top)
                 
                 Button(action: {
-                    self.profileVM.updateProfile(userAuthVM: userAuthVM)
+                    self.profileVM.updateProfile(userAuthVM: self.userAuthVM)
                 }) {
                     Text("Save")
                         .foregroundColor(Color.white)

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		10FC88C596DF2B561DB6A527 /* Pods_LabShare_FrontTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F57E97853FC45E6A4C572E5 /* Pods_LabShare_FrontTests.framework */; };
 		1B4FC244251F010A006E4A3D /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4FC243251F010A006E4A3D /* CircleImage.swift */; };
+		1B8EC5E12521B3A200D43412 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EC5E02521B3A200D43412 /* EditPostView.swift */; };
 		1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */; };
 		1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92705224FBE07D00D8CF34 /* ProfileView.swift */; };
 		1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFD250473F5006C6F90 /* SearchBarView.swift */; };
@@ -75,6 +76,7 @@
 		0AED4C041A59F839562BED82 /* Pods-LabShare-FrontTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-FrontTests.release.xcconfig"; path = "Target Support Files/Pods-LabShare-FrontTests/Pods-LabShare-FrontTests.release.xcconfig"; sourceTree = "<group>"; };
 		156CAE522A85B462637BAF62 /* Pods-LabShare-Front.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-Front.debug.xcconfig"; path = "Target Support Files/Pods-LabShare-Front/Pods-LabShare-Front.debug.xcconfig"; sourceTree = "<group>"; };
 		1B4FC243251F010A006E4A3D /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CircleImage.swift; path = ../ViewHelpers/CircleImage.swift; sourceTree = "<group>"; };
+		1B8EC5E02521B3A200D43412 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
 		1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		1B92705224FBE07D00D8CF34 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1BD01AFD250473F5006C6F90 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				F04A335124F91CAA004A86D9 /* PostRowView.swift */,
 				F04A335824FA234F004A86D9 /* PostDetailView.swift */,
 				F0D331DB250390CB008A280A /* PostHeaderView.swift */,
+				1B8EC5E02521B3A200D43412 /* EditPostView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				F060779325207FEF00503D2E /* RegisterViewRouter.swift in Sources */,
 				F05A03B6251DAE08001563AF /* UserPostsWebService.swift in Sources */,
 				F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */,
+				1B8EC5E12521B3A200D43412 /* EditPostView.swift in Sources */,
 				F09C69A72516216700EC961C /* SetUpView.swift in Sources */,
 				F09C69AF251635BD00EC961C /* LoginView.swift in Sources */,
 				F04A332224F91C43004A86D9 /* FeedView2.swift in Sources */,

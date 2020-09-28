@@ -11,10 +11,12 @@ import SwiftUI
 struct PostDetailView: View {
     @ObservedObject var postVM: PostViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-//    @ViewBuilder
+    @State var isEdit = false
+    @State var showingAlert = false
+    //    @ViewBuilder
     var body: some View {
         VStack (alignment:.leading) {
-
+            
             NavigationLink (destination: ProfileView(userId: postVM.post.author.id)) {
                 PostHeaderView(postVM: self.postVM)
             }.buttonStyle(PlainButtonStyle())
@@ -26,31 +28,39 @@ struct PostDetailView: View {
                 Spacer()
                 VStack {
                     Button(action: {
-                    
+                        self.isEdit = true
                     }){
                         Image(systemName: "pencil")
                             .imageScale(.large)
                         Text("Edit Post")
                     }.foregroundColor(.black)
-
+                        .sheet(isPresented: $isEdit) {
+                            EditPostView(postVM: PostViewModel(post: self.postVM.post), isPresented: self.$isEdit)
+                    }
                     Button(action: {
-
+                        self.showingAlert = true
+                        
                     }){
-                    Image(systemName: "trash")
-                        .imageScale(.large)
-                    Text("Delete Post")
-
+                        Image(systemName: "trash")
+                            .imageScale(.large)
+                        Text("Delete Post")
+                        
                     }.foregroundColor(.black)
                         .padding(.top, 10)
+                        .alert(isPresented:$showingAlert) {
+                            Alert(title: Text("Are you sure you want to delete this post?"), primaryButton: .destructive(Text("Delete")) {
+                                    // Actions
+                            }, secondaryButton: .cancel())
+                        }
                 }
-
+                
             }
-
+            
             Text("Date Posted: \(self.postVM.post.dateCreated.description)")
                 .font(Font.footnote).fontWeight(.thin)
             Text("\n" + self.postVM.post.content)
-
-
+            
+            
             VStack(alignment: .leading) {
                 Text("User Details:").font(.subheadline).fontWeight(.medium).foregroundColor(Color.black)
                 Text("Name: \(self.postVM.post.author.firstName) \(self.postVM.post.author.lastName)")
@@ -63,7 +73,7 @@ struct PostDetailView: View {
                 }
             }.padding(.all, 7)
                 .padding(.top)
-
+            
             Spacer()
         }.padding([.top, .leading, .trailing])
     }

@@ -105,6 +105,8 @@ class PostListViewModel: ObservableObject {
 
 class PostViewModel: ObservableObject {
     @Published var post: PostModel
+    @Published var newPostTitle: String = ""
+    @Published var newPostContent: String = ""
     @Published var makingRequest: Bool = false
     @Published var requestSuccessful: Bool = false
     init (post: PostModel) {
