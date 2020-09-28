@@ -129,7 +129,7 @@ class PostViewModel: ObservableObject {
         return {
             let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
 
-            userPostWebService.getUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
+            userPostWebService.deleteUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
                     return
                 },
             completionSuccessful: { (post: PostModel?) -> Void in
@@ -141,6 +141,24 @@ class PostViewModel: ObservableObject {
         }
     }
 
+    func deletePost (userAuthVM: UserAuthenticationViewModel) -> () -> () {
+        return {
+            let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
+
+            userPostWebService.deleteUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
+                    return
+                },
+            completionSuccessful: { (post: PostModel?) -> Void in
+                
+                //GO BACK TO USER FEED
+                //NAV BACK TWICE
+                return
+                
+                
+            })
+        }
+    }
+    
     //Are you sure about profile .... no edited values?
     func updatePost(userAuthVM: UserAuthenticationViewModel) {
         //CHeck if there has been any change
