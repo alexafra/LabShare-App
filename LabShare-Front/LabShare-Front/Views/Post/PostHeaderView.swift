@@ -13,7 +13,7 @@ struct PostHeaderView: View {
     
     var body: some View {
         HStack() {
-            Image(systemName: "square.fill")
+            Image(systemName: "person")
                 .resizable()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
@@ -24,6 +24,9 @@ struct PostHeaderView: View {
                     .fontWeight(.bold)
                 Text(self.postVM.post.dateCreated).font(Font.footnote).fontWeight(.thin)
             }
+//            Button(action: {postVM.d}, label: {
+//                /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
+//            })
             Spacer()
         }
     }

@@ -9,11 +9,11 @@ urlpatterns = [
     path('userinfo/<int:user_id>', views.GetUserInfo.as_view()),
     path('users/<int:user_id>', views.SingleUser.as_view()),
     path('current', views.Current.as_view()),
-    path('posts/<int:id>', views.SinglePost.as_view()), #This needs to change to posts/id
-    path('posts', views.Posts.as_view()),
     path('posts/<post_id>/comments', views.Comments.as_view()),
     path('users/<int:user_id>/posts/<int:post_id>/comments', views.PostComments.as_view()),
     path('users/<int:user_id>/posts/<int:post_id>/comments/<comment_id>', views.SingleComment.as_view()),
+    path('users/<int:user_id>/feed', views.Posts.as_view()),
+    path('users/<int:user_id>/posts/<int:id>', views.SinglePost.as_view()), #This needs to change to posts/id
     path('users/<int:user_id>/posts', views.UserPosts.as_view()), #Need to be able to create posts here
     path('users/<int:user_id>/profile', views.Profile.as_view()),
     path('categories', views.AvailableCategories.as_view()),
@@ -63,7 +63,7 @@ urlpatterns = [
 #Add comments to posts ###
 #Search function by name ###
 #Global admin
-#Profile  
+#Profile
 #Feed
 #AWS Server ###
 #Finalise restrictions on posts ##

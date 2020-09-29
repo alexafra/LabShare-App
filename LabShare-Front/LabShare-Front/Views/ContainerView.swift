@@ -9,27 +9,43 @@
 import SwiftUI
 
 struct ContainerView: View {
+    init() {
+            //Use this if NavigationBarTitle is with Large Font
+//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
+//
+//        //Use this if NavigationBarTitle is with displayMode = .inline
+//        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
+
+        UINavigationBar.appearance().barTintColor = UIColor.white
+//        UINavigationBar.appearance().tintColor = .green
+//        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().shadowImage = UIImage()
+        
+//        UITabBar.appearance().backgroundColor = UIColor.white
+//        UITabBar.appearance().isTranslucent = false
+        UITabBar.appearance().barTintColor = UIColor.white
+        
+//        self.tabBar.tintColor = UIColor.whiteColor()
+
+    }
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    //May want to think of alternative, does this need to be in a view?
     var body: some View {
         TabView {
-            FeedView(userId: userAuthVM.userAuth.id)
+            FeedView(postListVM: PostListViewModel(userId: 37, postListType: PostListType.Feed))
                 .tabItem {
                     Image(systemName: "house")
                 }
             ProfileContainerView()
-                .tabItem {
-                    Image(systemName: "person")
-                }
-            
-        }
-        
+                    .tabItem {
+                        Image(systemName: "person")
+                    }
+            }.accentColor(.green)
     }
 }
 
 
 struct ContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        ContainerView().environmentObject(UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true))
+        ContainerView().environmentObject(UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: true))
     }
 }

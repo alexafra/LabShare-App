@@ -18,82 +18,180 @@ class PostListViewModel: ObservableObject {
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
     @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
+    @Published var postListType: PostListType
     
-    init (userId: Int) {
+    init (userId: Int, postListType: PostListType) {
         self.userId = userId
+        self.postListType = postListType
     }
-    func getProfilePosts() {
-        PostWebservice().getProfilePosts(userId: userId) { posts in
-            if let posts = posts {
-                self.posts = posts.map( PostViewModel.init ) //Probs broken
+    func getAllUserPosts(userAuthVM: UserAuthenticationViewModel) {
+        getAllUserPostsClosure(userAuthVM: userAuthVM)()
+    }
+    
+    func getAllPostsClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
+            if self.postListType == PostListType.Feed {
+                return {
+                    self.getFeedPostsClosure(userAuthVM: userAuthVM)()
+                }
+            } else {
+                return {
+                    self.getAllUserPostsClosure(userAuthVM: userAuthVM)()
+                }
             }
+        
+    }
+    func getAllUserPostsClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
+        return {
+            let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
+
+            userPostWebService.getAllUserPosts(userId: self.userId, completionFailure: {() -> Void in return }, completionSuccessful: { (posts: [PostModel]?) -> Void in
+                if let posts = posts {
+                    self.posts = posts.map( self.modelToViewModel )
+                }
+            })
         }
     }
     
-    func getFeedPosts() {
-        PostWebservice().getFeedPosts(userId: userId) { posts in
-            if let posts = posts {
-                self.posts = posts.map( PostViewModel.init ) //Probs broken
-            }
+    func modelToViewModel (postModel : PostModel) -> PostViewModel {
+        return PostViewModel(post: postModel)
+    }
+    
+    
+    func getFeedPosts(userAuthVM: UserAuthenticationViewModel) {
+        getFeedPostsClosure(userAuthVM: userAuthVM)()
+    }
+    
+    func getFeedPostsClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
+        return {
+            let userFeedWebService = UserFeedWebService(userAuth: userAuthVM.userAuth)
+            userFeedWebService.getAllFeedPosts(userId: userAuthVM.userAuth.id,
+               completionFailure: {() -> Void in
+                    return
+               }, completionSuccessful: {(posts: [PostModel]?) -> Void in
+                    if let posts = posts {
+                        self.posts = posts.map( self.modelToViewModel ) //Probs broken
+                    }
+                    return
+               }
+            )
         }
     }
     
-    func createPost() {
+    func createPost(userAuthVM: UserAuthenticationViewModel) {
         let newPostTitle = self.newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         let newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
         if newPostContent.isEmpty || newPostTitle.isEmpty {
             return
         }
-        let newPost = PostEncodable(title: newPostTitle, content:newPostContent, author: 1)
-        PostWebservice().createPost(post: newPost) { posts in
-            if let posts = posts {
-                self.posts = posts.map( PostViewModel.init ) //Probs broken
-            }
-        }
-        self.newPostTitle = ""
-        self.newPostContent = ""
         
+        let newPost = PostModel(title: newPostTitle, content:newPostContent)
+        
+        let userFeedWebService = UserFeedWebService(userAuth: userAuthVM.userAuth)
+        userFeedWebService.createFeedPost(userId: userAuthVM.userAuth.id, postModel: newPost,
+           completionFailure: {() -> Void in
+                self.newPostTitle = ""
+                self.newPostContent = ""
+                return
+           }, completionSuccessful: {(post: PostModel?) -> Void in
+                if let post = post {
+                    self.posts.insert(self.modelToViewModel(postModel: post), at: 0) //Probs broken
+                }
+                self.newPostTitle = ""
+                self.newPostContent = ""
+           }
+       )
     }
 }
 
 class PostViewModel: ObservableObject {
     @Published var post: PostModel
-    
-    init(post: PostModel) {
+    @Published var makingRequest: Bool = false
+    @Published var requestSuccessful: Bool = false
+    init (post: PostModel) {
         self.post = post
     }
     
-//    var id: Int { return self.post.id }
-//    var title: String { return self.post.title }
-//    var content: String { return self.post.content }
-//    var date_created: String { return self.post.dateCreated }
-//    var author: UserModel { return self.post.author }
-    
-    func updatePost(userId: Int, indexSet: IndexSet) {
-//        let postToUpdate = self.posts[indexSet.first!]
-//        let newPostTitle = self.newPostTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-//        let newPostContent = self.newPostContent.trimmingCharacters(in: .whitespacesAndNewlines)
-//        if newPostContent.isEmpty || newPostTitle.isEmpty {
-//            return
-//        }
-//
-//        let newPost = PostEncodable(title: newPostTitle, content: newPostContent, author: postToUpdate.author)
-//
-//        PostWebservice().updatePost(postId: postToUpdate.id, post: newPost) { posts in
-//            if let posts = posts {
-//                self.posts = posts.map( PostViewModel.init )
-//            }
-//        }
-        
+    init (userId: Int, postId: Int) {
+        self.post = PostModel(userId: userId, postId: postId)
     }
     
-//    func deletePost() {
-//        PostWebservice().deletePost(itemId : self.post.id) { posts in
-//            if let posts = posts {
-//                self.posts = posts.map( PostViewModel.init )
-//            }
-//        }
-//    }
+    init () {
+        self.post = PostModel()
+    }
     
+    //When you transition to new view (for updating), you want to still use a PostViewModel BUT you need to make sure its a copy. THis can be done simply by using this initialiser i believe, because PostModel is a struct and structs are copy by value
     
+    func getUserPost(userAuthVM: UserAuthenticationViewModel) {
+        getPostClosure(userAuthVM: userAuthVM)()
+    }
+    
+    func getPostClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
+        return {
+            let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
+
+            userPostWebService.getUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
+                    return
+                },
+            completionSuccessful: { (post: PostModel?) -> Void in
+                if let post = post {
+                    self.post = post
+                }
+                return
+            })
+        }
+    }
+
+    func deletePost (userAuthVM: UserAuthenticationViewModel) {
+        deletePostClosure(userAuthVM: userAuthVM)()
+    }
+    
+    func deletePostClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
+        return {
+            let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
+
+            userPostWebService.deleteUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
+                    return
+                },
+            completionSuccessful: { (post: PostModel?) -> Void in
+                
+                //GO BACK TO USER FEED
+                //NAV BACK TWICE
+                return
+                
+                
+            })
+        }
+    }
+    
+    //Are you sure about profile .... no edited values?
+    func updatePost(userAuthVM: UserAuthenticationViewModel) {
+        //CHeck if there has been any change
+        if post.content.isEmpty || post.title.isEmpty {
+            return
+            //Do nothing
+        }
+        self.makingRequest = true
+        let userPostsWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
+        userPostsWebService.updateUserPost(userId: self.post.author.id, postModel: self.post,
+           completionFailure: {() -> Void in
+                self.makingRequest = false
+                self.requestSuccessful = false
+                return
+           },
+           completionSuccessful: { (postModel: PostModel?) -> Void in
+                self.makingRequest = false
+                self.requestSuccessful = true
+                if let postModel = postModel {
+                    self.post = postModel
+                }
+                
+            }
+        )
+    }
+    
+}
+
+enum PostListType {
+    case Profile
+    case Feed
 }

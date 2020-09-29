@@ -55,7 +55,7 @@ class SingleUser(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Upda
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
     def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs) 
+        return self.destroy(request, *args, **kwargs)
 
 class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin):
     permission_classes = [IsAuthenticated]
@@ -79,17 +79,6 @@ class UserPosts(generics.GenericAPIView, mixins.ListModelMixin):
         return Post.objects.filter(author__id = self.kwargs['user_id']).order_by("-date_created")
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-
-class Posts(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
-    permission_classes = [IsAuthenticated]
-    queryset = Post.objects.all().order_by('-date_created')
-    serializer_class = PostSerializer
-    def perform_create(self, serializer) -> None:
-        serializer.save(author = self.request.user)
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
 
 class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     permission_classes = [IsAuthenticated]
@@ -133,6 +122,20 @@ class SingleComment(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.U
         return self.update(request, *args, **kwargs)
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+
+class Posts(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+    permission_classes = [IsAuthenticated]
+    queryset = Post.objects.all().order_by('-date_created')
+    serializer_class = PostSerializer
+    def perform_create(self, serializer) -> None:
+        serializer.save(author = self.request.user)
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
 
 class AvailableCategories(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     permission_classes = [IsAuthenticated]

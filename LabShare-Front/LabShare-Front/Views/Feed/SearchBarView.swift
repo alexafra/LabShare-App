@@ -11,6 +11,7 @@ import SwiftUI
 
 struct SearchBarView: View {
     
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @State var searchResult = ""
     @State var show = false
     @State var searchID = -1

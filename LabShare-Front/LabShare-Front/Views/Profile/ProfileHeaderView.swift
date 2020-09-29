@@ -9,43 +9,31 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var profileVM: ProfileViewModel
+    
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
             CircleImage()
                 .padding(.leading, 30)
                 .padding(.trailing, 30)
-//            Text("Alex")
             HStack (alignment: .center) {
+                Spacer()
                 Text("\(self.profileVM.profile.owner.firstName) \(self.profileVM.profile.owner.lastName)")
-                    .font(.largeTitle)
+                    .font(.title)
                     .fontWeight(.semibold)
                     .padding()
-                Button(action: {
+//                    .border(Color.green, width: 3)
+                Spacer()
+                if (profileVM.profile.owner.id == userAuthVM.userAuth.id) {
+                    NavigationLink(
+                        destination: ProfileSettingsView(profileVM: profileVM),
+                        label: {
+                            Image(systemName: "line.horizontal.3").font(Font.largeTitle)
+                        })
                     
-                }) {
-                    Image(systemName: "line.horizontal.3").font(Font.largeTitle)
                 }
-                    
-//                Spacer()
-                
-//                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-//                    Image(systemName: "line.horizontal.3")
-//                })
-//                Image(systemName: "line.horizontal.3")
-//                    .contextMenu(ContextMenu(menuItems: {
-//                        Text("Menu Item 1")
-//                        Text("Menu Item 2")
-//                        Text("Menu Item 3")
-//                    })/*@END_MENU_TOKEN@*/)
-                    //.font(.system(size: 16, weight: .regular))
-//                contextMenu(menuItems: /*@START_MENU_TOKEN@*/{
-//                    Text("Menu Item 1")
-//                    Text("Menu Item 2")
-//                    Text("Menu Item 3")
-//                }/*@END_MENU_TOKEN@*/)
-////
-            }
+            }//.border(Color.green, width: 3)
             
 
             VStack (alignment: .leading, spacing: 7) {
@@ -59,14 +47,22 @@ struct ProfileHeaderView: View {
                 Text("Employer: \(self.profileVM.profile.employer)")
                 Text("Bio: \(self.profileVM.profile.bio)")
             }.padding(.leading, 5)
-            Spacer()
         }.padding()
-        .onAppear(perform: self.profileVM.getProfile)
+        .onAppear(perform: self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
     }
 }
 
 struct ProfileHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileHeaderView(profileVM: ProfileViewModel(userId: 10, profile: ProfileModel(id: 5, bio: "I like to dance and sing and be happy", dob: "2/4/1998", occupation: "Undergraduate", employer: "University of Western Australia", owner: UserModel(id: 10, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis"))))
+        Group {
+            
+            ProfileHeaderView(profileVM: ProfileViewModel(userId: 37))
+                .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+            
+            ProfileHeaderView(profileVM: ProfileViewModel(profile: ProfileModel(id: 37, bio: "I like programming and to study and to dance and to sing and to play baseball and to play soccer and to play jazz", dob: Date(), occupation: "Student", employer: "University of Western Australia", owner: UserModel(id: 37, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis"))))
+                .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+        }
+        
+            
     }
 }

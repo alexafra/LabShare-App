@@ -10,8 +10,11 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @ObservedObject var loginVM = LoginViewModel()
+    @ObservedObject var loginVM: LoginViewModel
     
+    init (userAuthVM: UserAuthenticationViewModel) {
+        loginVM = LoginViewModel(userAuthVM: userAuthVM)
+    }
 
     var body: some View {
         VStack {
@@ -20,6 +23,7 @@ struct LoginView: View {
             } else {
                 Text("Login to Lab Share")
                     .font(Font.largeTitle.weight(.bold))
+                    .foregroundColor(.green)
                 
                 TextField("Enter email address", text: self.$loginVM.userLogin.email).modifier(TextFieldAuthorization())
                 if (self.loginVM.userLogin.email.isEmpty) {
@@ -40,7 +44,7 @@ struct LoginView: View {
                 }
 
                 Button(action: {
-                    self.loginVM.login(completion: self.loginEnvironmentObject)
+                    self.loginVM.login()
                 }) {
                     Text("Login")
                         .foregroundColor(Color.white)
@@ -50,29 +54,32 @@ struct LoginView: View {
                 Spacer()
             }
         }.padding()
+//        .navigationBarTitle("Login", displayMode: .inline)
     }
-    func loginEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
-        
-        if let userAuthModel = userAuthModel {
-            if userAuthModel.token.isEmpty == false {
-                self.userAuthVM.userAuth.id = userAuthModel.id
-                self.userAuthVM.userAuth.token = userAuthModel.token
-                self.userAuthVM.userAuth.isLoggedIn = true
-                PostWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
-                PostWebservice().setToken(token: self.userAuthVM.userAuth.token)
-                UserWebservice().setLoggedInUserId(id: self.userAuthVM.userAuth.id)
-                UserWebservice().setToken(token: self.userAuthVM.userAuth.token)
-            }
-        }
-        
-        self.loginVM.attemptingLogin = false
-        self.loginVM.loginFailed = false
-    }
+
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView().environmentObject(
-            UserAuthenticationViewModel(id: 10, token: "a47f3319dd15cc56dcb451dbeffa8dade3ea5587", isLoggedIn: true))
+        NavigationView {
+            LoginView(userAuthVM: UserAuthenticationViewModel()).environmentObject(UserAuthenticationViewModel())
+                .navigationBarTitle("", displayMode: .inline)
+        }
+        
     }
 }
+
+
+//    func loginEnvironmentObject(userAuthModel: UserAuthenticationModel?) {
+//
+//        if let userAuthModel = userAuthModel {
+//            if userAuthModel.token.isEmpty == false {
+//                self.userAuthVM.userAuth.id = userAuthModel.id
+//                self.userAuthVM.userAuth.token = userAuthModel.token
+//                self.userAuthVM.userAuth.isLoggedIn = true
+//            }
+//        }
+//
+//        self.loginVM.attemptingLogin = false
+//        self.loginVM.loginSuccessful = false
+//    }
