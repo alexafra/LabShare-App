@@ -11,7 +11,8 @@ import SwiftUI
 struct PostEditView: View {
     @ObservedObject var postVM: PostViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @State var showingAlert: Bool = false
+    @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode
     
     init (userId: Int, postId: Int) {
         self.postVM = PostViewModel(userId: userId, postId: postId)
@@ -50,6 +51,8 @@ struct PostEditView: View {
             
             Button(action: {
                 self.postVM.updatePost(userAuthVM: self.userAuthVM)
+//                self.presentationMode.wrappedValue.dismiss()
+//                self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("Save")
                     .foregroundColor(Color.white)
