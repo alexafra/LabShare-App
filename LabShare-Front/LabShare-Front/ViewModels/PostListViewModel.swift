@@ -95,7 +95,7 @@ class PostListViewModel: ObservableObject {
             return
         }
         
-        let newPost = PostModel(title: newPostTitle, content:newPostContent)
+        let newPost = PostModel(title: newPostTitle, content:newPostContent, authorId: userAuthVM.userAuth.id)
         
         let userFeedWebService = UserFeedWebService(userAuth: userAuthVM.userAuth)
         userFeedWebService.createFeedPost(userId: userAuthVM.userAuth.id, postModel: newPost,
@@ -114,108 +114,7 @@ class PostListViewModel: ObservableObject {
     }
 }
 
-class PostViewModel: ObservableObject {
-    let didChange = PassthroughSubject<PostViewModel,Never>()
-    private let titleCharacterLimit = 30
-    @Published var post: PostModel
-//    {
-//        didSet {
-//            post.title = String(post.title.prefix(titleCharacterLimit))
-//            didChange.send(self)
-//        }
-//    }
-//    {
-//        willSet {
-//            self.post.title = String(newValue.title.prefix(titleCharacterLimit))
-//            didChange.send(self)
-////            self.newPostTitle = String(newValue.prefix(titleCharacterLimit))
-//        }
-//    }
-    @Published var makingRequest: Bool = false
-    @Published var requestSuccessful: Bool = false
-    init (post: PostModel) {
-        self.post = post
-    }
-    
-    init (userId: Int, postId: Int) {
-        self.post = PostModel(userId: userId, postId: postId)
-    }
-    
-    init () {
-        self.post = PostModel()
-    }
-    
-    //When you transition to new view (for updating), you want to still use a PostViewModel BUT you need to make sure its a copy. THis can be done simply by using this initialiser i believe, because PostModel is a struct and structs are copy by value
-    
-    func getUserPost(userAuthVM: UserAuthenticationViewModel) {
-        getPostClosure(userAuthVM: userAuthVM)()
-    }
-    
-    func getPostClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
-        return {
-            let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
 
-            userPostWebService.getUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
-                    return
-                },
-            completionSuccessful: { (post: PostModel?) -> Void in
-                if let post = post {
-                    self.post = post
-                }
-                return
-            })
-        }
-    }
-
-    func deletePost (userAuthVM: UserAuthenticationViewModel) {
-        deletePostClosure(userAuthVM: userAuthVM)()
-    }
-    
-    func deletePostClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
-        return {
-            let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
-
-            userPostWebService.deleteUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
-                    return
-                },
-            completionSuccessful: { (post: PostModel?) -> Void in
-                
-                //GO BACK TO USER FEED
-                //NAV BACK TWICE
-                return
-                
-                
-            })
-        }
-    }
-    
-    //Are you sure about profile .... no edited values?
-    func updatePost(userAuthVM: UserAuthenticationViewModel) {
-        //CHeck if there has been any change
-        if post.content.isEmpty || post.title.isEmpty {
-            return
-            //Do nothing
-        }
-        self.makingRequest = true
-        let userPostsWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
-        userPostsWebService.updateUserPost(userId: self.post.author.id, postModel: self.post,
-           completionFailure: {() -> Void in
-                self.makingRequest = false
-                self.requestSuccessful = false
-                return
-           },
-           completionSuccessful: { (postModel: PostModel?) -> Void in
-                self.makingRequest = false
-                self.requestSuccessful = true
-                if let postModel = postModel {
-                    self.post = postModel
-                }
-                
-            }
-        )
-    }
-    
-}
 
 enum PostListType {
     case Profile

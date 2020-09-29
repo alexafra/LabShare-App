@@ -34,7 +34,7 @@ struct ProfileSettingsView: View {
                             Text("Delete User")
                         }
                     }.alert(isPresented: $showingDeleteAlert) {
-                        Alert(title: Text("Delete book"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
+                        Alert(title: Text("Delete User"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
                             self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
                             self.presentationMode.wrappedValue.dismiss()
                             self.presentationMode.wrappedValue.dismiss()

@@ -13,7 +13,7 @@ struct PostModel: Hashable, Codable, Identifiable {
     var id: Int
     var title: String
     var content: String
-    var dateCreated: String
+    var dateCreated: Date
     var author: UserModel
     
     enum CodingKeys: String, CodingKey
@@ -25,7 +25,7 @@ struct PostModel: Hashable, Codable, Identifiable {
         case author
     }
     
-    init (id: Int, title: String, content: String, dateCreated: String, author: UserModel) {
+    init (id: Int, title: String, content: String, dateCreated: Date, author: UserModel) {
         self.id = id
         self.title = title
         self.content = content
@@ -34,7 +34,7 @@ struct PostModel: Hashable, Codable, Identifiable {
     }
     
     init () {
-        self.init (id: -1, title: "", content: "", dateCreated: "", author: UserModel())
+        self.init (id: -1, title: "", content: "", dateCreated: Date(), author: UserModel())
     }
     
     init (userId: Int, postId: Int) {
@@ -43,20 +43,17 @@ struct PostModel: Hashable, Codable, Identifiable {
         self.author.id = userId
     }
     
-    init (title: String, content: String) {
-        self.init(id: -1, title: title, content: content, dateCreated: "", author: UserModel())
+    init (title: String, content: String, authorId: Int) {
+        self.init(id: -1, title: title, content: content, dateCreated: Date(), author: UserModel())
+        self.author.id = authorId
     }
 }
-
-
-
-//I dont think this is right....
-//struct PostEncodable: Codable {
+//struct PostEncodableModel: Codable {
 //    var title: String
 //    var content: String
 //    var author: Int
 //}
-    
+//
 //    init(id: Int? = nil, title: String? = nil, content: String? = nil, date_created: String? = nil, author: Int? = nil) {
 //        self.id = id
 //        self.title = title

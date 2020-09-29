@@ -14,8 +14,6 @@ struct ProfileContainerView: View {
     var body: some View {
         NavigationView {
             ProfileView(userId: userAuthVM.userAuth.id)
-//                .navigationBarTitle(Text(""), displayMode: .inline)
-//                .navigationBarHidden(true)
         }.accentColor(.green)
     }
 }
