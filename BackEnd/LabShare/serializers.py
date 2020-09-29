@@ -34,6 +34,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         return value
 
 class PostSerializer(serializers.ModelSerializer):
+    date_created = serializers.DateTimeField(default = None, required = False, format="%Y-%m-%dT%H:%M:%SZ")
     class Meta:
         model = Post
         fields = ['id', 'title', 'content', 'date_created', 'category']
