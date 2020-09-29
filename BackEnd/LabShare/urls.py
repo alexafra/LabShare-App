@@ -9,7 +9,9 @@ urlpatterns = [
     path('userinfo/<int:user_id>', views.GetUserInfo.as_view()),
     path('users/<int:user_id>', views.SingleUser.as_view()),
     path('current', views.Current.as_view()),
-
+    path('posts/<post_id>/comments', views.Comments.as_view()),
+    path('users/<int:user_id>/posts/<int:post_id>/comments', views.PostComments.as_view()),
+    path('users/<int:user_id>/posts/<int:post_id>/comments/<comment_id>', views.SingleComment.as_view()),
     path('users/<int:user_id>/feed', views.Posts.as_view()),
     path('users/<int:user_id>/posts/<int:id>', views.SinglePost.as_view()), #This needs to change to posts/id
     path('users/<int:user_id>/posts', views.UserPosts.as_view()), #Need to be able to create posts here
@@ -77,3 +79,21 @@ urlpatterns = [
 #Change a user’s permissions ##DONE
 #Add page restrictions based on permissions of logged in user ##DONE
 #Profile photos ##DONE
+
+
+#comments
+#search
+#user image sent with user model serializer
+#filter by categories
+#global admin
+
+
+#comments
+#profile
+#search - (posts/posts?category = Reagent) [Just users]
+#https
+#admin
+#can't edit other users posts (restrictions)
+#pagination
+#users/<id>/posts/<post_id>/comments
+

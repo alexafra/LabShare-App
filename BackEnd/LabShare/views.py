@@ -7,11 +7,13 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate, logout, login, get_user_model
 from django.utils.decorators import method_decorator
 from LabShare.utils import get_and_authenticate_user, create_user_account
-from LabShare.models import Post, Categories, UserProfile
-from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, CategoriesSerializer, UserProfileSerializer
+from LabShare.models import Post, Categories, UserProfile, Comment
+from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, CategoriesSerializer, UserProfileSerializer, CommentSerializer
 from LabShare.permissions import unauthenticated
 
 User = get_user_model()
+
+import json
 
 class UserRegister(APIView):
     permission_classes = [unauthenticated]
@@ -55,7 +57,7 @@ class SingleUser(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Upda
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
-class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
+class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin):
     permission_classes = [IsAuthenticated]
     lookup_field = 'owner__id'
     lookup_url_kwarg = 'user_id'
@@ -90,6 +92,37 @@ class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Upda
         return self.update(request, *args, **kwargs)
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+class PostComments(generics.GenericAPIView, mixins.ListModelMixin):
+    permission_classes = [IsAuthenticated]
+    serializer_class = CommentSerializer
+    def get_queryset(self):
+        return Comment.objects.filter(post__id = self.kwargs['post_id']).order_by("-date_created")
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+class Comments(generics.GenericAPIView, mixins.CreateModelMixin):
+    permission_classes = [IsAuthenticated]
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+    def perform_create(self, serializer) -> None:
+        serializer.save(author = self.request.user, post = Post.objects.get(id = self.kwargs['post_id']))
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class SingleComment(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'id'
+    lookup_url_kwarg = 'comment_id'
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
 
 class Posts(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     permission_classes = [IsAuthenticated]
