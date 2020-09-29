@@ -35,18 +35,9 @@ struct PostListView: View {
                         Text("Content:")
                         ZStack {
                             MultilineTextView(text: self.$postListVM.newPostContent)
-                                
-    //                            if self.postListVM.newPostContent.isEmpty {
-    //                                Text("Content: enter up to 1000 characters")
-    //                            }
                             Text(self.postListVM.newPostContent).opacity(0).padding(.top, 12)
                         }
                     }
-                    
-//                        TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent)
-//                            .lineLimit(nil)
-//                            .padding()
-                    
                         
                     }.modifier(MultiLineTextFieldAuthorization())
                     .padding(10)

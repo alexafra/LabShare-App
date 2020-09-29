@@ -95,7 +95,7 @@ class PostListViewModel: ObservableObject {
             return
         }
         
-        let newPost = PostModel(title: newPostTitle, content:newPostContent)
+        let newPost = PostModel(title: newPostTitle, content:newPostContent, authorId: userAuthVM.userAuth.id)
         
         let userFeedWebService = UserFeedWebService(userAuth: userAuthVM.userAuth)
         userFeedWebService.createFeedPost(userId: userAuthVM.userAuth.id, postModel: newPost,
