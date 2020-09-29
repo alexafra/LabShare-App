@@ -112,13 +112,14 @@ class PostComments(generics.GenericAPIView, mixins.ListModelMixin):
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
-#class Comments(generics.GenericAPIView, mixins.mixins.CreateModelMixin):
-#    permission_classes = [IsAuthenticated]
-#    serializer_class = CommentSerializer
-#    queryset = Comment.objects.all()
- #   def perform_create(self, serializer) -> None:
-#        serializer.save(author = self.request.user, post = )
-
+class Comments(generics.GenericAPIView, mixins.CreateModelMixin):
+    permission_classes = [IsAuthenticated]
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+    def perform_create(self, serializer) -> None:
+        serializer.save(author = self.request.user, post = Post.objects.get(id = self.kwargs['post_id']))
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 class SingleComment(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     permission_classes = [IsAuthenticated]
