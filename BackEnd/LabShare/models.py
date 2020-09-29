@@ -67,7 +67,7 @@ class Post(models.Model):
 class UserProfile(models.Model):
     owner = models.OneToOneField(settings.AUTH_USER_MODEL, related_name = 'profile', on_delete = models.CASCADE)
     bio = models.TextField(blank = True, default = "")
-    dob = models.DateTimeField(default = '2000-01-01', blank = True)
+    dob = models.DateTimeField(default = '1970-01-01', blank = True)
     occupation = models.TextField(blank = True, default = "")
     employer = models.TextField(blank = True, default = "")
     #image = models.ImageField(upload_to = 'profile_image', blank = True, default = 'avatar.jpg')

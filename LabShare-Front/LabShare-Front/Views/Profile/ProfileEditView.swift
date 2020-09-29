@@ -46,12 +46,6 @@ struct ProfileEditView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Text("dob:")
-//                        DatePicker(
-//                            "",
-//                            selection: Binding<Date>(get: {self.profileVM.profile.dob ?? Date()}, set: {self.profileVM.profile.dob = $0}),
-//                            displayedComponents: .date
-//                        )
-//                        DatePicker("", selection: self.$profileVM.profile.dob ?? Date(), in: ...Date(), displayedComponents: .date)
                         DatePicker("", selection: self.$profileVM.profile.dob, in: ...Date(), displayedComponents: .date)
                             .labelsHidden()
                         Spacer()

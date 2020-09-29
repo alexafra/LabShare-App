@@ -36,7 +36,7 @@ struct PostSettingsView: View {
                     }
                     
                 }.alert(isPresented: $showingDeleteAlert) {
-                    Alert(title: Text("Delete book"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
+                    Alert(title: Text("Delete Post"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
                         self.postVM.deletePost(userAuthVM: self.userAuthVM)
                         self.presentationMode.wrappedValue.dismiss()
                         self.presentationMode.wrappedValue.dismiss()

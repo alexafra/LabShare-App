@@ -20,21 +20,10 @@ struct PostDetailView: View {
             NavigationLink (destination: ProfileView(userId: postVM.post.author.id)) {
                 PostHeaderView(postVM: self.postVM)
             }.buttonStyle(PlainButtonStyle())
-//            HStack {
                 Text(self.postVM.post.title)
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.black)
-//                Spacer()
-//                VStack {
-//                    NavigationLink (
-//                        destination: PostSettingsView(postVM: self.postVM),
-//                        label: {
-//                            Image(systemName: "line.horizontal.3").font(Font.largeTitle)
-//                        })
-//                    }
-//            }
-            
             Text(self.postVM.post.content)
             
             Spacer()
