@@ -40,7 +40,17 @@ struct ProfileModel: Codable, Identifiable, Hashable {
         self.owner.id = ownerId
     }
     init() {
-        self.init(id: -1, bio: "", dob: Date(), occupation: "", employer: "", owner: UserModel())
+        let dateString = "01/01/1970"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        var date: Date
+        if let dateFromString = dateFormatter.date(from: dateString) {
+            date = dateFromString
+        } else {
+            date = Date()
+        }
+        
+        self.init(id: -1, bio: "", dob: date, occupation: "", employer: "", owner: UserModel())
     }
     
 //    init(profile: ProfileModel) {

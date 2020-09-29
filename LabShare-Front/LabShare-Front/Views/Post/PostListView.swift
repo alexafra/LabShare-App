@@ -15,18 +15,9 @@ struct PostListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if userAuthVM.userAuth.id == postListVM.userId || postListVM.postListType == PostListType.Feed {
-                Text("Create new post").font(Font.headline)
-                Divider()
                 HStack {
-                    VStack {
-                        TextField("Title: Enter up to 20 characters", text: self.$postListVM.newPostTitle).padding()
-                        Divider()
-                        TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent)
-                            .lineLimit(nil)
-                            .padding()
-                        
-                            
-                    }.padding(10)
+                    Text("Create new post").font(Font.headline)
+                    Spacer()
                     Button(action: {
                         self.postListVM.createPost(userAuthVM: self.userAuthVM)
                     }){
@@ -36,7 +27,31 @@ struct PostListView: View {
                             
                     }
                 }
-                Divider()
+                
+//                Divider()
+                VStack (alignment: .leading) {
+                    Text("Title:")
+                    TextField("", text: self.$postListVM.newPostTitle)
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("Content:")
+                        ZStack {
+                            MultilineTextView(text: self.$postListVM.newPostContent)
+    //                            if self.postListVM.newPostContent.isEmpty {
+    //                                Text("Content: enter up to 1000 characters")
+    //                            }
+                            Text(self.postListVM.newPostContent).opacity(0).padding(.top, 11)
+                        }
+                    }
+                    
+//                        TextField("Content: enter up to 1000 characters", text: self.$postListVM.newPostContent)
+//                            .lineLimit(nil)
+//                            .padding()
+                    
+                        
+                    }.modifier(MultiLineTextFieldAuthorization())
+                    .padding(10)
+                    Divider()
             }
             
             Text("Posts:").font(Font.headline).padding(.top, 10)

@@ -20,50 +20,43 @@ struct ProfileEditView: View {
     var body: some View {
         VStack {
             ScrollView {
-                    
-                
                 VStack(alignment: .leading) {
                     Text("occupation:")
                     TextField("occupation", text: self.$profileVM.profile.occupation)
                         .modifier(TextFieldAuthorization())
-                }.frame(minHeight: 0, maxHeight: .infinity)
+                    
+                }
                 .padding(.top)
                 
                 VStack(alignment: .leading) {
                     Text("employer:")
                     TextField("employer", text: self.$profileVM.profile.employer).modifier(TextFieldAuthorization())
-                }.frame(minHeight: 0, maxHeight: .infinity)
+                }
                 .padding(.top)
         
-//                VStack(alignment: .leading) {
-//                    Text("bio:")
-//                    TextField("bio", text: self.$profileVM.profile.bio)
-//                        .modifier(TextFieldAuthorization())
-//                        .lineLimit(nil)
-//                }.frame(minHeight: 0, maxHeight: .infinity)
-//                .padding(.top)
-                VStack() {
-//                    Text("bio:")
-                    MultilineTextView(text: self.$profileVM.profile.bio)
-                        .modifier(MultiLineTextFieldAuthorization())
-                    
-//                    ("bio", text: self.$profileVM.profile.bio)
-//                        .modifier(TextFieldAuthorization())
-//                        .lineLimit(nil)
-                }.frame(minHeight: 0, maxHeight: .infinity)
+                VStack(alignment: .leading) {
+                    Text("bio:")
+                    ZStack {
+                        MultilineTextView(text: self.$profileVM.profile.bio)
+                        Text(self.profileVM.profile.bio).opacity(0).padding(.top, 11).modifier(MultiLineTextFieldAuthorization())
+                    }
+                }
                 .padding(.top)
                 
                 VStack(alignment: .leading) {
                     HStack {
                         Text("dob:")
-                        DatePicker("", selection: self.$profileVM.profile.dob, in: Date()..., displayedComponents: .date)
+//                        DatePicker(
+//                            "",
+//                            selection: Binding<Date>(get: {self.profileVM.profile.dob ?? Date()}, set: {self.profileVM.profile.dob = $0}),
+//                            displayedComponents: .date
+//                        )
+//                        DatePicker("", selection: self.$profileVM.profile.dob ?? Date(), in: ...Date(), displayedComponents: .date)
+                        DatePicker("", selection: self.$profileVM.profile.dob, in: ...Date(), displayedComponents: .date)
                             .labelsHidden()
                         Spacer()
                     }
-//                        .modifier(TextFieldAuthorization())
-                        //.border(Color.green, width: 3)
                 }
-                .frame(minHeight: 0, maxHeight: .infinity)
                 .padding(.top)
                 
                 Button(action: {
@@ -77,9 +70,10 @@ struct ProfileEditView: View {
                 .padding(.top)
                     
             }.padding()
-            .frame(minHeight: 0, maxHeight: .infinity)
             
-        }.onAppear(perform: self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
+            
+        }.frame(minHeight: 0, maxHeight: .infinity)
+        .onAppear(perform: self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
     }
 }
 
@@ -99,7 +93,7 @@ struct TextView: UIViewRepresentable {
 
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEditView(userId: 37)
-            .environmentObject( UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: false))
+        ProfileEditView(userId: 67)
+            .environmentObject( UserAuthenticationViewModel(id: 67, token: "ff93cb88141ba6e09b69ca3d7c5a395a64295626", isLoggedIn: false))
     }
 }

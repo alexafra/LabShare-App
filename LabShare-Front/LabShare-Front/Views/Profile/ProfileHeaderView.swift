@@ -42,7 +42,9 @@ struct ProfileHeaderView: View {
                     .fontWeight(.medium)
                 
                 Text("Email: \(self.profileVM.profile.owner.email)")
-                Text("Born: \(self.profileVM.profile.dob)")
+                if let dob = self.profileVM.profile.dob {
+                    Text("Born: \(dob)")
+                }
                 Text("Occupation: \(self.profileVM.profile.occupation)")
                 Text("Employer: \(self.profileVM.profile.employer)")
                 Text("Bio: \(self.profileVM.profile.bio)")

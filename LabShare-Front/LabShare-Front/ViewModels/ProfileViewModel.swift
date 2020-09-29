@@ -47,7 +47,7 @@ class ProfileViewModel: ObservableObject {
                 if (true) {
                     userAuthVM.userAuth.isLoggedIn = false
                 } else {
-                    //Change to go back feed
+                    //Change to go back feedqee
                 }
                 
             })

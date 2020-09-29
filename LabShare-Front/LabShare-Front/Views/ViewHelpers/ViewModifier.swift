@@ -30,7 +30,7 @@ struct TextFieldAuthorization: ViewModifier {
 struct MultiLineTextFieldAuthorization: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .padding(.top)
+            .padding(.all)
             .autocapitalization(.none)
             .frame(minWidth: 0, maxWidth: .infinity)
             .overlay(
@@ -78,34 +78,37 @@ struct ViewModifier_Previews: PreviewProvider {
     @State var text: String = "Hello"
     static var previews: some View {
         VStack {
-            VStack {
-                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
-                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
-            }.frame(minHeight: 0, maxHeight: .infinity)
-            
-            VStack {
-                MultilineTextView(text: Binding.constant("Hello")).modifier(MultiLineTextFieldAuthorization())
+            ScrollView {
+                VStack {
+                    /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
+                    /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
+                }.frame(minHeight: 0, maxHeight: .infinity)
+                
+                VStack {
+                    Text("John")
+                    MultilineTextView(text: Binding.constant("Hello")).modifier(MultiLineTextFieldAuthorization())
+                }
+                
+                
+                VStack {
+                    /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
+                    /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
+                }.frame(minHeight: 0, maxHeight: .infinity)
+                VStack {
+                    /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
+                    Text("Hello, World!").modifier(TextError())
+                }.frame(minHeight: 0, maxHeight: .infinity)
+                VStack {
+                    /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
+                    /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
+                }.frame(minHeight: 0, maxHeight: .infinity)
+                Button(action: {
+                }) {
+                    Text("Register")
+                        .foregroundColor(Color.white)
+                        .font(Font.title.weight(.bold))
+                }.modifier(AuthButton())
             }
-            
-            
-            VStack {
-                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
-                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
-            }.frame(minHeight: 0, maxHeight: .infinity)
-            VStack {
-                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
-                Text("Hello, World!").modifier(TextError())
-            }.frame(minHeight: 0, maxHeight: .infinity)
-            VStack {
-                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextFieldAuthorization())
-                /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/.modifier(TextError())
-            }.frame(minHeight: 0, maxHeight: .infinity)
-            Button(action: {
-            }) {
-                Text("Register")
-                    .foregroundColor(Color.white)
-                    .font(Font.title.weight(.bold))
-            }.modifier(AuthButton())
         }
         .padding(20)
         

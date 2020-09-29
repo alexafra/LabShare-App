@@ -68,7 +68,9 @@ class WebService {
         request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
     
         if let model = model, apiMethod == ApiMethod.POST || apiMethod == ApiMethod.PUT {
-            guard let modelData = try? JSONEncoder().encode(model) else {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            guard let modelData = try? encoder.encode(model) else {
                 print("Error Encoding")
                 completionFailure()
                 return
@@ -88,7 +90,9 @@ class WebService {
                 }
                 return
             }
-            let model = try? JSONDecoder().decode(T.self, from: data)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let model = try? decoder.decode(T.self, from: data)
             DispatchQueue.main.async {
                 //Update our UI
                 
@@ -125,7 +129,9 @@ class WebService {
                 }
                 return
             }
-            let modelArray = try? JSONDecoder().decode([T].self, from: data)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let modelArray = try? decoder.decode([T].self, from: data)
                 //                    We have good data - go back to the main thread
             DispatchQueue.main.async {
                 //Update our UI
@@ -218,3 +224,4 @@ enum ApiMethod {
 //}
 //
 //}
+

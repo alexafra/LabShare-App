@@ -25,6 +25,8 @@ struct MultilineTextView: UIViewRepresentable {
         view.textAlignment = .left
         view.font = UIFont(name: "Times New Roman", size: 20)
         view.delegate = context.coordinator
+        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.autoresizingMask = [.width, .height]
         return view
     }
 
@@ -48,6 +50,35 @@ struct MultilineTextView: UIViewRepresentable {
         }
     }
 }
+
+//struct MultilineTextView2: UIViewRepresentable {
+//    @Binding var text: String
+//
+//    func makeUIView(context: Context) -> UITextView {
+////        let view = UITextView()
+////        view.isScrollEnabled = true
+////        view.isEditable = true
+////        view.isUserInteractionEnabled = true
+//        let view = UITextView()
+//        view.translatesAutoresizingMaskIntoConstraints = true
+//        view.sizeToFit()
+//        view.isScrollEnabled = false
+//        view.sizeToFit()
+//        view.isEditable = true
+//        view.isUserInteractionEnabled = true
+//        view.textAlignment = .left
+//        view.font = UIFont(name: "Times New Roman", size: 20)
+//        
+////        var frame = view.frame
+////        frame.size.height = view.contentSize.height
+////        view.frame = frame
+//        return view
+//    }
+//
+//    func updateUIView(_ uiView: UITextView, context: Context) {
+//        uiView.text = text
+//    }
+//}
 
 struct KitToSwiftUIHelper_Previews: PreviewProvider {
     static var previews: some View {

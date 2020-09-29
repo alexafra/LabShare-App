@@ -93,7 +93,9 @@ struct RegisterView: View {
                     .font(Font.title.weight(.bold))
             }.modifier(AuthButton())
             Spacer()
-        }.padding()
+        }.frame(minHeight: 0, maxHeight: .infinity)
+        .padding()
+        
     }
 }
 
