@@ -10,15 +10,15 @@ import SwiftUI
 
 struct RegisterViewContainer: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @EnvironmentObject var registerViewRouter: AppState
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         VStack {
-            if registerViewRouter.RegisterPage == RegisterRouterEnum.Register {
+            if appState.registerPage == RegisterRouterEnum.Register {
                 RegisterView(userAuthVM: userAuthVM)
-            } else if registerViewRouter.RegisterPage == RegisterRouterEnum.ProfileEdit {
+            } else if appState.registerPage == RegisterRouterEnum.ProfileEdit {
                 ProfileEditView(userId: userAuthVM.userAuth.id)
-            } else if registerViewRouter.RegisterPage == RegisterRouterEnum.Login {
+            } else if appState.registerPage == RegisterRouterEnum.Login {
                 LoginView(userAuthVM: userAuthVM)
             } else {
                 Text("Hello World!")

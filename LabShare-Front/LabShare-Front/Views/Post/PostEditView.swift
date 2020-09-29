@@ -20,7 +20,7 @@ struct PostEditView: View {
     //    @ViewBuilder
     var body: some View {
         VStack (alignment:.center) {
-            PostHeaderView(postVM: self.postVM)
+//            PostHeaderView(postVM: self.postVM)
             VStack {
                 HStack {
                     Text("Title:")

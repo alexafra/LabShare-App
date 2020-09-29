@@ -129,7 +129,7 @@ class PostViewModel: ObservableObject {
         return {
             let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
 
-            userPostWebService.deleteUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
+            userPostWebService.getUserPost(userId: self.post.author.id, postId: self.post.id, completionFailure: {() -> Void in
                     return
                 },
             completionSuccessful: { (post: PostModel?) -> Void in
