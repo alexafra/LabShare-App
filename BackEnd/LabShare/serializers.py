@@ -2,7 +2,8 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from django.contrib.auth import password_validation
-from LabShare.models import Post, UserProfile, Categories
+from LabShare.models import Post, UserProfile, Categories, Comment
+from datetime import datetime
 
 User = get_user_model()
 
@@ -34,6 +35,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         return value
 
 class PostSerializer(serializers.ModelSerializer):
+    date_created = serializers.DateTimeField(default = None, required = False, format="%Y-%m-%dT%H:%M:%SZ")
     class Meta:
         model = Post
         fields = ['id', 'title', 'content', 'date_created', 'category']
@@ -51,6 +53,16 @@ class UserProfileSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         response = super().to_representation(instance)
         response['owner'] = UserSerializer(instance.owner).data
+        return response
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['id', 'date_created', 'post', 'content']
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['author'] = UserSerializer(instance.author).data
         return response
 
 class CategoriesSerializer(serializers.ModelSerializer):

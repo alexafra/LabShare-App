@@ -75,7 +75,15 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.owner.email
 
+class Comment(models.Model):
+    date_created = models.DateTimeField(auto_now_add= True)
+    post = models.ForeignKey(Post, related_name = 'comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name = 'comments', on_delete = models.CASCADE)
+    content = models.TextField(blank = True, default = "")
+
 @receiver(post_save, sender = settings.AUTH_USER_MODEL)
 def create_profile(sender, instance=None, created=False, **kwargs):
     if created:
         profile = UserProfile.objects.create(owner=instance)
+
+
