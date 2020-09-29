@@ -38,8 +38,8 @@ struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             NavigationView {
-                ProfileView(userId: 37)
-                    .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+                ProfileView(userId: 72)
+                    .environmentObject(UserAuthenticationViewModel(id: 72, token: "d4e3814547b0b328f3baae5ea78a3b1417464386", isLoggedIn: true))
             }
             
         }

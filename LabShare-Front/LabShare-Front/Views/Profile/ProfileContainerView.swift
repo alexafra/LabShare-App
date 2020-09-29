@@ -24,6 +24,6 @@ struct ProfileContainerView: View {
 struct ProfileContainerView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileContainerView()
-            .environmentObject(UserAuthenticationViewModel(id: 70, token: "356a0facdfb32b8720ada293893c4dae6267d406", isLoggedIn: true))
+            .environmentObject(UserAuthenticationViewModel(id: 72, token: "d4e3814547b0b328f3baae5ea78a3b1417464386", isLoggedIn: true))
     }
 }

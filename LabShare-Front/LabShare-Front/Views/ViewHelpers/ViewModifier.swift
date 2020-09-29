@@ -37,6 +37,7 @@ struct MultiLineTextFieldAuthorization: ViewModifier {
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.green, lineWidth: 1)
                     .shadow(radius:5))
+            .fixedSize(horizontal: false, vertical: true)
             
             
 //            .padding()

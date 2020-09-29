@@ -16,6 +16,31 @@ class ProfileViewModel: ObservableObject {
     @Published var hasCompletedLoading: Bool = false
     @Published var loadingSuccessful: Bool = false
     
+    var dobString: String {
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateStyle = .short
+        return dateFormatter1.string(from: profile.dob)
+    }
+    var dobExists: Bool {
+        let dateString = "01/01/1970"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        guard let defaultDate = dateFormatter.date(from: dateString) else {
+            return false
+        }
+        return defaultDate != profile.dob
+    }
+    var occupationExists: Bool {
+        return !profile.occupation.isEmpty
+    }
+    var employerExists: Bool {
+        return !profile.employer.isEmpty
+    }
+    var bioExists: Bool {
+        return !profile.bio.isEmpty
+    }
+    
+    
     init(userId: Int) {
         self.userId = userId
         self.hasCompletedLoading = false

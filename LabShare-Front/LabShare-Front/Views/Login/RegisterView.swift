@@ -78,7 +78,9 @@ struct RegisterView: View {
                 }
             }.frame(minHeight: 0, maxHeight: .infinity)
             VStack {
-                SecureField("Repeat password", text: self.$registerVM.repeatPassword).modifier(TextFieldAuthorization())
+                SecureField("Repeat password", text: self.$registerVM.repeatPassword)
+                    .modifier(TextFieldAuthorization())
+//                    .a
                 if (self.registerVM.userRegisterModel.password != self.registerVM.repeatPassword) {
                     Text("Passwords do not match").modifier(TextError())
                 } else {

@@ -26,7 +26,9 @@ class PostListViewModel: ObservableObject {
     @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
     @Published var postListType: PostListType
     
-    
+    var dateString: String {
+        return ""
+    }
     
     
     init (userId: Int, postListType: PostListType) {
