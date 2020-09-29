@@ -27,8 +27,6 @@ struct PostListView: View {
                             
                     }
                 }
-                
-//                Divider()
                 VStack (alignment: .leading) {
                     Text("Title:")
                     TextField("", text: self.$postListVM.newPostTitle)
@@ -40,7 +38,7 @@ struct PostListView: View {
     //                            if self.postListVM.newPostContent.isEmpty {
     //                                Text("Content: enter up to 1000 characters")
     //                            }
-                            Text(self.postListVM.newPostContent).opacity(0).padding(.top, 11)
+                            Text(self.postListVM.newPostContent).opacity(0).padding(.top, 12)
                         }
                     }
                     
@@ -74,7 +72,7 @@ struct PostListView_Previews: PreviewProvider {
         VStack {
             NavigationView {
                 ScrollView {
-                    PostListView(postListVM: PostListViewModel(userId: 37, postListType: PostListType.Profile)).environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+                    PostListView(postListVM: PostListViewModel(userId: 70, postListType: PostListType.Profile)).environmentObject(UserAuthenticationViewModel(id: 70, token: "356a0facdfb32b8720ada293893c4dae6267d406", isLoggedIn: true))
                 }
                 
             }

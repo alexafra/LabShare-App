@@ -24,7 +24,7 @@ struct RegisterView: View {
     }
 
     var body: some View {
-       
+        ScrollView {
         VStack (alignment: .center) {
             Text("Register to Lab Share")
                 .font(Font.title.weight(.bold))
@@ -95,7 +95,7 @@ struct RegisterView: View {
             Spacer()
         }.frame(minHeight: 0, maxHeight: .infinity)
         .padding()
-        
+        }
     }
 }
 

@@ -14,11 +14,20 @@ import Combine
 
 //Probably can use this for the feed
 class PostListViewModel: ObservableObject {
+    
+//    let objectWillChange = ObservableObjectPublisher()
+    let didChange = PassthroughSubject<PostListViewModel, Never>()
+    private let titleCharacterLimit = 30
     @Published var userId: Int
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
+
+           
     @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
     @Published var postListType: PostListType
+    
+    
+    
     
     init (userId: Int, postListType: PostListType) {
         self.userId = userId
@@ -104,7 +113,22 @@ class PostListViewModel: ObservableObject {
 }
 
 class PostViewModel: ObservableObject {
+    let didChange = PassthroughSubject<PostViewModel,Never>()
+    private let titleCharacterLimit = 30
     @Published var post: PostModel
+//    {
+//        didSet {
+//            post.title = String(post.title.prefix(titleCharacterLimit))
+//            didChange.send(self)
+//        }
+//    }
+//    {
+//        willSet {
+//            self.post.title = String(newValue.title.prefix(titleCharacterLimit))
+//            didChange.send(self)
+////            self.newPostTitle = String(newValue.prefix(titleCharacterLimit))
+//        }
+//    }
     @Published var makingRequest: Bool = false
     @Published var requestSuccessful: Bool = false
     init (post: PostModel) {
@@ -195,3 +219,4 @@ enum PostListType {
     case Profile
     case Feed
 }
+

@@ -25,14 +25,15 @@ struct ProfileHeaderView: View {
                     .padding()
 //                    .border(Color.green, width: 3)
                 Spacer()
-                if (profileVM.profile.owner.id == userAuthVM.userAuth.id) {
-                    NavigationLink(
-                        destination: ProfileSettingsView(profileVM: profileVM),
-                        label: {
-                            Image(systemName: "line.horizontal.3").font(Font.largeTitle)
-                        })
-                    
-                }
+                
+//                if (profileVM.profile.owner.id == userAuthVM.userAuth.id) {
+//                    NavigationLink(
+//                        destination: ProfileSettingsView(profileVM: profileVM),
+//                        label: {
+//                            Image(systemName: "line.horizontal.3").font(Font.largeTitle)
+//                        })
+//
+//                }
             }//.border(Color.green, width: 3)
             
 
@@ -42,15 +43,24 @@ struct ProfileHeaderView: View {
                     .fontWeight(.medium)
                 
                 Text("Email: \(self.profileVM.profile.owner.email)")
-                if let dob = self.profileVM.profile.dob {
-                    Text("Born: \(dob)")
-                }
+                Text("Born: \(self.profileVM.profile.dob)")
                 Text("Occupation: \(self.profileVM.profile.occupation)")
                 Text("Employer: \(self.profileVM.profile.employer)")
                 Text("Bio: \(self.profileVM.profile.bio)")
             }.padding(.leading, 5)
         }.padding()
+        .navigationBarItems(trailing: Group {
+            if (profileVM.profile.owner.id == userAuthVM.userAuth.id) {
+                NavigationLink (
+                    destination: ProfileSettingsView(profileVM: self.profileVM),
+                    label: {
+                        Image(systemName: "line.horizontal.3").font(Font.largeTitle)
+                    }
+                )
+            }
+        })
         .onAppear(perform: self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
+    
     }
 }
 
@@ -58,8 +68,8 @@ struct ProfileHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             
-            ProfileHeaderView(profileVM: ProfileViewModel(userId: 37))
-                .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+            ProfileHeaderView(profileVM: ProfileViewModel(userId: 70))
+                .environmentObject(UserAuthenticationViewModel(id: 70, token: "356a0facdfb32b8720ada293893c4dae6267d406", isLoggedIn: true))
             
             ProfileHeaderView(profileVM: ProfileViewModel(profile: ProfileModel(id: 37, bio: "I like programming and to study and to dance and to sing and to play baseball and to play soccer and to play jazz", dob: Date(), occupation: "Student", employer: "University of Western Australia", owner: UserModel(id: 37, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis"))))
                 .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))

@@ -22,7 +22,7 @@ struct ProfileEditView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     Text("occupation:")
-                    TextField("occupation", text: self.$profileVM.profile.occupation)
+                    TextField("", text: self.$profileVM.profile.occupation)
                         .modifier(TextFieldAuthorization())
                     
                 }
@@ -30,7 +30,7 @@ struct ProfileEditView: View {
                 
                 VStack(alignment: .leading) {
                     Text("employer:")
-                    TextField("employer", text: self.$profileVM.profile.employer).modifier(TextFieldAuthorization())
+                    TextField("", text: self.$profileVM.profile.employer).modifier(TextFieldAuthorization())
                 }
                 .padding(.top)
         
@@ -38,7 +38,7 @@ struct ProfileEditView: View {
                     Text("bio:")
                     ZStack {
                         MultilineTextView(text: self.$profileVM.profile.bio)
-                        Text(self.profileVM.profile.bio).opacity(0).padding(.top, 11).modifier(MultiLineTextFieldAuthorization())
+                        Text(self.profileVM.profile.bio).opacity(0).padding(.top, 12).modifier(MultiLineTextFieldAuthorization())
                     }
                 }
                 .padding(.top)

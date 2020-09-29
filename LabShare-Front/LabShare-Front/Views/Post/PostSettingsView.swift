@@ -10,9 +10,9 @@ import SwiftUI
 
 struct PostSettingsView: View {
     @ObservedObject var postVM: PostViewModel
+    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @State private var showingDeleteAlert = false
     
     var body: some View {
@@ -35,18 +35,27 @@ struct PostSettingsView: View {
                         
                     }
                     
-                }.navigationBarTitle(Text("Settings"), displayMode: .inline)
-                    .alert(isPresented: $showingDeleteAlert) {
-                        Alert(title: Text("Delete book"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
-                            self.postVM.deletePost(userAuthVM: self.userAuthVM)
-                            self.presentationMode.wrappedValue.dismiss()
-                            self.presentationMode.wrappedValue.dismiss()
-                            }, secondaryButton: .cancel()
-                        )
+                }.alert(isPresented: $showingDeleteAlert) {
+                    Alert(title: Text("Delete book"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
+                        self.postVM.deletePost(userAuthVM: self.userAuthVM)
+                        self.presentationMode.wrappedValue.dismiss()
+                        self.presentationMode.wrappedValue.dismiss()
+                        }, secondaryButton: .cancel()
+                    )
                 }
                 
-            }
+            }.navigationBarTitle(Text("Settings"), displayMode: .inline)
         }
+    }
+}
+
+struct PostSettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            PostSettingsView(postVM: PostViewModel(userId: 70, postId: 46))
+                .environmentObject(UserAuthenticationViewModel(id: 70, token: "356a0facdfb32b8720ada293893c4dae6267d406", isLoggedIn: true))
+        }
+        
     }
 }
 
@@ -71,9 +80,5 @@ struct PostSettingsView: View {
 //                        }
 //                }
 
-//struct PostSettingsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PostSettingsView(userId: 37, postId: 27)
-//    }
-//}
+
 

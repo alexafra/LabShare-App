@@ -20,43 +20,41 @@ struct PostEditView: View {
     //    @ViewBuilder
     var body: some View {
         VStack (alignment:.center) {
-//            PostHeaderView(postVM: self.postVM)
-            VStack {
-                HStack {
+//            PostHeaderView(p
+            ScrollView {
+                VStack (alignment: .leading) {
                     Text("Title:")
                         .font(.title)
-                        .foregroundColor(Color.black)
-                        .fontWeight(.bold)
-                    Spacer()
-                }
-                
-                TextField("title", text: self.$postVM.post.title)
-                    .font(.largeTitle)
-                    .foregroundColor(Color.black)
-            }
-            VStack {
-                HStack {
-                    Text("Contents:")
+//                        .foregroundColor(Color.black)
+//                        .fontWeight(.bold)
+                    
+                    TextField("", text: self.$postVM.post.title)
                         .font(.title)
                         .foregroundColor(Color.black)
-                        .fontWeight(.bold)
-                    Spacer()
-                }
-                
-                
-//                MultilineTextView(postVM: self.postVM)
-                MultilineTextView(text: self.$postVM.post.content)
-            }
+                        .modifier(TextFieldAuthorization())
             
-            Button(action: {
-                self.postVM.updatePost(userAuthVM: self.userAuthVM)
-            }) {
-                Text("Save")
-                    .foregroundColor(Color.white)
-                    .font(Font.title.weight(.bold))
+                }.padding(.top)
+                VStack (alignment: .leading){
+                    Text("Contents:")
+                        .font(.title)
+                    ZStack {
+                        MultilineTextView(text: self.$postVM.post.content)
+                        Text(self.postVM.post.content).opacity(0).padding(.top, 12).modifier(MultiLineTextFieldAuthorization())
+                    }
+//                        .font(.title)
+//                        .foregroundColor(Color.black)
+//                        .fontWeight(.bold)
+                }.padding(.top)
+                Button(action: {
+                    self.postVM.updatePost(userAuthVM: self.userAuthVM)
+                }) {
+                    Text("Save")
+                        .foregroundColor(Color.white)
+                        .font(Font.title.weight(.bold))
+                }
+                    .modifier(AuthButton())
+                    .padding(.top)
             }
-            .modifier(AuthButton())
-            .padding(.bottom)
             
 //            HStack {
 //                Button(action: {

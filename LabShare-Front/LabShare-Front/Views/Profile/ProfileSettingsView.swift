@@ -12,6 +12,9 @@ struct ProfileSettingsView: View {
 //    @State var userId: Int
     @ObservedObject var profileVM: ProfileViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
+    @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode
+    @State private var showingDeleteAlert = false
     
     var body: some View {
         VStack {
@@ -23,12 +26,20 @@ struct ProfileSettingsView: View {
                     }
                 }.buttonStyle(PlainButtonStyle())
                 HStack {
-                    Button(action: self.profileVM.deleteProfileClosure(userAuthVM: userAuthVM)) {
+                    Button(action: {
+                            self.showingDeleteAlert = true
+                    }) {
                         HStack {
                             Image(systemName: "trash")
                             Text("Delete User")
                         }
-                    }
+                    }.alert(isPresented: $showingDeleteAlert) {
+                        Alert(title: Text("Delete book"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
+                            self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
+                            self.presentationMode.wrappedValue.dismiss()
+                            self.presentationMode.wrappedValue.dismiss()
+                            }, secondaryButton: .cancel()
+                        )
                     
                 }
             }
@@ -36,10 +47,14 @@ struct ProfileSettingsView: View {
         
     }
 }
+}
 
 struct ProfileSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileSettingsView(profileVM: ProfileViewModel(userId: 37))
-            .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+        NavigationView {
+            ProfileSettingsView(profileVM: ProfileViewModel(userId: 70))
+                .environmentObject(UserAuthenticationViewModel(id: 70, token: "356a0facdfb32b8720ada293893c4dae6267d406", isLoggedIn: true))
+        }
+        
     }
 }

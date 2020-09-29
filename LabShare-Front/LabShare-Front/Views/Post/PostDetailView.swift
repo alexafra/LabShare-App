@@ -20,30 +20,35 @@ struct PostDetailView: View {
             NavigationLink (destination: ProfileView(userId: postVM.post.author.id)) {
                 PostHeaderView(postVM: self.postVM)
             }.buttonStyle(PlainButtonStyle())
-            HStack {
+//            HStack {
                 Text(self.postVM.post.title)
-                    .font(.largeTitle)
+                    .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.black)
-                Spacer()
-                VStack {
+//                Spacer()
+//                VStack {
+//                    NavigationLink (
+//                        destination: PostSettingsView(postVM: self.postVM),
+//                        label: {
+//                            Image(systemName: "line.horizontal.3").font(Font.largeTitle)
+//                        })
+//                    }
+//            }
+            
+            Text(self.postVM.post.content)
+            
+            Spacer()
+        }.padding([.top, .leading, .trailing])
+            .navigationBarItems(trailing: Group {
+                if (postVM.post.author.id == userAuthVM.userAuth.id) {
                     NavigationLink (
                         destination: PostSettingsView(postVM: self.postVM),
                         label: {
                             Image(systemName: "line.horizontal.3").font(Font.largeTitle)
-                        })
-                    }
-
-                
-            }
-            
-            Text("Date Posted: \(self.postVM.post.dateCreated.description)")
-                .font(Font.footnote).fontWeight(.thin)
-            Text("\n" + self.postVM.post.content)
-            
-            Spacer()
-        }.padding([.top, .leading, .trailing])
-        .onAppear(perform: postVM.getPostClosure(userAuthVM: userAuthVM))
+                    })
+                }
+            })
+            .onAppear(perform: postVM.getPostClosure(userAuthVM: userAuthVM))
     }
 }
 
