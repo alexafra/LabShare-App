@@ -6,6 +6,8 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate, logout, login, get_user_model
 from django.utils.decorators import method_decorator
+from django.db.models import Value as V
+from django.db.models.functions import Concat
 from LabShare.utils import get_and_authenticate_user, create_user_account
 from LabShare.models import Post, Categories, UserProfile, Comment
 from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, CategoriesSerializer, UserProfileSerializer, CommentSerializer
@@ -44,6 +46,16 @@ class UserLogout(APIView):
         self.request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
 
+class Users(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        if 'search' in self.request.GET:
+            queryset = User.objects.annotate(full_name = Concat('first_name', V(' '), 'last_name')).filter(full_name__icontains = self.request.GET.get('search')).order_by('last_name')
+        else:
+            queryset = User.objects.all().order_by('last_name')
+        serializer = UserSerializer(queryset, many = True)
+        return Response(serializer.data, status = status.HTTP_200_OK)
+
 class SingleUser(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     permission_classes = [IsAuthenticated]
     lookup_field = 'id'
@@ -57,7 +69,7 @@ class SingleUser(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Upda
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
-class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin):
+class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     permission_classes = [IsAuthenticated]
     lookup_field = 'owner__id'
     lookup_url_kwarg = 'user_id'
@@ -67,48 +79,21 @@ class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateM
         return self.retrieve(request, *args, **kwargs)
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
-class UserPosts(generics.GenericAPIView, mixins.ListModelMixin):
+class Comments(APIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = PostSerializer
-    def get_queryset(self):
-        return Post.objects.filter(author__id = self.kwargs['user_id']).order_by("-date_created")
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
-    permission_classes = [IsAuthenticated]
-    lookup_field = 'id'
-    lookup_url_kwarg = 'id'
-    serializer_class = PostSerializer
-    queryset = Post.objects.all()
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
-
-class PostComments(generics.GenericAPIView, mixins.ListModelMixin):
-    permission_classes = [IsAuthenticated]
-    serializer_class = CommentSerializer
-    def get_queryset(self):
-        return Comment.objects.filter(post__id = self.kwargs['post_id']).order_by("-date_created")
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-class Comments(generics.GenericAPIView, mixins.CreateModelMixin):
-    permission_classes = [IsAuthenticated]
-    serializer_class = CommentSerializer
-    queryset = Comment.objects.all()
-    def perform_create(self, serializer) -> None:
-        serializer.save(author = self.request.user, post = Post.objects.get(id = self.kwargs['post_id']))
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+    def get(self, request, **kwargs):
+        queryset = Comment.objects.filter(post__id = self.kwargs['post_id']).order_by("-date_created")
+        serializer = CommentSerializer(queryset, many = True)
+        return Response(serializer.data, status = status.HTTP_200_OK)
+    def post(self, request, **kwargs):
+        serializer = CommentSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save(author = self.request.user, post = Post.objects.get(id = self.kwargs['post_id']))
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class SingleComment(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     permission_classes = [IsAuthenticated]
@@ -123,19 +108,41 @@ class SingleComment(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.U
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
-
-class Posts(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+class Feed(APIView):
     permission_classes = [IsAuthenticated]
-    queryset = Post.objects.all().order_by('-date_created')
+    def get(self, request, **kwargs):
+        if 'category' in self.request.GET:
+            queryset = Post.objects.filter(category__category_name = self.request.GET.get('category')).order_by('-date_created')
+        else:
+            queryset = Post.objects.all().order_by('-date_created')
+        serializer = PostSerializer(queryset, many = True)
+        return Response(serializer.data, status = status.HTTP_200_OK)
+
+class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'id'
+    lookup_url_kwarg = 'id'
     serializer_class = PostSerializer
-    def perform_create(self, serializer) -> None:
-        serializer.save(author = self.request.user)
+    queryset = Post.objects.all()
     def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+        return self.retrieve(request, *args, **kwargs)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
 
-
+class UserPosts(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request, **kwargs):
+        queryset = Post.objects.filter(author__id = self.kwargs['user_id']).order_by("-date_created")
+        serializer = PostSerializer(queryset, many = True)
+        return Response(serializer.data, status = status.HTTP_200_OK)
+    def post(self, request, **kwargs):
+        serializer = PostSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save(author = self.request.user)
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class AvailableCategories(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     permission_classes = [IsAuthenticated]

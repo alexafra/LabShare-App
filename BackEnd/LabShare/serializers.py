@@ -11,6 +11,11 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'email', 'profile', 'first_name', 'last_name']
+    
+   # def to_representation(self, instance):
+   #     response = super().to_representation(instance)
+   #     response['image'] = UserProfileSerializer(instance.profile).data['image']
+   #     return response
 
     def get_auth_token(self, obj):
         token = Token.objects.create(user=obj)
@@ -48,7 +53,7 @@ class PostSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['id', 'bio', 'dob', 'occupation', 'employer'] #image
+        fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image']
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
