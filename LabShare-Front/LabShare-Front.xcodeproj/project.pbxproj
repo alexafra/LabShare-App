@@ -12,6 +12,8 @@
 		1B8EC5E12521B3A200D43412 /* PostEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EC5E02521B3A200D43412 /* PostEditView.swift */; };
 		1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */; };
 		1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92705224FBE07D00D8CF34 /* ProfileView.swift */; };
+		1BA99FE62526FA36005A4048 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA99FE52526FA36005A4048 /* ImagePicker.swift */; };
+		1BA99FE82527275D005A4048 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA99FE72527275D005A4048 /* ProfileImage.swift */; };
 		1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFD250473F5006C6F90 /* SearchBarView.swift */; };
 		1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */; };
 		1E40D5CFC070094A1C8C84AD /* Pods_LabShare_Front.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B900551F389BECD52DCD2DD7 /* Pods_LabShare_Front.framework */; };
@@ -81,6 +83,8 @@
 		1B8EC5E02521B3A200D43412 /* PostEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditView.swift; sourceTree = "<group>"; };
 		1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		1B92705224FBE07D00D8CF34 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		1BA99FE52526FA36005A4048 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		1BA99FE72527275D005A4048 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		1BD01AFD250473F5006C6F90 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContainerView.swift; sourceTree = "<group>"; };
 		1F57E97853FC45E6A4C572E5 /* Pods_LabShare_FrontTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_FrontTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -358,11 +362,13 @@
 			isa = PBXGroup;
 			children = (
 				1B4FC243251F010A006E4A3D /* CircleImage.swift */,
+				1BA99FE72527275D005A4048 /* ProfileImage.swift */,
 				1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */,
 				F0C21C4B2517557900EE3665 /* ProfileHeaderView.swift */,
 				F0545E64251B68090037EFC9 /* ProfileEditView.swift */,
 				1B92705224FBE07D00D8CF34 /* ProfileView.swift */,
 				F0A122182521867E00478FD0 /* ProfileSettingsView.swift */,
+				1BA99FE52526FA36005A4048 /* ImagePicker.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -587,6 +593,7 @@
 				1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */,
 				F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */,
 				1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */,
+				1BA99FE62526FA36005A4048 /* ImagePicker.swift in Sources */,
 				F0545E2F251A5F590037EFC9 /* ContainerView.swift in Sources */,
 				F00BEBD42521F4E3007674F4 /* PostSettingsView.swift in Sources */,
 				F0545E65251B68090037EFC9 /* ProfileEditView.swift in Sources */,
@@ -606,6 +613,7 @@
 				F09C69B92516450600EC961C /* UserAuthenticationViewModel.swift in Sources */,
 				F060778E25207FC900503D2E /* RegisterViewContainer.swift in Sources */,
 				F09C69B12516396200EC961C /* LoginViewModel.swift in Sources */,
+				1BA99FE82527275D005A4048 /* ProfileImage.swift in Sources */,
 				1B4FC244251F010A006E4A3D /* CircleImage.swift in Sources */,
 				F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */,
 				F05A0409251F6DCD001563AF /* LoginRegisterWebService.swift in Sources */,

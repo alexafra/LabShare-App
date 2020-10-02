@@ -11,6 +11,12 @@ import SwiftUI
 struct ProfileEditView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var profileVM: ProfileViewModel
+    @State var image: Image = Image(systemName: "person")
+    
+    @State private var showingImagePicker = false
+    @State private var inputImage: UIImage?
+
+
 
     
     init(userId: Int) {
@@ -21,18 +27,40 @@ struct ProfileEditView: View {
         VStack {
             ScrollView {
                     
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("profile picture:")
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            self.showingImagePicker = true
+
+                        }) {
+                            Text("Edit")
+                        }
+                    }
+                    
+                    HStack {
+                        Spacer()
+                        ProfileImage(image: $image)
+                        Spacer()
+                    }
+                    
+                }.frame(minHeight: 0, maxHeight: 200)
+                .padding(.top)
                 
                 VStack(alignment: .leading) {
                     Text("occupation:")
                     TextField("occupation", text: self.$profileVM.profile.occupation)
                         .modifier(TextFieldAuthorization())
-                }.frame(minHeight: 0, maxHeight: .infinity)
+                }.frame(minHeight: 0, maxHeight: 100)
                 .padding(.top)
                 
                 VStack(alignment: .leading) {
                     Text("employer:")
                     TextField("employer", text: self.$profileVM.profile.employer).modifier(TextFieldAuthorization())
-                }.frame(minHeight: 0, maxHeight: .infinity)
+                }.frame(minHeight: 0, maxHeight: 100)
                 .padding(.top)
         
 //                VStack(alignment: .leading) {
@@ -50,7 +78,7 @@ struct ProfileEditView: View {
 //                    ("bio", text: self.$profileVM.profile.bio)
 //                        .modifier(TextFieldAuthorization())
 //                        .lineLimit(nil)
-                }.frame(minHeight: 0, maxHeight: .infinity)
+                }.frame(minHeight: 0, maxHeight: 100)
                 .padding(.top)
                 
                 VStack(alignment: .leading) {
@@ -80,6 +108,14 @@ struct ProfileEditView: View {
             .frame(minHeight: 0, maxHeight: .infinity)
             
         }.onAppear(perform: self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
+        .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+            ImagePicker(image: self.$inputImage)
+        }
+    }
+    
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
     }
 }
 
