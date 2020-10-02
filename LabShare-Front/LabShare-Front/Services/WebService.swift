@@ -96,8 +96,8 @@ class WebService {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            print(T.self)
-            if let model = try? decoder.decode(T.self, from: data) {
+//            print(T.self)
+            if let model = try? decoder.decode(T.self, from: data) { //Should remove later
                 DispatchQueue.main.async {
                     //Update our UI
                     
@@ -140,12 +140,14 @@ class WebService {
             }
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            let modelArray = try? decoder.decode([T].self, from: data)
+            print(T.self)
+            if let modelArray = try? decoder.decode([T].self, from: data) {
                 //                    We have good data - go back to the main thread
-            DispatchQueue.main.async {
-                //Update our UI
-                completionSuccessful(modelArray)
-                return
+                DispatchQueue.main.async {
+                    //Update our UI
+                    completionSuccessful(modelArray)
+                    return
+                }
             }
         }.resume()
     }

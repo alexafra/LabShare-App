@@ -26,9 +26,9 @@ class PostListViewModel: ObservableObject {
     @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
     @Published var postListType: PostListType
     
-    var dateString: String {
-        return ""
-    }
+//    var dateString: String {
+//        return ""
+//    }
     
     
     init (userId: Int, postListType: PostListType) {
@@ -40,15 +40,15 @@ class PostListViewModel: ObservableObject {
     }
     
     func getAllPostsClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
-            if self.postListType == PostListType.Feed {
-                return {
-                    self.getFeedPostsClosure(userAuthVM: userAuthVM)()
-                }
-            } else {
-                return {
-                    self.getAllUserPostsClosure(userAuthVM: userAuthVM)()
-                }
+        if self.postListType == PostListType.Feed {
+            return {
+                self.getFeedPostsClosure(userAuthVM: userAuthVM)()
             }
+        } else {
+            return {
+                self.getAllUserPostsClosure(userAuthVM: userAuthVM)()
+            }
+        }
         
     }
     func getAllUserPostsClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {

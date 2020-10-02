@@ -46,6 +46,12 @@
 		F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */; };
 		F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */; };
 		F0603663252773CE0092412E /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0603662252773CE0092412E /* KeyboardView.swift */; };
+		F060367125279DAF0092412E /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060367025279DAF0092412E /* CommentView.swift */; };
+		F060367725279DFB0092412E /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060367625279DFB0092412E /* CommentViewModel.swift */; };
+		F060367F25279E050092412E /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060367E25279E050092412E /* CommentModel.swift */; };
+		F060368A25279E1A0092412E /* CommentsWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060368925279E1A0092412E /* CommentsWebService.swift */; };
+		F060368F2527A5160092412E /* CommentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060368E2527A5160092412E /* CommentListView.swift */; };
+		F06036972527AE840092412E /* CommentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06036962527AE840092412E /* CommentListViewModel.swift */; };
 		F060778E25207FC900503D2E /* RegisterViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060778D25207FC900503D2E /* RegisterViewContainer.swift */; };
 		F060779325207FEF00503D2E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060779225207FEF00503D2E /* AppState.swift */; };
 		F09C69A72516216700EC961C /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69A62516216700EC961C /* SetUpView.swift */; };
@@ -127,6 +133,12 @@
 		F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileWebService.swift; sourceTree = "<group>"; };
 		F0603662252773CE0092412E /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		F060367025279DAF0092412E /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		F060367625279DFB0092412E /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		F060367E25279E050092412E /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
+		F060368925279E1A0092412E /* CommentsWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsWebService.swift; sourceTree = "<group>"; };
+		F060368E2527A5160092412E /* CommentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListView.swift; sourceTree = "<group>"; };
+		F06036962527AE840092412E /* CommentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListViewModel.swift; sourceTree = "<group>"; };
 		F060778D25207FC900503D2E /* RegisterViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewContainer.swift; sourceTree = "<group>"; };
 		F060779225207FEF00503D2E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		F09C69A62516216700EC961C /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
@@ -226,6 +238,7 @@
 			children = (
 				F09C69B62516446900EC961C /* StartView.swift */,
 				F04A334E24F91C6A004A86D9 /* Views */,
+				F060367525279DBD0092412E /* Comment */,
 				F0519BB925034CC5006E580E /* ViewModels */,
 				F0519BB625034A49006E580E /* Services */,
 				F04A334D24F91C62004A86D9 /* Models */,
@@ -269,6 +282,7 @@
 		F04A334D24F91C62004A86D9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F060367E25279E050092412E /* CommentModel.swift */,
 				F04A334F24F91C90004A86D9 /* PostModel.swift */,
 				1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */,
 				F09C69B42516408200EC961C /* UserModel.swift */,
@@ -299,6 +313,7 @@
 				F05A03B5251DAE08001563AF /* UserPostsWebService.swift */,
 				F05A03DF251E466D001563AF /* UserFeedWebService.swift */,
 				F05A0408251F6DCC001563AF /* LoginRegisterWebService.swift */,
+				F060368925279E1A0092412E /* CommentsWebService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -306,6 +321,8 @@
 		F0519BB925034CC5006E580E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F060367625279DFB0092412E /* CommentViewModel.swift */,
+				F06036962527AE840092412E /* CommentListViewModel.swift */,
 				F0519BBA25034CD9006E580E /* PostListViewModel.swift */,
 				F05C400125239E6A00633181 /* PostViewModel.swift */,
 				F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */,
@@ -315,6 +332,15 @@
 				F060779225207FEF00503D2E /* AppState.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F060367525279DBD0092412E /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				F060367025279DAF0092412E /* CommentView.swift */,
+				F060368E2527A5160092412E /* CommentListView.swift */,
+			);
+			path = Comment;
 			sourceTree = "<group>";
 		};
 		F09C69AD2516303900EC961C /* Login */ = {
@@ -586,13 +612,16 @@
 				1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */,
 				F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */,
 				F0603663252773CE0092412E /* KeyboardView.swift in Sources */,
+				F060368F2527A5160092412E /* CommentListView.swift in Sources */,
 				F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */,
 				1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */,
 				F0A122192521867E00478FD0 /* ProfileSettingsView.swift in Sources */,
 				F0545E37251A62780037EFC9 /* RegisterView.swift in Sources */,
 				F0C21C4C2517557900EE3665 /* ProfileHeaderView.swift in Sources */,
 				1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */,
+				F060367725279DFB0092412E /* CommentViewModel.swift in Sources */,
 				F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */,
+				F060368A25279E1A0092412E /* CommentsWebService.swift in Sources */,
 				1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */,
 				F0545E2F251A5F590037EFC9 /* ContainerView.swift in Sources */,
 				F00BEBD42521F4E3007674F4 /* PostSettingsView.swift in Sources */,
@@ -600,10 +629,12 @@
 				F05A03E0251E466D001563AF /* UserFeedWebService.swift in Sources */,
 				F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */,
 				F04A335224F91CAA004A86D9 /* PostRowView.swift in Sources */,
+				F060367F25279E050092412E /* CommentModel.swift in Sources */,
 				F060779325207FEF00503D2E /* AppState.swift in Sources */,
 				F05A03B6251DAE08001563AF /* UserPostsWebService.swift in Sources */,
 				F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */,
 				1B8EC5E12521B3A200D43412 /* PostEditView.swift in Sources */,
+				F06036972527AE840092412E /* CommentListViewModel.swift in Sources */,
 				F09C69A72516216700EC961C /* SetUpView.swift in Sources */,
 				F05C400225239E6A00633181 /* PostViewModel.swift in Sources */,
 				F09C69AF251635BD00EC961C /* LoginView.swift in Sources */,
@@ -618,6 +649,7 @@
 				F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */,
 				F05A0409251F6DCD001563AF /* LoginRegisterWebService.swift in Sources */,
 				F0545E58251B341E0037EFC9 /* RegistrationModel.swift in Sources */,
+				F060367125279DAF0092412E /* CommentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

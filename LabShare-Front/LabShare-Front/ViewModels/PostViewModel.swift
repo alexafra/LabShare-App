@@ -11,7 +11,7 @@ import SwiftUI
 import Combine
 
 class PostViewModel: ObservableObject {
-    let didChange = PassthroughSubject<PostViewModel,Never>()
+    let didChange = PassthroughSubject<PostViewModel,Never>() //Needed????
     private let titleCharacterLimit = 30
     @Published var post: PostModel
     @Published var makingRequest: Bool = false
