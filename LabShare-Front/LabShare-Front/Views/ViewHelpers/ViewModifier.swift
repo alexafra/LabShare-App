@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct TextFieldAuthorization: ViewModifier {
 //    typealias Body = <#type#>
@@ -20,7 +21,6 @@ struct TextFieldAuthorization: ViewModifier {
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.green, lineWidth: 1)
                     .shadow(radius:5))
-            
             
 //            .padding()
             
@@ -75,6 +75,7 @@ struct AuthButton: ViewModifier {
     }
 }
 
+
 struct ViewModifier_Previews: PreviewProvider {
     @State var text: String = "Hello"
     static var previews: some View {
@@ -116,4 +117,6 @@ struct ViewModifier_Previews: PreviewProvider {
         
     }
 }
+
+
 

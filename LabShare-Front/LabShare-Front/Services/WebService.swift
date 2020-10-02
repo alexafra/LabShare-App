@@ -7,7 +7,10 @@
 //
 
 import Foundation
-
+var hostUrlString = "http://127.0.0.1:8000"
+//var hostUrlString = "http://10.20.233.187:8000"
+//var hostUrlString = "10.20.233.187:8000"
+//var hostUrlString = "http://3799f0fea0bb.ngrok.io"
 class WebService {
     
     var loggedInUserId: Int = -1
@@ -90,15 +93,21 @@ class WebService {
                 }
                 return
             }
+            
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            let model = try? decoder.decode(T.self, from: data)
-            DispatchQueue.main.async {
-                //Update our UI
-                
-                completionSuccessful(model)
-                return
+            print(T.self)
+            if let model = try? decoder.decode(T.self, from: data) {
+                DispatchQueue.main.async {
+                    //Update our UI
+                    
+                    completionSuccessful(model)
+                    return
+                }
             }
+//            else {
+//
+//            }
         }.resume()
     }
     

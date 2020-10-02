@@ -7,16 +7,18 @@
 //
 
 import Foundation
+
+
 class ProfileWebService: WebService {
     init(userAuth: UserAuthenticationModel) {
         super.init(userAuthModel: userAuth)
     }
     
     func generateURLString(userId: Int) -> String {
-        return "http://127.0.0.1:8000/users/\(userId)/profile"
+        return "\(hostUrlString)/users/\(userId)/profile"
     }
     func generateUserURLString(userId: Int) -> String {
-        return "http://127.0.0.1:8000/users/\(userId)"
+        return "\(hostUrlString)/users/\(userId)"
     }
     
     func getProfile(userId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping (ProfileModel?) -> ()) {

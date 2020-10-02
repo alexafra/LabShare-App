@@ -12,9 +12,11 @@ struct PostEditView: View {
     @ObservedObject var postVM: PostViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @State var showingAlert: Bool = false
+    @Binding var showSelf: Bool
     
-    init (userId: Int, postId: Int) {
+    init (userId: Int, postId: Int, showSelf: Binding<Bool>) {
         self.postVM = PostViewModel(userId: userId, postId: postId)
+        self._showSelf = showSelf
     }
     
     //    @ViewBuilder
@@ -29,11 +31,11 @@ struct PostEditView: View {
 //                        .fontWeight(.bold)
                     
                     TextField("", text: self.$postVM.post.title)
-                        .font(.title)
-                        .foregroundColor(Color.black)
+//                        .font(.title)
+//                        .foregroundColor(Color.black)
                         .modifier(TextFieldAuthorization())
-            
-                }.padding(.top)
+                }.padding()
+                
                 VStack (alignment: .leading){
                     Text("Contents:")
                         .font(.title)
@@ -44,15 +46,16 @@ struct PostEditView: View {
 //                        .font(.title)
 //                        .foregroundColor(Color.black)
 //                        .fontWeight(.bold)
-                }.padding(.top)
+                }.padding()
+                
                 Button(action: {
                     self.postVM.updatePost(userAuthVM: self.userAuthVM)
+                    self.showSelf = false
                 }) {
                     Text("Save")
                         .foregroundColor(Color.white)
                         .font(Font.title.weight(.bold))
-                }
-                    .modifier(AuthButton())
+                }.modifier(AuthButton())
                     .padding(.top)
             }
             
@@ -83,7 +86,7 @@ struct PostEditView: View {
 struct PostEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PostEditView(userId: 37, postId: 27)
+            PostEditView(userId: 37, postId: 27, showSelf: .constant(true))
                 .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
         }
         

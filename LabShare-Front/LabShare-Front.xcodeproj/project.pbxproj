@@ -45,6 +45,7 @@
 		F05C400225239E6A00633181 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C400125239E6A00633181 /* PostViewModel.swift */; };
 		F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */; };
 		F05E5E8F25039D9B004BC996 /* ProfileWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */; };
+		F0603663252773CE0092412E /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0603662252773CE0092412E /* KeyboardView.swift */; };
 		F060778E25207FC900503D2E /* RegisterViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060778D25207FC900503D2E /* RegisterViewContainer.swift */; };
 		F060779325207FEF00503D2E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060779225207FEF00503D2E /* AppState.swift */; };
 		F09C69A72516216700EC961C /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69A62516216700EC961C /* SetUpView.swift */; };
@@ -125,6 +126,7 @@
 		F05C400125239E6A00633181 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileWebService.swift; sourceTree = "<group>"; };
+		F0603662252773CE0092412E /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		F060778D25207FC900503D2E /* RegisterViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewContainer.swift; sourceTree = "<group>"; };
 		F060779225207FEF00503D2E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		F09C69A62516216700EC961C /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
@@ -292,8 +294,8 @@
 		F0519BB625034A49006E580E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */,
 				F05A03A7251CD4D7001563AF /* WebService.swift */,
+				F05E5E8E25039D9B004BC996 /* ProfileWebService.swift */,
 				F05A03B5251DAE08001563AF /* UserPostsWebService.swift */,
 				F05A03DF251E466D001563AF /* UserFeedWebService.swift */,
 				F05A0408251F6DCC001563AF /* LoginRegisterWebService.swift */,
@@ -340,6 +342,7 @@
 			children = (
 				F0545E52251B0FAE0037EFC9 /* ViewModifier.swift */,
 				F00BEBDF252204EC007674F4 /* KitToSwiftUIHelper.swift */,
+				F0603662252773CE0092412E /* KeyboardView.swift */,
 			);
 			path = ViewHelpers;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				F09C69B52516408200EC961C /* UserModel.swift in Sources */,
 				1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */,
 				F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */,
+				F0603663252773CE0092412E /* KeyboardView.swift in Sources */,
 				F05E5E8D25039AC8004BC996 /* ProfileViewModel.swift in Sources */,
 				1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */,
 				F0A122192521867E00478FD0 /* ProfileSettingsView.swift in Sources */,

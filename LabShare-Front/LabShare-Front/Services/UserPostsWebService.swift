@@ -20,7 +20,7 @@ class UserPostsWebService: WebService {
 //        self.token = userAuthModel.token
 //    }
     func generateURLString(userId: Int, postId: Int? = nil) -> String {
-        var urlString =  "http://127.0.0.1:8000/users/\(userId)/posts"
+        var urlString =  "\(hostUrlString)/users/\(userId)/posts"
         if let postId = postId {
             urlString = urlString + "/" + String(postId)
         }

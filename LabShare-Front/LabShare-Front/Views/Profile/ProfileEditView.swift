@@ -11,10 +11,18 @@ import SwiftUI
 struct ProfileEditView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var profileVM: ProfileViewModel
+    @Binding var showSelf: Bool
+
+//    @Binding var showSelf: Bool
 
     
-    init(userId: Int) {
+    init(userId: Int, showSelf: Binding<Bool>) {
         self.profileVM = ProfileViewModel(userId: userId)
+        self._showSelf = showSelf
+    }
+    
+    init(userId: Int) {
+        self.init(userId: userId, showSelf: .constant(true))
     }
     
     var body: some View {
@@ -26,13 +34,13 @@ struct ProfileEditView: View {
                         .modifier(TextFieldAuthorization())
                     
                 }
-                .padding(.top)
+                .padding()
                 
                 VStack(alignment: .leading) {
                     Text("employer:")
                     TextField("", text: self.$profileVM.profile.employer).modifier(TextFieldAuthorization())
                 }
-                .padding(.top)
+                .padding()
         
                 VStack(alignment: .leading) {
                     Text("bio:")
@@ -41,7 +49,7 @@ struct ProfileEditView: View {
                         Text(self.profileVM.profile.bio).opacity(0).padding(.top, 12).modifier(MultiLineTextFieldAuthorization())
                     }
                 }
-                .padding(.top)
+                .padding()
                 
                 VStack(alignment: .leading) {
                     HStack {
@@ -51,10 +59,11 @@ struct ProfileEditView: View {
                         Spacer()
                     }
                 }
-                .padding(.top)
+                .padding()
                 
                 Button(action: {
                     self.profileVM.updateProfile(userAuthVM: self.userAuthVM)
+                    self.showSelf = false
                 }) {
                     Text("Save")
                         .foregroundColor(Color.white)
@@ -63,11 +72,18 @@ struct ProfileEditView: View {
                 .modifier(AuthButton())
                 .padding(.top)
                     
-            }.padding()
+            }
             
             
-        }.frame(minHeight: 0, maxHeight: .infinity)
-        .onAppear(perform: self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
+        }.padding()
+//        .frame(minHeight: 0, maxHeight: .infinity)
+        .KeyboardAwarePadding()
+        .onAppear(
+            perform:
+                self.profileVM.getProfileClosure(userAuthVM: userAuthVM)
+            
+        )
+        
     }
 }
 
@@ -87,7 +103,7 @@ struct TextView: UIViewRepresentable {
 
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEditView(userId: 76)
+        ProfileEditView(userId: 76, showSelf: .constant(true))
             .environmentObject( UserAuthenticationViewModel(id: 76, token: "e6d3868c84c0cb418cb676d3fca4d9a9d03c90d8", isLoggedIn: false))
     }
 }

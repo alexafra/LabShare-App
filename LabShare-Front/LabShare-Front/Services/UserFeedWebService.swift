@@ -18,7 +18,7 @@ class UserFeedWebService: WebService {
 //        self.token = userAuthModel.token
 //    }
     func generateURLString(userId: Int) -> String {
-        return  "http://127.0.0.1:8000/users/\(userId)/feed"
+        return  "\(hostUrlString)/users/\(userId)/feed"
     }
     
     func getAllFeedPosts(userId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {

@@ -11,39 +11,42 @@ import SwiftUI
 struct PostRowView: View {
     @ObservedObject var postVM: PostViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
+    @State private var showDetail = false
     
     var body: some View {
-        VStack (alignment: .leading, spacing: 5) {
-            Divider()
-            NavigationLink (destination: ProfileView(userId: postVM.post.author.id)){
-                PostHeaderView(postVM: self.postVM)
-            }.buttonStyle(PlainButtonStyle())
-            
-            if self.postVM.post.title.count > 50 {
-                Text("\(String(self.postVM.post.title.prefix(50))) ...")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.black)
-            } else {
-                Text(self.postVM.post.title)
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.black)
-            }
-            
-//            Text(self.postVM.post.title)
-//                .font(.headline)
-//                .fontWeight(.bold)
-//                .foregroundColor(Color.black)
+        NavigationLink(destination: PostDetailView(postVM: postVM, showSelf: $showDetail), isActive: $showDetail) {
+            VStack (alignment: .leading, spacing: 5) {
+                Divider()
+                NavigationLink (destination: ProfileView(userId: postVM.post.author.id)){
+                    PostHeaderView(postVM: self.postVM)
+                }.buttonStyle(PlainButtonStyle())
                 
-            
-            if self.postVM.post.content.count > 170 {
-                Text("\(String(self.postVM.post.content.prefix(170))) ...")
-            } else {
-                Text(self.postVM.post.content)
-            }
-           
-        }.padding()
+                if self.postVM.post.title.count > 50 {
+                    Text("\(String(self.postVM.post.title.prefix(50))) ...")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.black)
+                } else {
+                    Text(self.postVM.post.title)
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.black)
+                }
+                
+    //            Text(self.postVM.post.title)
+    //                .font(.headline)
+    //                .fontWeight(.bold)
+    //                .foregroundColor(Color.black)
+                    
+                
+                if self.postVM.post.content.count > 170 {
+                    Text("\(String(self.postVM.post.content.prefix(170))) ...")
+                } else {
+                    Text(self.postVM.post.content)
+                }
+               
+            }.padding()
+        }.buttonStyle(PlainButtonStyle())
         
     }
 }

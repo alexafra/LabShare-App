@@ -11,6 +11,8 @@ import SwiftUI
 struct PostListView: View {
     @ObservedObject var postListVM: PostListViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
+    @ObservedObject private var keyboard = KeyboardResponder()
+    
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -39,7 +41,7 @@ struct PostListView: View {
                         }
                     }
                         
-                    }.modifier(MultiLineTextFieldAuthorization())
+                }.modifier(MultiLineTextFieldAuthorization())
                     .padding(10)
                     Divider()
             }
@@ -48,13 +50,14 @@ struct PostListView: View {
                 
             ForEach(self.postListVM.posts, id: \.post.id) {
                 postVM in
-                NavigationLink(destination: PostDetailView(postVM: postVM)) {
+                
                     PostRowView(postVM: postVM)
                         
-                }.buttonStyle(PlainButtonStyle())
+                
             }
         }.padding()
         .onAppear(perform: self.postListVM.getAllPostsClosure(userAuthVM: userAuthVM))
+            
     }
 }
 

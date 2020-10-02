@@ -15,11 +15,12 @@ struct ProfileSettingsView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
     @State private var showingDeleteAlert = false
+    @State private var showDetail = false
     
     var body: some View {
         VStack {
             List {
-                NavigationLink(destination: ProfileEditView(userId: self.profileVM.userId)) {
+                NavigationLink(destination: ProfileEditView(userId: self.profileVM.userId, showSelf: $showDetail), isActive: $showDetail) {
                     HStack {
                         Image(systemName: "pencil")
                         Text("Edit Profile")
@@ -35,9 +36,8 @@ struct ProfileSettingsView: View {
                         }
                     }.alert(isPresented: $showingDeleteAlert) {
                         Alert(title: Text("Delete User"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
+                            self.presentationMode.wrappedValue.dismiss()
                             self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
-                            self.presentationMode.wrappedValue.dismiss()
-                            self.presentationMode.wrappedValue.dismiss()
                             }, secondaryButton: .cancel()
                         )
                     

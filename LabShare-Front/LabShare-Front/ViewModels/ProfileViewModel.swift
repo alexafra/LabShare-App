@@ -99,19 +99,28 @@ class ProfileViewModel: ObservableObject {
     
     //Are you sure about profile .... no edited values?
     func updateProfile(userAuthVM: UserAuthenticationViewModel) {
+         //For register -> Profile edit view
+        
+        if !userAuthVM.userAuth.isLoggedIn {
+            userAuthVM.userAuth.isLoggedIn = true
+        }
+        
         let profileWebService = ProfileWebService(userAuth: userAuthVM.userAuth)
-            
         profileWebService.updateProfile(profileModel: self.profile, completionFailure: {() -> Void in
 //            self.hasCompletedLoading = true
 //            self.loadingSuccessful = false
+            
+            
             return
             
         }, completionSuccessful: { (profile: ProfileModel?) -> Void in
             if let profile = profile {
                 self.profile = profile
             }
+            
+            return
         })
-        userAuthVM.userAuth.isLoggedIn = true
+            // //////////NEED TO REPLACE self.userAuthVM.userAuth.isLoggedIn = true
     }
 }
 

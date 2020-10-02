@@ -114,3 +114,5 @@ cd (to backend directory)<br>
 python3 manage.py makemigrations<br>
 python3 manage.py migrate<br>
 python3 manage.py runserver
+
+Must get rid of AppTransportSecurity key before production!!!

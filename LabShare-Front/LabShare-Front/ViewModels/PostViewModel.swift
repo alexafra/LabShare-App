@@ -152,6 +152,7 @@ class PostViewModel: ObservableObject {
                 if let postModel = postModel {
                     self.post = postModel
                 }
+                return
                 
             }
         )

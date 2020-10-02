@@ -11,14 +11,16 @@ import SwiftUI
 struct PostSettingsView: View {
     @ObservedObject var postVM: PostViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @Environment(\.managedObjectContext) var moc
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.managedObjectContext) var moc
+//    @Environment(\.presentationMode) var presentationMode
     @State private var showingDeleteAlert = false
+    @Binding var showSelf: Bool
+    @State private var showEdit: Bool = false
     
     var body: some View {
         VStack {
             List {
-                NavigationLink(destination: PostEditView(userId: self.postVM.post.author.id, postId: self.postVM.post.id)) {
+                NavigationLink(destination: PostEditView(userId: self.postVM.post.author.id, postId: self.postVM.post.id, showSelf: $showEdit), isActive: $showEdit) {
                     HStack {
                         Image(systemName: "pencil")
                         Text("Edit Post")
@@ -38,8 +40,9 @@ struct PostSettingsView: View {
                 }.alert(isPresented: $showingDeleteAlert) {
                     Alert(title: Text("Delete Post"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
                         self.postVM.deletePost(userAuthVM: self.userAuthVM)
-                        self.presentationMode.wrappedValue.dismiss()
-                        self.presentationMode.wrappedValue.dismiss()
+                        self.showSelf = false
+//                        self.presentationMode.wrappedValue.dismiss()
+//                        self.presentationMode.wrappedValue.dismiss()
                         }, secondaryButton: .cancel()
                     )
                 }
@@ -52,7 +55,7 @@ struct PostSettingsView: View {
 struct PostSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PostSettingsView(postVM: PostViewModel(userId: 70, postId: 46))
+            PostSettingsView(postVM: PostViewModel(userId: 70, postId: 46), showSelf: Binding.constant(true))
                 .environmentObject(UserAuthenticationViewModel(id: 70, token: "356a0facdfb32b8720ada293893c4dae6267d406", isLoggedIn: true))
         }
         
