@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from django.conf.urls import include
 from rest_framework import routers
 from LabShare import views
@@ -6,94 +6,49 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('userinfo/<int:user_id>', views.GetUserInfo.as_view()),
-    path('users/<int:user_id>', views.SingleUser.as_view()),
-    path('current', views.Current.as_view()),
-    path('posts/<post_id>/comments', views.Comments.as_view()),
-    path('users/<int:user_id>/posts/<int:post_id>/comments', views.PostComments.as_view()),
-    path('users/<int:user_id>/posts/<int:post_id>/comments/<comment_id>', views.SingleComment.as_view()),
-    path('users/<int:user_id>/feed', views.Posts.as_view()),
-    path('users/<int:user_id>/posts/<int:id>', views.SinglePost.as_view()), #This needs to change to posts/id
-    path('users/<int:user_id>/posts', views.UserPosts.as_view()), #Need to be able to create posts here
-    path('users/<int:user_id>/profile', views.Profile.as_view()),
-    path('categories', views.AvailableCategories.as_view()),
-    path('categories/<int:id>', views.SingleCategory.as_view()),
-    path('register', views.UserRegister.as_view()),
-    path('login', views.UserLogin.as_view()),
-    path('logout', views.UserLogout.as_view()),
+    #TEST URLS
+    path('current', views.Current.as_view()), #id of currently logged in user (GET)
+    path('userinfo/<int:user_id>', views.GetUserInfo.as_view()), #token and email for a given user id (GET)
+    #USER
+    path('users/<int:user_id>', views.SingleUser.as_view()), #(GET, PUT, DELETE)
+    path('users/<int:user_id>/profile', views.Profile.as_view()), #(GET, PUT, DELETE)
+    path('users', views.Users.as_view()), #all users or user search(GET)
+    #POSTS
+    path('users/<int:user_id>/feed', views.Feed.as_view()), #view posts with(?) or without filters (GET)
+    path('users/<int:user_id>/posts/<int:id>', views.SinglePost.as_view()), #(GET, PUT, DELETE)
+    path('users/<int:user_id>/posts', views.UserPosts.as_view()), #get posts for a user, create a post (GET, POST)
+    #COMMENTS
+    path('users/<int:user_id>/posts/<int:post_id>/comments', views.Comments.as_view()), #create post comment, get post comments (GET, POST)
+    path('users/<int:user_id>/posts/<int:post_id>/comments/<int:comment_id>', views.SingleComment.as_view()), #(GET, PUT, DELETE)
+    #CATEGORIES
+    path('categories', views.AvailableCategories.as_view()), #get all categories, create a category (GET, POST)
+    path('categories/<int:id>', views.SingleCategory.as_view()), #(GET, PUT, DELETE)
+    #AUTHENTICATION
+    path('register', views.UserRegister.as_view()), #(POST)
+    path('login', views.UserLogin.as_view()), #(POST)
+    path('logout', views.UserLogout.as_view()), #(POST)
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 #GRAE
-#Create Categories table ##DONE
-#Attach profile and permissions to users automatically upon registration ##DONE
-#Give ability to update these categories and permissions available ##DONE
-#Change a user’s permissions
-#Add categories to posts ##DONE
-#Add the ability to query these posts by categories
-#Add page restrictions based on permissions of logged in user ##DONE
-#Profile photos ##DONE
+#comments ##DONE
+#category filter ##DONE
+#search ##DONE
+#can only create, edit and delete posts, edit, delete account if you are the same user (or admin)
+#admin functionality and permissions, change users active/non-active, remove and edit posts, permissions for active/non-active
+#user image sent with user model serializer
+#make serializers more concise
+#https
+#pagination
+#first_name and last name essential ##DONE
+
+#REFACTORING:
+##users/user_id/feed: get all posts and category filters if query string
+##users/user_id/posts: get posts from a user, create posts ##posts not created from feed anymore
+##users/user_id/posts/post_id/comments: create post comments, get post comments ##comments not created from post_id/comments anymore
 
 
 #GREG
 #Reimplement Postgres
 #Host app on AWS server
 #Strengthen authentication security
-#categories/ show all categories and add categories
-#categories/id/ shows a category for manipulation
-#userinfo/<user_id>/ now returns {token, email}
-#current/ now returns id of currently logged in user
-#views now restricted to logged in users
-#register and login restricted to logged out users
-#pip install pillow
-#profile images now work
-
-#remove all trailing /'s
-#'feed' changed to 'posts'
-#all instances of 'user' now 'users'
-#search functionality
-#Get started on admin functionality
-#Pagination
-#Make first_name and last_name essential
-#PUT request requires everything?
-#add comments
-
-#Make first_name and last_name essential
-#Comments
-#Implement PATCH functions rather than PUT
-#Add comments to posts ###
-#Search function by name ###
-#Global admin
-#Profile
-#Feed
-#AWS Server ###
-#Finalise restrictions on posts ##
-#Query posts on categories
-#Reverse posts order
-#Profile image in User
-
-
-#create categories for posts
-#Add the ability to query these posts by categories
-#Attach profile and permissions to users automatically upon registration ##DONE
-#Give ability to update these categories and permissions available ##DONE
-#Change a user’s permissions ##DONE
-#Add page restrictions based on permissions of logged in user ##DONE
-#Profile photos ##DONE
-
-
-#comments
-#search
-#user image sent with user model serializer
-#filter by categories
-#global admin
-
-
-#comments
-#profile
-#search - (posts/posts?category = Reagent) [Just users]
-#https
-#admin
-#can't edit other users posts (restrictions)
-#pagination
-#users/<id>/posts/<post_id>/comments
 

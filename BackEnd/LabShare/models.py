@@ -31,6 +31,8 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField('email address', unique = True)
+    first_name = models.CharField(max_length = 32, blank = False, null = False)
+    last_name = models.CharField(max_length = 160, blank = False, null = False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -70,7 +72,7 @@ class UserProfile(models.Model):
     dob = models.DateTimeField(default = '1970-01-01', blank = True)
     occupation = models.TextField(blank = True, default = "")
     employer = models.TextField(blank = True, default = "")
-    #image = models.ImageField(upload_to = 'profile_image', blank = True, default = 'avatar.jpg')
+    image = models.ImageField(upload_to = 'profile_image', blank = True, default = 'avatar.jpg')
 
     def __str__(self):
         return self.owner.email
