@@ -28,10 +28,4 @@ class UserFeedWebService: WebService {
         super.getAll(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
     }
     
-    func createFeedPost (userId: Int, postModel: PostModel, completionFailure: @escaping () -> (), completionSuccessful: @escaping (PostModel?) -> ()) {
-
-        let urlString = generateURLString(userId: userId)
-        super.post(urlString: urlString, model: postModel, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
-    }
-    
 }

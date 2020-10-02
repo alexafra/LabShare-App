@@ -97,8 +97,8 @@ class PostListViewModel: ObservableObject {
         
         let newPost = PostModel(title: newPostTitle, content:newPostContent, authorId: userAuthVM.userAuth.id)
         
-        let userFeedWebService = UserFeedWebService(userAuth: userAuthVM.userAuth)
-        userFeedWebService.createFeedPost(userId: userAuthVM.userAuth.id, postModel: newPost,
+        let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
+        userPostWebService.createPost(userId: userAuthVM.userAuth.id, postModel: newPost,
            completionFailure: {() -> Void in
                 self.newPostTitle = ""
                 self.newPostContent = ""

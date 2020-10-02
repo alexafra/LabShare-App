@@ -23,8 +23,8 @@ struct MultilineTextView: UIViewRepresentable {
         view.isEditable = true
         view.isUserInteractionEnabled = true
         view.textAlignment = .left
-//        view.font = UIFont(name: "Times New Roman", size: 20)
-        view.font = UIFont(name: ".SFUI", size: 20)
+        view.font = UIFont(name: "Times New Roman", size: 20)
+//        view.font = UIFont(name: ".SFUI", size: 20)
         view.delegate = context.coordinator
         view.translatesAutoresizingMaskIntoConstraints = false
 //        view.autoresizingMask = [.width, .height]

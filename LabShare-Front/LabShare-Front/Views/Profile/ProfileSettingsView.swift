@@ -25,7 +25,7 @@ struct ProfileSettingsView: View {
                         Text("Edit Profile")
                     }
                 }.buttonStyle(PlainButtonStyle())
-                HStack {
+//                HStack {
                     Button(action: {
                             self.showingDeleteAlert = true
                     }) {
@@ -41,7 +41,7 @@ struct ProfileSettingsView: View {
                             }, secondaryButton: .cancel()
                         )
                     
-                }
+//                }
             }
         }.navigationBarTitle(Text("Settings"), displayMode: .inline)
         

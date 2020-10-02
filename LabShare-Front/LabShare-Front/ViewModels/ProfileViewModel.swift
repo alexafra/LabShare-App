@@ -70,7 +70,7 @@ class ProfileViewModel: ObservableObject {
                 //SUPER USER NEEDS TO CHANGE HERE
             }, completionSuccessful: { (profile: ProfileModel?) -> Void in
                 if (true) {
-                    userAuthVM.userAuth.isLoggedIn = false
+                    userAuthVM.userAuth.isLoggedIn = true
                 } else {
                     //Change to go back feedqee
                 }
@@ -102,13 +102,11 @@ class ProfileViewModel: ObservableObject {
         let profileWebService = ProfileWebService(userAuth: userAuthVM.userAuth)
             
         profileWebService.updateProfile(profileModel: self.profile, completionFailure: {() -> Void in
-            self.hasCompletedLoading = true
-            self.loadingSuccessful = false
+//            self.hasCompletedLoading = true
+//            self.loadingSuccessful = false
             return
             
         }, completionSuccessful: { (profile: ProfileModel?) -> Void in
-            self.hasCompletedLoading = true
-            self.loadingSuccessful = true
             if let profile = profile {
                 self.profile = profile
             }

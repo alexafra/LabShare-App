@@ -52,4 +52,11 @@ class UserPostsWebService: WebService {
         super.delete(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
     }
     
+    
+    func createPost (userId: Int, postModel: PostModel, completionFailure: @escaping () -> (), completionSuccessful: @escaping (PostModel?) -> ()) {
+
+        let urlString = generateURLString(userId: userId)
+        super.post(urlString: urlString, model: postModel, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
+    }
+    
 }
