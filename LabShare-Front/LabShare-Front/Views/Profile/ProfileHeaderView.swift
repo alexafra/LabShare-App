@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ProfileHeaderView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel

@@ -15,6 +15,7 @@
  */
 
 import SwiftUI
+import Combine
 
 struct StartView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel

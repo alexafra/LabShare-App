@@ -8,6 +8,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct SearchBarView: View {
     

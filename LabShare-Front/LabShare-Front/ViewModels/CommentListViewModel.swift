@@ -6,21 +6,24 @@
 //  Copyright © 2020 CITS3200. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
 import Combine
 
 class CommentListViewModel: ObservableObject {
     
-    let didChange = PassthroughSubject<CommentListViewModel, Never>()
-//    @Published var comments: [CommentViewModel]
-    @Published var comments = [CommentViewModel]()
+//    let didChange = PassthroughSubject<CommentListViewModel, Never>()
+    @Published var comments: [CommentViewModel]
+//    @Published var comments = [CommentViewModel]()
     @Published var userId: Int
     @Published var postId: Int
-    @Published var newCommentContent: String = ""
+    @Published var newCommentContent: String
+//    @Published var newCommentContent: String = "New Comment"
     
     init(userId: Int, postId: Int) {
         self.userId = userId
         self.postId = postId
+        self.newCommentContent = "New Comment"
         self.comments = [CommentViewModel]()
         
     }

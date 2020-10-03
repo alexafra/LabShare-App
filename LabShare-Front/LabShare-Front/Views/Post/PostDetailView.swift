@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct PostDetailView: View {
     @ObservedObject var postVM: PostViewModel
@@ -48,7 +49,7 @@ struct PostDetailView: View {
                 Spacer()
             }.padding([.top, .leading, .trailing])
                 .onAppear(perform: postVM.getPostClosure(userAuthVM: userAuthVM))
-                .onAppear(perform: commentListVM.getAllCommentsClosure(userAuthVM: userAuthVM))
+//                .onAppear(perform: commentListVM.getAllCommentsClosure(userAuthVM: userAuthVM))
                 .navigationBarItems(trailing: Group {
                     if (postVM.post.author.id == userAuthVM.userAuth.id) {
                         NavigationLink (

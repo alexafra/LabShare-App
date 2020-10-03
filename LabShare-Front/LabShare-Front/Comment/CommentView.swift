@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CommentView: View {
     @ObservedObject var commentVM: CommentViewModel //Probs needs to change

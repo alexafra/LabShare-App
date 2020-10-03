@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CircleImage: View {
     var body: some View {

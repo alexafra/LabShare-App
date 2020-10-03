@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ProfileContainerView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
@@ -22,6 +23,6 @@ struct ProfileContainerView: View {
 struct ProfileContainerView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileContainerView()
-            .environmentObject(UserAuthenticationViewModel(id: 72, token: "d4e3814547b0b328f3baae5ea78a3b1417464386", isLoggedIn: true))
+            .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
     }
 }

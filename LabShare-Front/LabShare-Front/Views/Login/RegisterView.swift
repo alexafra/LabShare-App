@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 //Successful register equals login
 struct RegisterView: View {

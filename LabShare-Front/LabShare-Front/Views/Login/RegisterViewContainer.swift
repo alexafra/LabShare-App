@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct RegisterViewContainer: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel

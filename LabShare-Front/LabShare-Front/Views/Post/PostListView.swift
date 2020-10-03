@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct PostListView: View {
     @ObservedObject var postListVM: PostListViewModel

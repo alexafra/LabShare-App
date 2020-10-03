@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct PostHeaderView: View {
     @ObservedObject var postVM: PostViewModel //Probs needs to change

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct PostEditView: View {
     @ObservedObject var postVM: PostViewModel
