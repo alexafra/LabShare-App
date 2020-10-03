@@ -11,21 +11,21 @@ import Combine
 
 struct PostDetailView: View {
     @ObservedObject var postVM: PostViewModel
-    @ObservedObject var commentListVM: CommentListViewModel
+//    @ObservedObject var commentListVM = CommentListViewModel()
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @State var showingAlert = false
     @Binding var showSelf: Bool
     
     init (userId: Int, postId: Int, showSelf: Binding<Bool>) {
-        self.commentListVM = CommentListViewModel(userId: userId, postId: postId)
+//        self.commentListVM = CommentListViewModel(userId: userId, postId: postId)
         self.postVM = PostViewModel(userId: userId, postId: postId)
         self._showSelf = showSelf
         
     }
     
-    init (postVM: PostViewModel, commentListVM: CommentListViewModel, showSelf: Binding<Bool>) {
+    init (postVM: PostViewModel, showSelf: Binding<Bool>) {
         self.postVM = postVM
-        self.commentListVM = commentListVM
+//        self.commentListVM = commentListVM
 //        self.commentListVM = CommentListViewModel(userId: postVM.post.author.id, postId: postVM.post.id)
         self._showSelf = showSelf
     }
@@ -44,7 +44,8 @@ struct PostDetailView: View {
                         .foregroundColor(Color.black)
                 Text(self.postVM.post.content)
                 Divider()
-                CommentListView(commentListVM: self.commentListVM)
+                CommentListView(userId: self.postVM.post.author.id, postId: self.postVM.post.id, userAuthVM: self.userAuthVM)
+//                CommentListView(commentListVM: self.commentListVM)
                 
                 Spacer()
             }.padding([.top, .leading, .trailing])
@@ -68,7 +69,7 @@ struct PostDetail_Previews: PreviewProvider {
         Group {
             NavigationView {
                 ScrollView {
-                    PostDetailView(postVM: PostViewModel(userId: 80, postId: 99), commentListVM: CommentListViewModel(userId: 80, postId: 99), showSelf: .constant(true))
+                    PostDetailView(postVM: PostViewModel(userId: 80, postId: 99), showSelf: .constant(true))
                         .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
                 }
                 

@@ -11,13 +11,12 @@ import Combine
 
 struct PostRowView: View {
     @ObservedObject var postVM: PostViewModel
-    @ObservedObject var commentListVM: CommentListViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     
     @State private var showDetail = false
     
     var body: some View {
-        NavigationLink(destination: PostDetailView(postVM: postVM, commentListVM: commentListVM, showSelf: $showDetail), isActive: $showDetail) {
+        NavigationLink(destination: PostDetailView(postVM: postVM, showSelf: $showDetail), isActive: $showDetail) {
             VStack (alignment: .leading, spacing: 5) {
                 Divider()
                 NavigationLink (destination: ProfileView(userId: postVM.post.author.id)){
@@ -56,7 +55,8 @@ struct PostRowView: View {
 
 struct PostRow_Previews: PreviewProvider {
     static var previews: some View {
-        PostRowView(postVM: PostViewModel(post: PostModel(id: 10, title: "Free Iphonlwkjeq lwkej qlwkej lqkwje qlkwej lkqwje lkqwje lkqwje lkqwj elqwkjel kqwje lqwkjelqwkje kqwkje lqkwje lkqwje lkqwje es", content: "I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones", dateCreated: Date(), author: UserModel (id: 37, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis"))), commentListVM: CommentListViewModel(userId: 80, postId: 99)).environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+        PostRowView(postVM: PostViewModel(post: PostModel(id: 10, title: "Free Iphonlwkjeq lwkej qlwkej lqkwje qlkwej lkqwje lkqwje lkqwje lkqwj elqwkjel kqwje lqwkjelqwkje kqwkje lqkwje lkqwje lkqwje es", content: "I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones", dateCreated: Date(), author: UserModel (id: 37, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis"))))
+            .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
     }
     
 }

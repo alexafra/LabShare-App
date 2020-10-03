@@ -12,8 +12,8 @@ import Combine
 
 class CommentListViewModel: ObservableObject {
     
-//    let didChange = PassthroughSubject<CommentListViewModel, Never>()
-    @Published var comments: [CommentViewModel]
+    let didChange = PassthroughSubject<CommentListViewModel, Never>()
+    @Published var comments = [CommentViewModel]()
 //    @Published var comments = [CommentViewModel]()
     @Published var userId: Int
     @Published var postId: Int
@@ -23,9 +23,15 @@ class CommentListViewModel: ObservableObject {
     init(userId: Int, postId: Int) {
         self.userId = userId
         self.postId = postId
-        self.newCommentContent = "New Comment"
-        self.comments = [CommentViewModel]()
+        self.newCommentContent = ""
+//        self.comments = [CommentViewModel]()
         
+    }
+    init() {
+        self.userId = -1
+        self.postId = -1
+        self.newCommentContent = ""
+        self.comments = [CommentViewModel]()
     }
     
     func getAllComments (userAuthVM: UserAuthenticationViewModel) {
