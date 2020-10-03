@@ -13,6 +13,7 @@ struct CommentView: View {
     @ObservedObject var commentVM: CommentViewModel //Probs needs to change
     
     var body: some View {
+//        NavigationLink(destination: EmptyView()) {
         VStack(alignment: .leading) {
             NavigationLink (destination: ProfileView(userId: commentVM.commentModel.author.id)){
                 HStack() {
@@ -28,14 +29,12 @@ struct CommentView: View {
                         Text(self.commentVM.dateMessageString)
                             .font(Font.footnote).fontWeight(.thin)
                     }
-        //            Button(action: {postVM.d}, label: {
-        //                /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
-        //            })
-                    Spacer()
                 }
             }.buttonStyle(PlainButtonStyle())
             Text("\(self.commentVM.commentModel.content)")
-        }
+            
+        }.padding()
+//        }
     }
 }
 

@@ -12,25 +12,34 @@ import Combine
 
 class CommentListViewModel: ObservableObject {
     
-    let didChange = PassthroughSubject<CommentListViewModel, Never>()
+//    let didChange = PassthroughSubject<CommentListViewModel, Never>()
     @Published var comments = [CommentViewModel]()
 //    @Published var comments = [CommentViewModel]()
     @Published var userId: Int
     @Published var postId: Int
-    @Published var newCommentContent: String
+    @Published var newCommentContent: String = ""
+    
+//    let didChange = PassthroughSubject<CommentListViewModel, Never>()
+//
+//    var newCommentContent = "" {
+//        didSet {
+//            didChange.send(self)
+//        }
+//    }
+//
 //    @Published var newCommentContent: String = "New Comment"
     
     init(userId: Int, postId: Int) {
         self.userId = userId
         self.postId = postId
-        self.newCommentContent = ""
+//        self.newCommentContent = ""
 //        self.comments = [CommentViewModel]()
         
     }
     init() {
         self.userId = -1
         self.postId = -1
-        self.newCommentContent = ""
+//        self.newCommentContent = ""
         self.comments = [CommentViewModel]()
     }
     

@@ -46,10 +46,10 @@ struct ProfileEditView: View {
                 VStack(alignment: .leading) {
                     Text("bio:")
                     ZStack {
-                        MultilineTextView(text: self.$profileVM.profile.bio)
-                        Text(self.profileVM.profile.bio).opacity(0).padding(.top, 12).modifier(MultiLineTextFieldAuthorization())
+                        TextEditor(text: self.$profileVM.profile.bio)
+                        Text(self.profileVM.profile.bio).opacity(0).padding(.top, 12)
                     }
-                }
+                }.modifier(MultiLineTextFieldAuthorization())
                 .padding()
                 
                 VStack(alignment: .leading) {

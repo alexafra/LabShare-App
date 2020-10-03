@@ -37,11 +37,10 @@ struct PostListView: View {
                     VStack(alignment: .leading) {
                         Text("Content:")
                         ZStack {
-                            MultilineTextView(text: self.$postListVM.newPostContent)
+                            TextEditor(text: self.$postListVM.newPostContent)
                             Text(self.postListVM.newPostContent).opacity(0).padding(.top, 12)
                         }
-                    }
-                        
+                    }     
                 }.modifier(MultiLineTextFieldAuthorization())
                     .padding(10)
                     Divider()

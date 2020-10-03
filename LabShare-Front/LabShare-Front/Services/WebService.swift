@@ -7,8 +7,8 @@
 //
 
 import Foundation
-//var hostUrlString = "http://127.0.0.1:8000"
-var hostUrlString = "http://4576214aeca2.ngrok.io"
+var hostUrlString = "http://127.0.0.1:8000"
+//var hostUrlString = "http://4576214aeca2.ngrok.io"
 class WebService {
     
     var loggedInUserId: Int = -1

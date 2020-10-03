@@ -12,7 +12,8 @@ import Combine
 struct CommentListView: View {
     @ObservedObject var commentListVM: CommentListViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @ObservedObject private var keyboard = KeyboardResponder()
+//    @ObservedObject private var keyboard = KeyboardResponder()
+    
     
     init (userId: Int, postId: Int, userAuthVM: UserAuthenticationViewModel) {
         self.commentListVM = CommentListViewModel(userId: userId, postId: postId)
@@ -21,6 +22,7 @@ struct CommentListView: View {
 //        self.commentListVM.userId = userId
 //        self.commentListVM.postId = postId
     }
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -34,23 +36,19 @@ struct CommentListView: View {
                         .font(Font.title.weight(.bold))
                 }
             }
-//            VStack {
-            VStack (alignment: .leading) {
+            VStack(alignment: .leading) {
                 Text("Comment:")
-//                TextField("Add Comment", text: $commentListVM.newCommentContent)
-                
                 ZStack {
-                    MultilineTextView(text: $commentListVM.newCommentContent)
-                    Text(commentListVM.newCommentContent)
+                    TextEditor(text: self.$commentListVM.newCommentContent)
+                    Text(self.commentListVM.newCommentContent)
                         .opacity(0)
                         .padding(.top, 12)
+                    
                 }
-                   
-            }
-                
-            Divider()
-//            }.modifier(MultiLineTextFieldAuthorization())
+            }.modifier(MultiLineTextFieldAuthorization())
             .padding(10)
+//
+            Divider()
             
             Text("Comments:")
                 .font(Font.headline)
@@ -61,30 +59,22 @@ struct CommentListView: View {
                 CommentView(commentVM: commentVM)
                 Divider()
             }
-        }
-        .KeyboardAwarePadding()
+        }.KeyboardAwarePadding()
 //        .onAppear(perform: self.commentListVM.getAllCommentsClosure(userAuthVM: userAuthVM)) //NOT WORKING DONT KNOW WHY
-            
     }
 }
 
 struct CommentListView_Previews: PreviewProvider {
     static let  userAuthVM: UserAuthenticationViewModel = UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true)
     static var previews: some View {
-//        Group {
-//            VStack {
-                NavigationView {
-                    ScrollView {
-//                        CommentListView(commentListVM: CommentListViewModel(userId: 80, postId: 99) )
-                        CommentListView(userId: 80, postId: 99, userAuthVM: UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
-                            .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
-                    }
-                    
-                }
-//            }
+        NavigationView {
+            ScrollView {
+                CommentListView(userId: 80, postId: 99, userAuthVM: UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
+                    .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
+            }
             
-//        }
-        
-        
+        }
     }
 }
+
+
