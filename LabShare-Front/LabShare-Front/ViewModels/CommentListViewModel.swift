@@ -7,9 +7,12 @@
 //
 
 import SwiftUI
+import Combine
 
 class CommentListViewModel: ObservableObject {
     
+    let didChange = PassthroughSubject<CommentListViewModel, Never>()
+//    @Published var comments: [CommentViewModel]
     @Published var comments = [CommentViewModel]()
     @Published var userId: Int
     @Published var postId: Int
@@ -18,6 +21,8 @@ class CommentListViewModel: ObservableObject {
     init(userId: Int, postId: Int) {
         self.userId = userId
         self.postId = postId
+        self.comments = [CommentViewModel]()
+        
     }
     
     func getAllComments (userAuthVM: UserAuthenticationViewModel) {
@@ -43,7 +48,8 @@ class CommentListViewModel: ObservableObject {
     }
     
     func modelToViewModel (commentModel : CommentModel) -> CommentViewModel {
-        return CommentViewModel(commentModel: commentModel)
+        let commentVM = CommentViewModel(commentModel: commentModel)
+        return commentVM
     }
     
     func createComment(userAuthVM: UserAuthenticationViewModel) {

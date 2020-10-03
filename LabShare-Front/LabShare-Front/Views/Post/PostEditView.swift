@@ -79,6 +79,7 @@ struct PostEditView: View {
             Spacer()
         }.padding([.top, .leading, .trailing])
         .onAppear(perform: self.postVM.getPostClosure(userAuthVM: userAuthVM))
+        
     }
 }
 

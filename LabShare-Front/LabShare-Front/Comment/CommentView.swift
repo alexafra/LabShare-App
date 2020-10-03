@@ -13,7 +13,7 @@ struct CommentView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationLink (destination: ProfileView(userId: postVM.post.author.id)){
+            NavigationLink (destination: ProfileView(userId: commentVM.commentModel.author.id)){
                 HStack() {
                     Image(systemName: "person")
                         .resizable()

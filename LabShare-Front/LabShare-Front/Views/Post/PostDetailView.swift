@@ -22,9 +22,10 @@ struct PostDetailView: View {
         
     }
     
-    init (postVM: PostViewModel, showSelf: Binding<Bool>) {
+    init (postVM: PostViewModel, commentListVM: CommentListViewModel, showSelf: Binding<Bool>) {
         self.postVM = postVM
-        self.commentListVM = CommentListViewModel(userId: postVM.post.author.id, postId: postVM.post.id)
+        self.commentListVM = commentListVM
+//        self.commentListVM = CommentListViewModel(userId: postVM.post.author.id, postId: postVM.post.id)
         self._showSelf = showSelf
     }
     //    @ViewBuilder
@@ -42,12 +43,12 @@ struct PostDetailView: View {
                         .foregroundColor(Color.black)
                 Text(self.postVM.post.content)
                 Divider()
-                CommentListView(commentListVM: commentListVM)
+                CommentListView(commentListVM: self.commentListVM)
                 
                 Spacer()
             }.padding([.top, .leading, .trailing])
                 .onAppear(perform: postVM.getPostClosure(userAuthVM: userAuthVM))
-                
+                .onAppear(perform: commentListVM.getAllCommentsClosure(userAuthVM: userAuthVM))
                 .navigationBarItems(trailing: Group {
                     if (postVM.post.author.id == userAuthVM.userAuth.id) {
                         NavigationLink (
@@ -66,7 +67,7 @@ struct PostDetail_Previews: PreviewProvider {
         Group {
             NavigationView {
                 ScrollView {
-                    PostDetailView(postVM: PostViewModel(userId: 80, postId: 99), showSelf: .constant(true))
+                    PostDetailView(postVM: PostViewModel(userId: 80, postId: 99), commentListVM: CommentListViewModel(userId: 80, postId: 99), showSelf: .constant(true))
                         .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
                 }
                 

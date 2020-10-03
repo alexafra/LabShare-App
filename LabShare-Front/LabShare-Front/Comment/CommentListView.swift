@@ -49,7 +49,7 @@ struct CommentListView: View {
                 Divider()
             }
         }
-        .onAppear(perform: self.commentListVM.getAllCommentsClosure(userAuthVM: userAuthVM))
+        //.onAppear(perform: self.commentListVM.getAllCommentsClosure(userAuthVM: userAuthVM))
             
     }
 }
@@ -61,7 +61,8 @@ struct CommentListView_Previews: PreviewProvider {
 //            VStack {
                 NavigationView {
                     ScrollView {
-                        CommentListView(commentListVM: CommentListViewModel(userId: 80, postId: 99)).environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
+                        CommentListView(commentListVM: CommentListViewModel(userId: 80, postId: 99))
+                            .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
                     }
                     
                 }

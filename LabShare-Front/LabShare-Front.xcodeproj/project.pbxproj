@@ -52,6 +52,7 @@
 		F060368A25279E1A0092412E /* CommentsWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060368925279E1A0092412E /* CommentsWebService.swift */; };
 		F060368F2527A5160092412E /* CommentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060368E2527A5160092412E /* CommentListView.swift */; };
 		F06036972527AE840092412E /* CommentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06036962527AE840092412E /* CommentListViewModel.swift */; };
+		F06036B125289A6F0092412E /* CommentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06036B025289A6F0092412E /* CommentSettingsView.swift */; };
 		F060778E25207FC900503D2E /* RegisterViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060778D25207FC900503D2E /* RegisterViewContainer.swift */; };
 		F060779325207FEF00503D2E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060779225207FEF00503D2E /* AppState.swift */; };
 		F09C69A72516216700EC961C /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69A62516216700EC961C /* SetUpView.swift */; };
@@ -139,6 +140,7 @@
 		F060368925279E1A0092412E /* CommentsWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsWebService.swift; sourceTree = "<group>"; };
 		F060368E2527A5160092412E /* CommentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListView.swift; sourceTree = "<group>"; };
 		F06036962527AE840092412E /* CommentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListViewModel.swift; sourceTree = "<group>"; };
+		F06036B025289A6F0092412E /* CommentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSettingsView.swift; sourceTree = "<group>"; };
 		F060778D25207FC900503D2E /* RegisterViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewContainer.swift; sourceTree = "<group>"; };
 		F060779225207FEF00503D2E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		F09C69A62516216700EC961C /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
@@ -240,8 +242,8 @@
 				F04A334E24F91C6A004A86D9 /* Views */,
 				F060367525279DBD0092412E /* Comment */,
 				F0519BB925034CC5006E580E /* ViewModels */,
-				F0519BB625034A49006E580E /* Services */,
 				F04A334D24F91C62004A86D9 /* Models */,
+				F0519BB625034A49006E580E /* Services */,
 				F04A331D24F91C43004A86D9 /* AppDelegate.swift */,
 				F04A331F24F91C43004A86D9 /* SceneDelegate.swift */,
 				F04A332124F91C43004A86D9 /* FeedView2.swift */,
@@ -339,6 +341,7 @@
 			children = (
 				F060367025279DAF0092412E /* CommentView.swift */,
 				F060368E2527A5160092412E /* CommentListView.swift */,
+				F06036B025289A6F0092412E /* CommentSettingsView.swift */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				F0545E65251B68090037EFC9 /* ProfileEditView.swift in Sources */,
 				F05A03E0251E466D001563AF /* UserFeedWebService.swift in Sources */,
 				F04A332024F91C43004A86D9 /* SceneDelegate.swift in Sources */,
+				F06036B125289A6F0092412E /* CommentSettingsView.swift in Sources */,
 				F04A335224F91CAA004A86D9 /* PostRowView.swift in Sources */,
 				F060367F25279E050092412E /* CommentModel.swift in Sources */,
 				F060779325207FEF00503D2E /* AppState.swift in Sources */,

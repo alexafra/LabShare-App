@@ -50,8 +50,8 @@ struct PostListView: View {
                 
             ForEach(self.postListVM.posts, id: \.post.id) {
                 postVM in
-                
-                    PostRowView(postVM: postVM)
+                let commentListVM = CommentListViewModel(userId: postVM.post.author.id, postId: postVM.post.id)
+                PostRowView(postVM: postVM, commentListVM: commentListVM)
                         
                 
             }

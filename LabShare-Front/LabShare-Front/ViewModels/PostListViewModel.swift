@@ -16,7 +16,7 @@ import Combine
 class PostListViewModel: ObservableObject {
     
 //    let objectWillChange = ObservableObjectPublisher()
-    let didChange = PassthroughSubject<PostListViewModel, Never>()
+//    let didChange = PassthroughSubject<PostListViewModel, Never>()
     private let titleCharacterLimit = 30
     @Published var userId: Int
     @Published var newPostTitle: String = ""
