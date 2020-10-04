@@ -11,7 +11,7 @@ import Foundation
 class LoginRegisterWebService {
     func login (user: UserLoginModel, completionFailure: @escaping()->(), completionSuccessful: @escaping (UserAuthenticationModel?) -> ()) {
         
-        guard let url = URL(string: "http://127.0.0.1:8000/login"), let userLoginData = try? JSONEncoder().encode(user)  else {
+        guard let url = URL(string: "\(hostUrlString)/login"), let userLoginData = try? JSONEncoder().encode(user)  else {
             completionFailure()
             print("Invalid URL")
             return
@@ -41,7 +41,7 @@ class LoginRegisterWebService {
     
     func register (userRegisterModel: UserRegisterModel, completionFailure: @escaping(RegistrationErrorResponse?)->(), completionSuccessful: @escaping (UserModel?, UserLoginModel?) -> ()) {
         
-        guard let url = URL(string: "http://127.0.0.1:8000/register"), let userRegistrationData = try? JSONEncoder().encode(userRegisterModel)  else {
+        guard let url = URL(string: "\(hostUrlString)/register"), let userRegistrationData = try? JSONEncoder().encode(userRegisterModel)  else {
             completionFailure(nil)
             print("Invalid URL")
             return

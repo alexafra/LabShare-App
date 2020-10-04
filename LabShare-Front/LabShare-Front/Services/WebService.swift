@@ -7,7 +7,8 @@
 //
 
 import Foundation
-
+var hostUrlString = "http://127.0.0.1:8000"
+//var hostUrlString = "http://4576214aeca2.ngrok.io"
 class WebService {
     
     var loggedInUserId: Int = -1
@@ -68,7 +69,9 @@ class WebService {
         request.setValue("Token \(self.token)", forHTTPHeaderField: "Authorization")
     
         if let model = model, apiMethod == ApiMethod.POST || apiMethod == ApiMethod.PUT {
-            guard let modelData = try? JSONEncoder().encode(model) else {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            guard let modelData = try? encoder.encode(model) else {
                 print("Error Encoding")
                 completionFailure()
                 return
@@ -88,13 +91,21 @@ class WebService {
                 }
                 return
             }
-            let model = try? JSONDecoder().decode(T.self, from: data)
-            DispatchQueue.main.async {
-                //Update our UI
-                
-                completionSuccessful(model)
-                return
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+//            print(T.self)
+            if let model = try? decoder.decode(T.self, from: data) { //Should remove later
+                DispatchQueue.main.async {
+                    //Update our UI
+                    
+                    completionSuccessful(model)
+                    return
+                }
             }
+//            else {
+//
+//            }
         }.resume()
     }
     
@@ -125,12 +136,16 @@ class WebService {
                 }
                 return
             }
-            let modelArray = try? JSONDecoder().decode([T].self, from: data)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            print(T.self)
+            if let modelArray = try? decoder.decode([T].self, from: data) {
                 //                    We have good data - go back to the main thread
-            DispatchQueue.main.async {
-                //Update our UI
-                completionSuccessful(modelArray)
-                return
+                DispatchQueue.main.async {
+                    //Update our UI
+                    completionSuccessful(modelArray)
+                    return
+                }
             }
         }.resume()
     }
@@ -218,3 +233,4 @@ enum ApiMethod {
 //}
 //
 //}
+

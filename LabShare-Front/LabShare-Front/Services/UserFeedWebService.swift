@@ -17,21 +17,19 @@ class UserFeedWebService: WebService {
 //        self.loggedInUserId = userAuthModel.id
 //        self.token = userAuthModel.token
 //    }
-    func generateURLString(userId: Int) -> String {
-        return  "http://127.0.0.1:8000/users/\(userId)/feed"
+    func generateURLString(userId: Int, postFilter: PostFilter = PostFilter.None) -> String {
+        var urlString = "\(hostUrlString)/users/\(userId)/feed"
+        if postFilter != PostFilter.None {
+            urlString = urlString + "?category=\(postFilter.rawValue)"
+        }
+        return urlString
     }
     
-    func getAllFeedPosts(userId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
+    func getAllFeedPosts(userId: Int, postFilter: PostFilter = PostFilter.None, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
         
-        let urlString = generateURLString(userId: userId)
+        let urlString = generateURLString(userId: userId, postFilter: postFilter)
         
         super.getAll(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
-    }
-    
-    func createFeedPost (userId: Int, postModel: PostModel, completionFailure: @escaping () -> (), completionSuccessful: @escaping (PostModel?) -> ()) {
-
-        let urlString = generateURLString(userId: userId)
-        super.post(urlString: urlString, model: postModel, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
     }
     
 }

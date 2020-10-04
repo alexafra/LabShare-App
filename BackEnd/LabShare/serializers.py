@@ -29,7 +29,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email', 'password', 'first_name', 'last_name']
-    
+
     def validate_email(self, value):
         user = User.objects.filter(email=value)
         if user:
@@ -63,6 +63,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 ##same
 
 class CommentSerializer(serializers.ModelSerializer):
+    date_created = serializers.DateTimeField(default = None, required = False, format="%Y-%m-%dT%H:%M:%SZ")
     class Meta:
         model = Comment
         fields = ['id', 'date_created', 'post', 'content']
@@ -71,4 +72,3 @@ class CommentSerializer(serializers.ModelSerializer):
         response = super().to_representation(instance)
         response['author'] = UserSerializer(instance.author).data
         return response
-##

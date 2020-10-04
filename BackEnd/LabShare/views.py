@@ -51,8 +51,10 @@ class Users(APIView):
     def get(self, request):
         if 'search' in self.request.GET:
             queryset = User.objects.annotate(full_name = Concat('first_name', V(' '), 'last_name')).filter(full_name__icontains = self.request.GET.get('search')).order_by('last_name')
+            paginate_by = 2
         else:
             queryset = User.objects.all().order_by('last_name')
+            paginate_by = 2
         serializer = UserSerializer(queryset, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
