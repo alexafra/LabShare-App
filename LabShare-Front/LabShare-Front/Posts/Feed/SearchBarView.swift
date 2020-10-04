@@ -11,40 +11,64 @@ import Combine
 
 struct SearchBarView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @StateObject var searchVM: SearchViewModel = SearchViewModel()
+    @ObservedObject var searchVM: SearchViewModel = SearchViewModel()
+    @State var queryString: String = ""
+    
     init (userAuthVM: UserAuthenticationViewModel) {
 //        searchVM = SearchViewModel(userAuthVM: userAuthVM)
     }
     var body: some View {
-        VStack {
-            Text("Users:")
-            ForEach(self.searchVM.users, id: \.id) {
-                user in
-                NavigationLink(
-                    destination: ProfileView(userId: user.id),
-                    label: {
-                        Text("\(user.firstName) \(user.lastName)")
+//        let binding = Binding<String>(get: {
+//            self.queryString
+//        }, set: {
+//            self.queryString = $0
+//            self.searchVM.getUsersSearch(userAuthVM: userAuthVM, queryString: self.queryString)
+//        })
+        ScrollView {
+            VStack(alignment: .leading) {
+                
+                HStack {
+                    TextField("Search LabShare", text: $queryString)
                         
-                    }
-                )
+                        .onChange(of: queryString) {
+                            self.searchVM.getUsersSearch(userAuthVM: userAuthVM, queryString: $0)
+                                
+                        }
+                        .modifier(TextFieldAuthorization())
+                        .font(Font.system(.title))
+                }
+                Text("Users:").font(Font.title)
                 Divider()
-            }
-        }
-        .navigationBarItems(trailing:
-            HStack {
-                TextField("Search LabShare", text: self.$searchVM.userQuery, onEditingChanged: { (changed) in
-                    if changed {
-                        self.searchVM.getUsersSearch(userAuthVM: userAuthVM)
-                    } else {
-                        //self.searchVM.getUsersSearch(userAuthVM: userAuthVM)
-                    }
-                    
-                })
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .font(Font.system(.title))
+                ForEach(self.searchVM.users, id: \.id) {
+                    user in
+                    NavigationLink(
+                        destination: ProfileView(userId: user.id),
+                        label: {
+                            HStack {
+                                Text("\(user.firstName) \(user.lastName)").bold()
+                                    .font(Font.title)
+                            }
+                            
+                            
+                        }
+                    ).buttonStyle(PlainButtonStyle())
+                    Divider()
+                }
                 Spacer()
-            }
-        )
+                
+                
+                
+            }.padding()
+        }.onAppear(perform: {
+            self.searchVM.getUsersSearch(userAuthVM: userAuthVM, queryString: queryString)
+        })
+//        .navigationBarTitle("")
+//        .navigationBarHidden(true)
+        
+        
+//        .navigationBarItems(trailing:
+//
+//        )
         
     }
 }

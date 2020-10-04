@@ -26,15 +26,35 @@ class SearchViewModel: ObservableObject {
         self.userAuthVM = UserAuthenticationViewModel()
     }
     
-    func getUsersSearch(userAuthVM: UserAuthenticationViewModel) {
-        getUsersSearchClosure(userAuthVM: userAuthVM)()
+//    func getUsersSearch(userAuthVM: UserAuthenticationViewModel) {
+//        getUsersSearchClosure(userAuthVM: userAuthVM)()
+//    }
+////    getUsersSearchBar
+//    func getUsersSearchClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
+//        return {
+//            let userWebService = UserWebService(userAuth: userAuthVM.userAuth)
+//
+//            userWebService.getUsersSearchBar(queryString: self.userQuery, completionFailure: {() -> Void in
+//                    return
+//
+//                },
+//                completionSuccessful: { (users: [UserModel]?) -> Void in
+//                    if let users = users {
+//                        self.users = users
+//                    }
+//                }
+//            )
+//        }
+//    }
+    func getUsersSearch(userAuthVM: UserAuthenticationViewModel, queryString: String) {
+        getUsersSearchClosure(userAuthVM: userAuthVM, queryString: queryString)()
     }
 //    getUsersSearchBar
-    func getUsersSearchClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
+    func getUsersSearchClosure(userAuthVM: UserAuthenticationViewModel, queryString: String) -> () -> () {
         return {
             let userWebService = UserWebService(userAuth: userAuthVM.userAuth)
 
-            userWebService.getUsersSearchBar(queryString: self.userQuery, completionFailure: {() -> Void in
+            userWebService.getUsersSearchBar(queryString: queryString, completionFailure: {() -> Void in
                     return
                 
                 },
