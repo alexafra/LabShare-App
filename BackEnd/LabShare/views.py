@@ -136,7 +136,11 @@ class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Upda
 class UserPosts(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, **kwargs):
-        queryset = Post.objects.filter(author__id = self.kwargs['user_id']).order_by("-date_created")
+
+        if 'category' in self.request.GET:
+            queryset = Post.objects.filter(author__id = self.kwargs['user_id'], category = self.request.GET.get('category')).order_by("-date_created")
+        else:
+            queryset = Post.objects.filter(author__id = self.kwargs['user_id']).order_by("-date_created")
         serializer = PostSerializer(queryset, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
     def post(self, request, **kwargs):
