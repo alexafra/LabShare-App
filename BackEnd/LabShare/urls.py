@@ -20,9 +20,6 @@ urlpatterns = [
     #COMMENTS
     path('users/<int:user_id>/posts/<int:post_id>/comments', views.Comments.as_view()), #create post comment, get post comments (GET, POST)
     path('users/<int:user_id>/posts/<int:post_id>/comments/<int:comment_id>', views.SingleComment.as_view()), #(GET, PUT, DELETE)
-    #CATEGORIES
-    path('categories', views.AvailableCategories.as_view()), #get all categories, create a category (GET, POST)
-    path('categories/<int:id>', views.SingleCategory.as_view()), #(GET, PUT, DELETE)
     #AUTHENTICATION
     path('register', views.UserRegister.as_view()), #(POST)
     path('login', views.UserLogin.as_view()), #(POST)

@@ -47,15 +47,12 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
 
-class Categories(models.Model):
-    category_name = models.CharField(max_length = 80)
-
 class Post(models.Model):
     date_created = models.DateTimeField(auto_now_add= True)
     title = models.CharField(max_length = 80)
     content = models.TextField()
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name = 'posts', on_delete=models.CASCADE)
-    category = models.ForeignKey(Categories, related_name = 'posts', on_delete = models.CASCADE, blank = True, null = True)
+    category = models.TextField(default = "")
 
     def author_first(self):
         return self.author.first_name

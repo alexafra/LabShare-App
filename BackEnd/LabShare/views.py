@@ -9,8 +9,8 @@ from django.utils.decorators import method_decorator
 from django.db.models import Value as V
 from django.db.models.functions import Concat
 from LabShare.utils import get_and_authenticate_user, create_user_account
-from LabShare.models import Post, Categories, UserProfile, Comment
-from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, CategoriesSerializer, UserProfileSerializer, CommentSerializer
+from LabShare.models import Post, UserProfile, Comment
+from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, UserProfileSerializer, CommentSerializer
 from LabShare.permissions import unauthenticated
 
 User = get_user_model()
@@ -112,7 +112,7 @@ class Feed(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, **kwargs):
         if 'category' in self.request.GET:
-            queryset = Post.objects.filter(category__category_name = self.request.GET.get('category')).order_by('-date_created')
+            queryset = Post.objects.filter(category = self.request.GET.get('category')).order_by('-date_created')
         else:
             queryset = Post.objects.all().order_by('-date_created')
         serializer = PostSerializer(queryset, many = True)
@@ -143,28 +143,6 @@ class UserPosts(APIView):
             serializer.save(author = self.request.user)
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-
-class AvailableCategories(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
-    permission_classes = [IsAuthenticated]
-    queryset = Categories.objects.all()
-    serializer_class = CategoriesSerializer
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
-class SingleCategory(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
-    permission_classes = [IsAuthenticated]
-    lookup_field = 'id'
-    lookup_url_kwarg = 'id'
-    serializer_class = CategoriesSerializer
-    queryset = Categories.objects.all()
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
 
 ##TEST FUNCTIONS
 class Current(APIView):

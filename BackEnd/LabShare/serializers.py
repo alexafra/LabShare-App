@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from django.contrib.auth import password_validation
-from LabShare.models import Post, UserProfile, Categories, Comment
+from LabShare.models import Post, UserProfile, Comment
 from datetime import datetime
 
 User = get_user_model()
@@ -12,10 +12,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'email', 'profile', 'first_name', 'last_name']
     
-   # def to_representation(self, instance):
-   #     response = super().to_representation(instance)
-   #     response['image'] = UserProfileSerializer(instance.profile).data['image']
-   #     return response
+    #def to_representation(self, instance):
+    #    response = super().to_representation(instance)
+    #    response['image'] = UserProfileSerializer(instance.profile).data['image']
+    #    return response
 
     def get_auth_token(self, obj):
         token = Token.objects.create(user=obj)
@@ -49,16 +49,18 @@ class PostSerializer(serializers.ModelSerializer):
         response = super().to_representation(instance)
         response['author'] = UserSerializer(instance.author).data
         return response
+##same
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image']
+        fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image', 'owner']
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
         response['owner'] = UserSerializer(instance.owner).data
         return response
+##same
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -69,8 +71,4 @@ class CommentSerializer(serializers.ModelSerializer):
         response = super().to_representation(instance)
         response['author'] = UserSerializer(instance.author).data
         return response
-
-class CategoriesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Categories
-        fields = ['id', 'category_name']
+##
