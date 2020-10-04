@@ -31,9 +31,9 @@ struct FeedView: View {
 struct FeedView_Previews: PreviewProvider {
     
     static var previews: some View {
-        
-        FeedView(postListVM: PostListViewModel(userId: 37, postListType: PostListType.Feed))
-            .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
-        
+//        NavigationView {
+        FeedView(postListVM: PostListViewModel(userId: 80, postListType: PostListType.Feed))
+            .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
+//        }
     }
 }
