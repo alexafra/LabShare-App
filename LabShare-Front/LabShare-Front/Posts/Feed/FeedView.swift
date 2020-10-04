@@ -20,7 +20,20 @@ struct FeedView: View {
                 ScrollView{
                     PostListView(postListVM: self.postListVM)
                 }.navigationBarTitle("", displayMode: .inline)
-                .navigationBarItems(trailing: SearchBarView())
+//                .navigationBarItems(trailing: SearchBarView2())
+                .navigationBarItems(trailing:
+                    NavigationLink(
+                        destination: SearchBarView(userAuthVM: userAuthVM),
+                        label: {
+                            HStack {
+                                Text("Search")
+                                    .opacity(0.5).font(Font.system(.title))
+                                Image(systemName: "magnifyingglass")
+                                    .font(Font.system(.title).bold())
+                            }
+                        })
+                    
+                )
             }
             
         }.onAppear(perform: self.postListVM.getAllPostsClosure(userAuthVM: userAuthVM))

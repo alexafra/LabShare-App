@@ -12,7 +12,7 @@
 		1B8EC5E12521B3A200D43412 /* PostEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EC5E02521B3A200D43412 /* PostEditView.swift */; };
 		1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */; };
 		1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92705224FBE07D00D8CF34 /* ProfileView.swift */; };
-		1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFD250473F5006C6F90 /* SearchBarView.swift */; };
+		1BD01AFE250473F5006C6F90 /* SearchBarView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFD250473F5006C6F90 /* SearchBarView2.swift */; };
 		1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */; };
 		1E40D5CFC070094A1C8C84AD /* Pods_LabShare_Front.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B900551F389BECD52DCD2DD7 /* Pods_LabShare_Front.framework */; };
 		E470409723EB23F8766A4344 /* Pods_LabShare_Front_LabShare_FrontUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD28AB0AAB97049B83229062 /* Pods_LabShare_Front_LabShare_FrontUITests.framework */; };
@@ -56,6 +56,9 @@
 		F06036CA2529CE790092412E /* CommentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06036C92529CE790092412E /* CommentHeaderView.swift */; };
 		F06036D52529D0AF0092412E /* CommentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06036D42529D0AF0092412E /* CommentEditView.swift */; };
 		F06036F62529E5910092412E /* UserLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06036F52529E5910092412E /* UserLoginModel.swift */; };
+		F06037172529E7990092412E /* UserWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06037162529E7990092412E /* UserWebService.swift */; };
+		F060371C2529E9040092412E /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060371B2529E9040092412E /* SearchViewModel.swift */; };
+		F06037242529F1680092412E /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06037232529F1680092412E /* SearchBarView.swift */; };
 		F060778E25207FC900503D2E /* RegisterViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060778D25207FC900503D2E /* RegisterViewContainer.swift */; };
 		F060779325207FEF00503D2E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060779225207FEF00503D2E /* AppState.swift */; };
 		F09C69A72516216700EC961C /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C69A62516216700EC961C /* SetUpView.swift */; };
@@ -93,7 +96,7 @@
 		1B8EC5E02521B3A200D43412 /* PostEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditView.swift; sourceTree = "<group>"; };
 		1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		1B92705224FBE07D00D8CF34 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		1BD01AFD250473F5006C6F90 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		1BD01AFD250473F5006C6F90 /* SearchBarView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView2.swift; sourceTree = "<group>"; };
 		1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContainerView.swift; sourceTree = "<group>"; };
 		1F57E97853FC45E6A4C572E5 /* Pods_LabShare_FrontTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_FrontTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		305CF325481435D3912A9B8A /* Pods-LabShare-FrontTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-FrontTests.debug.xcconfig"; path = "Target Support Files/Pods-LabShare-FrontTests/Pods-LabShare-FrontTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +150,9 @@
 		F06036C92529CE790092412E /* CommentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentHeaderView.swift; sourceTree = "<group>"; };
 		F06036D42529D0AF0092412E /* CommentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEditView.swift; sourceTree = "<group>"; };
 		F06036F52529E5910092412E /* UserLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginModel.swift; sourceTree = "<group>"; };
+		F06037162529E7990092412E /* UserWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebService.swift; sourceTree = "<group>"; };
+		F060371B2529E9040092412E /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		F06037232529F1680092412E /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		F060778D25207FC900503D2E /* RegisterViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewContainer.swift; sourceTree = "<group>"; };
 		F060779225207FEF00503D2E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		F09C69A62516216700EC961C /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
@@ -289,6 +295,7 @@
 				F05A03DF251E466D001563AF /* UserFeedWebService.swift */,
 				F05A0408251F6DCC001563AF /* LoginRegisterWebService.swift */,
 				F060368925279E1A0092412E /* CommentsWebService.swift */,
+				F06037162529E7990092412E /* UserWebService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -446,7 +453,9 @@
 			isa = PBXGroup;
 			children = (
 				F0545E17251A564A0037EFC9 /* FeedView.swift */,
-				1BD01AFD250473F5006C6F90 /* SearchBarView.swift */,
+				1BD01AFD250473F5006C6F90 /* SearchBarView2.swift */,
+				F06037232529F1680092412E /* SearchBarView.swift */,
+				F060371B2529E9040092412E /* SearchViewModel.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -704,11 +713,13 @@
 				F0A122192521867E00478FD0 /* ProfileSettingsView.swift in Sources */,
 				F0545E37251A62780037EFC9 /* RegisterView.swift in Sources */,
 				F0C21C4C2517557900EE3665 /* ProfileHeaderView.swift in Sources */,
-				1BD01AFE250473F5006C6F90 /* SearchBarView.swift in Sources */,
+				1BD01AFE250473F5006C6F90 /* SearchBarView2.swift in Sources */,
 				F060367725279DFB0092412E /* CommentViewModel.swift in Sources */,
 				F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */,
+				F06037172529E7990092412E /* UserWebService.swift in Sources */,
 				F060368A25279E1A0092412E /* CommentsWebService.swift in Sources */,
 				1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */,
+				F060371C2529E9040092412E /* SearchViewModel.swift in Sources */,
 				F0545E2F251A5F590037EFC9 /* ContainerView.swift in Sources */,
 				F00BEBD42521F4E3007674F4 /* PostSettingsView.swift in Sources */,
 				F0545E65251B68090037EFC9 /* ProfileEditView.swift in Sources */,
@@ -724,6 +735,7 @@
 				1B8EC5E12521B3A200D43412 /* PostEditView.swift in Sources */,
 				F06036972527AE840092412E /* CommentListViewModel.swift in Sources */,
 				F09C69A72516216700EC961C /* SetUpView.swift in Sources */,
+				F06037242529F1680092412E /* SearchBarView.swift in Sources */,
 				F05C400225239E6A00633181 /* PostViewModel.swift in Sources */,
 				F09C69AF251635BD00EC961C /* LoginView.swift in Sources */,
 				F04A335924FA234F004A86D9 /* PostDetailView.swift in Sources */,
