@@ -32,6 +32,13 @@ struct CommentModel: Hashable, Codable, Identifiable {
         self.author = author
     }
     
+    init (userId: Int, postId: Int, commentId: Int) {
+        self.init()
+        self.postId = postId
+        self.author.id = userId
+        self.id = commentId
+    }
+    
     init() {
         self.init(id: -1, dateCreated: Date(), postId: -1, content: "", author: UserModel())
     }

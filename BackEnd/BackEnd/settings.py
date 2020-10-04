@@ -14,7 +14,7 @@ SECRET_KEY = '+nzn#8%t*+gft*262xeu91i(*di@elgmi&lgk$ge%!=)_p^fk$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-54-253-227-32.ap-southeast-2.compute.amazonaws.com', '127.0.0.1', '10.20.233.187', '3799f0fea0bb.ngrok.io'] #'*' seems unsafe
+ALLOWED_HOSTS = ['ec2-54-253-227-32.ap-southeast-2.compute.amazonaws.com', '127.0.0.1', '10.20.233.187', '4576214aeca2.ngrok.io'] #'*' seems unsafe
 
 
 # Application definition

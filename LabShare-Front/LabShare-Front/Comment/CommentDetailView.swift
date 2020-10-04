@@ -9,22 +9,22 @@
 import SwiftUI
 import Combine
 
-struct PostDetailView: View {
-    @ObservedObject var postVM: PostViewModel
+struct CommentDetailView: View {
+    @ObservedObject var commentVM: CommentViewModel
 //    @ObservedObject var commentListVM = CommentListViewModel()
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @State var showingAlert = false
     @Binding var showSelf: Bool
     
-    init (userId: Int, postId: Int, showSelf: Binding<Bool>) {
-//        self.commentListVM = CommentListViewModel(userId: userId, postId: postId)
-        self.postVM = PostViewModel(userId: userId, postId: postId)
-        self._showSelf = showSelf
-        
-    }
+//    init (userId: Int, postId: Int, commentId: Int, showSelf: Binding<Bool>) {
+////        self.commentListVM = CommentListViewModel(userId: userId, postId: postId)
+//        self.commentVM = CommentViewModel(userId: userId, postId: postId, commentId: commentId)
+//        self._showSelf = showSelf
+//
+//    }
     
-    init (postVM: PostViewModel, showSelf: Binding<Bool>) {
-        self.postVM = postVM
+    init (commentVM: CommentViewModel, showSelf: Binding<Bool>) {
+        self.commentVM = commentVM
 //        self.commentListVM = commentListVM
 //        self.commentListVM = CommentListViewModel(userId: postVM.post.author.id, postId: postVM.post.id)
         self._showSelf = showSelf
@@ -32,29 +32,21 @@ struct PostDetailView: View {
     //    @ViewBuilder
     var body: some View {
         ScrollView {
-            
             VStack (alignment:.leading) {
                 
-                NavigationLink (destination: ProfileView(userId: postVM.post.author.id)) {
-                    PostHeaderView(postVM: self.postVM)
+                NavigationLink (destination: ProfileView(userId: commentVM.commentModel.author.id)) {
+                    CommentHeaderView(commentVM: self.commentVM)
                 }.buttonStyle(PlainButtonStyle())
-                Text(self.postVM.post.title)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.black)
-                Text(self.postVM.post.content)
-                Divider()
-                CommentListView(userId: self.postVM.post.author.id, postId: self.postVM.post.id, userAuthVM: self.userAuthVM)
+                Text(self.commentVM.commentModel.content)
 //                CommentListView(commentListVM: self.commentListVM)
-                
                 Spacer()
             }.padding([.top, .leading, .trailing])
-                .onAppear(perform: postVM.getPostClosure(userAuthVM: userAuthVM))
+                .onAppear(perform: commentVM.getCommentClosure(userAuthVM: userAuthVM))
 //                .onAppear(perform: commentListVM.getAllCommentsClosure(userAuthVM: userAuthVM))
                 .navigationBarItems(trailing: Group {
-                    if (postVM.post.author.id == userAuthVM.userAuth.id) {
+                    if (commentVM.commentModel.author.id == userAuthVM.userAuth.id) {
                         NavigationLink (
-                            destination: PostSettingsView(postVM: self.postVM, showSelf: $showSelf),
+                            destination: CommentSettingsView(commentVM: self.commentVM, showSelf: $showSelf),
                             label: {
                                 Image(systemName: "line.horizontal.3").font(Font.largeTitle)
                         })
@@ -64,12 +56,12 @@ struct PostDetailView: View {
     }
 }
 
-struct PostDetail_Previews: PreviewProvider {
+struct CommentDetail_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
                 ScrollView {
-                    PostDetailView(postVM: PostViewModel(userId: 80, postId: 99), showSelf: .constant(true))
+                    CommentDetailView(commentVM: CommentViewModel(userId: 80, postId: 99, commentId: 20), showSelf: .constant(true))
                         .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
                 }
                 

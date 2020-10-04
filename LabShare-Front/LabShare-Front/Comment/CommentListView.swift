@@ -56,11 +56,11 @@ struct CommentListView: View {
                 
             ForEach(self.commentListVM.comments, id: \.commentModel.id) {
                 commentVM in
-                CommentView(commentVM: commentVM)
+                CommentRowView(commentVM: commentVM)
                 Divider()
             }
-        }.KeyboardAwarePadding()
-//        .onAppear(perform: self.commentListVM.getAllCommentsClosure(userAuthVM: userAuthVM)) //NOT WORKING DONT KNOW WHY
+        }
+        .onAppear(perform: self.commentListVM.getAllCommentsClosure(userAuthVM: userAuthVM)) //NOT WORKING DONT KNOW WHY
     }
 }
 

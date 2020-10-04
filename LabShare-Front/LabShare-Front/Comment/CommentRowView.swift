@@ -11,16 +11,21 @@ import Combine
 
 struct CommentRowView: View {
     @ObservedObject var commentVM: CommentViewModel //Probs needs to change
+    @State private var showDetail = false
     
     var body: some View {
-//        NavigationLink(destination: EmptyView()) {
-        VStack(alignment: .leading) {
-            NavigationLink (destination: ProfileView(userId: commentVM.commentModel.author.id)){
-                CommentHeaderView(commentVM: self.commentVM)
-            }.buttonStyle(PlainButtonStyle())
-            Text("\(self.commentVM.commentModel.content)")
-        }.padding()
-//        }
+        NavigationLink(destination: CommentDetailView(commentVM: commentVM, showSelf: $showDetail), isActive: $showDetail) {
+            VStack(alignment: .leading) {
+                NavigationLink (destination: ProfileView(userId: commentVM.commentModel.author.id)){
+                    CommentHeaderView(commentVM: self.commentVM)
+                }.buttonStyle(PlainButtonStyle())
+                if self.commentVM.commentModel.content.count > 170 {
+                    Text("\(String(self.commentVM.commentModel.content.prefix(170))) ...")
+                } else {
+                    Text(self.commentVM.commentModel.content)
+                }
+            }.padding()
+        }.buttonStyle(PlainButtonStyle())
     }
 }
 

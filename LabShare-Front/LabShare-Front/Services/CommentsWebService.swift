@@ -47,7 +47,7 @@ class CommentsWebService: WebService {
     
     func deleteComment (userId: Int, postId: Int, commentId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping (CommentModel?) -> ()) {
         
-        let urlString = generateURLString(userId: userId, postId: postId)
+        let urlString = generateURLString(userId: userId, postId: postId, commentId: commentId)
         super.delete(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
     }
     

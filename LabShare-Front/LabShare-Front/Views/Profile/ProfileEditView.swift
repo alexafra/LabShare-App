@@ -78,7 +78,7 @@ struct ProfileEditView: View {
             
         }.padding()
 //        .frame(minHeight: 0, maxHeight: .infinity)
-        .KeyboardAwarePadding()
+        //.KeyboardAwarePadding()
         .onAppear(
             perform:
                 self.profileVM.getProfileClosure(userAuthVM: userAuthVM)

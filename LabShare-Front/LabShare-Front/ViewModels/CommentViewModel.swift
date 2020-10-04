@@ -85,6 +85,10 @@ class CommentViewModel: ObservableObject {
         self.commentModel = CommentModel()
     }
     
+    init (userId: Int, postId: Int, commentId: Int) {
+        self.commentModel = CommentModel(userId: userId, postId: postId, commentId: commentId)
+    }
+    
     func getCommentClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
         return {
             let commentWebService = CommentsWebService(userAuth: userAuthVM.userAuth)
@@ -121,6 +125,32 @@ class CommentViewModel: ObservableObject {
                 
             })
         }
+    }
+    
+    func updateComment(userAuthVM: UserAuthenticationViewModel) {
+        //CHeck if there has been any change
+        if commentModel.content.isEmpty {
+            return
+            //Do nothing
+        }
+//        self.makingRequest = true
+        let userCommentsWebService = CommentsWebService(userAuth: userAuthVM.userAuth)
+        userCommentsWebService.updateComment(userId: self.commentModel.author.id, postId: self.commentModel.postId, commentModel: self.commentModel,
+           completionFailure: {() -> Void in
+//                self.makingRequest = false
+//                self.requestSuccessful = false
+                return
+           },
+           completionSuccessful: { (commentModel: CommentModel?) -> Void in
+//                self.makingRequest = false
+//                self.requestSuccessful = true
+                if let commentModel = commentModel {
+                    self.commentModel = commentModel
+                }
+                return
+                
+            }
+        )
     }
     
     
