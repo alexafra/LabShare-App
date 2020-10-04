@@ -19,17 +19,21 @@ class UserPostsWebService: WebService {
 //        self.loggedInUserId = userAuthModel.id
 //        self.token = userAuthModel.token
 //    }
-    func generateURLString(userId: Int, postId: Int? = nil) -> String {
+    //Probs stop optional
+    func generateURLString(userId: Int, postFilter: PostFilter = PostFilter.None, postId: Int? = nil) -> String {
         var urlString =  "\(hostUrlString)/users/\(userId)/posts"
+        if postFilter != PostFilter.None {
+            urlString = urlString + "?category=\(postFilter.rawValue)"
+        }
         if let postId = postId {
             urlString = urlString + "/" + String(postId)
         }
         return urlString
     }
     
-    func getAllUserPosts(userId: Int, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
+    func getAllUserPosts(userId: Int, postFilter: PostFilter = PostFilter.None, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
         
-        let urlString = generateURLString(userId: userId)
+        let urlString = generateURLString(userId: userId, postFilter: postFilter)
         
         super.getAll(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
     }

@@ -21,7 +21,7 @@ class PostListViewModel: ObservableObject {
     @Published var userId: Int
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
-
+    @Published var postFilter: PostFilter = PostFilter.None
            
     @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
     @Published var postListType: PostListType
@@ -51,11 +51,14 @@ class PostListViewModel: ObservableObject {
         }
         
     }
+    func getAllPosts(userAuthVM: UserAuthenticationViewModel) {
+        getAllPostsClosure(userAuthVM: userAuthVM)()
+    }
     func getAllUserPostsClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
         return {
             let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
 
-            userPostWebService.getAllUserPosts(userId: self.userId, completionFailure: {() -> Void in return }, completionSuccessful: { (posts: [PostModel]?) -> Void in
+            userPostWebService.getAllUserPosts(userId: self.userId, postFilter: self.postFilter, completionFailure: {() -> Void in return }, completionSuccessful: { (posts: [PostModel]?) -> Void in
                 if let posts = posts {
                     self.posts = posts.map( self.modelToViewModel )
                 }
@@ -75,7 +78,7 @@ class PostListViewModel: ObservableObject {
     func getFeedPostsClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
         return {
             let userFeedWebService = UserFeedWebService(userAuth: userAuthVM.userAuth)
-            userFeedWebService.getAllFeedPosts(userId: userAuthVM.userAuth.id,
+            userFeedWebService.getAllFeedPosts(userId: userAuthVM.userAuth.id, postFilter: self.postFilter,
                completionFailure: {() -> Void in
                     return
                }, completionSuccessful: {(posts: [PostModel]?) -> Void in
@@ -114,7 +117,13 @@ class PostListViewModel: ObservableObject {
     }
 }
 
-
+enum PostFilter: String {
+    case None = ""
+    case Reagents = "Reagents"
+    case Equipment = "Equipment"
+    case Expertise = "Expertise"
+    
+}
 
 enum PostListType {
     case Profile

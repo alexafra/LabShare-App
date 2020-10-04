@@ -40,14 +40,78 @@ struct PostListView: View {
                             TextEditor(text: self.$postListVM.newPostContent)
                             Text(self.postListVM.newPostContent).opacity(0).padding(.top, 12)
                         }
-                    }     
+                    }
+                    Divider()
+//                    Menu(content: {
+//                        Button(action: {
+//                            self.postListVM.postFilter = PostFilter.Reagents
+//                            self.postListVM.getAllPosts(userAuthVM: userAuthVM)
+//                        }, label: {
+//                            Text("Reagents")
+//                        })
+//                        Button(action: {
+//                            self.postListVM.postFilter = PostFilter.Equipment
+//                            self.postListVM.getAllPosts(userAuthVM: userAuthVM)
+//                        }, label: {
+//                            Text("Equipment")
+//                        })
+//                        Button(action: {
+//                            self.postListVM.postFilter = PostFilter.Expertise
+//                            self.postListVM.getAllPosts(userAuthVM: userAuthVM)
+//                        }, label: {
+//                            Text("Expertise")
+//                        })
+//                        Button(action: {
+//                            self.postListVM.postFilter = PostFilter.None
+//                            self.postListVM.getAllPosts(userAuthVM: userAuthVM)
+//                        }, label: {
+//                            Text("None")
+//                        })
+//                    }, label: {
+//                        Text("Filter")
+//                        Image(systemName: "line.horizontal.3").font(Font.system(.title).bold())
+//                            
+//                    })
+//                    
                 }.modifier(MultiLineTextFieldAuthorization())
                     .padding(10)
                     Divider()
             }
-            
-            Text("Posts:").font(Font.headline).padding(.top, 10)
-                
+            HStack {
+                Text("Posts:").font(Font.headline).padding(.top, 10)
+                Spacer()
+                Menu(content: {
+                    Button(action: {
+                        self.postListVM.postFilter = PostFilter.Reagents
+                        self.postListVM.getAllPosts(userAuthVM: userAuthVM)
+                    }, label: {
+                        Text("Reagents")
+                    })
+                    Button(action: {
+                        self.postListVM.postFilter = PostFilter.Equipment
+                        self.postListVM.getAllPosts(userAuthVM: userAuthVM)
+                    }, label: {
+                        Text("Equipment")
+                    })
+                    Button(action: {
+                        self.postListVM.postFilter = PostFilter.Expertise
+                        self.postListVM.getAllPosts(userAuthVM: userAuthVM)
+                    }, label: {
+                        Text("Expertise")
+                    })
+                    Button(action: {
+                        self.postListVM.postFilter = PostFilter.None
+                        self.postListVM.getAllPosts(userAuthVM: userAuthVM)
+                    }, label: {
+                        Text("None")
+                    })
+                }, label: {
+                    Text("Filter")
+                    Image(systemName: "line.horizontal.3").font(Font.system(.title).bold())
+                        
+                })
+            }.padding(.leading)
+            .padding(.trailing)
             ForEach(self.postListVM.posts, id: \.post.id) {
                 postVM in
                 PostRowView(postVM: postVM)
@@ -61,13 +125,13 @@ struct PostListView: View {
 }
 
 struct PostListView_Previews: PreviewProvider {
-    static let  userAuthVM: UserAuthenticationViewModel = UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true)
+//    static let  userAuthVM: UserAuthenticationViewModel = UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true)
     static var previews: some View {
         Group {
             VStack {
                 NavigationView {
                     ScrollView {
-                        PostListView(postListVM: PostListViewModel(userId: 72, postListType: PostListType.Profile)).environmentObject(UserAuthenticationViewModel(id: 72, token: "d4e3814547b0b328f3baae5ea78a3b1417464386", isLoggedIn: true))
+                        PostListView(postListVM: PostListViewModel(userId: 80, postListType: PostListType.Profile)).environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
                     }
                     
                 }

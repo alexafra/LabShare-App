@@ -27,27 +27,17 @@ struct PostEditView: View {
             ScrollView {
                 VStack (alignment: .leading) {
                     Text("Title:")
-                        .font(.title)
-//                        .foregroundColor(Color.black)
-//                        .fontWeight(.bold)
-                    
                     TextField("", text: self.$postVM.post.title)
-//                        .font(.title)
-//                        .foregroundColor(Color.black)
-                        .modifier(TextFieldAuthorization())
-                }.padding()
-                
-                VStack (alignment: .leading){
-                    Text("Contents:")
-                        .font(.title)
-                    ZStack {
-                        TextEditor(text: self.$postVM.post.content)
-                        Text(self.postVM.post.content).opacity(0).padding(.top, 12).modifier(MultiLineTextFieldAuthorization())
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("Content:")
+                        ZStack {
+                            TextEditor(text: self.$postVM.post.content)
+                            Text(self.postVM.post.content).opacity(0).padding(.top, 12)
+                        }
                     }
-//                        .font(.title)
-//                        .foregroundColor(Color.black)
-//                        .fontWeight(.bold)
-                }.padding()
+                }.modifier(MultiLineTextFieldAuthorization())
+                    .padding(10)
                 
                 Button(action: {
                     self.postVM.updatePost(userAuthVM: self.userAuthVM)
@@ -70,12 +60,36 @@ struct PostEditView: View {
 struct PostEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PostEditView(userId: 37, postId: 27, showSelf: .constant(true))
-                .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+            PostEditView(userId: 80, postId: 104, showSelf: .constant(true))
+                .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
         }
         
     }
 }
+
+//                VStack (alignment: .leading) {
+//                    Text("Title:")
+//                        .font(.title)
+////                        .foregroundColor(Color.black)
+////                        .fontWeight(.bold)
+//
+//                    TextField("", text: self.$postVM.post.title)
+////                        .font(.title)
+////                        .foregroundColor(Color.black)
+//                        .modifier(TextFieldAuthorization())
+//                }.padding()
+//
+//                VStack (alignment: .leading){
+//                    Text("Contents:")
+//                        .font(.title)
+//                    ZStack {
+//                        TextEditor(text: self.$postVM.post.content)
+//                        Text(self.postVM.post.content).opacity(0).padding(.top, 12).modifier(MultiLineTextFieldAuthorization())
+//                    }
+////                        .font(.title)
+////                        .foregroundColor(Color.black)
+////                        .fontWeight(.bold)
+//                }.padding()
 
 
 //                    .foregroundColor(.black)
