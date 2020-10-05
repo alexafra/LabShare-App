@@ -11,11 +11,11 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name']
+        read_only_fields = ['id', 'email', 'profile']
 
     def get_auth_token(self, obj):
         token = Token.objects.create(user=obj)
         return token.key
-
 
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length=300, required=True)
