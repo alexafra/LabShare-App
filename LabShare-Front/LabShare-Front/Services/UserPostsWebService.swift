@@ -20,9 +20,9 @@ class UserPostsWebService: WebService {
 //        self.token = userAuthModel.token
 //    }
     //Probs stop optional
-    func generateURLString(userId: Int, postFilter: PostFilter = PostFilter.None, postId: Int? = nil) -> String {
+    func generateURLString(userId: Int, postFilter: CategoryEnum = CategoryEnum.None, postId: Int? = nil) -> String {
         var urlString =  "\(hostUrlString)/users/\(userId)/posts"
-        if postFilter != PostFilter.None {
+        if postFilter != CategoryEnum.None {
             urlString = urlString + "?category=\(postFilter.rawValue)"
         }
         if let postId = postId {
@@ -31,7 +31,7 @@ class UserPostsWebService: WebService {
         return urlString
     }
     
-    func getAllUserPosts(userId: Int, postFilter: PostFilter = PostFilter.None, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
+    func getAllUserPosts(userId: Int, postFilter: CategoryEnum = CategoryEnum.None, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
         
         let urlString = generateURLString(userId: userId, postFilter: postFilter)
         

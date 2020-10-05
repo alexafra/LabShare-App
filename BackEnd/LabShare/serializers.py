@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'email', 'profile', 'first_name', 'last_name']
-    
+
     #def to_representation(self, instance):
     #    response = super().to_representation(instance)
     #    response['image'] = UserProfileSerializer(instance.profile).data['image']
@@ -41,6 +41,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     date_created = serializers.DateTimeField(default = None, required = False, format="%Y-%m-%dT%H:%M:%SZ")
+    category = serializers.CharField(allow_blank = True)
     class Meta:
         model = Post
         fields = ['id', 'title', 'content', 'date_created', 'category']
@@ -54,7 +55,8 @@ class PostSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image', 'owner']
+        fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'owner']
+        # fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image', 'owner']
 
     def to_representation(self, instance):
         response = super().to_representation(instance)

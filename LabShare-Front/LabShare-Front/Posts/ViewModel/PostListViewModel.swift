@@ -21,7 +21,9 @@ class PostListViewModel: ObservableObject {
     @Published var userId: Int
     @Published var newPostTitle: String = ""
     @Published var newPostContent: String = ""
-    @Published var postFilter: PostFilter = PostFilter.None
+    @Published var newPostCategory: CategoryEnum = CategoryEnum.None
+
+    @Published var postFilter: CategoryEnum = CategoryEnum.None
            
     @Published var posts = [PostViewModel]() //whenever you change the posts, it will publish an event
     @Published var postListType: PostListType
@@ -98,7 +100,7 @@ class PostListViewModel: ObservableObject {
             return
         }
         
-        let newPost = PostModel(title: newPostTitle, content:newPostContent, authorId: userAuthVM.userAuth.id)
+        let newPost = PostModel(title: newPostTitle, content:newPostContent, category: newPostCategory, authorId: userAuthVM.userAuth.id)
         
         let userPostWebService = UserPostsWebService(userAuth: userAuthVM.userAuth)
         userPostWebService.createPost(userId: userAuthVM.userAuth.id, postModel: newPost,
@@ -117,13 +119,7 @@ class PostListViewModel: ObservableObject {
     }
 }
 
-enum PostFilter: String {
-    case None = ""
-    case Reagents = "Reagents"
-    case Equipment = "Equipment"
-    case Expertise = "Expertise"
-    
-}
+
 
 enum PostListType {
     case Profile

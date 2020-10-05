@@ -17,15 +17,15 @@ class UserFeedWebService: WebService {
 //        self.loggedInUserId = userAuthModel.id
 //        self.token = userAuthModel.token
 //    }
-    func generateURLString(userId: Int, postFilter: PostFilter = PostFilter.None) -> String {
+    func generateURLString(userId: Int, postFilter: CategoryEnum = CategoryEnum.None) -> String {
         var urlString = "\(hostUrlString)/users/\(userId)/feed"
-        if postFilter != PostFilter.None {
+        if postFilter != CategoryEnum.None {
             urlString = urlString + "?category=\(postFilter.rawValue)"
         }
         return urlString
     }
     
-    func getAllFeedPosts(userId: Int, postFilter: PostFilter = PostFilter.None, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
+    func getAllFeedPosts(userId: Int, postFilter: CategoryEnum = CategoryEnum.None, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
         
         let urlString = generateURLString(userId: userId, postFilter: postFilter)
         

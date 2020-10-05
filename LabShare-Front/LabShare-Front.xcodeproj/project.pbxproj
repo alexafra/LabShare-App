@@ -471,9 +471,9 @@
 		F0C21C472517541800EE3665 /* Posts */ = {
 			isa = PBXGroup;
 			children = (
+				F06036DC2529E4500092412E /* View */,
 				F06036DE2529E45B0092412E /* ViewModel */,
 				F06036DD2529E4550092412E /* Model */,
-				F06036DC2529E4500092412E /* View */,
 				F0A1222325218C0100478FD0 /* Feed */,
 			);
 			path = Posts;

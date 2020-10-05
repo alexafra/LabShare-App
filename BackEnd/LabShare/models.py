@@ -69,7 +69,7 @@ class UserProfile(models.Model):
     dob = models.DateTimeField(default = '1970-01-01', blank = True)
     occupation = models.TextField(blank = True, default = "")
     employer = models.TextField(blank = True, default = "")
-    image = models.ImageField(upload_to = 'profile_image', blank = True, default = 'avatar.jpg')
+    # image = models.ImageField(upload_to = 'profile_image', blank = True, default = 'avatar.jpg')
 
     def __str__(self):
         return self.owner.email
@@ -84,5 +84,3 @@ class Comment(models.Model):
 def create_profile(sender, instance=None, created=False, **kwargs):
     if created:
         profile = UserProfile.objects.create(owner=instance)
-
-

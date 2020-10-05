@@ -25,9 +25,58 @@ struct PostEditView: View {
         VStack (alignment:.center) {
 //            PostHeaderView(p
             ScrollView {
+//                VStack (alignment: .leading) {
+//                    Text("Title:")
+//                    TextField("", text: self.$postVM.post.title)
+//                    Divider()
+//                    VStack(alignment: .leading) {
+//                        Text("Content:")
+//                        ZStack {
+//                            TextEditor(text: self.$postVM.post.content)
+//                            Text(self.postVM.post.content).opacity(0).padding(.top, 12)
+//                        }
+//                    }
+//                }.modifier(MultiLineTextFieldAuthorization())
+//                    .padding(10)
                 VStack (alignment: .leading) {
+                    HStack {
+                        if self.postVM.post.category == CategoryEnum.None {
+                            Text("Category: None")
+                        } else {
+                            Text("Category: \(self.postVM.post.category.rawValue)")
+                        }
+                        Spacer()
+                        Menu(content: {
+                            Button(action: {
+                                self.postVM.post.category = CategoryEnum.Reagents
+                            }, label: {
+                                Text("Reagents")
+                            })
+                            Button(action: {
+                                self.postVM.post.category = CategoryEnum.Equipment
+                            }, label: {
+                                Text("Equipment")
+                            })
+                            Button(action: {
+                                self.postVM.post.category = CategoryEnum.Expertise
+                            }, label: {
+                                Text("Expertise")
+                            })
+                            Button(action: {
+                                self.postVM.post.category = CategoryEnum.None
+                            }, label: {
+                                Text("None")
+                            })
+                        }, label: {
+                            Image(systemName: "line.horizontal.3").font(Font.system(.title)).foregroundColor(.black)
+                                
+                        })
+                        
+                    }
+                    Divider()
                     Text("Title:")
                     TextField("", text: self.$postVM.post.title)
+                    
                     Divider()
                     VStack(alignment: .leading) {
                         Text("Content:")
@@ -36,6 +85,7 @@ struct PostEditView: View {
                             Text(self.postVM.post.content).opacity(0).padding(.top, 12)
                         }
                     }
+                    
                 }.modifier(MultiLineTextFieldAuthorization())
                     .padding(10)
                 

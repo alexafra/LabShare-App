@@ -24,7 +24,8 @@ urlpatterns = [
     path('register', views.UserRegister.as_view()), #(POST)
     path('login', views.UserLogin.as_view()), #(POST)
     path('logout', views.UserLogout.as_view()), #(POST)
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+]
+# + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 #GRAE
 #comments ##DONE
@@ -48,4 +49,3 @@ urlpatterns = [
 #Reimplement Postgres
 #Host app on AWS server
 #Strengthen authentication security
-
