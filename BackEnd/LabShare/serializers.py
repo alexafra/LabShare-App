@@ -24,7 +24,7 @@ class UserLoginSerializer(serializers.Serializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'password', 'first_name', 'last_name']
+        fields = ['email', 'password', 'first_name', 'last_name', 'image_name']
 
     def validate_email(self, value):
         user = User.objects.filter(email=value)
@@ -52,7 +52,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ['id', 'bio', 'dob', 'occupation', 'employer']
-        # fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image_name']
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
