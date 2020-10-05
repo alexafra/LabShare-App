@@ -33,7 +33,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField('email address', unique = True)
     first_name = models.CharField(max_length = 32, blank = False, null = False)
     last_name = models.CharField(max_length = 160, blank = False, null = False)
-    # image_name = models.CharField(max_length = 32, blank = True, default = "image1")
+    image_name = models.TextField(blank = False, default = "image1")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -61,9 +61,6 @@ class Post(models.Model):
     def author_last(self):
         return self.author.last_name
 
-    # def image_name(self):
-    #     return self.author.image_name
-
     def __str__(self):
         return self.title
 
@@ -73,7 +70,6 @@ class UserProfile(models.Model):
     dob = models.DateTimeField(default = '1970-01-01', blank = True)
     occupation = models.TextField(blank = True, default = "")
     employer = models.TextField(blank = True, default = "")
-    # image_name = models.TextField(blank = False, default = "image1")
 
     def __str__(self):
         return self.owner.email

@@ -10,17 +10,12 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'profile', 'first_name', 'last_name']
-        # fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name']
-
-    #def to_representation(self, instance):
-    #    response = super().to_representation(instance)
-    #    response['image'] = UserProfileSerializer(instance.profile).data['image']
-    #    return response
+        fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name']
 
     def get_auth_token(self, obj):
         token = Token.objects.create(user=obj)
         return token.key
+
 
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length=300, required=True)
@@ -42,7 +37,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     date_created = serializers.DateTimeField(default = None, required = False, format="%Y-%m-%dT%H:%M:%SZ")
-    category = serializers.CharField(allow_blank = True)
+    #category = serializers.CharField(allow_blank = True)
     class Meta:
         model = Post
         fields = ['id', 'title', 'content', 'date_created', 'category']
