@@ -13,7 +13,7 @@ struct CommentHeaderView: View {
     
     var body: some View {
         HStack() {
-            Image(systemName: "person")
+            Image(systemName: commentVM.commentModel.author.imageName)
                 .resizable()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
