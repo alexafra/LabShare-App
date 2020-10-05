@@ -87,7 +87,7 @@ struct PostListView: View {
             HStack {
                 Text("Posts:").font(Font.headline).padding(.top, 10)
                 Spacer()
-                if self.postListVM.newPostCategory == CategoryEnum.None {
+                if self.postListVM.postFilter == CategoryEnum.None {
                     Text("Filter: None")
                 } else {
                     Text("Filter: \(self.postListVM.postFilter.rawValue)")
