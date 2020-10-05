@@ -31,6 +31,8 @@ urlpatterns = [
 #comments ##DONE
 #category filter ##DONE
 #search ##DONE
+#Get rid of users model in favour of hard coded strings ##DONE
+#category filter on /posts ##DONE
 #can only create, edit and delete posts, edit, delete account if you are the same user (or admin)
 #admin functionality and permissions, change users active/non-active, remove and edit posts, permissions for active/non-active
 #user image sent with user model serializer
