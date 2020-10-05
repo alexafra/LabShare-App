@@ -11,6 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'email', 'profile', 'first_name', 'last_name']
+        # fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name']
 
     #def to_representation(self, instance):
     #    response = super().to_representation(instance)
@@ -56,7 +57,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ['id', 'bio', 'dob', 'occupation', 'employer']
-        # fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image', 'owner']
+        # fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image_name']
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
