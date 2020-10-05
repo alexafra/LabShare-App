@@ -24,6 +24,9 @@ urlpatterns = [
     path('register', views.UserRegister.as_view()), #(POST)
     path('login', views.UserLogin.as_view()), #(POST)
     path('logout', views.UserLogout.as_view()), #(POST)
+    #ADMIN
+    path('admin/non-active', views.NonActive.as_view()), #(GET)
+    path('admin/active', views.Active.as_view()) #(GET)
 ]
 # + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

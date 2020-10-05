@@ -10,7 +10,7 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name']
+        fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name', 'is_staff', 'is_active']
         read_only_fields = ['id', 'email', 'profile']
 
     def get_auth_token(self, obj):
@@ -37,7 +37,6 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     date_created = serializers.DateTimeField(default = None, required = False, format="%Y-%m-%dT%H:%M:%SZ")
-    #category = serializers.CharField(allow_blank = True)
     class Meta:
         model = Post
         fields = ['id', 'title', 'content', 'date_created', 'category']

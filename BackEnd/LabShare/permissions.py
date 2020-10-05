@@ -1,5 +1,5 @@
 from rest_framework import permissions
-from LabShare.models import Post, UserProfile
+from LabShare.models import Post, Comment, UserProfile
 
 class unauthenticated(permissions.BasePermission):
     message = 'User is already authenticated'
@@ -30,7 +30,7 @@ class profileModifyPermission(permissions.BasePermission):
 
     def has_permission(self, request, view):
         if request.method != 'GET':
-            return request.user.id == Profile.objects.get(pk = view.kwargs['user_id']).owner.id or request.user.is_staff
+            return request.user.id == UserProfile.objects.get(pk = view.kwargs['user_id']).owner.id or request.user.is_staff
         else:
             return True
 
@@ -42,3 +42,15 @@ class commentModifyPermission(permissions.BasePermission):
             return request.user.id == Comment.objects.get(pk = view.kwargs['user_id']).author.id or request.user.is_staff
         else:
             return True
+
+class isActive(permissions.BasePermission):
+    message = 'User not active'
+
+    def has_permission(self, request, view):
+        return request.user.is_active
+
+class isAdmin(permissions.BasePermission):
+    message = 'User not admin'
+
+    def has_permission(self, request, view):
+        return request.user.is_staff
