@@ -9,13 +9,22 @@
 import SwiftUI
 
 struct ImagePicker: View {
+    @Binding var showImagePicker: Bool
+    @Binding var profileImage: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            imageRow(image: "house", showImagePicker: $showImagePicker, profileImage: $profileImage)
+            
+            imageRow(image: "person", showImagePicker: $showImagePicker, profileImage: $profileImage)
+            
+            imageRow(image: "star", showImagePicker: $showImagePicker, profileImage: $profileImage)
+        }
     }
 }
 
 struct ImagePicker_Previews: PreviewProvider {
     static var previews: some View {
-        ImagePicker()
+        ImagePicker(showImagePicker: Binding.constant(false), profileImage: Binding.constant("Hello"))
     }
 }

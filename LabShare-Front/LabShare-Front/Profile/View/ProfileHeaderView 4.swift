@@ -15,7 +15,7 @@ struct ProfileHeaderView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            CircleImage(imageName: self.profileVM.profile.imageName)
+            CircleImage()
                 .padding(.leading, 30)
                 .padding(.trailing, 30)
             

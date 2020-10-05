@@ -14,8 +14,11 @@ struct PostHeaderView: View {
     
     var body: some View {
         HStack() {
-            CircleImage(imageName: postVM.post.author.imageName)
+            Image(systemName: "person")
+                .resizable()
                 .frame(width: 50, height: 50)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
             VStack (alignment: .leading) {
                 Text("\(self.postVM.post.author.firstName) \(self.postVM.post.author.lastName)")
                     .font(Font.subheadline)

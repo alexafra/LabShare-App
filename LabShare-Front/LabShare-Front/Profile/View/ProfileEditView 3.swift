@@ -13,7 +13,9 @@ struct ProfileEditView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @ObservedObject var profileVM: ProfileViewModel
     @Binding var showSelf: Bool
-    @State var showImagePicker = false
+
+//    @Binding var showSelf: Bool
+
     
     init(userId: Int, showSelf: Binding<Bool>) {
         self.profileVM = ProfileViewModel(userId: userId)
@@ -28,19 +30,6 @@ struct ProfileEditView: View {
         VStack {
             ScrollView {
                 VStack(alignment: .leading) {
-                    HStack {
-                        Text("profile image:")
-                        Spacer()
-                        Button(action: {
-                                self.showImagePicker = true }) {
-                            Text("Edit")
-                        }
-                    }
-                    CircleImageUpdatable(imageName: $profileVM.profile.imageName)
-                    
-                }
-                
-                VStack(alignment: .leading) {
                     Text("occupation:")
                     TextField("", text: self.$profileVM.profile.occupation)
                         .modifier(TextFieldAuthorization())
@@ -53,7 +42,7 @@ struct ProfileEditView: View {
                     TextField("", text: self.$profileVM.profile.employer).modifier(TextFieldAuthorization())
                 }
                 .padding()
-                
+        
                 VStack(alignment: .leading) {
                     Text("bio:")
                     ZStack {
@@ -83,20 +72,19 @@ struct ProfileEditView: View {
                 }
                 .modifier(AuthButton())
                 .padding(.top)
-                
+                    
             }
             
             
         }.padding()
-        //        .frame(minHeight: 0, maxHeight: .infinity)
+//        .frame(minHeight: 0, maxHeight: .infinity)
         //.KeyboardAwarePadding()
         .onAppear(
             perform:
-                self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
-        .sheet(isPresented: $showImagePicker, content: {
-            ImagePicker(showImagePicker: $showImagePicker, profileImage: $profileVM.profile.imageName)
-        })
-
+                self.profileVM.getProfileClosure(userAuthVM: userAuthVM)
+            
+        )
+        
     }
 }
 

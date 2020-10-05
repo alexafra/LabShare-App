@@ -13,7 +13,7 @@ struct UserModel: Hashable, Codable, Identifiable {
     var email: String
     var firstName: String
     var lastName: String
-    var imageName: String
+//    var imageName: String
     
 //    "id": 8,
 //    "email": "graycumming@gmail.com",
@@ -27,19 +27,21 @@ struct UserModel: Hashable, Codable, Identifiable {
         case email
         case firstName = "first_name"
         case lastName = "last_name"
-        case imageName = "image_name"
+//        case imageName = "image_name"
     }
     
-    init(id: Int, email: String, firstName: String, lastName: String) {
+    init(id: Int, email: String, firstName: String, lastName: String//, imageName: String
+    ) {
         self.id = id
         self.email = email
         self.firstName = firstName
         self.lastName = lastName
-        self.imageName = "person"
+//        self.imageName = imageName
     }
     
     init() {
-        self.init(id: -1, email: "", firstName: "", lastName: "")
+        self.init(id: -1, email: "", firstName: "", lastName: ""//, imageName: "image1"
+        )
     }
 }
 
