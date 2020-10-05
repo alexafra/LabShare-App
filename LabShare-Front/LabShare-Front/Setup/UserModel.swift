@@ -35,7 +35,7 @@ struct UserModel: Hashable, Codable, Identifiable {
         self.email = email
         self.firstName = firstName
         self.lastName = lastName
-        self.imageName = "person"
+        self.imageName = "image1"
     }
     
     init() {

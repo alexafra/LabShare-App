@@ -53,7 +53,7 @@ struct ProfileModel: Codable, Identifiable, Hashable {
             date = Date()
         }
         
-        self.init(id: -1, bio: "", dob: date, occupation: "", employer: "", imageName: "person", owner: UserModel())
+        self.init(id: -1, bio: "", dob: date, occupation: "", employer: "", imageName: "image1", owner: UserModel())
     }
     
 //    init(profile: ProfileModel) {

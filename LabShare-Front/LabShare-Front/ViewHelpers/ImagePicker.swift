@@ -14,11 +14,11 @@ struct ImagePicker: View {
     
     var body: some View {
         VStack {
-            imageRow(image: "house", showImagePicker: $showImagePicker, profileImage: $profileImage)
+            imageButton(image: "image1", showImagePicker: $showImagePicker, profileImage: $profileImage)
             
-            imageRow(image: "person", showImagePicker: $showImagePicker, profileImage: $profileImage)
+            imageButton(image: "image2", showImagePicker: $showImagePicker, profileImage: $profileImage)
             
-            imageRow(image: "star", showImagePicker: $showImagePicker, profileImage: $profileImage)
+            imageButton(image: "image3", showImagePicker: $showImagePicker, profileImage: $profileImage)
         }
     }
 }

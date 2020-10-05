@@ -10,33 +10,29 @@ import SwiftUI
 import Combine
 
 struct CircleImage: View {
-    @State var imageName: String = "person"
-    @State var imageCol: Color = .black
+    @State var imageName: String = "image1"
     var body: some View {
-        Image(systemName: imageName)
+        Image(imageName)
             .resizable()
             .scaledToFit()
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white, lineWidth: 4))
             .shadow(radius: 10)
             .padding(5)
-            .foregroundColor(imageCol)
             
     }
 }
 
 struct CircleImageUpdatable: View {
     @Binding var imageName: String
-    @State var imageCol: Color = .black
     var body: some View {
-        Image(systemName: imageName)
+        Image(imageName)
             .resizable()
             .scaledToFit()
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white, lineWidth: 4))
             .shadow(radius: 10)
             .padding(5)
-            .foregroundColor(imageCol)
             
     }
 }
