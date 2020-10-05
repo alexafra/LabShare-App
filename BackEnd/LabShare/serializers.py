@@ -55,7 +55,7 @@ class PostSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'owner']
+        fields = ['id', 'bio', 'dob', 'occupation', 'employer']
         # fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image', 'owner']
 
     def to_representation(self, instance):
