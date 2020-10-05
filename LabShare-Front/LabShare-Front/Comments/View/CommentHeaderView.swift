@@ -13,11 +13,11 @@ struct CommentHeaderView: View {
     
     var body: some View {
         HStack() {
-            Image(systemName: commentVM.commentModel.author.imageName)
-                .resizable()
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+//            Image(systemName: commentVM.commentModel.author.imageName)
+//                .resizable()
+//                .frame(width: 50, height: 50)
+//                .clipShape(Circle())
+//                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
             VStack (alignment: .leading) {
                 Text("\(self.commentVM.commentModel.author.firstName) \(self.commentVM.commentModel.author.lastName)")
                     .font(Font.subheadline)
