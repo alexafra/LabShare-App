@@ -10,7 +10,7 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'profile', 'first_name', 'last_name']
+        fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name']
         # fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name']
 
     #def to_representation(self, instance):

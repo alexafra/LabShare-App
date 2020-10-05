@@ -13,8 +13,14 @@ class UserWebService: WebService {
         super.init(userAuthModel: userAuth)
     }
 
-    func generateURLString(queryString: String) -> String {
-        return "\(hostUrlString)/users?search=\(queryString)"
+    func generateURLString(queryString: String? = nil, userId: Int? = nil) -> String {
+        var urlString = "\(hostUrlString)/users"
+        if let queryString = queryString {
+            urlString = urlString + "?search=\(queryString)"
+        } else if let userId = userId {
+            urlString = urlString + "/\(userId)"
+        }
+        return urlString
     }
     
     func getUsersSearchBar(queryString: String, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([UserModel]?) -> ()) {
@@ -22,5 +28,13 @@ class UserWebService: WebService {
         let urlString = generateURLString(queryString: queryString)
         super.get(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
     }
+    
+    func updateUser(userId: Int, userModel: UserModel, completionFailure: @escaping () -> (), completionSuccessful: @escaping (UserModel?) -> ()) {
+        
+        let urlString = generateURLString(userId: userId)
+        super.update(urlString: urlString, model: userModel, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
+    }
+    
+    
     
 }

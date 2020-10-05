@@ -36,7 +36,7 @@ struct ProfileEditView: View {
                             Text("Edit")
                         }
                     }
-                    CircleImageUpdatable(imageName: $profileVM.profile.imageName)
+                    CircleImageUpdatable(imageName: $profileVM.profile.owner.imageName)
                     
                 }
                 
@@ -94,7 +94,7 @@ struct ProfileEditView: View {
             perform:
                 self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
         .sheet(isPresented: $showImagePicker, content: {
-            ImagePicker(showImagePicker: $showImagePicker, profileImage: $profileVM.profile.imageName)
+            ImagePicker(showImagePicker: $showImagePicker, profileImage: $profileVM.profile.owner.imageName)
         })
 
     }

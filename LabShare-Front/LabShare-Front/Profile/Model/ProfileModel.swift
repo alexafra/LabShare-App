@@ -14,7 +14,6 @@ struct ProfileModel: Codable, Identifiable, Hashable {
     var dob: Date
     var occupation: String
     var employer: String
-    var imageName: String
     var owner: UserModel
     
     enum CodingKeys: String, CodingKey
@@ -24,17 +23,15 @@ struct ProfileModel: Codable, Identifiable, Hashable {
         case dob
         case occupation
         case employer
-        case imageName
         case owner
     }
     
-    init(id: Int, bio: String, dob: Date, occupation: String, employer: String, imageName: String, owner: UserModel) {
+    init(id: Int, bio: String, dob: Date, occupation: String, employer: String,  owner: UserModel) {
         self.id = id
         self.bio = bio
         self.dob = dob
         self.occupation = occupation
         self.employer = employer
-        self.imageName = imageName
         self.owner = owner
     }
     
@@ -53,7 +50,7 @@ struct ProfileModel: Codable, Identifiable, Hashable {
             date = Date()
         }
         
-        self.init(id: -1, bio: "", dob: date, occupation: "", employer: "", imageName: "image1", owner: UserModel())
+        self.init(id: -1, bio: "", dob: date, occupation: "", employer: "", owner: UserModel())
     }
     
 //    init(profile: ProfileModel) {

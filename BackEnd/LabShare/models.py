@@ -33,7 +33,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField('email address', unique = True)
     first_name = models.CharField(max_length = 32, blank = False, null = False)
     last_name = models.CharField(max_length = 160, blank = False, null = False)
-    # image_name = models.CharField(max_length = 32, blank = True, default = "image1")
+    image_name = models.CharField(max_length = 32, blank = True, default = "image1")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
