@@ -27,6 +27,8 @@ urlpatterns = [
     path('register', views.UserRegister.as_view()), #(POST)
     path('login', views.UserLogin.as_view()), #(POST)
     path('logout', views.UserLogout.as_view()), #(POST)
+    #dj-rest-auth
+    path('me', views.UserDetailView.as_view())
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 #GRAE
