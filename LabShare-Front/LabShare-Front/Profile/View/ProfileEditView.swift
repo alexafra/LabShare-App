@@ -94,7 +94,7 @@ struct ProfileEditView: View {
             perform:
                 self.profileVM.getProfileClosure(userAuthVM: userAuthVM))
         .sheet(isPresented: $showImagePicker, content: {
-            ImagePicker(showImagePicker: $showImagePicker, profileImage: $profileVM.profile.owner.imageName)
+            ImagePicker(showImagePicker: $showImagePicker, profileImage: self.$profileVM.profile.owner.imageName)
         })
 
     }
