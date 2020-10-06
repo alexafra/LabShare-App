@@ -30,16 +30,16 @@ struct UserModel: Hashable, Codable, Identifiable {
         case imageName = "image_name"
     }
     
-    init(id: Int, email: String, firstName: String, lastName: String) {
+    init(id: Int, email: String, firstName: String, lastName: String, imageName: String) {
         self.id = id
         self.email = email
         self.firstName = firstName
         self.lastName = lastName
-        self.imageName = "image1"
+        self.imageName = imageName
     }
     
     init() {
-        self.init(id: -1, email: "", firstName: "", lastName: "")
+        self.init(id: -1, email: "", firstName: "", lastName: "", imageName: "image1")
     }
 }
 
