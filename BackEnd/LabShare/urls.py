@@ -45,6 +45,7 @@ urlpatterns = [
 ##users/user_id/feed: get all posts and category filters if query string
 ##users/user_id/posts: get posts from a user, create posts ##posts not created from feed anymore
 ##users/user_id/posts/post_id/comments: create post comments, get post comments ##comments not created from post_id/comments anymore
+##users/user_id: change to APIView
 
 
 #GREG
