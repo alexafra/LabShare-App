@@ -9,9 +9,10 @@ from django.utils.decorators import method_decorator
 from django.db.models import Value as V
 from django.db.models.functions import Concat
 from LabShare.utils import get_and_authenticate_user, create_user_account
-from LabShare.models import Post, UserProfile, Comment
-from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, UserProfileSerializer, CommentSerializer
+from LabShare.models import Post, Categories, UserProfile, Comment
+from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, CategoriesSerializer, UserProfileSerializer, CommentSerializer
 from LabShare.permissions import unauthenticated
+from .serializers import ChangePasswordSerializer
 
 User = get_user_model()
 
@@ -51,10 +52,8 @@ class Users(APIView):
     def get(self, request):
         if 'search' in self.request.GET:
             queryset = User.objects.annotate(full_name = Concat('first_name', V(' '), 'last_name')).filter(full_name__icontains = self.request.GET.get('search')).order_by('last_name')
-            paginate_by = 2
         else:
             queryset = User.objects.all().order_by('last_name')
-            paginate_by = 2
         serializer = UserSerializer(queryset, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
@@ -114,7 +113,7 @@ class Feed(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, **kwargs):
         if 'category' in self.request.GET:
-            queryset = Post.objects.filter(category = self.request.GET.get('category')).order_by('-date_created')
+            queryset = Post.objects.filter(category__category_name = self.request.GET.get('category')).order_by('-date_created')
         else:
             queryset = Post.objects.all().order_by('-date_created')
         serializer = PostSerializer(queryset, many = True)
@@ -136,11 +135,7 @@ class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Upda
 class UserPosts(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, **kwargs):
-
-        if 'category' in self.request.GET:
-            queryset = Post.objects.filter(author__id = self.kwargs['user_id'], category = self.request.GET.get('category')).order_by("-date_created")
-        else:
-            queryset = Post.objects.filter(author__id = self.kwargs['user_id']).order_by("-date_created")
+        queryset = Post.objects.filter(author__id = self.kwargs['user_id']).order_by("-date_created")
         serializer = PostSerializer(queryset, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
     def post(self, request, **kwargs):
@@ -149,6 +144,62 @@ class UserPosts(APIView):
             serializer.save(author = self.request.user)
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+class AvailableCategories(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+    permission_classes = [IsAuthenticated]
+    queryset = Categories.objects.all()
+    serializer_class = CategoriesSerializer
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class SingleCategory(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'id'
+    lookup_url_kwarg = 'id'
+    serializer_class = CategoriesSerializer
+    queryset = Categories.objects.all()
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+class ChangePasswordView(generics.UpdateAPIView):
+    """
+    For changing password.
+    """
+    serializer_class = ChangePasswordSerializer
+    model = User
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        return obj
+
+    def update(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            # Check old password
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+            # set_password also hashes the password that the user will get
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            response = {
+                'status': 'success',
+                'code': status.HTTP_200_OK,
+                'message': 'Password updated successfully',
+                'data': []
+            }
+
+            return Response(response)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 ##TEST FUNCTIONS
 class Current(APIView):
@@ -176,3 +227,4 @@ class GetUserInfo(APIView):
             return Response(responseDict)
         except:
             return Response("no token associated with this ID")
+

@@ -1,9 +1,10 @@
-from django.urls import path, re_path
-from django.conf.urls import include
+from django.urls import path, re_path, include
+from django.conf.urls import url, include
 from rest_framework import routers
 from LabShare import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import ChangePasswordView
 
 urlpatterns = [
     #TEST URLS
@@ -20,19 +21,22 @@ urlpatterns = [
     #COMMENTS
     path('users/<int:user_id>/posts/<int:post_id>/comments', views.Comments.as_view()), #create post comment, get post comments (GET, POST)
     path('users/<int:user_id>/posts/<int:post_id>/comments/<int:comment_id>', views.SingleComment.as_view()), #(GET, PUT, DELETE)
+    #CATEGORIES
+    path('categories', views.AvailableCategories.as_view()), #get all categories, create a category (GET, POST)
+    path('categories/<int:id>', views.SingleCategory.as_view()), #(GET, PUT, DELETE)
     #AUTHENTICATION
     path('register', views.UserRegister.as_view()), #(POST)
     path('login', views.UserLogin.as_view()), #(POST)
     path('logout', views.UserLogout.as_view()), #(POST)
-]
-# + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    path('password_change', ChangePasswordView.as_view(), name='password_change'),
+    path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+    
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 #GRAE
 #comments ##DONE
 #category filter ##DONE
 #search ##DONE
-#Get rid of users model in favour of hard coded strings ##DONE
-#category filter on /posts ##DONE
 #can only create, edit and delete posts, edit, delete account if you are the same user (or admin)
 #admin functionality and permissions, change users active/non-active, remove and edit posts, permissions for active/non-active
 #user image sent with user model serializer
@@ -51,3 +55,4 @@ urlpatterns = [
 #Reimplement Postgres
 #Host app on AWS server
 #Strengthen authentication security
+
