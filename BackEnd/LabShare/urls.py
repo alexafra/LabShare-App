@@ -1,9 +1,10 @@
-from django.urls import path, re_path
-from django.conf.urls import include
+from django.urls import path, re_path, include
+from django.conf.urls import url, include
 from rest_framework import routers
 from LabShare import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import ChangePasswordView
 
 urlpatterns = [
     #TEST URLS
@@ -27,6 +28,9 @@ urlpatterns = [
     path('register', views.UserRegister.as_view()), #(POST)
     path('login', views.UserLogin.as_view()), #(POST)
     path('logout', views.UserLogout.as_view()), #(POST)
+    path('password_change', ChangePasswordView.as_view(), name='password_change'),
+    path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+    
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 #GRAE

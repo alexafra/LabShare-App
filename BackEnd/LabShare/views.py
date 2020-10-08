@@ -12,6 +12,7 @@ from LabShare.utils import get_and_authenticate_user, create_user_account
 from LabShare.models import Post, Categories, UserProfile, Comment
 from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, CategoriesSerializer, UserProfileSerializer, CommentSerializer
 from LabShare.permissions import unauthenticated
+from .serializers import ChangePasswordSerializer
 
 User = get_user_model()
 
@@ -166,6 +167,40 @@ class SingleCategory(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
+class ChangePasswordView(generics.UpdateAPIView):
+    """
+    For changing password.
+    """
+    serializer_class = ChangePasswordSerializer
+    model = User
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        return obj
+
+    def update(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            # Check old password
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+            # set_password also hashes the password that the user will get
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            response = {
+                'status': 'success',
+                'code': status.HTTP_200_OK,
+                'message': 'Password updated successfully',
+                'data': []
+            }
+
+            return Response(response)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 ##TEST FUNCTIONS
 class Current(APIView):
     def get(self, request, format = None):
@@ -192,3 +227,4 @@ class GetUserInfo(APIView):
             return Response(responseDict)
         except:
             return Response("no token associated with this ID")
+

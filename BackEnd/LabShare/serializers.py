@@ -74,3 +74,12 @@ class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categories
         fields = ['id', 'category_name']
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    """
+    Serializer for password change
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)

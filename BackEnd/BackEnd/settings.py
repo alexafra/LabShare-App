@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_rest_passwordreset',
     'LabShare.apps.LabshareConfig'
 ]
 
@@ -123,3 +124,5 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'LabShare/media')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
