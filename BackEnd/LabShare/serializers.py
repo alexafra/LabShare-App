@@ -74,9 +74,3 @@ class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categories
         fields = ['id', 'category_name']
-
-#reset-password
-class PASSWORD_RESET_SERIALIZER(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['email']

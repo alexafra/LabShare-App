@@ -192,9 +192,3 @@ class GetUserInfo(APIView):
             return Response(responseDict)
         except:
             return Response("no token associated with this ID")
-
-# user for dj-rest-auth
-class UserDetailView(APIView):
-    permission_classes = [IsAuthenticated]
-    def get(self, request, *args, **kwargs):
-        return Response({ "email": request.user.email })
