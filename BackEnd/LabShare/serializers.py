@@ -11,7 +11,17 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name', 'is_staff', 'is_active']
-        read_only_fields = ['id', 'email', 'profile']
+        read_only_fields = ['id', 'email', 'profile', 'is_staff', 'is_active']
+
+    def get_auth_token(self, obj):
+        token = Token.objects.create(user=obj)
+        return token.key
+
+class UserSerializerAdmin(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name', 'is_staff', 'is_active']
+        read_only_fields = ['id']
 
     def get_auth_token(self, obj):
         token = Token.objects.create(user=obj)
@@ -24,7 +34,7 @@ class UserLoginSerializer(serializers.Serializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'password', 'first_name', 'last_name', 'image_name']
+        fields = ['email', 'password', 'first_name', 'last_name', 'image_name', 'is_staff', 'is_active']
 
     def validate_email(self, value):
         user = User.objects.filter(email=value)

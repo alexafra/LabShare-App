@@ -10,8 +10,8 @@ from django.db.models import Value as V
 from django.db.models.functions import Concat
 from LabShare.utils import get_and_authenticate_user, create_user_account
 from LabShare.models import Post, UserProfile, Comment
-from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, UserProfileSerializer, CommentSerializer
-from LabShare.permissions import unauthenticated, userModifyPermission, postModifyPermission, profileModifyPermission, commentModifyPermission, isActive
+from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, UserProfileSerializer, CommentSerializer, UserSerializerAdmin
+from LabShare.permissions import unauthenticated, userModifyPermission, postModifyPermission, profileModifyPermission, commentModifyPermission, isActive, isAdmin
 
 User = get_user_model()
 
@@ -27,7 +27,7 @@ class UserRegister(APIView):
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
 class UserLogin(APIView):
-    permission_classes = [unauthenticated, isActive]
+    permission_classes = [unauthenticated]
     def post(self, request, format = None):
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid():
@@ -64,7 +64,10 @@ class SingleUser(APIView):
         return Response(serializer.data)
     def put(self, request, user_id):
         user = User.objects.get(pk = user_id)
-        serializer = UserSerializer(user, data = request.data, partial = True)
+        if user.is_staff:
+            serializer = UserSerializerAdmin(user, data = request.data, partial = True)
+        else:
+            serializer = UserSerializer(user, data = request.data, partial = True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_200_OK)
@@ -137,7 +140,7 @@ class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Upda
         return self.destroy(request, *args, **kwargs)
 
 class UserPosts(APIView):
-    permission_classes = [IsAuthenticated], isActive
+    permission_classes = [IsAuthenticated, isActive]
     def get(self, request, **kwargs):
         if 'category' in self.request.GET:
             queryset = Post.objects.filter(author__id = self.kwargs['user_id'], category = self.request.GET.get('category')).order_by("-date_created")
