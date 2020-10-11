@@ -3,8 +3,8 @@ POST http://127.0.0.1:8000/register
 Content-Type: application/json
 
 {
-    "email": "gregggg@gmail.com",
-    "first_name": "G",
+    "email": "gregedmonds17@gmail.com",
+    "first_name": "Gd",
     "last_name": "Edmonds",
     "password": "greg1234"
 }
@@ -14,8 +14,8 @@ POST http://127.0.0.1:8000/login
 Content-Type: application/json
 
 {
-    "email": "gregggg@gmail.com",
-    "password": "newpassword44"
+    "email": "gregedmonds17@gmail.com",
+    "password": "greg1234"
 }
 
 ### Change password
@@ -31,17 +31,17 @@ Authorization: Token d270c70489e537710fd85b69e0687b294c4499cb
 ### Reset password
 POST http://127.0.0.1:8000/password_reset/ HTTP/1.1
 Content-Type: application/json
-Authorization: Token d270c70489e537710fd85b69e0687b294c4499cb
+Authorization: Token ee46670564e5b9bf680f0e31594e0d8d439cf2d5
 
 {
-    "email": "gregggg@gmail.com"
+    "email": "gregedmonds17@gmail.com"
 }
 ### Confirm reset password
 POST http://127.0.0.1:8000/password_reset/confirm/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "token": "a9bd7b31e8e051e6260079cb23506d2dcae3881c9142",
+    "token": "c43406a86c67a7a0d807f167d7d1a2",
     "password": "newpassword44"
 }
 
