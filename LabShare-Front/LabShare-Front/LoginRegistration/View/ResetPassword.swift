@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ResetPassword: View {
     @ObservedObject var resetVM: ResetPasswordViewModel
+    @State private var showingPopUp = false
     
     init () {
         resetVM = ResetPasswordViewModel()
@@ -26,18 +27,24 @@ struct ResetPassword: View {
                 .font(.callout)
                 .foregroundColor(.green)
                 .multilineTextAlignment(.leading)
-                
+            
             
             TextField("Enter email address", text: self.$resetVM.resetPassword.email).modifier(TextFieldAuthorization())
                 .padding()
             
             Button(action: {
-                self.resetVM.reset()
+                if (!resetVM.resetPassword.email.isEmpty) {
+                    self.resetVM.reset()
+                    self.showingPopUp = true
+                }
             }) {
                 Text("Reset Password")
                     .foregroundColor(Color.white)
                     .font(Font.title.weight(.bold))
             }.modifier(AuthButton())
+            .alert(isPresented: $showingPopUp, content: {
+                Alert(title: Text("Reset Password"), message: Text("If this email is associated with a LabShare account you will recieve and email shortly."), dismissButton: .default(Text("Okay")))
+            })
             Spacer()
         }.padding()
     }

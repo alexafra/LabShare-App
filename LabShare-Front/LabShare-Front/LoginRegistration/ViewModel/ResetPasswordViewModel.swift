@@ -26,10 +26,12 @@ class ResetPasswordViewModel: ObservableObject {
             self.attemptingReset = true
             ResetPasswordRegisterWebService().reset(resetP: self.resetPassword,
                 completionFailure: { () -> Void in
+                    self.resetPassword.email = ""
                     self.attemptingReset = false
                     self.resetFailed = true
                 },
                 completionSuccessful: { () in
+                    self.resetPassword.email = ""
                     self.attemptingReset = false
                     self.resetFailed = false
                 }
