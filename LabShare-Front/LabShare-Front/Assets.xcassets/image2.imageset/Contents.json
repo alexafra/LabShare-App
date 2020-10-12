@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "flasks,flask,test,lab,laboratory,science,1798591.svg",
+      "filename" : "icons8-star-512.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "icons8-star-512@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "icons8-star-512@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
