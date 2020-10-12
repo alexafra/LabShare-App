@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct ResetPassword: View {
-    @State var email: String = ""
     @ObservedObject var resetVM: ResetPasswordViewModel
     
     init () {
@@ -29,7 +28,7 @@ struct ResetPassword: View {
                 .multilineTextAlignment(.leading)
                 
             
-            TextField("Enter email address", text: self.$email).modifier(TextFieldAuthorization())
+            TextField("Enter email address", text: self.$resetVM.resetPassword.email).modifier(TextFieldAuthorization())
                 .padding()
             
             Button(action: {

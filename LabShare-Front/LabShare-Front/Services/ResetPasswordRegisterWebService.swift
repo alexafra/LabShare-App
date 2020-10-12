@@ -11,7 +11,7 @@ import SwiftUI
 class ResetPasswordRegisterWebService {
     func reset (resetP: ResetPasswordModel, completionFailure: @escaping()->(), completionSuccessful: @escaping () -> ()) {
         
-        guard let url = URL(string: "\(hostUrlString)/password_reset"), let resetPasswordData = try? JSONEncoder().encode(resetP)  else {
+        guard let url = URL(string: "\(hostUrlString)/password_reset/"), let resetPasswordData = try? JSONEncoder().encode(resetP)  else {
             completionFailure()
             print("Invalid URL")
             return
