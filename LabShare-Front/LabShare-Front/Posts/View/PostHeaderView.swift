@@ -14,7 +14,7 @@ struct PostHeaderView: View {
     
     var body: some View {
         HStack() {
-            CircleImage(imageName: postVM.post.author.imageName)
+            CircleImageUpdatable(imageName: self.$postVM.post.author.imageName)
                 .frame(width: 50, height: 50)
             VStack (alignment: .leading) {
                 Text("\(self.postVM.post.author.firstName) \(self.postVM.post.author.lastName)")

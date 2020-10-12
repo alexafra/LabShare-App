@@ -15,7 +15,7 @@ struct ProfileHeaderView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            CircleImage(imageName: self.profileVM.profile.owner.imageName)
+            CircleImageUpdatable(imageName: self.$profileVM.profile.owner.imageName)
                 .padding(.leading, 30)
                 .padding(.trailing, 30)
             
