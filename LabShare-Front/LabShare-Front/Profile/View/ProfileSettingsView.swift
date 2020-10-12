@@ -10,12 +10,13 @@ import SwiftUI
 import Combine
 
 struct ProfileSettingsView: View {
-//    @State var userId: Int
+    //    @State var userId: Int
     @ObservedObject var profileVM: ProfileViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
     @State private var showingDeleteAlert = false
+    @State private var showingLogOutAlert = false
     @State private var showDetail = false
     
     var body: some View {
@@ -27,27 +28,41 @@ struct ProfileSettingsView: View {
                         Text("Edit Profile")
                     }
                 }.buttonStyle(PlainButtonStyle())
-//                HStack {
-                    Button(action: {
-                            self.showingDeleteAlert = true
-                    }) {
-                        HStack {
-                            Image(systemName: "trash")
-                            Text("Delete User")
-                        }
-                    }.alert(isPresented: $showingDeleteAlert) {
-                        Alert(title: Text("Delete User"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
-                            self.presentationMode.wrappedValue.dismiss()
-                            self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
-                            }, secondaryButton: .cancel()
-                        )
+                //                HStack {
+                Button(action: {
+                    self.showingDeleteAlert = true
+                }) {
+                    HStack {
+                        Image(systemName: "trash")
+                        Text("Delete User")
+                    }
+                }.alert(isPresented: $showingDeleteAlert) {
+                    Alert(title: Text("Delete User"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
+                        self.presentationMode.wrappedValue.dismiss()
+                        self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
+                    }, secondaryButton: .cancel()
+                    )
                     
-//                }
+                    //                }
+                }
+                
+                Button(action: {
+                    self.showingLogOutAlert = true
+                }, label: {
+                    HStack{
+                        Image(systemName: "escape")
+                        Text("Sign Out")
+                    }
+                }).alert(isPresented: $showingLogOutAlert) {
+                    Alert(title: Text("Log Out"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Log Out")) {
+                        self.presentationMode.wrappedValue.dismiss()
+                        userAuthVM.userAuth.isLoggedIn = false
+                    }, secondaryButton: .cancel()
+                    )
+            }.navigationBarTitle(Text("Settings"), displayMode: .inline)
             }
-        }.navigationBarTitle(Text("Settings"), displayMode: .inline)
-        
+        }
     }
-}
 }
 
 struct ProfileSettingsView_Previews: PreviewProvider {
