@@ -28,7 +28,8 @@ urlpatterns = [
     path('register', views.UserRegister.as_view()), #(POST)
     path('login', views.UserLogin.as_view()), #(POST)
     path('logout', views.UserLogout.as_view()), #(POST)
-    path('password_change', ChangePasswordView.as_view(), name='password_change'),
+    #PASSWORD RESET
+    path('password_change', ChangePasswordView.as_view()),
     path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
