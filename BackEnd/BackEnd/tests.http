@@ -31,11 +31,11 @@ Authorization: Token d270c70489e537710fd85b69e0687b294c4499cb
 ### Reset password
 POST http://127.0.0.1:8000/password_reset/ HTTP/1.1
 Content-Type: application/json
-Authorization: Token ee46670564e5b9bf680f0e31594e0d8d439cf2d5
 
 {
     "email": "gregedmonds17@gmail.com"
 }
+
 ### Confirm reset password
 POST http://127.0.0.1:8000/password_reset/confirm/ HTTP/1.1
 Content-Type: application/json
