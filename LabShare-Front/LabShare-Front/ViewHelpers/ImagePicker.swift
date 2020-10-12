@@ -14,11 +14,28 @@ struct ImagePicker: View {
     
     var body: some View {
         VStack {
-            imageButton(image: "image1", showImagePicker: $showImagePicker, profileImage: $profileImage)
-            
-            imageButton(image: "image2", showImagePicker: $showImagePicker, profileImage: $profileImage)
-            
-            imageButton(image: "image3", showImagePicker: $showImagePicker, profileImage: $profileImage)
+            Text("Choose your profile picture")
+            HStack{
+                imageButton(image: "image1", showImagePicker: $showImagePicker, profileImage: $profileImage)
+                
+                imageButton(image: "image2", showImagePicker: $showImagePicker, profileImage: $profileImage)
+                
+                imageButton(image: "image3", showImagePicker: $showImagePicker, profileImage: $profileImage)
+            }
+            HStack{
+                imageButton(image: "image4", showImagePicker: $showImagePicker, profileImage: $profileImage)
+                
+                imageButton(image: "image5", showImagePicker: $showImagePicker, profileImage: $profileImage)
+                
+                imageButton(image: "image6", showImagePicker: $showImagePicker, profileImage: $profileImage)
+            }
+            HStack{
+                imageButton(image: "image7", showImagePicker: $showImagePicker, profileImage: $profileImage)
+                
+                imageButton(image: "image8", showImagePicker: $showImagePicker, profileImage: $profileImage)
+                
+                imageButton(image: "image9", showImagePicker: $showImagePicker, profileImage: $profileImage)
+            }
         }
     }
 }
