@@ -38,7 +38,7 @@ struct ResetPassword: View {
                     .foregroundColor(Color.white)
                     .font(Font.title.weight(.bold))
             }.modifier(AuthButton())
-
+            Spacer()
         }.padding()
     }
 }
