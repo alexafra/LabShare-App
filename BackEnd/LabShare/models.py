@@ -7,6 +7,11 @@ from rest_framework.authtoken.models import Token
 from django.dispatch import receiver
 from BackEnd import settings
 from datetime import datetime
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.urls import reverse
+
+from django_rest_passwordreset.signals import reset_password_token_created
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
@@ -33,7 +38,6 @@ class CustomUser(AbstractUser):
     email = models.EmailField('email address', unique = True)
     first_name = models.CharField(max_length = 32, blank = False, null = False)
     last_name = models.CharField(max_length = 160, blank = False, null = False)
-    image_name = models.CharField(max_length = 32, blank = True, default = "image1")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -48,12 +52,15 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
 
+class Categories(models.Model):
+    category_name = models.CharField(max_length = 80)
+
 class Post(models.Model):
     date_created = models.DateTimeField(auto_now_add= True)
     title = models.CharField(max_length = 80)
     content = models.TextField()
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name = 'posts', on_delete=models.CASCADE)
-    category = models.TextField(default = "")
+    category = models.ForeignKey(Categories, related_name = 'posts', on_delete = models.CASCADE, blank = True, null = True)
 
     def author_first(self):
         return self.author.first_name
@@ -61,19 +68,16 @@ class Post(models.Model):
     def author_last(self):
         return self.author.last_name
 
-    # def image_name(self):
-    #     return self.author.image_name
-
     def __str__(self):
         return self.title
 
 class UserProfile(models.Model):
     owner = models.OneToOneField(settings.AUTH_USER_MODEL, related_name = 'profile', on_delete = models.CASCADE)
     bio = models.TextField(blank = True, default = "")
-    dob = models.DateTimeField(default = '1970-01-01', blank = True)
+    dob = models.DateField(default = '2000-01-01', blank = True)
     occupation = models.TextField(blank = True, default = "")
     employer = models.TextField(blank = True, default = "")
-    # image_name = models.TextField(blank = False, default = "image1")
+    image = models.ImageField(upload_to = 'profile_image', blank = True, default = 'avatar.jpg')
 
     def __str__(self):
         return self.owner.email
@@ -88,3 +92,43 @@ class Comment(models.Model):
 def create_profile(sender, instance=None, created=False, **kwargs):
     if created:
         profile = UserProfile.objects.create(owner=instance)
+
+@receiver(reset_password_token_created)
+def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
+    """
+    Handles password reset tokens
+    When a token is created, an e-mail needs to be sent to the user
+    :param sender: View Class that sent the signal
+    :param instance: View Instance that sent the signal
+    :param reset_password_token: Token Model Object
+    :param args:
+    :param kwargs:
+    :return:
+    """
+    # send an e-mail to the user
+    context = {
+        'current_user': reset_password_token.user,
+        'username': reset_password_token.user.username,
+        'email': reset_password_token.user.email,
+        'reset_password_url': "{}?token={}".format(
+            instance.request.build_absolute_uri(reverse('password_reset:reset-password-confirm')),
+            reset_password_token.key),
+        'token' : reset_password_token.key
+    }
+
+    # render email text
+    email_html_message = render_to_string('email/user_reset_password.html', context)
+    email_plaintext_message = render_to_string('email/user_reset_password.txt', context)
+
+    msg = EmailMultiAlternatives(
+        # title:
+        "Password Reset for {title}".format(title="LabShare App"),
+        # message:
+        email_plaintext_message,
+        # from:
+        "labshareapp@outlook.com",
+        # to:
+        [reset_password_token.user.email]
+    )
+    msg.attach_alternative(email_html_message, "text/html")
+    msg.send()

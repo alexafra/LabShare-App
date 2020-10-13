@@ -14,7 +14,7 @@ SECRET_KEY = '+nzn#8%t*+gft*262xeu91i(*di@elgmi&lgk$ge%!=)_p^fk$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-54-253-227-32.ap-southeast-2.compute.amazonaws.com', '127.0.0.1', '10.20.233.187', '3f0822249c66.ngrok.io'] #'*' seems unsafe http://3f0822249c66.ngrok.io
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'LabShare.apps.LabshareConfig'
+    'LabShare.apps.LabshareConfig',
+    'django_rest_passwordreset',
 ]
 
 REST_FRAMEWORK = {
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'BackEnd.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,3 +124,11 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'LabShare/media')
+
+# Email functionality for password reset
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIT_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
