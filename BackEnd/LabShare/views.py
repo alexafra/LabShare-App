@@ -51,24 +51,42 @@ class Users(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
         if 'search' in self.request.GET:
-            queryset = User.objects.annotate(full_name = Concat('first_name', V(' '), 'last_name')).filter(full_name__icontains = self.request.GET.get('search')).order_by('last_name')
+            queryset = User.objects.annotate(full_name = Concat('first_name', V(' '), 'last_name')).filter(full_name__icontains = self.request.GET.get('search')).order_by('last_name')[:15]
         else:
-            queryset = User.objects.all().order_by('last_name')
+            queryset = User.objects.all().order_by('last_name')[:15]
         serializer = UserSerializer(queryset, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
-class SingleUser(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+class SingleUser(APIView):
     permission_classes = [IsAuthenticated]
-    lookup_field = 'id'
-    lookup_url_kwarg = 'user_id'
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+    def get(self, request, user_id):
+        user = User.objects.get(pk = user_id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    def put(self, request, user_id):
+        user = User.objects.get(pk = user_id)
+        serializer = UserSerializer(user, data = request.data, partial = True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_200_OK)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    def delete(self, request, user_id):
+        user = User.objects.get(pk = user_id)
+        user.delete()
+        return Response(status = status.HTTP_204_NO_CONTENT)
+
+#class SingleUser(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+#    permission_classes = [IsAuthenticated]
+#    lookup_field = 'id'
+#    lookup_url_kwarg = 'user_id'
+#    serializer_class = UserSerializer
+#    queryset = User.objects.all()
+#    def get(self, request, *args, **kwargs):
+#        return self.retrieve(request, *args, **kwargs)
+#    def put(self, request, *args, **kwargs):
+#        return self.update(request, *args, **kwargs)
+#    def delete(self, request, *args, **kwargs):
+#        return self.destroy(request, *args, **kwargs)
 
 class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     permission_classes = [IsAuthenticated]
@@ -227,4 +245,3 @@ class GetUserInfo(APIView):
             return Response(responseDict)
         except:
             return Response("no token associated with this ID")
-
