@@ -3,6 +3,7 @@ from django.conf.urls import include
 from rest_framework import routers
 from LabShare import views
 from django.conf import settings
+from django.conf.urls import url, include
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -27,6 +28,8 @@ urlpatterns = [
     #ADMIN
     path('admin/non-active', views.NonActive.as_view()), #(GET)
     path('admin/active', views.Active.as_view()), #(GET)
+    #PASSWORD RESET
+    path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]
 # + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
