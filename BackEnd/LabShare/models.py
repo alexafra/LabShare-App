@@ -53,16 +53,13 @@ class Post(models.Model):
     title = models.CharField(max_length = 80)
     content = models.TextField()
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name = 'posts', on_delete=models.CASCADE)
-    category = models.TextField(default = "")
+    category = models.TextField(default = "", blank = True)
 
     def author_first(self):
         return self.author.first_name
 
     def author_last(self):
         return self.author.last_name
-
-    # def image_name(self):
-    #     return self.author.image_name
 
     def __str__(self):
         return self.title
@@ -73,7 +70,6 @@ class UserProfile(models.Model):
     dob = models.DateTimeField(default = '1970-01-01', blank = True)
     occupation = models.TextField(blank = True, default = "")
     employer = models.TextField(blank = True, default = "")
-    # image_name = models.TextField(blank = False, default = "image1")
 
     def __str__(self):
         return self.owner.email

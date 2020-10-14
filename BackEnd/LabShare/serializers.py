@@ -55,19 +55,16 @@ class PostSerializer(serializers.ModelSerializer):
         response = super().to_representation(instance)
         response['author'] = UserSerializer(instance.author).data
         return response
-##same
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ['id', 'bio', 'dob', 'occupation', 'employer']
-        # fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image_name']
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
         response['owner'] = UserSerializer(instance.owner).data
         return response
-##same
 
 class CommentSerializer(serializers.ModelSerializer):
     date_created = serializers.DateTimeField(default = None, required = False, format="%Y-%m-%dT%H:%M:%SZ")
