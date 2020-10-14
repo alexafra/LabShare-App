@@ -10,13 +10,18 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name']
-        # fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name']
+        fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name', 'is_staff', 'is_active']
+        read_only_fields = ['id', 'email', 'profile', 'is_staff', 'is_active']
 
-    #def to_representation(self, instance):
-    #    response = super().to_representation(instance)
-    #    response['image'] = UserProfileSerializer(instance.profile).data['image']
-    #    return response
+    def get_auth_token(self, obj):
+        token = Token.objects.create(user=obj)
+        return token.key
+
+class UserSerializerAdmin(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name', 'is_staff', 'is_active']
+        read_only_fields = ['id']
 
     def get_auth_token(self, obj):
         token = Token.objects.create(user=obj)
@@ -29,7 +34,7 @@ class UserLoginSerializer(serializers.Serializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'password', 'first_name', 'last_name']
+        fields = ['email', 'password', 'first_name', 'last_name', 'image_name', 'is_staff', 'is_active']
 
     def validate_email(self, value):
         user = User.objects.filter(email=value)
@@ -42,7 +47,6 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     date_created = serializers.DateTimeField(default = None, required = False, format="%Y-%m-%dT%H:%M:%SZ")
-    category = serializers.CharField(allow_blank = True)
     class Meta:
         model = Post
         fields = ['id', 'title', 'content', 'date_created', 'category']
