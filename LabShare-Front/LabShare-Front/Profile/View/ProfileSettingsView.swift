@@ -28,6 +28,16 @@ struct ProfileSettingsView: View {
                         Text("Edit Profile")
                     }
                 }.buttonStyle(PlainButtonStyle())
+                
+                NavigationLink(
+                    destination: ApproveUsersView(userAuthVM: _userAuthVM),
+                    label: {
+                        HStack {
+                            Image(systemName: "plus")
+                            Text("Edit Profile")
+                        }
+                    }).buttonStyle(PlainButtonStyle())
+                
                 //                HStack {
                 Button(action: {
                     self.showingDeleteAlert = true

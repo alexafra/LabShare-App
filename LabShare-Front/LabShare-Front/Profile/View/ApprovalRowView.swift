@@ -27,7 +27,8 @@ struct ApprovalRowView: View {
                 Spacer()
                 
                 Button(action: {
-                    // Change is_active to true;
+                    userVM.user.isActive = true
+                    userVM.updateIsActive(userAuthVM: userAuthVM)
                 }, label: {
                     Text("Approve")
                         .foregroundColor(Color.white)
@@ -45,6 +46,6 @@ struct ApprovalRowView: View {
 
 struct ApprovalRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ApprovalRowView(userVM: UserViewModel(user: UserModel(id: 1, email: "test@gmail", firstName: "Liam", lastName: "1", imageName: "image1", isStaff: true, isActive: true)))
+        ApprovalRowView(userVM: UserViewModel(user: UserModel(id: 1, email: "test@gmail", firstName: "Liam", lastName: "1", imageName: "image1", isStaff: false, isActive: true)))
     }
 }

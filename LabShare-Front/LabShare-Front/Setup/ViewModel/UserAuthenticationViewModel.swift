@@ -17,7 +17,7 @@ class UserAuthenticationViewModel: ObservableObject {
         userAuth = UserAuthenticationModel(id: id, token: token, isLoggedIn: isLoggedIn, isStaff: isStaff, isActive: isActive)
     }
     init() {
-        userAuth = UserAuthenticationModel(id: -1, token: "", isLoggedIn: false, isStaff: true, isActive: true)
+        userAuth = UserAuthenticationModel(id: -1, token: "", isLoggedIn: false, isStaff: false, isActive: true)
     }
     
 }

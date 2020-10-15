@@ -21,39 +21,23 @@ class UserViewModel: ObservableObject {
         if !userAuthVM.userAuth.isLoggedIn {
             userAuthVM.userAuth.isLoggedIn = true
         }
-        
-//        let profileWebService = ProfileWebService(userAuth: userAuthVM.userAuth)
-//        profileWebService.updateProfile(profileModel: self.profile, completionFailure: {() -> Void in
-////            self.hasCompletedLoading = true
-////            self.loadingSuccessful = false
-//
-//
-//            return
-//
-//        }, completionSuccessful: { (profile: ProfileModel?) -> Void in
-//            if let profile = profile {
-//                self.profile = profile
-//            }
-//
-//            return
-//        })
-//
-//        let userWebService = UserWebService(userAuth: userAuthVM.userAuth)
-//        userWebService.updateUser(userId: self.profile.owner.id, userModel: self.profile.owner, completionFailure: {() -> Void in
-////            self.hasCompletedLoading = true
-////            self.loadingSuccessful = false
-//
-//
-//            return
-//
-//        }, completionSuccessful: { (user: UserModel?) -> Void in
-//            if let user = user {
-//                self.profile.owner = user
-//            }
-//
-//            return
-//        })
-//            // //////////NEED TO REPLACE self.userAuthVM.userAuth.isLoggedIn = true
+
+        let userWebService = UserWebService(userAuth: userAuthVM.userAuth)
+        userWebService.updateUser(userId: self.user.id, userModel: self.user, completionFailure: {() -> Void in
+//            self.hasCompletedLoading = true
+//            self.loadingSuccessful = false
+
+
+            return
+
+        }, completionSuccessful: { (user: UserModel?) -> Void in
+            if let user = user {
+                self.user = user
+            }
+
+            return
+        })
+            // //////////NEED TO REPLACE self.userAuthVM.userAuth.isLoggedIn = true
     }
     
 }
