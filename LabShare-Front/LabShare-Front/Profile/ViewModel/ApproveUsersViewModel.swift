@@ -11,7 +11,7 @@ import SwiftUI
 import Combine
 
 class ApproveUsersViewModel: ObservableObject {
-    @Published var users: [UserModel] = [UserModel]()
+    @Published var users: [UserViewModel] = [UserViewModel]()
     
     func delete() {
         
@@ -37,6 +37,30 @@ class ApproveUsersViewModel: ObservableObject {
 //            )
         }
     }
+    
+//    func deleteUser(userAuthVM: UserAuthenticationViewModel) {
+//        deleteUserClosure(userAuthVM: userAuthVM)()
+//    }
+//
+//    func deleteUserClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
+//        return {
+//            let profileWebService = ProfileWebService(userAuth: userAuthVM.userAuth)
+//
+//            profileWebService.deleteUser(userId: self.users, completionFailure: {() -> Void in
+//                print("ERROR")
+//                return
+//
+//                //SUPER USER NEEDS TO CHANGE HERE
+//            }, completionSuccessful: { (profile: ProfileModel?) -> Void in
+//                if (true) {
+//                    //
+//                } else {
+//                    //Change to go back feedqee
+//                }
+//
+//            })
+//        }
+//    }
 }
 
 

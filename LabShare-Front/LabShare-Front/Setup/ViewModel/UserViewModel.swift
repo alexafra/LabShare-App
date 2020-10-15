@@ -9,6 +9,7 @@
 import SwiftUI
 
 class UserViewModel: ObservableObject {
+    
     @Published var user: UserModel
     
     init(user: UserModel ) {

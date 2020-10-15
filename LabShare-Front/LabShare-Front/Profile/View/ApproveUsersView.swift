@@ -18,9 +18,45 @@ struct ApproveUsersView: View {
                 
                 Text("Users to be approved:").font(Font.title)
                 Divider()
-                ForEach(self.approveUsersVM.users, id: \.id) {
-                    user in
-                    ApprovalRowView(userVM: UserViewModel(user: user))
+                ForEach(self.approveUsersVM.users, id: \.user.id) {
+                    userVM in
+                    VStack (alignment: .leading, spacing: 5)  {
+                        Divider()
+                        Text("\(userVM.user.firstName) \(userVM.user.lastName)").bold()
+                            .font(Font.title)
+                        
+                        Text("\(userVM.user.email)")
+                        
+                        HStack{
+                            Button(action: {
+                                userVM.user.isActive = true
+                                userVM.updateIsActive(userAuthVM: userAuthVM)
+                            }, label: {
+                                Text("Approve")
+                                    .foregroundColor(Color.white)
+                                    .font(Font.headline.weight(.bold))
+                            })
+                            .padding(.vertical, 15)
+                            .padding(.horizontal, 20)
+                            .background(Color.green)
+                            .cornerRadius(40)
+                            
+                            Button(action: {
+                                userVM.deleteUser(userAuthVM: userAuthVM)
+//                                if let index = approveUsersVM.users.firstIndex(of: userVM) {
+//                                    approveUsersVM.users.remove(at: IndexSet(integer: self.index))
+//                                }
+                            }, label: {
+                                Text("   Deny   ")
+                                    .foregroundColor(Color.black)
+                                    .font(Font.headline.weight(.bold))
+                            })
+                            .padding(.vertical, 15)
+                            .padding(.horizontal, 20)
+                            .background(Color.white)
+                            .overlay(RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.black, lineWidth: 4))            }
+                    }.padding()
                 }
                 Spacer()
                 
@@ -28,14 +64,14 @@ struct ApproveUsersView: View {
                 
             }.padding()
         }
-//        .onAppear(perform: {
-//            self.approveUsersVM.getNonAppproved(userAuthVM: userAuthVM)
-//        })
+        //        .onAppear(perform: {
+        //            self.approveUsersVM.getNonAppproved(userAuthVM: userAuthVM)
+        //        })
     }
 }
-    
-    struct ApproveUsers_Previews: PreviewProvider {
-        static var previews: some View {
-            ApproveUsersView()
-        }
+
+struct ApproveUsers_Previews: PreviewProvider {
+    static var previews: some View {
+        ApproveUsersView()
     }
+}
