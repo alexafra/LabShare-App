@@ -8,28 +8,20 @@
 
 import Foundation
 
-class ApproveUserWebSerice: WebService {
+class ApproveUserWebService: WebService {
     
     init(userAuth: UserAuthenticationModel) {
         super.init(userAuthModel: userAuth)
     }
-//    init (userAuthModel: UserAuthenticationModel) {
-//        self.loggedInUserId = userAuthModel.id
-//        self.token = userAuthModel.token
-//    }
-//    func generateURLString(userId: Int) -> String {
-//        var urlString = "\(hostUrlString)/admin/non-active"
-//        if postFilter != CategoryEnum.None {
-//            urlString = urlString + "?category=\(postFilter.rawValue)"
-//        }
-//        return urlString
-//    }
+    func generateURLString() -> String {
+        let urlString = "\(hostUrlString)/admin/non-active"
+        return urlString
+    }
     
-//    func getAllFeedPosts(userId: Int, postFilter: CategoryEnum = CategoryEnum.None, completionFailure: @escaping () -> (), completionSuccessful: @escaping ([PostModel]?) -> ()) {
-//
-//        let urlString = generateURLString(userId: userId, postFilter: postFilter)
-//
-//        super.getAll(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
-//    }
+    func getAllNonActiveUsers(completionFailure: @escaping () -> (), completionSuccessful: @escaping ([UserModel]?) -> ()) {
+
+        let urlString = generateURLString()
+        super.getAll(urlString: urlString, completionFailure: completionFailure, completionSuccessful: completionSuccessful)
+    }
     
 }

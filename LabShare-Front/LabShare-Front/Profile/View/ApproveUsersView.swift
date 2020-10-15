@@ -13,15 +13,16 @@ struct ApproveUsersView: View {
     @ObservedObject var approveUsersVM: ApproveUsersViewModel = ApproveUsersViewModel()
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
+        VStack(alignment: .leading) {
+            ScrollView {
+            
                 
                 Text("Users to be approved:").font(Font.title)
                 Divider()
                 ForEach(self.approveUsersVM.users, id: \.user.id) {
                     userVM in
                     VStack (alignment: .leading, spacing: 5)  {
-                        Divider()
+                        
                         Text("\(userVM.user.firstName) \(userVM.user.lastName)").bold()
                             .font(Font.title)
                         
@@ -31,6 +32,9 @@ struct ApproveUsersView: View {
                             Button(action: {
                                 userVM.user.isActive = true
                                 userVM.updateIsActive(userAuthVM: userAuthVM)
+                                if let index = self.approveUsersVM.users.firstIndex(of: userVM) {
+                                    self.approveUsersVM.users.remove(at: index)
+                                }
                             }, label: {
                                 Text("Approve")
                                     .foregroundColor(Color.white)
@@ -43,9 +47,10 @@ struct ApproveUsersView: View {
                             
                             Button(action: {
                                 userVM.deleteUser(userAuthVM: userAuthVM)
-//                                if let index = approveUsersVM.users.firstIndex(of: userVM) {
-//                                    approveUsersVM.users.remove(at: IndexSet(integer: self.index))
-//                                }
+                                if let index = self.approveUsersVM.users.firstIndex(of: userVM) {
+                                    self.approveUsersVM.users.remove(at: index)
+                                }
+                                
                             }, label: {
                                 Text("   Deny   ")
                                     .foregroundColor(Color.black)
@@ -55,18 +60,17 @@ struct ApproveUsersView: View {
                             .padding(.horizontal, 20)
                             .background(Color.white)
                             .overlay(RoundedRectangle(cornerRadius: 40)
-                                        .stroke(Color.black, lineWidth: 4))            }
+                            .stroke(Color.black, lineWidth: 4))
+                            Divider()
+                        
+                        }
                     }.padding()
                 }
                 Spacer()
-                
-                
-                
             }.padding()
         }
-        //        .onAppear(perform: {
-        //            self.approveUsersVM.getNonAppproved(userAuthVM: userAuthVM)
-        //        })
+        .onAppear(perform: self.approveUsersVM.getAllNonApprovedClosure(userAuthVM: userAuthVM))
+        
     }
 }
 

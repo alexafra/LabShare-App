@@ -8,12 +8,16 @@
 
 import SwiftUI
 
-class UserViewModel: ObservableObject {
+class UserViewModel: ObservableObject, Equatable {
     
     @Published var user: UserModel
     
     init(user: UserModel ) {
         self.user = user
+    }
+    
+    static func ==(lhs: UserViewModel, rhs: UserViewModel) -> Bool {
+        return (lhs.user.id == rhs.user.id)
     }
     
     func updateIsActive(userAuthVM: UserAuthenticationViewModel) {

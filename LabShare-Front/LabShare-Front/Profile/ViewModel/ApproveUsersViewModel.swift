@@ -12,30 +12,27 @@ import Combine
 
 class ApproveUsersViewModel: ObservableObject {
     @Published var users: [UserViewModel] = [UserViewModel]()
-    
-    func delete() {
-        
-    }
-    
-    func getNonApproved(userAuthVM: UserAuthenticationViewModel) {
-        getNonApprovedClosure(userAuthVM: userAuthVM)()
+
+    func getAllNonApproved(userAuthVM: UserAuthenticationViewModel) {
+        getAllNonApprovedClosure(userAuthVM: userAuthVM)()
     }
 
-    func getNonApprovedClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
+    func getAllNonApprovedClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
         return {
-//            let userWebService = UserWebService(userAuth: userAuthVM.userAuth)
-//
-//            userWebService.getUsersSearchBar(completionFailure: {() -> Void in
-//                return
-//
-//            },
-//            completionSuccessful: { (users: [UserModel]?) -> Void in
-//                if let users = users {
-//                    self.users = users
-//                }
-//            }
-//            )
+            let approveUserWebService = ApproveUserWebService(userAuth: userAuthVM.userAuth)
+            approveUserWebService.getAllNonActiveUsers(completionFailure: {() -> Void in
+                return
+            },
+            completionSuccessful: { (users: [UserModel]?) -> Void in
+                if let users = users {
+                    self.users = users.map( self.modelToViewModel )
+                }
+            })
         }
+    }
+    
+    func modelToViewModel (userModel : UserModel) -> UserViewModel {
+        return UserViewModel(user: userModel)
     }
     
 //    func deleteUser(userAuthVM: UserAuthenticationViewModel) {
