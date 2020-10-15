@@ -14,6 +14,8 @@ struct UserModel: Hashable, Codable, Identifiable {
     var firstName: String
     var lastName: String
     var imageName: String
+    var is_active: Bool
+    var is_staff: Bool
     
 //    "id": 8,
 //    "email": "graycumming@gmail.com",
@@ -28,18 +30,22 @@ struct UserModel: Hashable, Codable, Identifiable {
         case firstName = "first_name"
         case lastName = "last_name"
         case imageName = "image_name"
+        case is_staff = "is_staff"
+        case is_active = "is_active"
     }
     
-    init(id: Int, email: String, firstName: String, lastName: String, imageName: String) {
+    init(id: Int, email: String, firstName: String, lastName: String, imageName: String, is_staff: Bool, is_active: Bool) {
         self.id = id
         self.email = email
         self.firstName = firstName
         self.lastName = lastName
         self.imageName = imageName
+        self.is_staff = is_staff
+        self.is_active = is_active
     }
     
     init() {
-        self.init(id: -1, email: "", firstName: "", lastName: "", imageName: "image1")
+        self.init(id: -1, email: "", firstName: "", lastName: "", imageName: "image1", is_staff: false, is_active: true)
     }
 }
 

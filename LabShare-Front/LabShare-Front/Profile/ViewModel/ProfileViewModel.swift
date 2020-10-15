@@ -70,7 +70,7 @@ class ProfileViewModel: ObservableObject {
                 //SUPER USER NEEDS TO CHANGE HERE
             }, completionSuccessful: { (profile: ProfileModel?) -> Void in
                 if (true) {
-                    userAuthVM.userAuth.isLoggedIn = true
+                    userAuthVM.userAuth.isLoggedIn = false
                 } else {
                     //Change to go back feedqee
                 }
