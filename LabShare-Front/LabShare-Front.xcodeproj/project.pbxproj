@@ -21,6 +21,7 @@
 		1B98760025386AFE0003FAAE /* ApproveUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9875FF25386AFE0003FAAE /* ApproveUsersViewModel.swift */; };
 		1B98760825386D2B0003FAAE /* ApprovalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98760725386D2B0003FAAE /* ApprovalRowView.swift */; };
 		1B98760D25386E250003FAAE /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98760C25386E250003FAAE /* UserViewModel.swift */; };
+		1BB46FF725389DB6005C163B /* ApproveUserWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB46FF625389DB6005C163B /* ApproveUserWebService.swift */; };
 		1BBF92AB252B002B008A7EDE /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF92AA252B002B008A7EDE /* ImagePicker.swift */; };
 		1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */; };
 		1E40D5CFC070094A1C8C84AD /* Pods_LabShare_Front.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B900551F389BECD52DCD2DD7 /* Pods_LabShare_Front.framework */; };
@@ -114,6 +115,7 @@
 		1B9875FF25386AFE0003FAAE /* ApproveUsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveUsersViewModel.swift; sourceTree = "<group>"; };
 		1B98760725386D2B0003FAAE /* ApprovalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovalRowView.swift; sourceTree = "<group>"; };
 		1B98760C25386E250003FAAE /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		1BB46FF625389DB6005C163B /* ApproveUserWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveUserWebService.swift; sourceTree = "<group>"; };
 		1BBF92AA252B002B008A7EDE /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContainerView.swift; sourceTree = "<group>"; };
 		1F57E97853FC45E6A4C572E5 /* Pods_LabShare_FrontTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_FrontTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +344,7 @@
 				F060368925279E1A0092412E /* CommentsWebService.swift */,
 				F06037162529E7990092412E /* UserWebService.swift */,
 				1B9875D52538422B0003FAAE /* ResetPasswordWebService.swift */,
+				1BB46FF625389DB6005C163B /* ApproveUserWebService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -794,6 +797,7 @@
 				F06037242529F1680092412E /* SearchBarView.swift in Sources */,
 				F05C400225239E6A00633181 /* PostViewModel.swift in Sources */,
 				F09C69AF251635BD00EC961C /* LoginView.swift in Sources */,
+				1BB46FF725389DB6005C163B /* ApproveUserWebService.swift in Sources */,
 				F04A335924FA234F004A86D9 /* PostDetailView.swift in Sources */,
 				F06036CA2529CE790092412E /* CommentHeaderView.swift in Sources */,
 				F0545E0A251A54CD0037EFC9 /* PostListView.swift in Sources */,

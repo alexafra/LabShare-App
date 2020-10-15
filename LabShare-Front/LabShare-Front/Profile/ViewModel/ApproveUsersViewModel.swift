@@ -12,19 +12,15 @@ import Combine
 
 class ApproveUsersViewModel: ObservableObject {
     @Published var users: [UserModel] = [UserModel]()
-    var userAuthVM: UserAuthenticationViewModel
     
-    init (userAuthVM: UserAuthenticationViewModel) {
-        self.userAuthVM = userAuthVM
-    }
-    init() {
-        self.userAuthVM = UserAuthenticationViewModel()
+    func delete() {
+        
     }
     
     func getNonApproved(userAuthVM: UserAuthenticationViewModel) {
         getNonApprovedClosure(userAuthVM: userAuthVM)()
     }
-    //    getUsersSearchBar
+
     func getNonApprovedClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
         return {
 //            let userWebService = UserWebService(userAuth: userAuthVM.userAuth)

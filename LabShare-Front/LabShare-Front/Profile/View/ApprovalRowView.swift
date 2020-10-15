@@ -13,19 +13,15 @@ struct ApprovalRowView: View {
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
     
     var body: some View {
-        VStack {
+        
+        VStack (alignment: .leading, spacing: 5)  {
             Divider()
-            HStack {
-                
-                VStack (alignment: .leading, spacing: 5)  {
-                    Text("\(userVM.user.firstName) \(userVM.user.lastName)").bold()
-                        .font(Font.title)
-                    
-                    Text("\(userVM.user.email)")
-                }
-                
-                Spacer()
-                
+            Text("\(userVM.user.firstName) \(userVM.user.lastName)").bold()
+                .font(Font.title)
+            
+            Text("\(userVM.user.email)")
+            
+            HStack{
                 Button(action: {
                     userVM.user.isActive = true
                     userVM.updateIsActive(userAuthVM: userAuthVM)
@@ -39,13 +35,24 @@ struct ApprovalRowView: View {
                 .background(Color.green)
                 .cornerRadius(40)
                 
-            }
+                Button(action: {
+                    // Delete user
+                }, label: {
+                    Text("   Deny   ")
+                        .foregroundColor(Color.black)
+                        .font(Font.headline.weight(.bold))
+                })
+                .padding(.vertical, 15)
+                .padding(.horizontal, 20)
+                .background(Color.white)
+                .overlay(RoundedRectangle(cornerRadius: 40)
+                                .stroke(Color.black, lineWidth: 4))            }
         }.padding()
     }
 }
-
-struct ApprovalRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        ApprovalRowView(userVM: UserViewModel(user: UserModel(id: 1, email: "test@gmail", firstName: "Liam", lastName: "1", imageName: "image1", isStaff: false, isActive: true)))
-    }
-}
+        
+        struct ApprovalRowView_Previews: PreviewProvider {
+            static var previews: some View {
+                ApprovalRowView(userVM: UserViewModel(user: UserModel(id: 1, email: "22499153@gmail", firstName: "Liam", lastName: "Niedzielski", imageName: "image1", isStaff: false, isActive: true)))
+            }
+        }

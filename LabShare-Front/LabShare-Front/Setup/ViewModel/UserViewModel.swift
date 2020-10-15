@@ -40,6 +40,30 @@ class UserViewModel: ObservableObject {
             // //////////NEED TO REPLACE self.userAuthVM.userAuth.isLoggedIn = true
     }
     
+    func deleteUser(userAuthVM: UserAuthenticationViewModel) {
+        deleteUserClosure(userAuthVM: userAuthVM)()
+    }
+    
+    func deleteUserClosure (userAuthVM: UserAuthenticationViewModel) -> () -> () {
+        return {
+            let profileWebService = ProfileWebService(userAuth: userAuthVM.userAuth)
+            
+            profileWebService.deleteUser(userId: self.user.id, completionFailure: {() -> Void in
+                print("ERROR")
+                return
+                
+                //SUPER USER NEEDS TO CHANGE HERE
+            }, completionSuccessful: { (profile: ProfileModel?) -> Void in
+                if (true) {
+                    //
+                } else {
+                    //Change to go back feedqee
+                }
+                
+            })
+        }
+    }
+    
 }
 
 //struct UserViewModel_Previews: PreviewProvider {

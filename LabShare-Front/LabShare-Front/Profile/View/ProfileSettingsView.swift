@@ -34,7 +34,7 @@ struct ProfileSettingsView: View {
                     label: {
                         HStack {
                             Image(systemName: "plus")
-                            Text("Edit Profile")
+                            Text("Approve Users")
                         }
                     }).buttonStyle(PlainButtonStyle())
                 
