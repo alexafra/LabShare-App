@@ -17,6 +17,10 @@
 		1B9875C3253841280003FAAE /* ResetPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9875C2253841280003FAAE /* ResetPasswordModel.swift */; };
 		1B9875C82538413A0003FAAE /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9875C72538413A0003FAAE /* ResetPasswordViewModel.swift */; };
 		1B9875D62538422B0003FAAE /* ResetPasswordWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9875D52538422B0003FAAE /* ResetPasswordWebService.swift */; };
+		1B9875F3253867A60003FAAE /* ApproveUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9875F2253867A60003FAAE /* ApproveUsersView.swift */; };
+		1B98760025386AFE0003FAAE /* ApproveUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9875FF25386AFE0003FAAE /* ApproveUsersViewModel.swift */; };
+		1B98760825386D2B0003FAAE /* ApprovalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98760725386D2B0003FAAE /* ApprovalRowView.swift */; };
+		1B98760D25386E250003FAAE /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98760C25386E250003FAAE /* UserViewModel.swift */; };
 		1BBF92AB252B002B008A7EDE /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF92AA252B002B008A7EDE /* ImagePicker.swift */; };
 		1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */; };
 		1E40D5CFC070094A1C8C84AD /* Pods_LabShare_Front.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B900551F389BECD52DCD2DD7 /* Pods_LabShare_Front.framework */; };
@@ -106,6 +110,10 @@
 		1B9875C2253841280003FAAE /* ResetPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordModel.swift; sourceTree = "<group>"; };
 		1B9875C72538413A0003FAAE /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		1B9875D52538422B0003FAAE /* ResetPasswordWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordWebService.swift; sourceTree = "<group>"; };
+		1B9875F2253867A60003FAAE /* ApproveUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveUsersView.swift; sourceTree = "<group>"; };
+		1B9875FF25386AFE0003FAAE /* ApproveUsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveUsersViewModel.swift; sourceTree = "<group>"; };
+		1B98760725386D2B0003FAAE /* ApprovalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovalRowView.swift; sourceTree = "<group>"; };
+		1B98760C25386E250003FAAE /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		1BBF92AA252B002B008A7EDE /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContainerView.swift; sourceTree = "<group>"; };
 		1F57E97853FC45E6A4C572E5 /* Pods_LabShare_FrontTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_FrontTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -319,6 +327,8 @@
 				F0C21C4B2517557900EE3665 /* ProfileHeaderView.swift */,
 				F0545E64251B68090037EFC9 /* ProfileEditView.swift */,
 				F0A122182521867E00478FD0 /* ProfileSettingsView.swift */,
+				1B9875F2253867A60003FAAE /* ApproveUsersView.swift */,
+				1B98760725386D2B0003FAAE /* ApprovalRowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -335,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				F05E5E8C25039AC8004BC996 /* ProfileViewModel.swift */,
+				1B9875FF25386AFE0003FAAE /* ApproveUsersViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -449,6 +460,7 @@
 				F09C69B42516408200EC961C /* UserModel.swift */,
 				F060779225207FEF00503D2E /* AppState.swift */,
 				F09C69B82516450600EC961C /* UserAuthenticationViewModel.swift */,
+				1B98760C25386E250003FAAE /* UserViewModel.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -720,6 +732,7 @@
 				F05A03A8251CD4D7001563AF /* WebService.swift in Sources */,
 				1BBF92AB252B002B008A7EDE /* ImagePicker.swift in Sources */,
 				F09C69B72516446900EC961C /* StartView.swift in Sources */,
+				1B98760825386D2B0003FAAE /* ApprovalRowView.swift in Sources */,
 				F09C69B52516408200EC961C /* UserModel.swift in Sources */,
 				1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */,
 				F0D331DC250390CB008A280A /* PostHeaderView.swift in Sources */,
@@ -734,6 +747,7 @@
 				F04A331E24F91C43004A86D9 /* AppDelegate.swift in Sources */,
 				F06037172529E7990092412E /* UserWebService.swift in Sources */,
 				F060368A25279E1A0092412E /* CommentsWebService.swift in Sources */,
+				1B98760D25386E250003FAAE /* UserViewModel.swift in Sources */,
 				1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */,
 				F060371C2529E9040092412E /* SearchViewModel.swift in Sources */,
 				F0545E2F251A5F590037EFC9 /* ContainerView.swift in Sources */,
@@ -752,6 +766,7 @@
 				1B8EC5E12521B3A200D43412 /* PostEditView.swift in Sources */,
 				F06036972527AE840092412E /* CommentListViewModel.swift in Sources */,
 				F09C69A72516216700EC961C /* SetUpView.swift in Sources */,
+				1B9875F3253867A60003FAAE /* ApproveUsersView.swift in Sources */,
 				F06037242529F1680092412E /* SearchBarView.swift in Sources */,
 				F05C400225239E6A00633181 /* PostViewModel.swift in Sources */,
 				F09C69AF251635BD00EC961C /* LoginView.swift in Sources */,
@@ -768,6 +783,7 @@
 				1B4FC244251F010A006E4A3D /* CircleImage.swift in Sources */,
 				F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */,
 				F05A0409251F6DCD001563AF /* LoginRegisterWebService.swift in Sources */,
+				1B98760025386AFE0003FAAE /* ApproveUsersViewModel.swift in Sources */,
 				F0545E58251B341E0037EFC9 /* RegistrationModel.swift in Sources */,
 				F060367125279DAF0092412E /* CommentRowView.swift in Sources */,
 			);
