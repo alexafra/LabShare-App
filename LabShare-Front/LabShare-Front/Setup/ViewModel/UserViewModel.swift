@@ -48,19 +48,19 @@ class UserViewModel: ObservableObject {
         return {
             let profileWebService = ProfileWebService(userAuth: userAuthVM.userAuth)
             
-//            profileWebService.deleteUser(userId: self.user.id, completionFailure: {() -> Void in
-//                print("ERROR")
-//                return
-//                
-//                //SUPER USER NEEDS TO CHANGE HERE
-//            }, completionSuccessful: { (user: UserModel??) -> Void in
-//                if (true) {
-//                    
-//                } else {
-//                    //Change to go back feedqee
-//                }
-//                
-//            })
+            profileWebService.deleteUser(userId: self.user.id, completionFailure: {() -> Void in
+                print("ERROR")
+                return
+                
+                //SUPER USER NEEDS TO CHANGE HERE
+            }, completionSuccessful: { (profile: ProfileModel?) -> Void in
+                if (true) {
+                    //
+                } else {
+                    //Change to go back feedqee
+                }
+                
+            })
         }
     }
     
