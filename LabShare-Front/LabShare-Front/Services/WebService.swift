@@ -20,7 +20,7 @@ class WebService {
     }
     
     convenience init () {
-        self.init(userAuthModel: UserAuthenticationModel(id: -1, token: "", isLoggedIn: false))
+        self.init(userAuthModel: UserAuthenticationModel(id: -1, token: "", isLoggedIn: false, isStaff: false, isActive: true))
     }
     
     func get<T:Codable>(urlString: String, completionFailure: @escaping()->(), completionSuccessful: @escaping (T?) -> ()) {

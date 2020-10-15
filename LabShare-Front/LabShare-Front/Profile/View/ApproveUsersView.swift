@@ -29,19 +29,8 @@ struct ApproveUsersView: View {
             }.padding()
         }
 //        .onAppear(perform: {
-//            self.searchVM.getUsersSearch(userAuthVM: userAuthVM, queryString: queryString)
+//            self.approveUsersVM.getNonAppproved(userAuthVM: userAuthVM)
 //        })
-        //        .onAppear(perform: {
-        //            self.approveUsersVM.getUsersSearch(userAuthVM: userAuthVM, queryString: queryString)
-        //        })
-        //        .navigationBarTitle("")
-        //        .navigationBarHidden(true)
-        
-        
-        //        .navigationBarItems(trailing:
-        //
-        //        )
-        
     }
 }
     

@@ -20,7 +20,29 @@ class ApproveUsersViewModel: ObservableObject {
     init() {
         self.userAuthVM = UserAuthenticationViewModel()
     }
+    
+    func getNonApproved(userAuthVM: UserAuthenticationViewModel) {
+        getNonApprovedClosure(userAuthVM: userAuthVM)()
+    }
+    //    getUsersSearchBar
+    func getNonApprovedClosure(userAuthVM: UserAuthenticationViewModel) -> () -> () {
+        return {
+//            let userWebService = UserWebService(userAuth: userAuthVM.userAuth)
+//
+//            userWebService.getUsersSearchBar(completionFailure: {() -> Void in
+//                return
+//
+//            },
+//            completionSuccessful: { (users: [UserModel]?) -> Void in
+//                if let users = users {
+//                    self.users = users
+//                }
+//            }
+//            )
+        }
+    }
 }
+
 
 //struct ApproveUsersViewModel_Previews: PreviewProvider {
 //    static var previews: some View {
