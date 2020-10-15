@@ -35,7 +35,9 @@ class UserLogin(APIView):
             token, created = Token.objects.get_or_create(user = user)
             responseDict = {
                 'token': token.key,
-                'id': user.id
+                'id': user.id,
+                'is_staff': user.is_staff,
+                'is_active': user.is_active
             }
             return Response(responseDict, status = status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
