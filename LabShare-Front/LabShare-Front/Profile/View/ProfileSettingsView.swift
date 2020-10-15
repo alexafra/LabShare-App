@@ -51,7 +51,7 @@ struct ProfileSettingsView: View {
                 }, label: {
                     HStack{
                         Image(systemName: "escape")
-                        Text("Sign Out")
+                        Text("Log Out")
                     }
                 }).alert(isPresented: $showingLogOutAlert) {
                     Alert(title: Text("Log Out"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Log Out")) {
