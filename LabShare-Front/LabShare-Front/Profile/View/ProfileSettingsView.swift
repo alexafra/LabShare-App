@@ -50,10 +50,13 @@ struct ProfileSettingsView: View {
                     Alert(title: Text("Delete User"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
                         self.presentationMode.wrappedValue.dismiss()
                         self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
-                    }, secondaryButton: .cancel()
-                    )
-                    
-                    //                }
+                        if (self.userAuthVM.userAuth.id == profileVM.profile.owner.id) {
+                            self.userAuthVM.userAuth.isLoggedIn = false
+                        } else {
+                            //DO SOMETHING TO MAKE VIEW WORK
+                        }
+                        userAuthVM.userAuth.isLoggedIn = false
+                    }, secondaryButton: .cancel())
                 }
                 
                 Button(action: {
@@ -68,7 +71,7 @@ struct ProfileSettingsView: View {
                         self.presentationMode.wrappedValue.dismiss()
                         userAuthVM.userAuth.isLoggedIn = false
                     }, secondaryButton: .cancel()
-                    )
+                )
             }.navigationBarTitle(Text("Settings"), displayMode: .inline)
             }
         }
