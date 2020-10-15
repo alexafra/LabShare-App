@@ -63,16 +63,6 @@ struct ProfileEditView: View {
                 }.modifier(MultiLineTextFieldAuthorization())
                 .padding()
                 
-//                VStack(alignment: .leading) {
-//                    HStack {
-//                        Text("dob:")
-//                        DatePicker("", selection: self.$profileVM.profile.dob, in: ...Date(), displayedComponents: .date)
-//                            .labelsHidden()
-//                        Spacer()
-//                    }
-//                }
-//                .padding()
-                
                 Button(action: {
                     self.profileVM.updateProfile(userAuthVM: self.userAuthVM)
                     self.showSelf = false

@@ -9,52 +9,33 @@
 import Foundation
 import SwiftUI
 import Combine
-
-class PushRegisterViewModel: ObservableObject {
-    @Published var loginFailed: Bool = false
-    @Published var loginSuccessful: Bool = false
-}
+//
+//class PushRegisterViewModel: ObservableObject {
+//    @Published var loginFailed: Bool = false
+//    @Published var loginSuccessful: Bool = false
+//}
 
 class RegisterViewModel: ObservableObject {
-     @Published var userRegisterModel: UserRegisterModel
-     @Published var repeatPassword: String
+    @Published var userRegisterModel: UserRegisterModel
+    @Published var repeatPassword: String
 
-     @Published var attemptingRegistrationAndLogin: Bool
-     @Published var registrationFailed: Bool
+    @Published var attemptingRegistrationAndLogin: Bool = false
+    @Published var registrationFailed: Bool = false
+    @Published var registrationSuccessful: Bool = false
 
-     @Published var passwordError: String
-     @Published var emailError: String
+    @Published var passwordError: String = ""
+    @Published var emailError: String = ""
 
-     @Published var loginFailure: Bool = false
-     @Published var loginSuccessful: Bool = false
+//     @Published var loginFailure: Bool = false
+//     @Published var loginSuccessful: Bool = false
 
-
-//    var pushRegisterVM: PushRegisterViewModel
-//    var userAuthVM: UserAuthenticationViewModel
-//    var registerViewRouter: RegisterViewRouter
 
     init (userAuthVM: UserAuthenticationViewModel) {
         self.userRegisterModel = UserRegisterModel(email: "", password: "", firstName: "", lastName: "")
         self.repeatPassword = ""
         self.attemptingRegistrationAndLogin = false
         self.registrationFailed = false
-        self.passwordError = ""
-        self.emailError = ""
-//        self.userAuthVM = userAuthVM
-//        self.registerViewRouter = registerViewRouter
-//        self.pushRegisterVM = pushRegisterVM
     }
-
-//    init () {
-//        self.userRegisterModel = UserRegisterModel(email: "", password: "", firstName: "", lastName: "")
-//        self.repeatPassword = ""
-//        self.attemptingRegistrationAndLogin = false
-//        self.registrationFailed = false
-//        self.passwordError = ""
-//        self.emailError = ""
-//        self.userAuthVM = UserAuthenticationViewModel()
-////        self.pushRegisterVM = pushRegisterVM
-//    }
 
 //    func register(loginSuccessful: inout Bool, loginFailure: inout Bool) {
     func register(userAuthVM: UserAuthenticationViewModel, appState: AppState) {
@@ -80,24 +61,26 @@ class RegisterViewModel: ObservableObject {
                 },
                completionSuccessful: { (userModel, userLoginModel) in
                     self.registrationFailed = false
-                    if let userLoginModel = userLoginModel {
-                        LoginRegisterWebService().login(user: userLoginModel,
-                            completionFailure: { () -> Void in
-                                self.attemptingRegistrationAndLogin = false
-                                appState.registerPage = RegisterRouterEnum.Login
-                            },
-                            completionSuccessful: { (userAuthModel: UserAuthenticationModel?) in
-                                self.attemptingRegistrationAndLogin = false
-                                if let userSettings = userAuthModel {
-                                    appState.registerPage = RegisterRouterEnum.ProfileEdit
-                                    userAuthVM.userAuth.id = userSettings.id
-                                    userAuthVM.userAuth.token = userSettings.token
-                                } else {
-                                    appState.registerPage = RegisterRouterEnum.Login
-                                }
-                            }
-                        )
-                    }
+                    self.registrationSuccessful = true
+                    
+//                    if let userLoginModel = userLoginModel {
+//                        LoginRegisterWebService().login(user: userLoginModel,
+//                            completionFailure: { () -> Void in
+//                                self.attemptingRegistrationAndLogin = false
+//                                appState.registerPage = RegisterRouterEnum.Login
+//                            },
+//                            completionSuccessful: { (userAuthModel: UserAuthenticationModel?) in
+//                                self.attemptingRegistrationAndLogin = false
+//                                if let userSettings = userAuthModel {
+//                                    appState.registerPage = RegisterRouterEnum.ProfileEdit
+//                                    userAuthVM.userAuth.id = userSettings.id
+//                                    userAuthVM.userAuth.token = userSettings.token
+//                                } else {
+//                                    appState.registerPage = RegisterRouterEnum.Login
+//                                }
+//                            }
+//                        )
+//                    }
 
                 }
             )
