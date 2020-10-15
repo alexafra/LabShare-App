@@ -62,26 +62,7 @@ class RegisterViewModel: ObservableObject {
                completionSuccessful: { (userModel, userLoginModel) in
                     self.registrationFailed = false
                     self.registrationSuccessful = true
-                    
-//                    if let userLoginModel = userLoginModel {
-//                        LoginRegisterWebService().login(user: userLoginModel,
-//                            completionFailure: { () -> Void in
-//                                self.attemptingRegistrationAndLogin = false
-//                                appState.registerPage = RegisterRouterEnum.Login
-//                            },
-//                            completionSuccessful: { (userAuthModel: UserAuthenticationModel?) in
-//                                self.attemptingRegistrationAndLogin = false
-//                                if let userSettings = userAuthModel {
-//                                    appState.registerPage = RegisterRouterEnum.ProfileEdit
-//                                    userAuthVM.userAuth.id = userSettings.id
-//                                    userAuthVM.userAuth.token = userSettings.token
-//                                } else {
-//                                    appState.registerPage = RegisterRouterEnum.Login
-//                                }
-//                            }
-//                        )
-//                    }
-
+                    appState.registerPage = RegisterRouterEnum.Login
                 }
             )
 
