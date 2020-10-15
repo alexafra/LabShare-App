@@ -104,6 +104,7 @@ class Comments(APIView):
             serializer.save(author = self.request.user, post = Post.objects.get(id = self.kwargs['post_id']))
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    
 
 class SingleComment(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     permission_classes = [IsAuthenticated, commentModifyPermission, isActive]
