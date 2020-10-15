@@ -21,14 +21,12 @@ struct ApproveUsersView: View {
                 Divider()
                 ForEach(self.approveUsersVM.users, id: \.user.id) {
                     userVM in
-                    VStack (alignment: .leading, spacing: 5)  {
-                        
-                        Text("\(userVM.user.firstName) \(userVM.user.lastName)").bold()
-                            .font(Font.title)
-                        
-                        Text("\(userVM.user.email)")
-                        
-                        HStack{
+                    VStack {
+                        HStack {
+                            Text("\(userVM.user.firstName) \(userVM.user.lastName)").bold()
+                                .font(Font.title)
+                            Spacer()
+                            
                             Button(action: {
                                 userVM.user.isActive = true
                                 userVM.updateIsActive(userAuthVM: userAuthVM)
@@ -36,15 +34,18 @@ struct ApproveUsersView: View {
                                     self.approveUsersVM.users.remove(at: index)
                                 }
                             }, label: {
-                                Text("Approve")
-                                    .foregroundColor(Color.white)
-                                    .font(Font.headline.weight(.bold))
-                            })
-                            .padding(.vertical, 15)
-                            .padding(.horizontal, 20)
-                            .background(Color.green)
-                            .cornerRadius(40)
-                            
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.green)
+                                    .font(Font.title.weight(.bold))
+    //                                Text("Approve")
+    //                                    .foregroundColor(Color.white)
+    //                                    .font(Font.headline.weight(.bold))
+                            }).padding(.trailing)
+    //                            .padding(.vertical, 15)
+    //                            .padding(.horizontal, 20)
+    //                            .background(Color.green)
+    //                            .cornerRadius(40)
+    //
                             Button(action: {
                                 userVM.deleteUser(userAuthVM: userAuthVM)
                                 if let index = self.approveUsersVM.users.firstIndex(of: userVM) {
@@ -52,18 +53,20 @@ struct ApproveUsersView: View {
                                 }
                                 
                             }, label: {
-                                Text("   Deny   ")
-                                    .foregroundColor(Color.black)
-                                    .font(Font.headline.weight(.bold))
-                            })
-                            .padding(.vertical, 15)
-                            .padding(.horizontal, 20)
-                            .background(Color.white)
-                            .overlay(RoundedRectangle(cornerRadius: 40)
-                            .stroke(Color.black, lineWidth: 4))
-                            Divider()
-                        
+                                Image(systemName: "x.circle.fill")
+                                    .foregroundColor(.red)
+                                    .font(Font.title.weight(.bold))
+    //                                Text("   Deny   ")
+    //                                    .foregroundColor(Color.black)
+    //                                    .font(Font.headline.weight(.bold))
+                            }).padding(.leading)
+    //                            .padding(.vertical, 15)
+    //                            .padding(.horizontal, 20)
+    //                            .background(Color.white)
+    //                            .overlay(RoundedRectangle(cornerRadius: 40)
+    //                            .stroke(Color.black, lineWidth: 4))
                         }
+                        Divider()
                     }.padding()
                 }
                 Spacer()
@@ -77,5 +80,7 @@ struct ApproveUsersView: View {
 struct ApproveUsers_Previews: PreviewProvider {
     static var previews: some View {
         ApproveUsersView()
+            .environmentObject(UserAuthenticationViewModel(id: 80, token: "d620ebc3ca80b02814afd8be67f6c815cca2296c", isLoggedIn: true, isStaff: true, isActive: true))
     }
 }
+

@@ -76,8 +76,8 @@ struct SearchBarView: View {
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SearchBarView(userAuthVM: UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true, isStaff: true, isActive: true))
-        }.environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true, isStaff: true, isActive: true))
+            SearchBarView(userAuthVM: UserAuthenticationViewModel(id: 1, token: "d620ebc3ca80b02814afd8be67f6c815cca2296c", isLoggedIn: true, isStaff: true, isActive: true))
+        }.environmentObject(UserAuthenticationViewModel(id: 1, token: "d620ebc3ca80b02814afd8be67f6c815cca2296c", isLoggedIn: true, isStaff: true, isActive: true))
         
     }
 }

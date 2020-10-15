@@ -29,14 +29,64 @@ struct ProfileSettingsView: View {
                     }
                 }.buttonStyle(PlainButtonStyle())
                 
-                NavigationLink(
-                    destination: ApproveUsersView(userAuthVM: _userAuthVM),
-                    label: {
-                        HStack {
-                            Image(systemName: "plus")
-                            Text("Approve Users")
-                        }
+//                if (self.userAuthVM.userAuth.isStaff && self.userAuthVM.userAuth.id == self.profileVM.profile.owner.id) {
+                if (self.userAuthVM.userAuth.isStaff) {
+                    NavigationLink(
+                        destination: ApproveUsersView(userAuthVM: _userAuthVM),
+                        label: {
+                            HStack {
+                                Image(systemName: "plus")
+                                Text("Approve Users")
+                            }
                     }).buttonStyle(PlainButtonStyle())
+                }
+                
+                
+//                if (self.userAuthVM.userAuth.isStaff && self.profileVM.profile.owner.isStaff) {
+//                    Button(action: {
+//                        self.showingDeleteAlert = true
+//                    }) {
+//                        HStack {
+//                            Image(systemName: "bin.x.mark.fill")
+//                            Text("Remove Admin")
+//                        }
+//                    }.alert(isPresented: $showingDeleteAlert) {
+//                        Alert(title: Text("Remove User Admin"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Remove")) {
+//                            self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
+//                            if (self.userAuthVM.userAuth.id == profileVM.profile.owner.id) {
+//                                self.userAuthVM.userAuth.isLoggedIn = false
+//                            } else {
+//                                //DO SOMETHING TO MAKE VIEW WORK
+//                            }
+//                            userAuthVM.userAuth.isLoggedIn = false
+//                        }, secondaryButton: .cancel())
+//                    }
+//                }
+//                if (self.userAuthVM.userAuth.isStaff && !self.profileVM.profile.owner.isStaff) {
+//                    Button(action: {
+//                        self.showingDeleteAlert = true
+//                    }) {
+//                        HStack {
+//                            Image(systemName: "book")
+//                            Text("Make Admin")
+//                        }
+//                    }.alert(isPresented: $showingDeleteAlert) {
+//                        Alert(title: Text("Make User Admin"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
+//                            self.presentationMode.wrappedValue.dismiss()
+//                            self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
+//                            if (self.userAuthVM.userAuth.id == profileVM.profile.owner.id) {
+//                                self.userAuthVM.userAuth.isLoggedIn = false
+//                            } else {
+//                                //DO SOMETHING TO MAKE VIEW WORK
+//                            }
+//                            userAuthVM.userAuth.isLoggedIn = false
+//                        }, secondaryButton: .cancel())
+//                    }
+//                }
+                
+//
+                
+
                 
                 //                HStack {
                 Button(action: {
