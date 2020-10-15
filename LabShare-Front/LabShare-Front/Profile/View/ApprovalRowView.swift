@@ -34,13 +34,25 @@ struct ApprovalRowView: View {
                 .padding(.horizontal, 20)
                 .background(Color.green)
                 .cornerRadius(40)
-            }
+                
+                Button(action: {
+                    // Delete user
+                }, label: {
+                    Text("   Deny   ")
+                        .foregroundColor(Color.black)
+                        .font(Font.headline.weight(.bold))
+                })
+                .padding(.vertical, 15)
+                .padding(.horizontal, 20)
+                .background(Color.white)
+                .overlay(RoundedRectangle(cornerRadius: 40)
+                                .stroke(Color.black, lineWidth: 4))            }
         }.padding()
     }
 }
         
         struct ApprovalRowView_Previews: PreviewProvider {
             static var previews: some View {
-                ApprovalRowView(userVM: UserViewModel(user: UserModel(id: 1, email: "test@gmail", firstName: "Liam", lastName: "1", imageName: "image1", isStaff: false, isActive: true)))
+                ApprovalRowView(userVM: UserViewModel(user: UserModel(id: 1, email: "22499153@gmail", firstName: "Liam", lastName: "Niedzielski", imageName: "image1", isStaff: false, isActive: true)))
             }
         }
