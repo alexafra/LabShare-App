@@ -39,7 +39,7 @@ class commentModifyPermission(permissions.BasePermission):
 
     def has_permission(self, request, view):
         if request.method != 'GET':
-            return request.user.id == Comment.objects.get(pk = view.kwargs['user_id']).author.id or request.user.is_staff
+            return request.user.id == Comment.objects.get(pk = view.kwargs['comment_id']).author.id or request.user.is_staff
         else:
             return True
 
