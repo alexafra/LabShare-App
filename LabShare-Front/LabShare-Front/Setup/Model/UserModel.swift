@@ -14,8 +14,8 @@ struct UserModel: Hashable, Codable, Identifiable {
     var firstName: String
     var lastName: String
     var imageName: String
-    var is_active: Bool
-    var is_staff: Bool
+    var isActive: Bool
+    var isStaff: Bool
     
 //    "id": 8,
 //    "email": "graycumming@gmail.com",
@@ -30,22 +30,22 @@ struct UserModel: Hashable, Codable, Identifiable {
         case firstName = "first_name"
         case lastName = "last_name"
         case imageName = "image_name"
-        case is_staff = "is_staff"
-        case is_active = "is_active"
+        case isStaff = "is_staff"
+        case isActive = "is_active"
     }
     
-    init(id: Int, email: String, firstName: String, lastName: String, imageName: String, is_staff: Bool, is_active: Bool) {
+    init(id: Int, email: String, firstName: String, lastName: String, imageName: String, isStaff: Bool, isActive: Bool) {
         self.id = id
         self.email = email
         self.firstName = firstName
         self.lastName = lastName
         self.imageName = imageName
-        self.is_staff = is_staff
-        self.is_active = is_active
+        self.isStaff = isStaff
+        self.isActive = isActive
     }
     
     init() {
-        self.init(id: -1, email: "", firstName: "", lastName: "", imageName: "image1", is_staff: false, is_active: true)
+        self.init(id: -1, email: "", firstName: "", lastName: "", imageName: "image1", isStaff: false, isActive: true)
     }
 }
 
@@ -55,10 +55,14 @@ struct UserAuthenticationModel: Codable, Identifiable {
     var id: Int = -1
     var token: String
     var isLoggedIn: Bool = false
+    var isStaff: Bool
+    var isActive: Bool
     
     private enum CodingKeys: String, CodingKey {
         case token
         case id
+        case isStaff = "is_staff"
+        case isActive = "is_active"
     }
 }
 
