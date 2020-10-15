@@ -66,7 +66,7 @@ class SingleUser(APIView):
         return Response(serializer.data)
     def put(self, request, user_id):
         user = User.objects.get(pk = user_id)
-        if user.is_staff:
+        if self.request.user.is_staff:
             serializer = UserSerializerAdmin(user, data = request.data, partial = True)
         else:
             serializer = UserSerializer(user, data = request.data, partial = True)
