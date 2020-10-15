@@ -1,0 +1,51 @@
+### Register
+POST http://127.0.0.1:8000/register
+Content-Type: application/json
+
+{
+    "email": "gregedmonds17@gmail.com",
+    "first_name": "Gd",
+    "last_name": "Edmonds",
+    "password": "greg1234"
+}
+
+### Login
+POST http://127.0.0.1:8000/login
+Content-Type: application/json
+
+{
+    "email": "gregedmonds17@gmail.com",
+    "password": "Testpassword2"
+}
+
+### Change password
+PUT http://127.0.0.1:8000/password_change   HTTP/1.1
+Content-Type: application/json
+Authorization: Token d270c70489e537710fd85b69e0687b294c4499cb
+
+{
+    "old_password": "greg1234",
+    "new_password": "greg4321"
+}
+
+### Reset password
+POST http://127.0.0.1:8000/password_reset/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "gregedmonds17@gmail.com"
+}
+
+### Confirm reset password
+POST http://127.0.0.1:8000/password_reset/confirm/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "token": "c43406a86c67a7a0d807f167d7d1a2",
+    "password": "newpassword44"
+}
+
+### Get users
+GET http://127.0.0.1:8000/users HTTP/1.1
+Content-Type: application/json
+Authorization: Token 9e5930486cadc4a664eae6d5b7d5b6805947b508

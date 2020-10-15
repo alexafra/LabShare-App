@@ -52,7 +52,18 @@ struct LoginView: View {
                         .font(Font.title.weight(.bold))
                 }.modifier(AuthButton())
                 
+                NavigationLink(
+                    destination: ResetPassword(),
+                    label: {
+                        Text("Forgot Password?")
+                            .font(.callout)
+                            .foregroundColor(.green)
+                    }).padding()
+                
                 Spacer()
+                
+                
+                
             }
         }.padding()
 //        .navigationBarTitle("Login", displayMode: .inline)
