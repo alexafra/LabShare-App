@@ -45,6 +45,6 @@ struct ApprovalRowView: View {
 
 struct ApprovalRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ApprovalRowView(userVM: UserViewModel(user: UserModel(id: 1, email: "test@gmail", firstName: "Liam", lastName: "1", imageName: "image1", is_staff: false, is_active: false)))
+        ApprovalRowView(userVM: UserViewModel(user: UserModel(id: 1, email: "test@gmail", firstName: "Liam", lastName: "1", imageName: "image1", isStaff: true, isActive: true)))
     }
 }

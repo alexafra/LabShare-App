@@ -37,10 +37,10 @@ struct ProfileHeaderView: View {
                 Text("Email: \(self.profileVM.profile.owner.email)")
                     .fixedSize(horizontal: false, vertical: true)
 //                Text("Born: \(self.profileVM.profile.dob)")
-                if profileVM.dobExists {
-                    Text("Born: " + self.profileVM.dobString)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+//                if profileVM.dobExists {
+//                    Text("Born: " + self.profileVM.dobString)
+//                        .fixedSize(horizontal: false, vertical: true)
+//                }
                 if profileVM.occupationExists {
                     Text("Occupation: \(self.profileVM.profile.occupation)")
                         .fixedSize(horizontal: false, vertical: true)
@@ -58,7 +58,7 @@ struct ProfileHeaderView: View {
         }.padding()
         
         .navigationBarItems(trailing: Group {
-            if (profileVM.profile.owner.id == userAuthVM.userAuth.id) {
+            if (profileVM.profile.owner.id == userAuthVM.userAuth.id || userAuthVM.userAuth.isStaff) {
                 NavigationLink (
                     destination: ProfileSettingsView(profileVM: self.profileVM),
                     label: {
@@ -76,10 +76,10 @@ struct ProfileHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ProfileHeaderView(profileVM: ProfileViewModel(userId: 72))
-                .environmentObject(UserAuthenticationViewModel(id: 72, token: "d4e3814547b0b328f3baae5ea78a3b1417464386", isLoggedIn: true))
+                .environmentObject(UserAuthenticationViewModel(id: 72, token: "d4e3814547b0b328f3baae5ea78a3b1417464386", isLoggedIn: true, isStaff: true, isActive: true))
             
             ProfileHeaderView(profileVM: ProfileViewModel(userId: 70))
-                .environmentObject(UserAuthenticationViewModel(id: 70, token: "356a0facdfb32b8720ada293893c4dae6267d406", isLoggedIn: true))
+                .environmentObject(UserAuthenticationViewModel(id: 70, token: "356a0facdfb32b8720ada293893c4dae6267d406", isLoggedIn: true, isStaff: true, isActive: true))
             
 //            ProfileHeaderView(profileVM: ProfileViewModel(profile: ProfileModel(id: 37, bio: "I like programming and to study and to dance and to sing and to play baseball and to play soccer and to play jazz", dob: Date(), occupation: "Student", employer: "University of Western Australia", owner: UserModel(id: 37, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis"))))
 //                .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))

@@ -143,7 +143,7 @@ struct PostListView_Previews: PreviewProvider {
             VStack {
                 NavigationView {
                     ScrollView {
-                        PostListView(postListVM: PostListViewModel(userId: 85, postListType: PostListType.Profile)).environmentObject(UserAuthenticationViewModel(id: 85, token: "7c0960191dec28960967bc2a4dc62116f3ea5d6d", isLoggedIn: true))
+                        PostListView(postListVM: PostListViewModel(userId: 85, postListType: PostListType.Profile)).environmentObject(UserAuthenticationViewModel(id: 85, token: "7c0960191dec28960967bc2a4dc62116f3ea5d6d", isLoggedIn: true, isStaff: true, isActive: true))
                     }
                     
                 }

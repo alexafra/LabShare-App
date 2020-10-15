@@ -69,7 +69,7 @@ struct ProfileSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ProfileSettingsView(profileVM: ProfileViewModel(userId: 76))
-                .environmentObject(UserAuthenticationViewModel(id: 76, token: "e6d3868c84c0cb418cb676d3fca4d9a9d03c90d8", isLoggedIn: true))
+                .environmentObject(UserAuthenticationViewModel(id: 76, token: "e6d3868c84c0cb418cb676d3fca4d9a9d03c90d8", isLoggedIn: true, isStaff: true, isActive: true))
         }
         
     }

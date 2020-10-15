@@ -82,7 +82,7 @@ struct CommentEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             CommentEditView(userId: 37, postId: 27, commentId: 20, showSelf: .constant(true))
-                .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+                .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true, isStaff: true, isActive: true))
         }
         
     }

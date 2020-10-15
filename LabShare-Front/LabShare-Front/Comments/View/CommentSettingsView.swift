@@ -57,7 +57,7 @@ struct CommentSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             PostSettingsView(postVM: PostViewModel(userId: 70, postId: 46), showSelf: Binding.constant(true))
-                .environmentObject(UserAuthenticationViewModel(id: 70, token: "356a0facdfb32b8720ada293893c4dae6267d406", isLoggedIn: true))
+                .environmentObject(UserAuthenticationViewModel(id: 70, token: "356a0facdfb32b8720ada293893c4dae6267d406", isLoggedIn: true, isStaff: true, isActive: true))
         }
         
     }

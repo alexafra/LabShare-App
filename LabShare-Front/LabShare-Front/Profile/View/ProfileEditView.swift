@@ -63,15 +63,15 @@ struct ProfileEditView: View {
                 }.modifier(MultiLineTextFieldAuthorization())
                 .padding()
                 
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("dob:")
-                        DatePicker("", selection: self.$profileVM.profile.dob, in: ...Date(), displayedComponents: .date)
-                            .labelsHidden()
-                        Spacer()
-                    }
-                }
-                .padding()
+//                VStack(alignment: .leading) {
+//                    HStack {
+//                        Text("dob:")
+//                        DatePicker("", selection: self.$profileVM.profile.dob, in: ...Date(), displayedComponents: .date)
+//                            .labelsHidden()
+//                        Spacer()
+//                    }
+//                }
+//                .padding()
                 
                 Button(action: {
                     self.profileVM.updateProfile(userAuthVM: self.userAuthVM)
@@ -117,6 +117,6 @@ struct TextView: UIViewRepresentable {
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileEditView(userId: 76, showSelf: .constant(true))
-            .environmentObject( UserAuthenticationViewModel(id: 76, token: "e6d3868c84c0cb418cb676d3fca4d9a9d03c90d8", isLoggedIn: false))
+            .environmentObject( UserAuthenticationViewModel(id: 76, token: "e6d3868c84c0cb418cb676d3fca4d9a9d03c90d8", isLoggedIn: false, isStaff: true, isActive: true))
     }
 }
