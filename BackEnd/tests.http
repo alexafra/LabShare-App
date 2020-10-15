@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
     "email": "gregedmonds17@gmail.com",
-    "first_name": "Gd",
-    "last_name": "Edmonds",
+    "first_name": "G",
+    "last_name": "E",
     "password": "greg1234"
 }
 
@@ -15,17 +15,7 @@ Content-Type: application/json
 
 {
     "email": "gregedmonds17@gmail.com",
-    "password": "Testpassword2"
-}
-
-### Change password
-PUT http://127.0.0.1:8000/password_change   HTTP/1.1
-Content-Type: application/json
-Authorization: Token d270c70489e537710fd85b69e0687b294c4499cb
-
-{
-    "old_password": "greg1234",
-    "new_password": "greg4321"
+    "password": "greg1234"
 }
 
 ### Reset password
@@ -35,13 +25,12 @@ Content-Type: application/json
 {
     "email": "gregedmonds17@gmail.com"
 }
-
 ### Confirm reset password
 POST http://127.0.0.1:8000/password_reset/confirm/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "token": "c43406a86c67a7a0d807f167d7d1a2",
+    "token": "a9bd7b31e8e051e6260079cb23506d2dcae3881c9142",
     "password": "newpassword44"
 }
 
