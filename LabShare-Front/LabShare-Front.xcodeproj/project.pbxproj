@@ -14,10 +14,6 @@
 		1B92704F24FBDE6400D8CF34 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */; };
 		1B92705324FBE07D00D8CF34 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92705224FBE07D00D8CF34 /* ProfileView.swift */; };
 		1BBF92AB252B002B008A7EDE /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF92AA252B002B008A7EDE /* ImagePicker.swift */; };
-		1BC921392532AC490086E87D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC921382532AC490086E87D /* ResetPassword.swift */; };
-		1BC9213E2532B7760086E87D /* ResetPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC9213D2532B7760086E87D /* ResetPasswordModel.swift */; };
-		1BC921432532B7CF0086E87D /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC921422532B7CF0086E87D /* ResetPasswordViewModel.swift */; };
-		1BC921482532B90F0086E87D /* ResetPasswordRegisterWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC921472532B90F0086E87D /* ResetPasswordRegisterWebService.swift */; };
 		1BD01B00250488B4006C6F90 /* ProfileContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */; };
 		1E40D5CFC070094A1C8C84AD /* Pods_LabShare_Front.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B900551F389BECD52DCD2DD7 /* Pods_LabShare_Front.framework */; };
 		E470409723EB23F8766A4344 /* Pods_LabShare_Front_LabShare_FrontUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD28AB0AAB97049B83229062 /* Pods_LabShare_Front_LabShare_FrontUITests.framework */; };
@@ -103,10 +99,6 @@
 		1B92704E24FBDE6400D8CF34 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		1B92705224FBE07D00D8CF34 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1BBF92AA252B002B008A7EDE /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		1BC921382532AC490086E87D /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
-		1BC9213D2532B7760086E87D /* ResetPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordModel.swift; sourceTree = "<group>"; };
-		1BC921422532B7CF0086E87D /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
-		1BC921472532B90F0086E87D /* ResetPasswordRegisterWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordRegisterWebService.swift; sourceTree = "<group>"; };
 		1BD01AFF250488B4006C6F90 /* ProfileContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContainerView.swift; sourceTree = "<group>"; };
 		1F57E97853FC45E6A4C572E5 /* Pods_LabShare_FrontTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabShare_FrontTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		305CF325481435D3912A9B8A /* Pods-LabShare-FrontTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabShare-FrontTests.debug.xcconfig"; path = "Target Support Files/Pods-LabShare-FrontTests/Pods-LabShare-FrontTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -306,7 +298,6 @@
 				F05A0408251F6DCC001563AF /* LoginRegisterWebService.swift */,
 				F060368925279E1A0092412E /* CommentsWebService.swift */,
 				F06037162529E7990092412E /* UserWebService.swift */,
-				1BC921472532B90F0086E87D /* ResetPasswordRegisterWebService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -415,7 +406,6 @@
 				F09C69AE251635BD00EC961C /* LoginView.swift */,
 				F0545E36251A62780037EFC9 /* RegisterView.swift */,
 				F060778D25207FC900503D2E /* RegisterViewContainer.swift */,
-				1BC921382532AC490086E87D /* ResetPassword.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -425,7 +415,6 @@
 			children = (
 				F0545E57251B341E0037EFC9 /* RegistrationModel.swift */,
 				F06036F52529E5910092412E /* UserLoginModel.swift */,
-				1BC9213D2532B7760086E87D /* ResetPasswordModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -435,7 +424,6 @@
 			children = (
 				F09C69B02516396200EC961C /* LoginViewModel.swift */,
 				F0545E41251ACE5A0037EFC9 /* RegisterViewModel.swift */,
-				1BC921422532B7CF0086E87D /* ResetPasswordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -712,7 +700,6 @@
 			files = (
 				F06036D52529D0AF0092412E /* CommentEditView.swift in Sources */,
 				F0545E42251ACE5A0037EFC9 /* RegisterViewModel.swift in Sources */,
-				1BC921482532B90F0086E87D /* ResetPasswordRegisterWebService.swift in Sources */,
 				F00BEBE0252204EC007674F4 /* KitToSwiftUIHelper.swift in Sources */,
 				F0545E18251A564A0037EFC9 /* FeedView.swift in Sources */,
 				F06036C52529CDA50092412E /* CommentDetailView.swift in Sources */,
@@ -759,12 +746,9 @@
 				F06036CA2529CE790092412E /* CommentHeaderView.swift in Sources */,
 				F0545E0A251A54CD0037EFC9 /* PostListView.swift in Sources */,
 				F04A335024F91C90004A86D9 /* PostModel.swift in Sources */,
-				1BC921392532AC490086E87D /* ResetPassword.swift in Sources */,
-				1BC921432532B7CF0086E87D /* ResetPasswordViewModel.swift in Sources */,
 				F09C69B92516450600EC961C /* UserAuthenticationViewModel.swift in Sources */,
 				F060778E25207FC900503D2E /* RegisterViewContainer.swift in Sources */,
 				F09C69B12516396200EC961C /* LoginViewModel.swift in Sources */,
-				1BC9213E2532B7760086E87D /* ResetPasswordModel.swift in Sources */,
 				1B4FC244251F010A006E4A3D /* CircleImage.swift in Sources */,
 				F0519BBB25034CD9006E580E /* PostListViewModel.swift in Sources */,
 				F05A0409251F6DCD001563AF /* LoginRegisterWebService.swift in Sources */,
