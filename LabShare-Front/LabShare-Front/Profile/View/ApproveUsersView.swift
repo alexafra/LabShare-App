@@ -23,8 +23,12 @@ struct ApproveUsersView: View {
                     userVM in
                     VStack {
                         HStack {
-                            Text("\(userVM.user.firstName) \(userVM.user.lastName)").bold()
-                                .font(Font.title)
+                            VStack {
+                                Text("\(userVM.user.firstName) \(userVM.user.lastName)").bold()
+                                    .font(Font.title)
+                                Text("\(userVM.user.email)")
+                            }
+                            
                             Spacer()
                             
                             Button(action: {
@@ -37,14 +41,7 @@ struct ApproveUsersView: View {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.green)
                                     .font(Font.title.weight(.bold))
-    //                                Text("Approve")
-    //                                    .foregroundColor(Color.white)
-    //                                    .font(Font.headline.weight(.bold))
                             }).padding(.trailing)
-    //                            .padding(.vertical, 15)
-    //                            .padding(.horizontal, 20)
-    //                            .background(Color.green)
-    //                            .cornerRadius(40)
     //
                             Button(action: {
                                 userVM.deleteUser(userAuthVM: userAuthVM)
@@ -56,15 +53,7 @@ struct ApproveUsersView: View {
                                 Image(systemName: "x.circle.fill")
                                     .foregroundColor(.red)
                                     .font(Font.title.weight(.bold))
-    //                                Text("   Deny   ")
-    //                                    .foregroundColor(Color.black)
-    //                                    .font(Font.headline.weight(.bold))
                             }).padding(.leading)
-    //                            .padding(.vertical, 15)
-    //                            .padding(.horizontal, 20)
-    //                            .background(Color.white)
-    //                            .overlay(RoundedRectangle(cornerRadius: 40)
-    //                            .stroke(Color.black, lineWidth: 4))
                         }
                         Divider()
                     }.padding()

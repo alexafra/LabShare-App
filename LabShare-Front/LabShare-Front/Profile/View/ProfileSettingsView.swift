@@ -13,9 +13,9 @@ struct ProfileSettingsView: View {
     //    @State var userId: Int
     @ObservedObject var profileVM: ProfileViewModel
     @EnvironmentObject var userAuthVM: UserAuthenticationViewModel
-    @Environment(\.managedObjectContext) var moc
-    @Environment(\.presentationMode) var presentationMode
     @State private var showingDeleteAlert = false
+    @State private var showingAddAdminAlert = false
+    @State private var showingRemoveAdminAlert = false
     @State private var showingLogOutAlert = false
     @State private var showDetail = false
     
@@ -42,70 +42,49 @@ struct ProfileSettingsView: View {
                 }
                 
                 
-//                if (self.userAuthVM.userAuth.isStaff && self.profileVM.profile.owner.isStaff) {
-//                    Button(action: {
-//                        self.showingDeleteAlert = true
-//                    }) {
-//                        HStack {
-//                            Image(systemName: "bin.x.mark.fill")
-//                            Text("Remove Admin")
-//                        }
-//                    }.alert(isPresented: $showingDeleteAlert) {
-//                        Alert(title: Text("Remove User Admin"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Remove")) {
-//                            self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
-//                            if (self.userAuthVM.userAuth.id == profileVM.profile.owner.id) {
-//                                self.userAuthVM.userAuth.isLoggedIn = false
-//                            } else {
-//                                //DO SOMETHING TO MAKE VIEW WORK
-//                            }
-//                            userAuthVM.userAuth.isLoggedIn = false
-//                        }, secondaryButton: .cancel())
-//                    }
-//                }
-//                if (self.userAuthVM.userAuth.isStaff && !self.profileVM.profile.owner.isStaff) {
-//                    Button(action: {
-//                        self.showingDeleteAlert = true
-//                    }) {
-//                        HStack {
-//                            Image(systemName: "book")
-//                            Text("Make Admin")
-//                        }
-//                    }.alert(isPresented: $showingDeleteAlert) {
-//                        Alert(title: Text("Make User Admin"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
-//                            self.presentationMode.wrappedValue.dismiss()
-//                            self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
-//                            if (self.userAuthVM.userAuth.id == profileVM.profile.owner.id) {
-//                                self.userAuthVM.userAuth.isLoggedIn = false
-//                            } else {
-//                                //DO SOMETHING TO MAKE VIEW WORK
-//                            }
-//                            userAuthVM.userAuth.isLoggedIn = false
-//                        }, secondaryButton: .cancel())
-//                    }
-//                }
-                
-//
-                
-
-                
-                //                HStack {
+                if (self.userAuthVM.userAuth.isStaff && self.profileVM.profile.owner.isStaff) {
+                    Button(action: {
+                        self.showingRemoveAdminAlert = true
+                    }, label: {
+                        HStack {
+                            Image(systemName: "bin.xmark.fill")
+                            Text("Remove Admin")
+                        }
+                    }).alert(isPresented: $showingRemoveAdminAlert) {
+                        Alert(title: Text("Remove User Admin"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Remove")) {
+                            self.profileVM.removeAdmin(userAuthVM: self.userAuthVM)
+                        }, secondaryButton: .cancel())
+                    }
+                }
+                if (self.userAuthVM.userAuth.isStaff && !self.profileVM.profile.owner.isStaff) {
+                    Button(action: {
+                        self.showingAddAdminAlert = true
+                    }) {
+                        HStack {
+                            Image(systemName: "book")
+                            Text("Make Admin")
+                        }
+                    }.alert(isPresented: $showingAddAdminAlert) {
+                        Alert(title: Text("Make User Admin"), message: Text("Are you sure?"), primaryButton: .default(Text("Make Admin")) {
+                            self.profileVM.setAdmin(userAuthVM: self.userAuthVM)
+                        }, secondaryButton: .cancel())
+                    }
+                }
                 Button(action: {
                     self.showingDeleteAlert = true
-                }) {
+                }, label: {
                     HStack {
                         Image(systemName: "trash")
                         Text("Delete User")
                     }
-                }.alert(isPresented: $showingDeleteAlert) {
+                }).alert(isPresented: $showingDeleteAlert) {
                     Alert(title: Text("Delete User"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
-                        self.presentationMode.wrappedValue.dismiss()
                         self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
                         if (self.userAuthVM.userAuth.id == profileVM.profile.owner.id) {
                             self.userAuthVM.userAuth.isLoggedIn = false
                         } else {
                             //DO SOMETHING TO MAKE VIEW WORK
                         }
-                        userAuthVM.userAuth.isLoggedIn = false
                     }, secondaryButton: .cancel())
                 }
                 
@@ -118,7 +97,6 @@ struct ProfileSettingsView: View {
                     }
                 }).alert(isPresented: $showingLogOutAlert) {
                     Alert(title: Text("Log Out"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Log Out")) {
-                        self.presentationMode.wrappedValue.dismiss()
                         userAuthVM.userAuth.isLoggedIn = false
                     }, secondaryButton: .cancel()
                 )
