@@ -52,9 +52,9 @@ class Users(APIView):
     permission_classes = [IsAuthenticated, isActive]
     def get(self, request):
         if 'search' in self.request.GET:
-            queryset = User.objects.annotate(full_name = Concat('first_name', V(' '), 'last_name')).filter(full_name__icontains = self.request.GET.get('search')).order_by('last_name')[:15]
+            queryset = User.objects.annotate(full_name = Concat('first_name', V(' '), 'last_name')).filter(full_name__icontains = self.request.GET.get('search'), is_active = True).order_by('last_name')[:15]
         else:
-            queryset = User.objects.all().order_by('last_name')[:15]
+            queryset = User.objects.filter(is_active = True).order_by('last_name')[:15]
         serializer = UserSerializer(queryset, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
