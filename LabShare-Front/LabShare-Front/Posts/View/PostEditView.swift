@@ -25,19 +25,6 @@ struct PostEditView: View {
         VStack (alignment:.center) {
 //            PostHeaderView(p
             ScrollView {
-//                VStack (alignment: .leading) {
-//                    Text("Title:")
-//                    TextField("", text: self.$postVM.post.title)
-//                    Divider()
-//                    VStack(alignment: .leading) {
-//                        Text("Content:")
-//                        ZStack {
-//                            TextEditor(text: self.$postVM.post.content)
-//                            Text(self.postVM.post.content).opacity(0).padding(.top, 12)
-//                        }
-//                    }
-//                }.modifier(MultiLineTextFieldAuthorization())
-//                    .padding(10)
                 VStack (alignment: .leading) {
                     HStack {
                         if self.postVM.post.category == CategoryEnum.None {
@@ -111,54 +98,8 @@ struct PostEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             PostEditView(userId: 80, postId: 104, showSelf: .constant(true))
-                .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
+                .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true, isStaff: true, isActive: true))
         }
         
     }
 }
-
-//                VStack (alignment: .leading) {
-//                    Text("Title:")
-//                        .font(.title)
-////                        .foregroundColor(Color.black)
-////                        .fontWeight(.bold)
-//
-//                    TextField("", text: self.$postVM.post.title)
-////                        .font(.title)
-////                        .foregroundColor(Color.black)
-//                        .modifier(TextFieldAuthorization())
-//                }.padding()
-//
-//                VStack (alignment: .leading){
-//                    Text("Contents:")
-//                        .font(.title)
-//                    ZStack {
-//                        TextEditor(text: self.$postVM.post.content)
-//                        Text(self.postVM.post.content).opacity(0).padding(.top, 12).modifier(MultiLineTextFieldAuthorization())
-//                    }
-////                        .font(.title)
-////                        .foregroundColor(Color.black)
-////                        .fontWeight(.bold)
-//                }.padding()
-
-
-//                    .foregroundColor(.black)
-//                        .sheet(isPresented: $isEdit) {
-//                            PostEditView(postVM: PostViewModel(post: self.postVM.post), oldpostVM: self.postVM, isPresented: self.$isEdit)
-//                    }
-//                    Button(action: {
-//                        self.showingAlert = true
-//
-//                    }){
-//                        Image(systemName: "trash")
-//                            .imageScale(.large)
-//                        Text("Delete Post")
-//
-//                    }.foregroundColor(.black)
-//                        .padding(.top, 10)
-//                        .alert(isPresented:$showingAlert) {
-//                            Alert(title: Text("Are you sure you want to delete this post?"), primaryButton: .destructive(Text("Delete")) {
-//                                    // Actions
-//                            }, secondaryButton: .cancel())
-//                        }
-//                }

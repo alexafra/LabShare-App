@@ -70,7 +70,7 @@ class ProfileViewModel: ObservableObject {
                 //SUPER USER NEEDS TO CHANGE HERE
             }, completionSuccessful: { (profile: ProfileModel?) -> Void in
                 if (true) {
-                    userAuthVM.userAuth.isLoggedIn = true
+                    userAuthVM.userAuth.isLoggedIn = false
                 } else {
                     //Change to go back feedqee
                 }
@@ -138,6 +138,41 @@ class ProfileViewModel: ObservableObject {
         })
             // //////////NEED TO REPLACE self.userAuthVM.userAuth.isLoggedIn = true
     }
+    func setAdmin(userAuthVM: UserAuthenticationViewModel) {
+         //For register -> Profile edit view
+        
+        if (!self.profile.owner.isStaff) {
+            var userModel: UserModel = self.profile.owner
+            userModel.isStaff = true
+            let userWebService = UserWebService(userAuth: userAuthVM.userAuth)
+            userWebService.updateUser(userId: self.profile.owner.id, userModel: userModel, completionFailure: {() -> Void in
+                userModel.isStaff = false
+                return
+                
+            }, completionSuccessful: { (user: UserModel?) -> Void in
+                return
+            })
+        }
+        
+    }
+    
+    func removeAdmin(userAuthVM: UserAuthenticationViewModel) {
+         //For register -> Profile edit view
+        
+        if (self.profile.owner.isStaff) {
+            var userModel: UserModel = self.profile.owner
+            userModel.isStaff = false
+            let userWebService = UserWebService(userAuth: userAuthVM.userAuth)
+            userWebService.updateUser(userId: self.profile.owner.id, userModel: userModel, completionFailure: {() -> Void in
+                userModel.isStaff = true
+                return
+                
+            }, completionSuccessful: { (user: UserModel?) -> Void in
+                return
+            })
+        }
+    }
+    
 }
 
 //let userPostWebService = UserPostsWebService(userAuth: self.userAuthVM.userAuth)

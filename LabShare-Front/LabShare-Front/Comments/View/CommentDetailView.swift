@@ -44,7 +44,7 @@ struct CommentDetailView: View {
                 .onAppear(perform: commentVM.getCommentClosure(userAuthVM: userAuthVM))
 //                .onAppear(perform: commentListVM.getAllCommentsClosure(userAuthVM: userAuthVM))
                 .navigationBarItems(trailing: Group {
-                    if (commentVM.commentModel.author.id == userAuthVM.userAuth.id) {
+                    if (commentVM.commentModel.author.id == userAuthVM.userAuth.id || userAuthVM.userAuth.isStaff) {
                         NavigationLink (
                             destination: CommentSettingsView(commentVM: self.commentVM, showSelf: $showSelf),
                             label: {
@@ -62,7 +62,7 @@ struct CommentDetail_Previews: PreviewProvider {
             NavigationView {
                 ScrollView {
                     CommentDetailView(commentVM: CommentViewModel(userId: 80, postId: 99, commentId: 20), showSelf: .constant(true))
-                        .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true))
+                        .environmentObject(UserAuthenticationViewModel(id: 80, token: "296251f6ec81048da3c9cc8a64192f54c4507072", isLoggedIn: true, isStaff: true, isActive: true))
                 }
                 
                 //            }

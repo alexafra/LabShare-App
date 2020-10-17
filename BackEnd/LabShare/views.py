@@ -9,10 +9,9 @@ from django.utils.decorators import method_decorator
 from django.db.models import Value as V
 from django.db.models.functions import Concat
 from LabShare.utils import get_and_authenticate_user, create_user_account
-from LabShare.models import Post, Categories, UserProfile, Comment
-from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, CategoriesSerializer, UserProfileSerializer, CommentSerializer
-from LabShare.permissions import unauthenticated
-from .serializers import ChangePasswordSerializer
+from LabShare.models import Post, UserProfile, Comment
+from LabShare.serializers import UserSerializer, UserLoginSerializer, UserRegisterSerializer, PostSerializer, UserProfileSerializer, CommentSerializer, UserSerializerAdmin
+from LabShare.permissions import unauthenticated, userModifyPermission, postModifyPermission, profileModifyPermission, commentModifyPermission, isActive, isAdmin
 
 User = get_user_model()
 
@@ -36,42 +35,52 @@ class UserLogin(APIView):
             token, created = Token.objects.get_or_create(user = user)
             responseDict = {
                 'token': token.key,
-                'id': user.id
+                'id': user.id,
+                'is_staff': user.is_staff,
+                'is_active': user.is_active
             }
             return Response(responseDict, status = status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
 class UserLogout(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, isActive]
     def post(self, request, format = None):
         self.request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
 
 class Users(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, isActive]
     def get(self, request):
         if 'search' in self.request.GET:
-            queryset = User.objects.annotate(full_name = Concat('first_name', V(' '), 'last_name')).filter(full_name__icontains = self.request.GET.get('search')).order_by('last_name')
+            queryset = User.objects.annotate(full_name = Concat('first_name', V(' '), 'last_name')).filter(full_name__icontains = self.request.GET.get('search'), is_active = True).order_by('last_name')[:15]
         else:
-            queryset = User.objects.all().order_by('last_name')
+            queryset = User.objects.filter(is_active = True).order_by('last_name')[:15]
         serializer = UserSerializer(queryset, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
-class SingleUser(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
-    permission_classes = [IsAuthenticated]
-    lookup_field = 'id'
-    lookup_url_kwarg = 'user_id'
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+class SingleUser(APIView):
+    permission_classes = [IsAuthenticated, userModifyPermission, isActive]
+    def get(self, request, user_id):
+        user = User.objects.get(pk = user_id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    def put(self, request, user_id):
+        user = User.objects.get(pk = user_id)
+        if self.request.user.is_staff:
+            serializer = UserSerializerAdmin(user, data = request.data, partial = True)
+        else:
+            serializer = UserSerializer(user, data = request.data, partial = True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_200_OK)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    def delete(self, request, user_id):
+        user = User.objects.get(pk = user_id)
+        user.delete()
+        return Response(status = status.HTTP_204_NO_CONTENT)
 
 class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, profileModifyPermission, isActive]
     lookup_field = 'owner__id'
     lookup_url_kwarg = 'user_id'
     serializer_class = UserProfileSerializer
@@ -84,7 +93,7 @@ class Profile(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateM
         return self.destroy(request, *args, **kwargs)
 
 class Comments(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, isActive]
     def get(self, request, **kwargs):
         queryset = Comment.objects.filter(post__id = self.kwargs['post_id']).order_by("-date_created")
         serializer = CommentSerializer(queryset, many = True)
@@ -95,9 +104,10 @@ class Comments(APIView):
             serializer.save(author = self.request.user, post = Post.objects.get(id = self.kwargs['post_id']))
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    
 
 class SingleComment(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, commentModifyPermission, isActive]
     lookup_field = 'id'
     lookup_url_kwarg = 'comment_id'
     serializer_class = CommentSerializer
@@ -110,19 +120,19 @@ class SingleComment(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.U
         return self.destroy(request, *args, **kwargs)
 
 class Feed(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, isActive]
     def get(self, request, **kwargs):
         if 'category' in self.request.GET:
-            queryset = Post.objects.filter(category__category_name = self.request.GET.get('category')).order_by('-date_created')
+            queryset = Post.objects.filter(category = self.request.GET.get('category')).order_by('-date_created')
         else:
             queryset = Post.objects.all().order_by('-date_created')
         serializer = PostSerializer(queryset, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
 class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, postModifyPermission, isActive]
     lookup_field = 'id'
-    lookup_url_kwarg = 'id'
+    lookup_url_kwarg = 'post_id'
     serializer_class = PostSerializer
     queryset = Post.objects.all()
     def get(self, request, *args, **kwargs):
@@ -133,9 +143,12 @@ class SinglePost(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Upda
         return self.destroy(request, *args, **kwargs)
 
 class UserPosts(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, isActive]
     def get(self, request, **kwargs):
-        queryset = Post.objects.filter(author__id = self.kwargs['user_id']).order_by("-date_created")
+        if 'category' in self.request.GET:
+            queryset = Post.objects.filter(author__id = self.kwargs['user_id'], category = self.request.GET.get('category')).order_by("-date_created")
+        else:
+            queryset = Post.objects.filter(author__id = self.kwargs['user_id']).order_by("-date_created")
         serializer = PostSerializer(queryset, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
     def post(self, request, **kwargs):
@@ -145,61 +158,21 @@ class UserPosts(APIView):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-class AvailableCategories(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
-    permission_classes = [IsAuthenticated]
-    queryset = Categories.objects.all()
-    serializer_class = CategoriesSerializer
+class NonActive(generics.GenericAPIView, mixins.ListModelMixin):
+    permission_classes = [isAdmin]
+    serializer_class = UserSerializer
+    def get_queryset(self):
+        return User.objects.filter(is_active = False)
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
 
-class SingleCategory(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
-    permission_classes = [IsAuthenticated]
-    lookup_field = 'id'
-    lookup_url_kwarg = 'id'
-    serializer_class = CategoriesSerializer
-    queryset = Categories.objects.all()
+class Active(generics.GenericAPIView, mixins.ListModelMixin):
+    permission_classes = [isAdmin]
+    serializer_class = UserSerializer
+    def get_queryset(self):
+        return User.objects.filter(is_active = True)
     def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
-
-class ChangePasswordView(generics.UpdateAPIView):
-    """
-    For changing password.
-    """
-    serializer_class = ChangePasswordSerializer
-    model = User
-    permission_classes = (IsAuthenticated,)
-
-    def get_object(self, queryset=None):
-        obj = self.request.user
-        return obj
-
-    def update(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        serializer = self.get_serializer(data=request.data)
-
-        if serializer.is_valid():
-            # Check old password
-            if not self.object.check_password(serializer.data.get("old_password")):
-                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
-            # set_password also hashes the password that the user will get
-            self.object.set_password(serializer.data.get("new_password"))
-            self.object.save()
-            response = {
-                'status': 'success',
-                'code': status.HTTP_200_OK,
-                'message': 'Password updated successfully',
-                'data': []
-            }
-
-            return Response(response)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return self.list(request, *args, **kwargs)
 
 ##TEST FUNCTIONS
 class Current(APIView):
@@ -227,4 +200,3 @@ class GetUserInfo(APIView):
             return Response(responseDict)
         except:
             return Response("no token associated with this ID")
-

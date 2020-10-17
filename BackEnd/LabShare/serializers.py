@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from django.contrib.auth import password_validation
-from LabShare.models import Post, UserProfile, Categories, Comment
+from LabShare.models import Post, UserProfile, Comment
 from datetime import datetime
 
 User = get_user_model()
@@ -10,12 +10,18 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'profile', 'first_name', 'last_name']
-    
-   # def to_representation(self, instance):
-   #     response = super().to_representation(instance)
-   #     response['image'] = UserProfileSerializer(instance.profile).data['image']
-   #     return response
+        fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name', 'is_staff', 'is_active']
+        read_only_fields = ['id', 'email', 'profile', 'is_staff', 'is_active']
+
+    def get_auth_token(self, obj):
+        token = Token.objects.create(user=obj)
+        return token.key
+
+class UserSerializerAdmin(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'profile', 'first_name', 'last_name', 'image_name', 'is_staff', 'is_active']
+        read_only_fields = ['id']
 
     def get_auth_token(self, obj):
         token = Token.objects.create(user=obj)
@@ -28,8 +34,8 @@ class UserLoginSerializer(serializers.Serializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'password', 'first_name', 'last_name']
-    
+        fields = ['email', 'password', 'first_name', 'last_name', 'image_name', 'is_staff', 'is_active']
+
     def validate_email(self, value):
         user = User.objects.filter(email=value)
         if user:
@@ -53,7 +59,7 @@ class PostSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['id', 'bio', 'dob', 'occupation', 'employer', 'image']
+        fields = ['id', 'bio', 'dob', 'occupation', 'employer']
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
@@ -61,6 +67,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return response
 
 class CommentSerializer(serializers.ModelSerializer):
+    date_created = serializers.DateTimeField(default = None, required = False, format="%Y-%m-%dT%H:%M:%SZ")
     class Meta:
         model = Comment
         fields = ['id', 'date_created', 'post', 'content']
@@ -69,17 +76,3 @@ class CommentSerializer(serializers.ModelSerializer):
         response = super().to_representation(instance)
         response['author'] = UserSerializer(instance.author).data
         return response
-
-class CategoriesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Categories
-        fields = ['id', 'category_name']
-
-class ChangePasswordSerializer(serializers.Serializer):
-    model = User
-
-    """
-    Serializer for password change
-    """
-    old_password = serializers.CharField(required=True)
-    new_password = serializers.CharField(required=True)

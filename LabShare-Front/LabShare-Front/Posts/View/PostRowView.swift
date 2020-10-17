@@ -53,10 +53,10 @@ struct PostRowView: View {
     }
 }
 
-struct PostRow_Previews: PreviewProvider {
-    static var previews: some View {
-        PostRowView(postVM: PostViewModel(post: PostModel(id: 10, title: "Free Iphonlwkjeq lwkej qlwkej lqkwje qlkwej lkqwje lkqwje lkqwje lkqwj elqwkjel kqwje lqwkjelqwkje kqwkje lqkwje lkqwje lkqwje es", content: "I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones", dateCreated: Date(), category: CategoryEnum.Reagents, author: UserModel ())))
-            .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
-    }
-    
-}
+//struct PostRow_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PostRowView(postVM: PostViewModel(post: PostModel(id: 10, title: "Free Iphonlwkjeq lwkej qlwkej lqkwje qlkwej lkqwje lkqwje lkqwje lkqwj elqwkjel kqwje lqwkjelqwkje kqwkje lqkwje lkqwje lkqwje es", content: "I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones I would like to give away 10 iphones", dateCreated: Date(), category: CategoryEnum.Reagents, author: UserModel (id: 37, email: "alexanderfrazis@gmail.com", firstName: "Alexander", lastName: "Frazis", imageName: "image1"))))
+//            .environmentObject(UserAuthenticationViewModel(id: 37, token: "14f2518e6ffc20cf52642b7c7d51b63b88fe127f", isLoggedIn: true))
+//    }
+//
+//}
