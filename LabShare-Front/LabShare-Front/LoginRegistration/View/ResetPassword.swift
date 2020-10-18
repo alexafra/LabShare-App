@@ -25,7 +25,7 @@ struct ResetPassword: View {
             
             Text("Enter your email address and follow the instructions sent to your email to reset your password.")
                 .font(.callout)
-                .foregroundColor(.green)
+                .foregroundColor(.black)
                 .multilineTextAlignment(.leading)
             
             

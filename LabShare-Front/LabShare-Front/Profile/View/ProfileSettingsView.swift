@@ -78,7 +78,7 @@ struct ProfileSettingsView: View {
                         Text("Delete User")
                     }
                 }).alert(isPresented: $showingDeleteAlert) {
-                    Alert(title: Text("Delete User"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
+                    Alert(title: Text("Delete User"), message: Text("Are you sure? \nThis will delete all of their posts and comments."), primaryButton: .destructive(Text("Delete")) {
                         self.profileVM.deleteProfile(userAuthVM: self.userAuthVM)
                         if (self.userAuthVM.userAuth.id == profileVM.profile.owner.id) {
                             self.userAuthVM.userAuth.isLoggedIn = false
