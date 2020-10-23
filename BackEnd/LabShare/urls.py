@@ -1,10 +1,10 @@
-from django.urls import path, re_path, include
-from django.conf.urls import url, include
+from django.urls import path, re_path
+from django.conf.urls import include
 from rest_framework import routers
 from LabShare import views
 from django.conf import settings
+from django.conf.urls import url, include
 from django.conf.urls.static import static
-from .views import ChangePasswordView
 
 urlpatterns = [
     #TEST URLS
@@ -16,34 +16,35 @@ urlpatterns = [
     path('users', views.Users.as_view()), #all users or user search(GET)
     #POSTS
     path('users/<int:user_id>/feed', views.Feed.as_view()), #view posts with(?) or without filters (GET)
-    path('users/<int:user_id>/posts/<int:id>', views.SinglePost.as_view()), #(GET, PUT, DELETE)
+    path('users/<int:user_id>/posts/<int:post_id>', views.SinglePost.as_view()), #(GET, PUT, DELETE)
     path('users/<int:user_id>/posts', views.UserPosts.as_view()), #get posts for a user, create a post (GET, POST)
     #COMMENTS
     path('users/<int:user_id>/posts/<int:post_id>/comments', views.Comments.as_view()), #create post comment, get post comments (GET, POST)
     path('users/<int:user_id>/posts/<int:post_id>/comments/<int:comment_id>', views.SingleComment.as_view()), #(GET, PUT, DELETE)
-    #CATEGORIES
-    path('categories', views.AvailableCategories.as_view()), #get all categories, create a category (GET, POST)
-    path('categories/<int:id>', views.SingleCategory.as_view()), #(GET, PUT, DELETE)
     #AUTHENTICATION
     path('register', views.UserRegister.as_view()), #(POST)
     path('login', views.UserLogin.as_view()), #(POST)
     path('logout', views.UserLogout.as_view()), #(POST)
+    #ADMIN
+    path('admin/non-active', views.NonActive.as_view()), #(GET)
+    path('admin/active', views.Active.as_view()), #(GET)
     #PASSWORD RESET
-    path('password_change', ChangePasswordView.as_view()),
     path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
-    
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+]
+# + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 #GRAE
 #comments ##DONE
 #category filter ##DONE
 #search ##DONE
-#can only create, edit and delete posts, edit, delete account if you are the same user (or admin)
-#admin functionality and permissions, change users active/non-active, remove and edit posts, permissions for active/non-active
-#user image sent with user model serializer
-#make serializers more concise
+#user image changed to a string ##DONE
+#categories changed to hardcoded strings rather than updateable model ##DONE
+#user id, email and profile_id locked ##DONE
+#users who are not the owner of a user, post, profile or comment object, cannot modify that object
+#admins have all permissions that a normal user would have of their own content
+#admin functionality to change users from active/non-active
+#make serializers more concise ##DONE
 #https
-#pagination
 #first_name and last name essential ##DONE
 
 #REFACTORING:
@@ -57,4 +58,3 @@ urlpatterns = [
 #Reimplement Postgres
 #Host app on AWS server
 #Strengthen authentication security
-

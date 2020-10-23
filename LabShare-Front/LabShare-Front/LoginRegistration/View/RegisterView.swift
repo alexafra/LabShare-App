@@ -134,7 +134,7 @@ struct RegisterView_Previews: PreviewProvider {
 //        NavigationView {
             RegisterView(userAuthVM: UserAuthenticationViewModel())
                 .environmentObject(
-                    UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false)
+                    UserAuthenticationViewModel(id: 1, token: "e3ef7d0655f1698e348a81eb184156b74612ad59", isLoggedIn: false, isStaff: true, isActive: true)
                 ).environmentObject(AppState())
                 .navigationBarTitle(Text(""), displayMode: .inline)
                 .navigationBarHidden(true)

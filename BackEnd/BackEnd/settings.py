@@ -28,13 +28,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'LabShare.apps.LabshareConfig',
     'django_rest_passwordreset',
-    'LabShare.apps.LabshareConfig'
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        #'rest_framework.authentication.SessionAuthentication'
         'rest_framework.authentication.TokenAuthentication'
     ]
 }
@@ -56,7 +55,7 @@ ROOT_URLCONF = 'BackEnd.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'djangotemplates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,9 +124,10 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'LabShare/media')
 
+# Email functionality for password reset
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIT_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_PASSWORD = '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'

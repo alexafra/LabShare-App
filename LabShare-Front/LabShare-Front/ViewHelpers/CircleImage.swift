@@ -16,7 +16,7 @@ struct CircleImage: View {
             .resizable()
             .scaledToFit()
             .clipShape(Circle())
-            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+            .overlay(Circle().stroke(Color.white, lineWidth: 2))
             .shadow(radius: 10)
             .padding(5)
             
@@ -30,7 +30,7 @@ struct CircleImageUpdatable: View {
             .resizable()
             .scaledToFit()
             .clipShape(Circle())
-            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+            .overlay(Circle().stroke(Color.white, lineWidth: 2))
             .shadow(radius: 10)
             .padding(5)
             
